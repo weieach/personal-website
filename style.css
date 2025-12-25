@@ -1,0 +1,175 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Geist";
+    color: #121212;
+}
+
+nav {
+    display: flex;
+    padding-top: 2rem;
+    /* padding-inline: 4.6rem; */
+    padding-inline: 3.5vw;
+    padding-bottom: 3rem;
+    /* justify-content: space-between; */
+    align-items: center;
+    position: relative;
+    /* background-color: aqua; */
+}
+
+body{
+    background-color: #F6F6F6;
+}
+
+main{
+    margin-bottom: 4rem;
+}
+
+footer{
+    padding: 2rem 3.5vw;
+}
+
+.logo{
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 200;
+}
+
+nav a{
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+ul {
+    padding: 0;
+    display: flex;
+    gap: 3.5rem;
+    position: absolute;
+    width: 94vw;
+    /* background-color: aqua; */
+    z-index: 10;
+    justify-content: center;
+}
+
+ul li{
+    list-style: none;
+    padding: 0;
+    font-size: 0.95rem;
+}
+
+.cards{
+    display: grid;
+    column-gap: 1.5vw;
+    row-gap: 2rem;
+    margin-inline: 3.5vw;
+    grid-template-columns: 1fr 1fr;
+    
+}
+
+
+.card{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vw;
+}
+
+.card-thumbnail{
+    aspect-ratio: 1.77;
+    /* height: 200px; */
+    /* height: 26vw; */
+    background-color: #121212;
+    display: flex;
+}
+
+.card-text{
+    display: flex;
+    flex-direction: column;
+    gap: 0.25vw;
+    text-transform: uppercase;
+}
+
+.work-title{
+    
+}
+
+.work-caption{
+    font-family: "Geist Mono";
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.bold{
+    font-weight: 600;
+
+}
+
+
+video{
+    object-fit: cover;
+    margin-inline: auto;
+    /* width: 80%; */
+    scale: 0.9;
+}
+
+.thumb-img{
+    margin-inline: auto;
+}
+
+.card-fs .card-thumbnail{
+    background-color: #E08494;
+}
+
+
+.video-fs{
+    /* justify-self: center; */
+    /* aspect-ratio: 631/438; */
+    width: 80%;
+    scale: 0.9;
+    margin-inline: auto;
+    background-color: antiquewhite;
+    /* height: ; */
+}
+
+.video-elastic{
+    object-fit: contain;
+    width: 100%;
+    scale: 0.9;
+}
+
+.card-superfast .card-thumbnail{
+    background-color: black;
+    
+}
+
+.video-superfast{
+    scale: 0.9;
+    width: 100%;
+}
+
+.card-videssay .card-thumbnail{
+    background-color: white;
+}
+
+.video-essay{
+    scale: 1;
+    width: 100%;
+}
+
+.card-wu .card-thumbnail{
+    background-image: url("assets/wu\ blurred\ bg\ 1.png");
+    /* background-size: cover; */
+    background-size: 360%;
+    background-position-y: 12%;
+    /* background-blend-mode: color-dodge; */
+}
+
+.img-wu-poster{
+    width: 60%;
+    scale: 0.9;
+}
+
+.card-booklets .card-thumbnail{
+    background-image: url("assets/booklet-thumbnail.png");
+    background-size: cover;
+}
