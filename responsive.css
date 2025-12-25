@@ -1,0 +1,29 @@
+@media (width < 960px) {
+  .cards {
+    grid-template-columns: 1fr;
+    row-gap: 4.5vw;
+  }
+
+  .card {
+    gap: 2vw;
+  }
+
+  nav {
+    justify-content: space-between;
+  }
+
+  nav ul {
+    position: static;
+    width: auto;
+    gap: 5.8vw;
+  }
+}
+
+@media (width < 460px) {
+  nav ul {
+    display: none;
+  }
+  .btn-burger {
+    display: block;
+  }
+}
