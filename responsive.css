@@ -17,12 +17,27 @@
     width: auto;
     gap: 5.8vw;
   }
+
+  .main-aboutpg {
+    padding-inline: 3.5vw;
+    max-width: none;
+  }
+
+  .content-about {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .text-about{
+    width: 100%;
+}
 }
 
 @media (width < 460px) {
   nav ul {
     display: none;
   }
+
   .btn-burger {
     display: block;
   }
