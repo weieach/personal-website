@@ -203,3 +203,7 @@ video{
     background-size: contain;
     background-position: center;
 }
+
+.no-display{
+    display: none;
+}
