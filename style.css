@@ -20,7 +20,7 @@ nav {
     padding-inline: 3.5vw;
     /* padding-bottom: 3rem; */
     /* padding-bottom: 0.9vw; */
-    padding-bottom: 0.3vw;
+    padding-bottom: 0.5vw;
     align-items: center;
     position: relative;
     
@@ -48,8 +48,8 @@ main{
 }
 
 .main-aboutpg{
-    padding-top: 10vw;
-    padding-inline: 3.5vw;
+    padding-top: 14vw;
+    padding-inline: 5vw;
     margin-top: 0;
     /* max-width: 70ch; */
     /* height: calc(100vh - 16.5rem); */
@@ -298,19 +298,24 @@ video{
 }
 
 .img-avatar{
-    width: 100%;
-    max-width: 350px;
+    /* width: 100%;
+    max-width: 350px; */
+    width: 350px;
 }
 
 .content-about{
     display: flex;
     flex-direction: row;
     gap: 1.5rem;
+    justify-content: center;
 }
 
 .text-about{
-    max-width: 60ch;
+    max-width: 55ch;
     /* align-self: end; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .text-about i{
@@ -321,7 +326,7 @@ video{
 }
 
 .contact-info{
-    margin-top: 3rem;
+    margin-top: 4rem;
 }
 
 .contact-info p{

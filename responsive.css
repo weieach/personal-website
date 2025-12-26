@@ -8,8 +8,12 @@
     gap: 2vw;
   }
 
-  .main-aboutpg{
+  .main-aboutpg {
     margin-top: 7rem;
+    margin-bottom: 2.5rem;
+    padding-top: 0;
+    padding-inline: 3.5vw;
+    max-width: none;
   }
 
   nav {
@@ -21,20 +25,29 @@
     width: auto;
     gap: 5.8vw;
   }
+  
 
-  .main-aboutpg {
-    padding-inline: 3.5vw;
-    max-width: none;
-  }
+  .img-avatar{
+    width: 100%;
+    max-width: 375px;
+    order: 2;
+    /* width: 350px; */
+}
 
   .content-about {
     flex-direction: column;
-    gap: 1.5rem;
+    /* gap: 1.5rem; */
+    gap: 0;
   }
 
-  .text-about{
+  .text-about {
     width: 100%;
-}
+  }
+
+  .contact-info {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 }
 
 @media (width < 460px) {
