@@ -8,6 +8,10 @@
     gap: 2vw;
   }
 
+  .main-aboutpg{
+    margin-top: 7rem;
+  }
+
   nav {
     justify-content: space-between;
   }
