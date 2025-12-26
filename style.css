@@ -102,6 +102,12 @@ ul li{
     
 }
 
+.loading{
+    margin: auto;
+    position: absolute;
+    left: 30%;
+}
+
 
 .material-symbols-outlined {
   font-size: 1.7rem;
@@ -188,9 +194,19 @@ video{
     scale: 0.9;
 }
 
+.video-mm{
+    object-fit: contain;
+    width: 90%;
+    scale: 0.9;
+}
+
 .card-superfast .card-thumbnail{
     background-color: black;
     
+}
+
+.card-mm .card-thumbnail{
+    background-color: black;
 }
 
 .video-superfast{
