@@ -143,9 +143,9 @@ h3 {
     /* text-decoration-style: dashed; */
     text-decoration: none;
     font-weight: 500;
-    color: #4a63f3;
-    color: rgb(0, 165, 55);
-      color: #db6579;
+    color: #d33939;
+    /* color: rgb(0, 165, 55); */
+      /* color: #db6579; */
     font-family: "Geist";
     
 }
