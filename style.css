@@ -373,8 +373,10 @@ video{
 .cards a:hover{
     /* outline: 2px solid black; */
     scale: 1.005;
-    transition-property: scale;
+    font-weight: 700;
+    transition-property: scale font-weight;
     transition-duration: 300ms;
+    
 }
 
 nav ul a:hover{
