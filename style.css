@@ -223,7 +223,7 @@ video{
 .video-elastic{
     object-fit: contain;
     width: 100%;
-    scale: 0.9;
+    scale: 0.95;
 }
 
 .video-mm{
@@ -359,6 +359,10 @@ video{
 
 .ph-device-mobile{
     /* rotate: -10deg; */
+}
+
+.elastic-thumbnail{
+    aspect-ratio: 27/21;
 }
 
 /* hover state */
