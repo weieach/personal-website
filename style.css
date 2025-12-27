@@ -17,7 +17,7 @@ nav {
     display: flex;
     padding-top: 2rem;
     /* padding-inline: 4.6rem; */
-    padding-inline: 3.5vw;
+    padding-inline: 4vw;
     /* padding-bottom: 3rem; */
     /* padding-bottom: 0.9vw; */
     padding-bottom: 0.5vw;
@@ -47,6 +47,8 @@ main{
     margin-bottom: 4.5rem;
 }
 
+
+
 .main-aboutpg{
     padding-top: 14vw;
     padding-inline: 5vw;
@@ -56,6 +58,9 @@ main{
     /* background-color: #E08494; */
 }
 
+
+
+
 .main-aboutpg p{
     margin-bottom: 1rem;
 }
@@ -64,8 +69,10 @@ hr{
     border: 0.25px dashed #c8c8c8;
 }
 
+
+
 footer{
-    padding: 2rem 3.5vw;
+    padding: 2rem 4vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
