@@ -261,11 +261,14 @@ video{
     background-size: 200%;
     background-position-y: 12%;
     /* background-blend-mode: color-dodge; */
+    aspect-ratio: 27/24;
 }
 
 .img-wu-poster{
+    
     width: 65%;
     scale: 1;
+    
 }
 
 .card-booklets .card-thumbnail{

@@ -163,3 +163,8 @@ h3 {
     /* margin: 0; */
 }
 
+
+.work-wu-poster{
+  max-width: 660px;
+  margin-inline: auto;
+}
