@@ -1,6 +1,6 @@
 
 # large media
-*.mp4
-*.m4v
-assets/*.mp4
-assets/*.m4v
+# *.mp4
+# *.m4v
+# assets/*.mp4
+# assets/*.m4v
