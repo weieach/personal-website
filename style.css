@@ -274,12 +274,16 @@ video{
 .card-booklets .card-thumbnail{
     background-image: url("assets/booklet-thumbnail.png");
     background-size: cover;
+    outline: 2px solid #F5F5F5;
 }
 
 .card-tldr .card-thumbnail{
     background-color: #F6F6F6;
 }
 
+.card-nightingale .card-thumbnail{
+    aspect-ratio: 793/678;
+}
 
 
 .img-tldr{

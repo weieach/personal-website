@@ -5,7 +5,7 @@ html{
 
 h1 {
   font-size: 1.75rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.8rem;
   font-weight: 600;
 }
 
@@ -142,8 +142,8 @@ h3 {
 .scroll-anchor{
     /* text-decoration-style: dashed; */
     text-decoration: none;
-    font-weight: 500;
-    color: #d33939;
+    font-weight: 600;
+    /* color: #d33939; */
     /* color: rgb(0, 165, 55); */
       /* color: #db6579; */
     font-family: "Geist";
@@ -167,4 +167,14 @@ h3 {
 .work-wu-poster{
   max-width: 660px;
   margin-inline: auto;
+}
+
+h2{
+  margin-bottom: 2.5rem;
+  color: rgb(88, 88, 88);
+  font-size: 1.05rem;
+}
+
+.project-caption ul{
+  margin-top: 2.25rem;
 }
