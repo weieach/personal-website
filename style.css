@@ -354,3 +354,11 @@ video{
 .ph-device-mobile{
     /* rotate: -10deg; */
 }
+
+/* hover state */
+.cards a:hover{
+    /* outline: 2px solid black; */
+    scale: 1.005;
+    transition-property: scale;
+    transition-duration: 300ms;
+}

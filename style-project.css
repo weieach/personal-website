@@ -57,7 +57,7 @@ ul {
 h2,
 h3 {
   color: #d57888;
-  color: #3189c4;
+  /* color: #3189c4; */
   font-weight: 400;
   font-family: "Geist Mono";
 }
@@ -147,3 +147,4 @@ h3 {
     max-width: 450px;
     /* margin: 0; */
 }
+
