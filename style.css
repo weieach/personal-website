@@ -7,7 +7,7 @@
 
 header{
     background-color: #F6F6F6;
-    z-index: 100;
+    z-index: 300;
     position: fixed;
     top: 0;
     width: 100%;
@@ -128,11 +128,15 @@ ul li{
     font-size: 0.95rem;
 }
 
-.btn-burger{
+.btn-burger, .btn-close{
     display: none;
     border: none;
     background: none;
     
+}
+
+.btn-burger i{
+    font-size: 1.7rem;
 }
 
 .loading{
@@ -317,6 +321,8 @@ video{
     display: none;
 }
 
+
+
 .img-avatar{
     /* width: 100%;
     max-width: 350px; */
@@ -403,6 +409,12 @@ nav ul a:hover{
     background-color: #000000;
 }
 
+
+
+.dark-mode .btn-burger span, .dark-mode .btn-burger i{
+    color: #f2f2f2;
+}
+
 .dark-mode hr{
     border-color: rgb(47, 47, 47);
 }
@@ -413,4 +425,14 @@ nav ul a:hover{
 
 .dark-mode h2{
     color: rgb(166, 166, 166);
+}
+
+.dark-mode .sidebar, .dark-mode .sidebar a{
+    color: #f2f2f2;
+    background-color: #000000;
+}
+
+/* sidebar */
+.sidebar{
+    display: none;
 }
