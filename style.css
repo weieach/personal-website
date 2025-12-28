@@ -150,7 +150,7 @@ ul li{
     width: 100%;
     column-gap: 1.5vw;
     row-gap: 2.5vw;
-    margin-inline: 3.5vw;
+    padding-inline: 3.5vw;
     grid-template-columns: 1fr 1fr;
     
 }
