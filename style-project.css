@@ -178,3 +178,20 @@ h2{
 .project-caption ul{
   margin-top: 2.25rem;
 }
+
+.item-tldr-recorded > div{
+  aspect-ratio: 10/10;
+  max-height: 680px;
+  padding: 1rem 0px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.item-tldr-recorded > div video{
+  width: auto;
+  /* aspect-ratio: 10/8; */
+  height: 100%;
+  /* scale: 0.5; */
+}

@@ -278,7 +278,8 @@ video{
 }
 
 .card-tldr .card-thumbnail{
-    background-color: #F6F6F6;
+    background-color: #000000;
+    aspect-ratio: 10/6;
 }
 
 .card-nightingale .card-thumbnail{
