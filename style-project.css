@@ -208,3 +208,8 @@ h2{
   max-width: 600px;
   /* margin-inline: auto; */
 }
+
+.dephy-project-pics > div{
+  width: 80%;
+  margin-inline: auto;
+}
