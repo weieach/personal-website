@@ -1,5 +1,5 @@
 @media (width < 1350px) {
-  .placeholder-caption{
+  .placeholder-caption {
     display: none;
   }
 
@@ -13,29 +13,27 @@
     position: static;
   }
 
-  
-
-  .project-pics{
+  .project-pics {
     gap: 3vw;
   }
 
-  .elastic-main-projectpg{
+  .elastic-main-projectpg {
     flex-direction: row;
   }
 
-    .item-dino-recorded{
-  margin-inline: auto;
-}
+  .item-dino-recorded {
+    margin-inline: auto;
+  }
+
+  .concert-project-pics {
+    width: 100%;
+  }
 }
 
 @media (width < 960px) {
-
-  
-
-  .elastic-main-projectpg{
+  .elastic-main-projectpg {
     flex-direction: row;
   }
-
 
   .cards {
     grid-template-columns: 1fr;
@@ -53,8 +51,6 @@
     padding-inline: 3.5vw;
     max-width: none;
   }
-
-  
 
   nav {
     justify-content: space-between;
@@ -87,19 +83,15 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
-
-
 }
 
 @media (width < 800px) {
-  .elastic-main-projectpg{
+  .elastic-main-projectpg {
     flex-direction: column;
   }
 }
 
 @media (width < 460px) {
-  
-
   nav ul {
     display: none;
   }

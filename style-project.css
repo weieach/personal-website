@@ -213,3 +213,12 @@ h2{
   width: 80%;
   margin-inline: auto;
 }
+
+.concert-project-pics{
+  width: 50%;
+}
+
+.concert-project-pics > div{
+  max-width: 600px;
+  margin-inline: auto;
+}
