@@ -393,3 +393,22 @@ nav ul a:hover{
     transition-duration: 300ms;
 
 }
+
+
+/* dark mode */
+.dark-mode, .dark-mode nav, .dark-mode nav ul, .dark-mode h1, .dark-mode p{
+    color: #f2f2f2;
+    background-color: #000000;
+}
+
+.dark-mode hr{
+    border-color: rgb(47, 47, 47);
+}
+
+.dark-mode nav ul a{
+    color: #f2f2f2;
+}
+
+.dark-mode h2{
+    color: rgb(166, 166, 166);
+}

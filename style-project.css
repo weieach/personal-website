@@ -195,3 +195,16 @@ h2{
   height: 100%;
   /* scale: 0.5; */
 }
+
+.dino-landing-demo{
+  max-width: 600px;
+}
+
+.dino-event-demo{
+  border-radius: 4%;
+}
+
+.item-dino-recorded{
+  max-width: 600px;
+  /* margin-inline: auto; */
+}
