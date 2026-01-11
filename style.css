@@ -15,7 +15,7 @@ header{
 
 nav {
     display: flex;
-    padding-top: 2rem;
+    padding-top: 1.4rem;
     /* padding-inline: 4.6rem; */
     padding-inline: 4vw;
     /* padding-bottom: 3rem; */
@@ -43,7 +43,7 @@ body{
 }
 
 main{
-    margin-top: 6.5rem;
+    margin-top: 5.8rem;
     margin-bottom: 4.5rem;
     width: 100vw;
 }
