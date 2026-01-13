@@ -304,6 +304,12 @@ video{
     background-position: center;
 }
 
+.card-gvd .card-thumbnail{
+    background-image: url("assets/gvd-thumb.png");
+    background-size: cover;
+    background-position: center;
+}
+
 .card-dino .card-thumbnail{
     background-image: url("assets/dino-thumb.png");
     background-size: contain;
@@ -435,4 +441,16 @@ nav ul a:hover{
 /* sidebar */
 .sidebar{
     display: none;
+}
+
+/* disable link */
+.disabled-link {
+  pointer-events: none; /* disables clicking */
+  /* opacity: 0.4; */
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.dev-note{
+    color: #E08494;
 }
