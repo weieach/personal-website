@@ -59,6 +59,11 @@ p {
   scroll-margin-top: 0px;
 }
 
+#el-item-3 video{
+  height: calc(100vh-75px);
+  width: 70%;
+}
+
 .captioned-item p {
   color: rgb(87, 87, 87);
 }
