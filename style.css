@@ -278,7 +278,7 @@ video{
 }
 
 .card-booklets .card-thumbnail{
-    background-image: url("assets/booklet-thumbnail.png");
+    background-image: url("assets/hurricane-newthumb.png");
     background-size: cover;
     outline: 2px solid #F5F5F5;
 }
@@ -415,6 +415,9 @@ nav ul a:hover{
     background-color: #000000;
 }
 
+.dark-mode i, .dark-mode a{
+    color: #f2f2f2;
+}
 
 
 .dark-mode .btn-burger span, .dark-mode .btn-burger i{
