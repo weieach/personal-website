@@ -28,7 +28,14 @@
     <title>Nicole Wei</title>
 </head>
 
-<body>
+<body class="is-loading">
+    <!-- Fullscreen loading overlay (hidden on window.load) -->
+    <div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-label="Loading">
+        <div class="page-loader__inner">
+            <div class="page-loader__spinner" aria-hidden="true"></div>
+            <p class="page-loader__text">Loading…</p>
+        </div>
+    </div>
     <header>
         <nav>
             <a href="#" class="logo">

@@ -210,10 +210,6 @@ ul li{
     text-transform: uppercase;
 }
 
-.work-title{
-    
-}
-
 .work-caption{
     font-family: "Geist Mono";
     font-size: 0.875rem;
@@ -242,10 +238,6 @@ video{
 .card-fs .card-thumbnail{
     background-color: #E08494;
     position: relative;
-}
-
-.card-fs .btn-visit-site{
-    
 }
 
 
@@ -437,17 +429,9 @@ video{
     margin-bottom: 0.5rem;
 }
 
-.contact-info a{
-    
-}
-
 .contact-entry{
     display: inline-block;
     margin-left: 5px;
-}
-
-.ph-device-mobile{
-    /* rotate: -10deg; */
 }
 
 .elastic-thumbnail{
@@ -526,4 +510,76 @@ nav ul a:hover{
 
 .dev-note{
     color: #E08494;
+}
+
+/* ---------------------------- */
+/* Fullscreen page loader (index) */
+/* ---------------------------- */
+body.is-loading{
+  overflow: hidden;
+}
+
+.page-loader{
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.96);
+  color: #111;
+  opacity: 1;
+  transition: opacity 220ms ease;
+}
+
+.dark-mode .page-loader{
+  background: rgba(0,0,0,.96);
+  color: #f2f2f2;
+}
+
+.page-loader__inner{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.dark-mode .page-loader__inner{
+  border-color: rgba(255,255,255,.12);
+  background: rgba(0,0,0,.35);
+}
+
+.page-loader__spinner{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: page-loader-spin 700ms linear infinite;
+}
+
+.page-loader__text{
+  margin: 0;
+  font: 500 14px/1.2 "Geist", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.page-loader--hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes page-loader-spin{
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .page-loader, .page-loader__spinner{
+    transition: none;
+    animation: none;
+  }
 }

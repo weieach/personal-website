@@ -135,3 +135,26 @@ document.addEventListener("click", (e) => {
   e.preventDefault();
   showToast(DISABLED_LINK_TOAST_MESSAGE);
 });
+
+// --------------------------
+// Fullscreen page loader (index.html)
+// --------------------------
+(() => {
+  const loader = document.getElementById("page-loader");
+  if (!loader) return;
+
+  const hide = () => {
+    if (!loader.isConnected) return;
+    loader.classList.add("page-loader--hidden");
+    document.body.classList.remove("is-loading");
+    window.setTimeout(() => loader.remove(), 260);
+  };
+
+  // Hide once *all* resources (images/videos/fonts) are loaded.
+  window.addEventListener("load", () => {
+    window.requestAnimationFrame(hide);
+  });
+
+  // Safety fallback (prevents stuck loader if something hangs).
+  window.setTimeout(hide, 8000);
+})();
