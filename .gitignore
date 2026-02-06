@@ -4,3 +4,6 @@
 # *.m4v
 # assets/*.mp4
 # assets/*.m4v
+
+# local large asset dumps
+asset-bin/
