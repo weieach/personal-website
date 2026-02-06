@@ -201,6 +201,22 @@ h2{
   /* scale: 0.5; */
 }
 
+.item-pictogram-recorded >div{
+  width: 100%;
+  display: flex;
+  background-color: #3E5ED9;
+}
+
+.item-pictogram-recorded video{
+  max-width: 85vh;
+  justify-self: center;
+  max-height:85vh;
+  padding: 36px 50px;
+  margin-inline: auto;
+  
+}
+
+
 .dino-landing-demo{
   max-width: 600px;
 }

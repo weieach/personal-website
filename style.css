@@ -312,6 +312,7 @@ video{
     aspect-ratio: 27/21.5;
 }
 
+
 .img-wu-poster{
     
     /* width: 65%; */
@@ -319,15 +320,28 @@ video{
     
 }
 
+.card-pictogram .card-thumbnail{
+    background-color: #3E5ED9;
+    aspect-ratio: 800/490;
+}
+
+.card-pictogram video{
+    scale: 0.95;
+    width: 100%;
+    object-fit: contain;
+}
+
 .card-booklets .card-thumbnail{
-    background-image: url("assets/hurricane-newthumb.png");
+    background-image: url("assets/hurricane-fullspreads-3.png");
     background-size: cover;
+    aspect-ratio: 3356/2679;
     outline: 2px solid #F5F5F5;
 }
 
 .card-tldr .card-thumbnail{
     background-color: #000000;
     /* aspect-ratio: 10/6; */
+    aspect-ratio: 800/490;
 }
 
 .card-nightingale .card-thumbnail{
