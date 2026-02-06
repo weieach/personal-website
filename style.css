@@ -140,7 +140,10 @@ ul li{
 }
 
 .btn-visit-site{
-    display: block;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 0.25rem;
     position: absolute;
     right: 0;
     top: 0;
@@ -251,6 +254,7 @@ video{
     aspect-ratio: 631/438;
     width: 88%;
     scale: 0.88;
+    border-radius: 0.8rem;
     /* position: absolute;
     left: 10%;
     top: 10%; */
@@ -361,9 +365,16 @@ video{
 }
 
 .card-gvd .card-thumbnail{
-    background-image: url("assets/gvd-thumb.png");
+    /* background-image: url("assets/gvd-thumb.png"); */
+    background-color: #893F90;
     background-size: cover;
     background-position: center;
+}
+
+.card-gvd .card-thumbnail video{
+    width: 100%;
+    scale: 0.84;
+    border-radius: 1rem;
 }
 
 .card-dino .card-thumbnail{
@@ -375,7 +386,10 @@ video{
 .card-bird .card-thumbnail{
     background-image: url("assets/bird-thumb.png");
     background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
+    aspect-ratio: 10/7.2;
+    background-color: black;
 }
 
 
@@ -504,8 +518,8 @@ nav ul a:hover{
 
 /* disable link */
 .disabled-link {
-  pointer-events: none; /* disables clicking */
-  /* opacity: 0.4; */
+  /* allow clicking so we can show a toast in JS */
+  pointer-events: auto;
   cursor: not-allowed;
   text-decoration: none;
 }
