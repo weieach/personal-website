@@ -139,11 +139,33 @@ ul li{
     font-size: 1.7rem;
 }
 
+.btn-visit-site{
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 0.9rem;
+    z-index: 150;
+    text-decoration: none;
+    color: black;
+    padding: 6px 10px;
+    background-color: #F6F6F6;
+    border: 2.5px solid black;
+}
+
+.btn-visit-site .ph-bold{
+    color: black;
+    color: #315095;
+}
+
+
+
 .loading{
     margin: auto;
     position: absolute;
     left: 30%;
 }
+
 
 
 .material-symbols-outlined {
@@ -164,15 +186,18 @@ ul li{
 .card{
     display: flex;
     flex-direction: column;
-    gap: 1.2vw;
+    /* gap: 1.2vw; */
+    gap: 0;
 }
 
 .card-thumbnail{
     aspect-ratio: 1.77;
+    position: relative;
     /* height: 200px; */
     /* height: 26vw; */
     background-color: #121212;
     display: flex;
+    margin-bottom: 1.2vw;
 }
 
 .card-text{
@@ -213,17 +238,28 @@ video{
 
 .card-fs .card-thumbnail{
     background-color: #E08494;
+    position: relative;
+}
+
+.card-fs .btn-visit-site{
+    
 }
 
 
 .video-fs{
     /* justify-self: center; */
-    /* aspect-ratio: 631/438; */
-    width: 80%;
-    scale: 0.9;
-    margin-inline: auto;
+    aspect-ratio: 631/438;
+    width: 88%;
+    scale: 0.88;
+    /* position: absolute;
+    left: 10%;
+    top: 10%; */
+    margin-inline: 6%;
+    /* margin-inline: auto; */
     background-color: antiquewhite;
     /* height: ; */
+    /* scale: 0.8; */
+    /* width: 100%; */
 }
 
 .video-elastic{
@@ -238,8 +274,13 @@ video{
     scale: 0.9;
 }
 
+.card-superfast{
+    gap: 0;
+}
+
 .card-superfast .card-thumbnail{
     background-color: black;
+    margin-bottom: 1rem;
     
 }
 
@@ -250,6 +291,7 @@ video{
 .video-superfast{
     scale: 0.9;
     width: 100%;
+    border: 3px solid black;
 }
 
 .card-videssay .card-thumbnail{
