@@ -166,7 +166,10 @@ ul li{
 .loading{
     margin: auto;
     position: absolute;
-    left: 30%;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    color: white;
 }
 
 
@@ -238,6 +241,11 @@ video{
 .card-fs .card-thumbnail{
     background-color: #E08494;
     position: relative;
+    background-image: url("assets/fs-thumbnail-1.png");
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
 }
 
 
@@ -277,6 +285,10 @@ video{
 .card-superfast .card-thumbnail{
     background-color: black;
     margin-bottom: 1rem;
+    background-image: url("assets/superfast-print-bookcover.png");
+    background-size: 57%;
+    background-position: center;
+    background-repeat: no-repeat;
     
 }
 
@@ -292,6 +304,9 @@ video{
 
 .card-videssay .card-thumbnail{
     background-color: white;
+    background-image: url("assets/wherewhatwhere-staticthumb.png");
+    background-size: cover;
+    background-position: center;
 }
 
 .video-essay{
@@ -319,11 +334,14 @@ video{
 .card-pictogram .card-thumbnail{
     background-color: #3E5ED9;
     aspect-ratio: 800/490;
+    background-image: url("assets/pictogram-staticthumb.png");
+    background-size: contain;
 }
 
 .card-pictogram video{
     scale: 0.95;
     width: 100%;
+     aspect-ratio: 800/490;
     object-fit: contain;
 }
 
@@ -358,7 +376,7 @@ video{
 
 .card-gvd .card-thumbnail{
     /* background-image: url("assets/gvd-thumb.png"); */
-    background-color: #893F90;
+    background-color: #531957;
     background-size: cover;
     background-position: center;
 }
@@ -436,6 +454,8 @@ video{
 
 .elastic-thumbnail{
     aspect-ratio: 27/21;
+    background-image: url("assets/elastic-staticthumb.png");
+    background-size: contain;
 }
 
 /* hover state */
