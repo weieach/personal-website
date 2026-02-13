@@ -333,15 +333,17 @@ video{
 
 .card-pictogram .card-thumbnail{
     background-color: #3E5ED9;
-    aspect-ratio: 800/490;
-    background-image: url("assets/pictogram-staticthumb.png");
+    aspect-ratio: 800/620;
+    background-image: url("assets/pictogram-static-thumb-grid.png");
     background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .card-pictogram video{
-    scale: 0.95;
+    scale: 0.85;
     width: 100%;
-     aspect-ratio: 800/490;
+     /* aspect-ratio: 800/490; */
     object-fit: contain;
 }
 
