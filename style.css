@@ -337,12 +337,12 @@ video{
     background-image: url("assets/pictogram-static-thumb-grid.png");
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: bottom;
 }
 
 .card-pictogram video{
     scale: 0.85;
-    width: 100%;
+    width: 90%;
      /* aspect-ratio: 800/490; */
     object-fit: contain;
 }
