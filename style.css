@@ -246,6 +246,8 @@ video{
     background-size: 75%;
     background-repeat: no-repeat;
     background-position: center;
+    /* height: 500px; */
+    aspect-ratio: 792/490;
     
 }
 
