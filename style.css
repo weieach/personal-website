@@ -185,8 +185,7 @@ ul li{
     column-gap: 1.5vw;
     row-gap: 2.5vw;
     padding-inline: 3.5vw;
-    grid-template-columns: 1fr 1fr;
-    
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
 
@@ -205,6 +204,7 @@ ul li{
     background-color: #121212;
     display: flex;
     margin-bottom: 1.2vw;
+    overflow: hidden;
 }
 
 .card-text{
@@ -230,7 +230,7 @@ ul li{
 video{
     object-fit: cover;
     margin-inline: auto;
-    /* width: 80%; */
+    max-width: 100%;
     scale: 0.9;
 }
 
