@@ -188,6 +188,24 @@ ul li{
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
+.cards-single-column{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    padding-inline: 3.5vw;
+}
+
+.cards-single-column .card{
+    flex-direction: row;
+    align-items: center;
+    gap: 2vw;
+    /* justify-content: space-between; */
+}
+.cards-single-column .card a{
+    width: 70%;
+    /* order: 2; */
+}
+
 
 .card{
     display: flex;
@@ -263,7 +281,7 @@ video{
     top: 10%; */
     margin-inline: 6%;
     /* margin-inline: auto; */
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     /* height: ; */
     /* scale: 0.8; */
     /* width: 100%; */
