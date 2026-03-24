@@ -82,7 +82,7 @@ h3 {
 }
 
 h2 {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
 
   text-transform: uppercase;
   margin-bottom: 1rem;
@@ -123,14 +123,14 @@ h3 {
   /* text-transform: uppercase; */
 }
 
-.project-caption ul li {
+.project-caption ul li:not(.list-case-study li) {
   margin-bottom: 0rem;
 
   display: flex;
   gap: 1rem;
 }
 
-.project-caption ul li p {
+.project-caption ul li p:not(.list-case-study li p) {
   font-family: "Geist Mono";
 }
 
@@ -177,10 +177,10 @@ h3 {
 h2{
   margin-bottom: 2.5rem;
   color: rgb(88, 88, 88);
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
-.project-caption ul{
+.project-caption ul:not(.list-case-study){
   margin-top: 2.25rem;
 }
 
@@ -246,4 +246,192 @@ h2{
 
 .hurricane-seq{
   width: 80%;
+}
+
+/* case study */
+.main-projectpg.case-study-project{
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.main-projectpg.case-study-project .project-caption{
+  position: relative;
+  width: 100%;
+  max-width: 90ch;
+}
+
+.case-study-header{
+  width: 100%;
+  max-width: 80ch;
+  margin-inline: auto;
+  position: relative;
+}
+
+.case-study-header h2{
+  text-transform: none;
+  font-family: "Geist";
+  margin-top: 1rem;
+  margin-bottom: 20px;
+  
+}
+
+.case-study-project section{
+  margin-bottom: 4.5rem;
+}
+
+.list-case-study-info{
+  display: flex;
+  gap: 0rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.list-case-study-info li{
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  width: 16ch;
+}
+
+.list-case-study-info .entry-header, h3{
+  color: #4e7e43;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.list-case-study-info .entry-content{
+  font-family: "geist";
+  font-size: 0.95rem;
+}
+
+.list-case-study-problems{
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 60ch;
+  margin-bottom: 2.5rem;
+  /* margin-inline: auto; */
+}
+
+.list-case-study-problems li{
+  flex-direction: column;
+  padding-left: 1.8rem;
+  border-left: 4px solid #8C87E6;
+}
+
+.list-case-study li h4{
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.list-case-study li p{
+  font-family: "geist";
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.img-casestudy-cover{
+  width: 90%;
+  margin-inline: auto;
+}
+
+.img-case-study-body{
+  width: 130%;
+  position: relative;
+  right: 15%;
+}
+
+.product-highlight-entry{
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.video-app-highlights{
+  width: 60%;
+  scale: 1;
+  border-radius: 0px;
+}
+
+.product-highlight-entries{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin-inline: auto;
+
+}
+
+.product-highlight-entry{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 2.5rem;
+  
+}
+
+.product-highlight-entry div{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.6rem;
+}
+
+.product-highlight-entry h4{
+  font-weight: 600;
+  /* width: 35%; */
+}
+
+.product-highlight-entry h4 i{
+  font-size: 1rem;
+}
+
+.product-highlight-entry p{
+  font-size: 0.9rem;
+  opacity: 0.6;
+  line-height: 1.28;
+}
+
+.section-mockup img{
+  width: 100%;
+}
+
+.section-design-system img{
+  width: 100%;
+}
+
+.btn-back{
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  background-color: #ebebeb;
+  color: #6f6f6f;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5rem;
+  position: absolute;
+  left: -35%;
+  top: 0;
+}
+
+.btn-back:hover{
+  background-color: #e6e6e6;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-back i{
+  color: #6f6f6f;
+}
+
+.wrapper-design-system{
+  height: 600px;
+  overflow-y: scroll;
+  background-color: #F1F1F1;
+  border: 1px solid #dfdfdf;
+  border-radius: 1rem;
+  padding-inline: 2rem;
 }

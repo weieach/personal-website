@@ -15,6 +15,8 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu">
@@ -42,7 +44,7 @@
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg">
+    <main class="main-projectpg case-study-project">
         <div class="sidebar no-display">
             <ul>
                 <li><a href="index.html">Projects</a></li>
@@ -50,41 +52,153 @@
                 <li><a href="about.html">About</a></li>
             </ul>
         </div>
-        <div class="project-caption">
-            <h1><i>Adventurer's Scroll</i> App Design</h1>
-            <h2>UI / UX, Graphic design</h2>
-            <p><i>Adventurer’s Scroll</i> is a gamified productivity app designed specifically for middle school students. It motivates learning and task completion by transforming users' personal goals into an AI-powered, interactive litRPG (literary role-playing game) adventure. Through pomodoro-style focus sessions, users embark on a unique journey where they shape their own epic—or humorously absurd—tale.</p>
-            <p>In terms of design, the app has undergone 5 major iterations, significantly enhancing its UI design, usability, and overall functionality (detailed development timeline available). The integration of AI, which automates the generation of multi-branched storylines, has been a crucial advancement. The next phase of development focuses on product deployment and recruiting mobile app developers to bring this project to life.</p>
-            <ul>
-                <li>
-                    <h3>Duration</h3>
-                    <p>April 2020 - December 2023</p>
-                </li>
-                <li>
-                    <h3>Tools</h3>
-                    <p>Figma, Procreate</p>
-                </li>
 
-            </ul>
+        <div class="case-study-header">
+            <h1>Adventurer's Scroll</h1>
+            <h2>A gamified productivity app that builds intrinsic motivation and transforms studying into an endless
+                personalized adventure.</h2>
+            <a href="intern.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
         </div>
-        <div class="placeholder-caption"></div>
-        <div class="project-pics">
-            <div class="captioned-item ">
-                <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="630" src="https://embed.figma.com/proto/sl8uAToac3ZqbrRWhSJ4eV/The-Adventurer-s-Scroll?page-id=1926%3A10043&node-id=1926-12255&p=f&viewport=85%2C74%2C0.15&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1926%3A12255&embed-host=share" allowfullscreen></iframe>
-                <!-- <p>Interactive prototype</p> -->
-            </div>
-            <div class="captioned-item ">
-                <img src="assets/adventurer full ui.png" alt="hi-fi UI">
-                <p>Hi-fi UI</p>
-            </div>
-            <div class="captioned-item ">
+        <img class="img-casestudy-cover" src="assets/adventurer-thumb.png" alt="">
+        <div class="project-caption">
+            <section>
+                <ul class="list-case-study list-case-study-info">
+                    <li>
+                        <p class="entry-header">Role</p>
+                        <p class="entry-content">Visual &amp; product designer</p>
+                    </li>
+                    <li>
+                        <p class="entry-header">Timeline</p>
+                        <p class="entry-content">April 2020 - December 2023</p>
+                    </li>
+                    <li>
+                        <p class="entry-header">Audience</p>
+                        <p class="entry-content">Middle school students (ages ~11–14)</p>
+                    </li>
+                    <li>
+                        <p class="entry-header">Tools</p>
+                        <p class="entry-content">Figma, Procreate</p>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Problem</h3>
+                <ul class="list-case-study list-case-study-problems">
+                    <li>
+                        <h4>Students are often driven by external pressure rather than curiosity to learn. </h4>
+                        <p>Middle school students often learn under parental pressure, grading systems, and standardized
+                            benchmarks, leading to compliance as opposed to curiosity. </p>
+                    </li>
+                    <li>
+                        <h4>High anxiety → lower sense of agency.</h4>
+                        <p>Middle school students often learn under parental pressure, grading systems, and standardized
+                            benchmarks, leading to compliance as opposed to curiosity. </p>
+                    </li>
+                    <li>
+                        <h4>Major productivity tools rely on discipline over engagement. </h4>
+                        <p>Most tools (Notion, Todoist, etc.) are designed for adults, relying on discipline over
+                            engagement. Their lack of imagination and reward loops misaligns with how Gen Z actually
+                            engages with the world, which is through storytelling, games, and social connections. </p>
+                    </li>
+                </ul>
+                <img src="assets/img-problem-picture.png" class="img-case-study-body" alt="">
+            </section>
+            <section>
+                <h3>Research question</h3>
+                <p>What if studying felt like progressing through a story instead of completing tasks?</p>
+            </section>
+            <section class="section-product-highlights">
+
+                <h3>Product highlights</h3>
+                <div class="product-highlight-entries">
+                    <div class="product-highlight-entry">
+                        <div>
+                            <h4>Focus session + story progression loop</h4>
+
+                            <p>The user begins by setting up a checklist of tasks which they would execute in a
+                                Pomodoro-style focus session. With each task complete, they unlock a new segment of
+                                their story and are prompted to make a choice that determines how the narrative unfolds.
+                                By continuously prompting the question “What happens next?”, the experience builds
+                                anticipation and encourages sustained engagement, allowing students to feel a sense of
+                                accomplishment in real time.</p>
+                        </div>
+                        <video class="video-app-highlights" src="assets/adventurer-focus(v2).mp4" autoplay loop muted
+                            playsinline></video>
+
+                    </div>
+                    <div class="product-highlight-entry">
+                        <div>
+                            <h4>AI-based branching narrative system</h4>
+
+                            <p>The story itself is dynamically generated through AI, adapting to the user’s previous
+                                decisions and preferred tone, whether epic, chaotic, or humorous. As users make choices,
+                                they actively shape their character’s identity and influence the direction of the world.
+                            </p>
+                        </div>
+                        <video class="video-app-highlights" src="assets/adventurer-narrative.mp4" autoplay loop muted
+                            playsinline></video>
+
+                    </div>
+
+                    <div class="product-highlight-entry">
+                        <div>
+                            <h4>Reward economy</h4>
+
+                            <p>In addition to narrative progression, users earn coins through completed focus sessions.
+                                These rewards can be exchanged for new story genres, additional “script slots,”
+                                educational audio content, and customization options.
+                            </p>
+                        </div>
+                        <video class="video-app-highlights" src="assets/adventurer-store.mp4" autoplay loop muted
+                            playsinline></video>
+
+                    </div>
+
+                    <div class="product-highlight-entry">
+                        <div>
+                            <h4>Build momentum through peer-supported micro groups.</h4>
+
+                            <p>To introduce a social dimension without creating pressure, students can form small groups
+                                of up to four people, where they work toward shared weekly goals and unlock collective
+                                rewards.
+                            </p>
+                        </div>
+                        <video class="video-app-highlights" src="assets/adventurer-clan.mp4" autoplay loop muted
+                            playsinline></video>
+
+                    </div>
+                </div>
+            </section>
+            <section class="section-mockup">
+                <h3>Mockup</h3>
                 <img src="assets/adventurer-mockup.png" alt="hi-fi UI">
-            </div>
-            <div class="captioned-item ">
+            </section>
+            <section class="section-design-system">
+                <h3>Design system</h3>
+                <div class="wrapper-design-system">
                 <img src="assets/design system.png" alt="Keyframes">
-                <p>Design system</p>
-            </div>
-            
+                </div>
+            </section>
+            <div class="placeholder-caption"></div>
+            <!-- <div class="project-pics">
+                <div class="captioned-item ">
+                    <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="630"
+                        src="https://embed.figma.com/proto/sl8uAToac3ZqbrRWhSJ4eV/The-Adventurer-s-Scroll?page-id=1926%3A10043&node-id=1926-12255&p=f&viewport=85%2C74%2C0.15&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1926%3A12255&embed-host=share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="captioned-item ">
+                    <img src="assets/adventurer full ui.png" alt="hi-fi UI">
+                    <p>Hi-fi UI</p>
+                </div>
+                <div class="captioned-item ">
+                    <img src="assets/adventurer-mockup.png" alt="hi-fi UI">
+                </div>
+                <div class="captioned-item ">
+                    <img src="assets/design system.png" alt="Keyframes">
+                    <p>Design system</p>
+                </div>
+
+            </div> -->
         </div>
     </main>
     <hr>
