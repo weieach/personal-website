@@ -257,7 +257,7 @@ h2{
 .main-projectpg.case-study-project .project-caption{
   position: relative;
   width: 100%;
-  max-width: 90ch;
+  max-width: 85ch;
 }
 
 .case-study-header{
@@ -312,13 +312,13 @@ h2{
   gap: 2rem;
   max-width: 60ch;
   margin-bottom: 2.5rem;
-  /* margin-inline: auto; */
+  margin-inline: auto;
 }
 
 .list-case-study-problems li{
   flex-direction: column;
   padding-left: 1.8rem;
-  border-left: 4px solid #8C87E6;
+  border-left: 3px solid #688960;
 }
 
 .list-case-study li h4{
@@ -339,9 +339,9 @@ h2{
 }
 
 .img-case-study-body{
-  width: 130%;
+  width: 120%;
   position: relative;
-  right: 15%;
+  right: 10%;
 }
 
 .product-highlight-entry{
@@ -399,8 +399,18 @@ h2{
   width: 100%;
 }
 
+.section-ui-design img{
+  width: 110%;
+  position: relative;
+  left: -5%;
+}
+
 .section-design-system img{
   width: 100%;
+}
+
+.img-mockup{
+  margin-top: 1.3rem;
 }
 
 .btn-back{

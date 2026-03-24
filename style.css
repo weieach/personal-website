@@ -206,6 +206,11 @@ ul li{
     /* order: 2; */
 }
 
+.cards-single-column .card a:hover{
+    opacity: 0.95;
+    transition: opacity 300ms ease;
+}
+
 
 .card{
     display: flex;
