@@ -456,8 +456,8 @@ h2{
   left: -15%;
   height: 80vh;
   overflow-y: scroll;
-  background-color: #F1F1F1;
-  border: 1px solid #dfdfdf;
+  background-color: #FEFCFA;
+  /* border: 1px solid #e5e5e5; */
   border-radius: 1rem;
   padding-inline: 2rem;
 }
