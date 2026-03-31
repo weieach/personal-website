@@ -15,12 +15,12 @@ header{
 
 nav {
     display: flex;
-    padding-top: 1.4rem;
+    padding-top: 1rem;
     /* padding-inline: 4.6rem; */
     padding-inline: 4vw;
     /* padding-bottom: 3rem; */
     /* padding-bottom: 0.9vw; */
-    padding-bottom: 0.5vw;
+    padding-bottom: 0.3vw;
     align-items: center;
     position: relative;
     
@@ -28,6 +28,13 @@ nav {
     /* background-color: aqua; */
     
     
+}
+nav ul{
+    margin-bottom: 0.5rem;
+}
+
+nav ul a{
+    font-size: 0.85rem;
 }
 
 body{
@@ -114,7 +121,7 @@ nav a{
 nav ul {
     padding: 0;
     display: flex;
-    gap: 3.5rem;
+    gap: 4.2rem;
     position: absolute;
     width: 94vw;
     /* background-color: aqua; */

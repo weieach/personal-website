@@ -257,7 +257,7 @@ h2{
 .main-projectpg.case-study-project .project-caption{
   position: relative;
   width: 100%;
-  max-width: 85ch;
+  max-width: 80ch;
 }
 
 .case-study-header{
@@ -280,24 +280,34 @@ h2{
 }
 
 .list-case-study-info{
-  display: flex;
-  gap: 0rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  
+  grid-template-rows: 50% 50%;
+  column-gap: 4rem;
+  row-gap: 0.1rem;
   justify-content: space-between;
   margin-top: 1rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .list-case-study-info li{
   display: flex;
-  flex-direction: column;
-  gap: 0rem;
-  width: 16ch;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.list-case-study-info .entry-header{
+  width: 140px;
+  font-family: "geist mono";
+  color: #4E7E44;
 }
 
 .list-case-study-info .entry-header, h3{
-  color: #4e7e43;
+  color: #4E7E44;
   font-size: 0.9rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
 }
 
 .list-case-study-info .entry-content{
@@ -310,16 +320,18 @@ h2{
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 60ch;
+  /* max-width: 60ch; */
   margin-bottom: 2.5rem;
   margin-inline: auto;
 }
 
 .list-case-study-problems li{
   flex-direction: column;
-  padding-left: 1.8rem;
-  border-left: 3px solid #688960;
+  padding-left: 1.5rem;
+  border-left: 3px solid #4E7E44;
 }
+
+
 
 .list-case-study li h4{
   font-weight: 500;
@@ -329,8 +341,12 @@ h2{
 .list-case-study li p{
   font-family: "geist";
   margin: 0;
-  opacity: 0.8;
+  opacity: 1;
   font-size: 0.9rem;
+}
+
+.list-case-study-problems li p{
+  opacity: 0.5;
 }
 
 .img-casestudy-cover{
@@ -339,19 +355,15 @@ h2{
 }
 
 .img-case-study-body{
-  width: 120%;
+  width: 140%;
   position: relative;
-  right: 10%;
+  right: 20%;
 }
 
-.product-highlight-entry{
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
+
 
 .video-app-highlights{
-  width: 60%;
+  width: 100%;
   scale: 1;
   border-radius: 0px;
 }
@@ -359,7 +371,7 @@ h2{
 .product-highlight-entries{
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 100%;
   margin-inline: auto;
 
@@ -367,9 +379,9 @@ h2{
 
 .product-highlight-entry{
   display: flex;
-  flex-direction: row;
-  align-items: start;
-  gap: 2.5rem;
+  flex-direction: column;
+  align-items: end;
+  gap: 0rem;
   
 }
 
@@ -377,7 +389,8 @@ h2{
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 0.6rem;
+  gap: 0.4rem;
+  /* order: 2; */
 }
 
 .product-highlight-entry h4{
@@ -400,9 +413,9 @@ h2{
 }
 
 .section-ui-design img{
-  width: 110%;
+  width: 130%;
   position: relative;
-  left: -5%;
+  left: -15%;
 }
 
 .section-design-system img{
@@ -438,7 +451,10 @@ h2{
 }
 
 .wrapper-design-system{
-  height: 600px;
+  width: 130%;
+  position: relative;
+  left: -15%;
+  height: 80vh;
   overflow-y: scroll;
   background-color: #F1F1F1;
   border: 1px solid #dfdfdf;
