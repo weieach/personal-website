@@ -21,15 +21,45 @@ main.pg-with-thumbnail {
   margin-top: 0;
 }
 
+.pictogram-main-projectpg{
+  margin-top: 66px;
+}
+
+.pictogram-main-projectpg .page-thumbnail{
+  background-color: #3E5ED9;
+  margin-top: 0;
+  
+}
+
 .page-thumbnail{
   width: 100%;
+  display: flex;
   margin-top: 66px;
   margin-bottom: 4vh;
   /* max-width: 1200px; */
   margin-inline: auto;
   /* padding: 5vh 0; */
+  height: calc(100vh - 66px);
+  min-height: 800px;
   max-height: calc(100vh - 66px);
   background-color: #338AC9;
+}
+
+.page-thumbnail.page-thumbnail-elastic-mind {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: calc(100vh - 66px);
+  max-height: calc(100vh - 66px);
+}
+
+.page-thumbnail-elastic-mind video {
+
+  max-height: 103%;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 1;
 }
 
 .main-projectpg {
@@ -65,12 +95,18 @@ main.pg-with-thumbnail {
 .captioned-item {
   display: flex;
   flex-direction: column;
-  gap: 1.5vw;
+  gap: 1.8vw;
   position: relative;
   justify-content: center;
   align-items: center;
   scroll-margin-top: 100px;
 
+}
+
+.floating-caption-wrap{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .floating-caption{
@@ -93,6 +129,9 @@ main.pg-with-thumbnail {
 .floating-caption-detail{
   /* font-size: 0.92rem; */
   opacity: 0.5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   
 }
 
@@ -256,6 +295,18 @@ h3 {
     
     
     /* margin: 0; */
+}
+
+.pictogram-static{
+  width: 100%;
+  max-width: 100vh;
+}
+
+.pictogram-motion{
+  /* aspect-ratio: 10/10; */
+  padding: 3% 5%;
+  background-color: #3E5ED9;
+  max-width: 780px;
 }
 
 .sf-bookcover{
