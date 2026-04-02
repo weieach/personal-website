@@ -5,7 +5,7 @@ html{
 
 h1 {
   font-size: 1.75rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
   font-weight: 600;
 }
 
@@ -17,9 +17,24 @@ p {
   font-size: 0.98rem;
 }
 
+main.pg-with-thumbnail {
+  margin-top: 0;
+}
+
+.page-thumbnail{
+  width: 100%;
+  margin-top: 66px;
+  margin-bottom: 4vh;
+  /* max-width: 1200px; */
+  margin-inline: auto;
+  /* padding: 5vh 0; */
+  max-height: calc(100vh - 66px);
+  background-color: #338AC9;
+}
+
 .main-projectpg {
   /* margin-top: 8.5rem; */
-  padding-inline: 4vw;
+  /* padding-inline: 4vw; */
   display: flex;
   flex-direction: row;
   gap: 4vw;
@@ -27,10 +42,14 @@ p {
 
 .project-pics {
   width: 100%;
+  max-width: 1200px;
   display: flex;
-  gap: 2vw;
+  gap: 5vw;
+  margin-inline: auto;
   flex-direction: column;
-  /* justify-content: center; */
+  align-items: center;
+  
+  justify-content: center;
 }
 
 .project-pics > * {
@@ -46,12 +65,39 @@ p {
 .captioned-item {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  justify-content: start;
+  gap: 1.5vw;
+  position: relative;
+  justify-content: center;
+  align-items: center;
   scroll-margin-top: 100px;
+
 }
 
-#el-item-1{
+.floating-caption{
+  /* position: absolute; */
+  text-align: center;
+  display: flex;
+  /* flex-direction: column; */
+  gap: 1rem;
+  justify-content: center;
+}
+
+.floating-caption-title{
+  font-family: "Geist Mono";
+  text-transform: uppercase;
+  font-weight: 400;
+  opacity: 0.8;
+  
+}
+
+.floating-caption-detail{
+  /* font-size: 0.92rem; */
+  opacity: 0.5;
+  
+}
+
+
+/* #el-item-1{
   scroll-margin-top: 200px;
 }
 
@@ -62,11 +108,13 @@ p {
 #el-item-3 video{
   height: calc(100vh-75px);
   width: 70%;
+} */
+
+#el-item-4{
+  width: 80%;
 }
 
-.captioned-item p {
-  color: rgb(87, 87, 87);
-}
+
 
 ul {
   padding-left: 0px;
@@ -97,11 +145,23 @@ h3 {
   color: rgb(0, 255, 85);
 }
 
+.non-cs-pg{
+  display: flex;
+  flex-direction: column !important;
+  gap: 2vh;
+}
+
+
 .project-caption {
   width: 100%;
   max-width: 55ch;
-  position: fixed;
+  position: relative;
   margin-inline: auto;
+  
+}
+
+.non-cs-pg .project-pics > *{
+  width: 100%;
 }
 
 .placeholder-caption {
@@ -116,6 +176,10 @@ h3 {
 
 .project-caption p {
   margin-bottom: 1rem;
+  font-size: 0.92rem;
+  line-height: 1.28;
+  font-weight: 350;
+  opacity: 0.7;
 }
 
 .project-caption a {
@@ -159,15 +223,44 @@ h3 {
     content: "#";
 }
 
-.elastic-main-projectpg .project-pics{
-    max-width: 850px;
+.dark-mode-lighter, .dark-mode-lighter nav, .dark-mode-lighter nav ul, .dark-mode-lighter p, .dark-mode-lighter h1, .dark-mode-lighter h2, .dark-mode-lighter h3{
+  background-color: #1C1C1C;
+}
+
+.dark-mode ul h3{
+  color: #C4D938;
+}
+
+.elastic-main-projectpg .project-pics > *{
+  margin-inline: auto;
+    /* max-width: 850px; */
+}
+
+.elastic-teaser-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+
+.elastic-poster{
+  max-width: 1050px;
 }
 
 .motion-teaser{
-    max-width: 450px;
+    /* max-width: 450px; */
+    width: 80%;
+    scale: 1;
+    max-width: 1050px;
+    
+    
     /* margin: 0; */
 }
 
+.sf-bookcover{
+  max-width: 850px;
+}
 
 .work-wu-poster{
   max-width: 660px;
@@ -445,6 +538,17 @@ h2{
   background-color: #e6e6e6;
   transition: background-color 0.3s ease-in-out;
 }
+
+.dark-mode .btn-back{
+  background-color: #161616;
+  color: #959595;
+}
+
+.dark-mode .btn-back:hover{
+  background-color: #232323;
+  transition: background-color 0.3s ease-in-out;
+}
+
 
 .btn-back i{
   color: #6f6f6f;

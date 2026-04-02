@@ -16,6 +16,8 @@
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu">
     <!-- stylesheet -->
@@ -26,7 +28,7 @@
     <title>Nicole Wei: Design and the Elastic Mind (2025)</title>
 </head>
 
-<body>
+<body class="dark-mode dark-mode-lighter">
     <header>
         <nav>
             <a href="index.html" class="logo">
@@ -42,7 +44,7 @@
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg elastic-main-projectpg">
+    <main class="main-projectpg non-cs-pg elastic-main-projectpg">
         <div class="sidebar no-display">
             <ul>
                 <li><a href="index.html">Projects</a></li>
@@ -52,9 +54,13 @@
         </div>
         <div class="project-caption elastic-project-caption">
             <h1>Design and the Elastic Mind: Exhibition Curatorial Design</h1>
-            <h2>Motion Graphics, 3D Poster, Graphic design</h2>
+            <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
+            <!-- <h2>Motion Graphics, 3D Poster, Graphic design</h2> -->
             
-            <p>This project is a set of speculative branding materials created for MoMA’s Design and the Elastic Mind
+            <p>This poster is part of a set of speculative branding materials created for MoMA’s Design and the Elastic Mind (2008), an exhibition exploring disruptive innovations at the intersection of design, science, and engineering. The exhibition frames design innovation as a form of engineering progress, where our understanding of the physical world is renewed by an ability to exert control from the nanoscale to the macro-scale. Letterforms are generated through cellular automata, revealing the text from disintegrating and reintegrating particles and new aesthetic possibilities born from the logic of generative systems.</p>
+            <p>Building from my poster design, I created a 15-second motion reel that translates the exhibition’s curatorial themes into time-based form, extending the generative system into animation, accompanied by a 3D poster that transforms the static 2D poster graphic into a dimensional, animated object, one that “breathes” within digital space. </p>
+
+            <!-- <p>This project is a set of speculative branding materials created for MoMA’s Design and the Elastic Mind
                 (2008), an exhibition exploring disruptive innovations at the intersection of design, science, and
                 engineering. Developed as part of a Typography course, the work centers on an <a href="#el-item-1" class="scroll-anchor">A1-sized poster</a> in which type functions as image, produced through
                 cellular automata. By treating typography as a computational system, the poster reframes design as an
@@ -67,7 +73,7 @@
                 choreographed, system-driven performance that evokes the rhythmic precision of mechanical processes.</p>
             <p>Finally, I developed an <a href="#el-item-4" class="scroll-anchor">AR</a> version of the 3D poster using p5.js,
                 allowing the work to be experienced spatially through an AR tracker built with <a
-                    href="https://github.com/tetunori/p5.simpleAR">p5.simpleAR</a>. </p>
+                    href="https://github.com/tetunori/p5.simpleAR">p5.simpleAR</a>. </p> -->
             <ul>
                 <li>
                     <h3>Duration</h3>
@@ -88,22 +94,35 @@
         <div class="placeholder-caption"></div>
         <div class="project-pics">
             <div class="captioned-item" id="el-item-1">
-                <img src="assets/elastic-poster.png" alt="">
-                <p>I. Printed poster</p>
+                <img src="assets/elastic mind mockup v3 1.png" class="elastic-poster" alt="">
+                <div class="floating-caption">
+                    <p class="floating-caption-title">poster design</p>
+                    <p class="floating-caption-detail">A1 (23.4 x 33.1 inch)</p>
+                </div>
             </div>
-            <div class="captioned-item" id="el-item-2">
-                <video src="assets/elastic-Motion Teaser.mp4" class="motion-teaser" controls loop></video>
+            
+            <div class="elastic-teaser-wrap captioned-item">
+                <video src="assets/showcase - 2 juxtaposed copy.mp4" class="motion-teaser" autoplay muted controls loop></video>
+                <div class="floating-caption">
+                    <p class="floating-caption-title">motion graphics</p>
+                    <p class="floating-caption-detail">3D poster (left) & motion teaser (right)</p>
+                </div>
+            </div>
+            <!-- <div class="captioned-item" id="el-item-2">
+                <video src="assets/elastic-Motion Teaser.mp4" class="motion-teaser" autoplay muted controls loop></video>
                 <p>II. Motion teaser (best experienced with sound on)</p>
             </div>
             <div class="captioned-item" id="el-item-3">
-                <!-- <video src="assets/elastic-3d-poster.mp4" autoplay controls loop ></video> -->
                  <video src="assets/elastic-3d-poster.mp4" controls loop ></video>
-                 <!-- autoplay removed considering mobile -->
+                 
                 <p>III. 3D poster</p>
-            </div>
+            </div> -->
             <div class="captioned-item" id="el-item-4">
                 <video src="assets/ar-recorded.mp4" autoplay controls loop muted></video>
-                <p>IV. AR</p>
+                <div class="floating-caption">
+                    <!-- <p class="floating-caption-title">motion graphics</p> -->
+                    <p class="floating-caption-detail">AR version of 3D poster</p>
+                </div>
             </div>
 
         </div>
