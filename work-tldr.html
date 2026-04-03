@@ -28,7 +28,7 @@
     <title>Nicole Wei: TL;DR (2025)</title>
 </head>
 
-<body>
+<body class="dark-mode">
     <header>
         <nav>
             <a href="index.html" class="logo">
@@ -44,7 +44,7 @@
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg non-cs-pg">
+    <main class="main-projectpg non-cs-pg pg-with-thumbnail">
         <div class="sidebar no-display">
             <ul>
                 <li><a href="index.html">Projects</a></li>
@@ -52,12 +52,20 @@
                 <li><a href="about.html">About</a></li>
             </ul>
         </div>
+        <div class="page-thumbnail page-thumbnail-tldr">
+            <!-- <img src="assets/tldr mockup.png" alt="mockup"> -->
+        </div>
         <div class="project-caption">
             <h1><i>TL;DR</i> App Design</h1>
             <h2>UI / UX, Graphic design</h2>
             <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
-            <p><i>TL;DR</i> is a speculative reading product designed in response to the growing fragmentation of attention in the age of short-form content. Positioned as an "intellectual fast food" app, TL;DR mimics the UX patterns of platforms like TikTok and Instagram Reels—delivering long-form literature and complex ideas in swipable, bite-sized pieces.</p>
-            <p>What begins as a convenience-driven interface soon reveals itself to be a critique: by simulating familiar distraction-based interactions while guiding users through classic texts, the product satirizes the illusion of learning and depth in the age of AI summaries and dopamine loops.</p>
+            <p><i>TL;DR</i> is a speculative reading product designed in response to the growing fragmentation of
+                attention in the age of short-form content. Positioned as an "intellectual fast food" app, TL;DR mimics
+                the UX patterns of platforms like TikTok and Instagram Reels—delivering long-form literature and complex
+                ideas in swipable, bite-sized pieces.</p>
+            <p>What begins as a convenience-driven interface soon reveals itself to be a critique: by simulating
+                familiar distraction-based interactions while guiding users through classic texts, the product satirizes
+                the illusion of learning and depth in the age of AI summaries and dopamine loops.</p>
             <ul>
                 <li>
                     <h3>Duration</h3>
@@ -77,14 +85,30 @@
         <div class="placeholder-caption"></div>
         <div class="project-pics tldr-project-pics">
             <div class="captioned-item item-tldr-recorded">
-                <div>
-                <video src="assets/tldr app recording.mp4" autoplay loop controls muted></video>
+                <div class="tldr-demo">
+                    <video src="assets/tldr app recording.mp4" autoplay loop controls muted></video>
                 </div>
-                <p>Interactive prototype walkthrough</p>
+                <div class="floating-caption">
+                    <p class="floating-caption-detail">Interactive prototype walkthrough</p>
+                </div>
             </div>
             <div class="captioned-item ">
-                <img src="assets/tldr app ui.png" alt="hi-fi UI">
-                <p>Hi-fi UI</p>
+                <img src="assets/tldr logo cover pg.png" alt="">
+                <div class="floating-caption">
+                    <p class="floating-caption-detail">Product Logo</p>
+                </div>
+            </div>
+            <div class="captioned-item ">
+                <img class="img-tldr-ui" src="assets/tldr app ui.png" alt="hi-fi UI">
+                
+                <div class="floating-caption">
+                    <p class="floating-caption-detail">Hi-fi UI Design</p>
+                </div>
+                <img src="assets/tldr mockup.png" alt="mockup">
+                <img src="assets/tldr-mockup-2phone.png" alt="">
+                <div class="floating-caption">
+                    <p class="floating-caption-detail">Mockup</p>
+                </div>
             </div>
         </div>
     </main>
@@ -102,4 +126,3 @@
 </body>
 
 </html>
-

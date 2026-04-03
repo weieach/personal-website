@@ -39,10 +39,49 @@ main.pg-with-thumbnail {
   /* max-width: 1200px; */
   margin-inline: auto;
   /* padding: 5vh 0; */
-  height: calc(100vh - 66px);
-  min-height: 800px;
-  max-height: calc(100vh - 66px);
+  height: calc(80vh - 66px);
+  min-height: 630px;
+  max-height: calc(80vh - 66px);
   background-color: #338AC9;
+  position: relative;
+}
+
+.thumbnail-tooltip{
+  position: absolute;
+  background-color: #000000;
+  padding: 10px 20px;
+  text-decoration: none;
+  left: 0;
+  color: #B2B2B2;
+  top: 28px;
+}
+
+.thumbnail-tooltip:hover{
+  /* opacity: 0.5; */
+  /* background-color: #232323; */
+  text-decoration: underline;
+  transition: text-decoration 0.3s ease-in-out;
+
+}
+
+#elastic-h1{
+  scroll-margin-top: 110px;
+}
+
+.page-thumbnail-fs{
+  background-color: #E18594;
+}
+
+.page-thumbnail-tldr{
+  background-image: url(assets/tldr\ mockup.png);
+  background-size: cover;
+  background-position: center 25%;
+  height: calc(85vh - 66px);
+  max-height: calc(85vh - 66px);
+}
+
+.page-thumbnail-fs video{
+  
 }
 
 .page-thumbnail.page-thumbnail-elastic-mind {
@@ -297,6 +336,11 @@ h3 {
     /* margin: 0; */
 }
 
+.film-wherewhatwhere{
+  outline: 1px solid rgb(68, 68, 68);
+  border-radius: 1.85rem;
+}
+
 .pictogram-static{
   width: 100%;
   max-width: 100vh;
@@ -328,7 +372,7 @@ h2{
   margin-top: 2.25rem;
 }
 
-.item-tldr-recorded > div{
+.item-tldr-recorded > .tldr-demo{
   aspect-ratio: 10/10;
   max-height: 680px;
   padding: 1rem 0px;
@@ -336,6 +380,10 @@ h2{
   display: flex;
   justify-content: center;
   
+}
+
+.img-tldr-ui{
+  width: 90%;
 }
 
 .item-tldr-recorded > div video{
