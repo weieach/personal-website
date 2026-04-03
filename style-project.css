@@ -81,6 +81,7 @@ main.pg-with-thumbnail {
   background-color: #000000;
 }
 
+
 .page-thumbnail-fs video{
   
 }
@@ -337,6 +338,8 @@ h3 {
     /* margin: 0; */
 }
 
+
+
 .film-wherewhatwhere{
   outline: 1px solid rgb(68, 68, 68);
   border-radius: 1.85rem;
@@ -373,26 +376,32 @@ h2{
   margin-top: 2.25rem;
 }
 
-.item-tldr-recorded > .tldr-demo{
-  aspect-ratio: 10/10;
-  max-height: 680px;
-  padding: 1rem 0px;
-  background-color: black;
+.flexbox-tldr-demo{
   display: flex;
+  gap: 1rem;
+  max-width: 900px;
   justify-content: center;
-  
+  margin-bottom: 0.5rem;
+}
+
+.flexbox-tldr-demo video{
+  /* aspect-ratio: 10/10; */
+  /* height: 100%; */
+  width: 33%;
+  border-radius: 2rem;
+  background-color: black;
+  margin: 0;
+}
+
+.video-tldr-walkthrough{
+  max-width: 330px;
+  border-radius: 2rem;
 }
 
 .img-tldr-ui{
   width: 90%;
 }
 
-.item-tldr-recorded > div video{
-  width: auto;
-  /* aspect-ratio: 10/8; */
-  height: 100%;
-  /* scale: 0.5; */
-}
 
 .item-pictogram-recorded >div{
   width: 100%;
