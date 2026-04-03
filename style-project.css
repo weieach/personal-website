@@ -78,6 +78,7 @@ main.pg-with-thumbnail {
   background-position: center 25%;
   height: calc(85vh - 66px);
   max-height: calc(85vh - 66px);
+  background-color: #000000;
 }
 
 .page-thumbnail-fs video{
