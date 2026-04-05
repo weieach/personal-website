@@ -292,6 +292,15 @@ video{
     
 }
 
+.card-dance .card-thumbnail{
+    aspect-ratio: 100/57;
+    padding: 0;
+}
+
+.card-dance .card-thumbnail video{
+    scale: 1.02;
+}
+
 
 .video-fs{
     /* justify-self: center; */
