@@ -85,6 +85,49 @@
   }
 }
 
+@media (width < 1350px) {
+  .project-pics{
+    padding-inline: 5%;
+  }
+
+  .project-caption{
+    padding-inline: 5%;
+  }
+
+  /* case study */
+
+  .main-projectpg.case-study-project{
+    padding-inline: 5%;
+  }
+
+  .list-case-study{
+    grid-template-columns: auto;
+    grid-template-rows: repeat(4, auto);
+    row-gap: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .case-study-project .section-case-study-info{
+    margin-bottom: 3rem;
+  }
+
+  .list-case-study-info li:not(  .list-case-study-info li:last-child){
+    border-bottom: 1px solid rgba(153, 153, 153, 0.2);
+  }
+
+  /* adventurer */
+
+  .wrapper-design-system, .img-mockup, .img-casestudy-cover, .img-case-study-body{
+    max-width: 100%;
+    left: 0%;
+    width: 100%;
+  }
+
+  .section-ui-design img{
+    left: 0%;
+  }
+}
+
 @media (width < 800px) {
   .elastic-main-projectpg {
     flex-direction: column;

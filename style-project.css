@@ -34,6 +34,8 @@ main.pg-with-thumbnail {
 .page-thumbnail{
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 66px;
   margin-bottom: 4vh;
   /* max-width: 1200px; */
@@ -82,8 +84,9 @@ main.pg-with-thumbnail {
 }
 
 
-.page-thumbnail-fs video{
-  
+.page-thumbnail video{
+  object-fit: contain;
+  max-height: 100%;
 }
 
 .page-thumbnail.page-thumbnail-elastic-mind {
@@ -96,10 +99,10 @@ main.pg-with-thumbnail {
 }
 
 .page-thumbnail-elastic-mind video {
-
+  /* aspect-ratio: 300/100; */
   max-height: 103%;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
   flex-shrink: 1;
 }
 
@@ -116,6 +119,7 @@ main.pg-with-thumbnail {
   max-width: 1200px;
   display: flex;
   gap: 5vw;
+  padding-inline: 0%;
   margin-inline: auto;
   flex-direction: column;
   align-items: center;
@@ -237,7 +241,7 @@ h3 {
   max-width: 55ch;
   position: relative;
   margin-inline: auto;
-  
+  padding: 0;
 }
 
 .non-cs-pg .project-pics > *{
@@ -310,6 +314,25 @@ h3 {
 .dark-mode ul h3{
   color: #C4D938;
 }
+
+.dark-mode .list-case-study-info .entry-header, 
+.dark-mode .case-study-project h3{
+  color: #8A8FE5;
+}
+
+.case-study-project section img{
+  width: 100%;
+}
+
+.dark-mode .list-case-study-problems h4{
+  color: #B2B2B2;
+}
+
+.dark-mode .list-case-study-problems li{
+  border-left: 3px solid #8A8FE5;
+}
+
+
 
 .elastic-main-projectpg .project-pics > *{
   margin-inline: auto;
@@ -420,16 +443,42 @@ h2{
 
 
 .dino-landing-demo{
-  max-width: 600px;
+  max-width: 800px;
+  margin-inline: auto;
 }
 
 .dino-event-demo{
   border-radius: 4%;
 }
 
-.item-dino-recorded{
+.item-dino-recorded video{
   max-width: 600px;
   /* margin-inline: auto; */
+}
+
+.dino-screens{
+  width: 100vw;
+  max-width: 1100px;
+}
+
+.img-dino-early-logos{
+  max-width: 630px;
+  width: 70%;
+}
+
+.img-dino-branding-illu{
+  max-width: 770px;
+  /* width: 80%; */
+}
+
+.section-dino-branding div{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.img-dino-mockup{
+  width: 100%;
 }
 
 .dephy-project-pics > div{
@@ -454,6 +503,7 @@ h2{
 .main-projectpg.case-study-project{
   flex-direction: column;
   gap: 2rem;
+  padding-inline: 0%;
 }
 
 .main-projectpg.case-study-project .project-caption{
@@ -498,6 +548,7 @@ h2{
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  border: none;
 }
 
 .list-case-study-info .entry-header{
@@ -537,7 +588,7 @@ h2{
 
 .list-case-study li h4{
   font-weight: 500;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
 }
 
 .list-case-study li p{

@@ -248,6 +248,11 @@ ul li{
     flex-direction: column;
     gap: 0.25vw;
     text-transform: uppercase;
+    
+}
+
+.cards-single-column .card-text{
+    max-width: 24%;
 }
 
 .work-caption{
@@ -387,9 +392,9 @@ video{
 }
 
 .card-booklets .card-thumbnail{
-    background-image: url("assets/hurricane-fullspreads-3.png");
+    background-image: url("assets/hurricane-cover-new.png");
     background-size: cover;
-    aspect-ratio: 3356/2679;
+    aspect-ratio: 3000/1900;
     outline: 2px solid #F5F5F5;
 }
 
@@ -429,6 +434,7 @@ video{
 }
 
 .card-dino .card-thumbnail{
+    /* background-image: url("assets/dino-mockup.png"); */
     background-image: url("assets/dino-thumb.png");
     background-size: contain;
     background-position: center;
