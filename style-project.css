@@ -461,6 +461,22 @@ h2{
   max-width: 1100px;
 }
 
+.dino-screens-gallery{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100vw;
+  max-width: 1200px;
+  margin-top: 1.5rem;
+  padding-inline: 5%;
+}
+
+.dino-screens-gallery img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .img-dino-early-logos{
   max-width: 630px;
   width: 70%;

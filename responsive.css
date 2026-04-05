@@ -134,6 +134,12 @@
   }
 }
 
+@media (width < 700px) {
+  .dino-screens-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (width < 460px) {
   nav ul {
     display: none;
