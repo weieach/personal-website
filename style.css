@@ -107,6 +107,41 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+.postcard-hint{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    font: 400 0.88rem/1.3 "Geist", system-ui, sans-serif;
+    color: rgba(18, 18, 18, 0.5);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 420ms ease;
+    z-index: 1;
+}
+
+.postcard-hint i{
+    font-size: 1.05rem;
+    line-height: 1;
+}
+
+.postcard-hint.is-visible{
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce){
+    .postcard-hint{
+        transition: none;
+    }
 }
 
 footer .icons{
@@ -413,10 +448,19 @@ ul li{
     gap: 1rem;
 }
 
-.cards-single-column .work-title,
-.cards-single-column .work-title .bold{
+.cards-single-column .work-title{
     text-align: left;
     font-weight: 400;
+    text-transform: none;
+    color: #121212;
+}
+
+.cards-single-column .work-title .bold{
+    font-weight: 600;
+}
+
+.cards-single-column .work-title-desc{
+    color: rgba(18, 18, 18, 0.42);
 }
 
 .cards-single-column .work-caption{
@@ -576,8 +620,8 @@ video{
 
 .img-wu-poster{
     
-    /* width: 65%; */
-    scale: 1;
+    width: 62%;
+    scale: 0.9;
     
 }
 
@@ -635,8 +679,17 @@ video{
 
 .card-gvd .card-thumbnail video{
     width: 100%;
-    scale: 0.84;
-    border-radius: 2rem;
+    scale: 0.82;
+    border-radius: 1.4rem;
+}
+
+.card-nijimu .card-thumbnail{
+    background-color: #000000;
+}
+
+.card-nijimu .card-thumbnail video{
+    width: 100%;
+    object-fit: contain;
 }
 
 .card-dino .card-thumbnail{

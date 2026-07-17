@@ -19,6 +19,7 @@ const postcard = document.getElementById("about-postcard");
 const inner = postcard?.querySelector(".postcard__inner");
 const front = postcard?.querySelector(".postcard__front");
 const back = postcard?.querySelector(".postcard__back");
+const hint = document.getElementById("postcard-hint");
 
 if (postcard && inner && front && back) {
   const reduceMotion = window.matchMedia(
@@ -32,6 +33,37 @@ if (postcard && inner && front && back) {
   const tilt = { x: 0, y: 0, targetX: 0, targetY: 0 };
   let tiltRaf = 0;
   let hovering = false;
+
+  // Hover hint: show in footer after 2s without a click
+  let hintTimer = 0;
+  let hintDismissed = false;
+
+  const clearHintTimer = () => {
+    if (!hintTimer) return;
+    window.clearTimeout(hintTimer);
+    hintTimer = 0;
+  };
+
+  const hideHint = () => {
+    hint?.classList.remove("is-visible");
+  };
+
+  const showHint = () => {
+    if (hintDismissed || flipped) return;
+    hint?.classList.add("is-visible");
+  };
+
+  const dismissHint = () => {
+    hintDismissed = true;
+    clearHintTimer();
+    hideHint();
+  };
+
+  const scheduleHint = () => {
+    if (hintDismissed || flipped) return;
+    clearHintTimer();
+    hintTimer = window.setTimeout(showHint, 2000);
+  };
 
   const writeTransform = () => {
     inner.style.transform = `rotateX(${tilt.x.toFixed(
@@ -58,6 +90,8 @@ if (postcard && inner && front && back) {
   const setFlipped = (next) => {
     if (flipped === next) return;
     flipped = next;
+
+    if (next) dismissHint();
 
     // Kill tilt so the card rotates around a clean axis
     tilt.targetX = 0;
@@ -107,6 +141,20 @@ if (postcard && inner && front && back) {
     setFlipped(false);
   });
 
+  // About nav / sidebar: if already on this page and still on the front,
+  // clicking About again flips the postcard open.
+  const sidebar = document.querySelector(".sidebar");
+  document.querySelectorAll("nav a, .sidebar a").forEach((link) => {
+    const label = link.textContent?.trim().toLowerCase();
+    if (label !== "about") return;
+    link.addEventListener("click", (e) => {
+      if (flipped) return;
+      e.preventDefault();
+      setFlipped(true);
+      sidebar?.classList.add("no-display");
+    });
+  });
+
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && flipped) setFlipped(false);
   });
@@ -144,6 +192,7 @@ if (postcard && inner && front && back) {
   };
 
   postcard.addEventListener("pointerenter", (e) => {
+    if (e.pointerType === "mouse") scheduleHint();
     if (reduceMotion || flipped || e.pointerType !== "mouse") return;
     hovering = true;
     startTiltLoop();
@@ -159,6 +208,7 @@ if (postcard && inner && front && back) {
   });
 
   postcard.addEventListener("pointerleave", () => {
+    clearHintTimer();
     hovering = false;
     tilt.targetX = 0;
     tilt.targetY = 0;
