@@ -5,6 +5,38 @@ const header = document.querySelector("header");
 let closeBtnOn = false;
 
 // --------------------------
+// Gallery pages (index / intern): always start at top on refresh
+// --------------------------
+const isGalleryPage = Boolean(
+  document.querySelector(".cards, .cards-single-column")
+);
+if (isGalleryPage) {
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+  window.scrollTo(0, 0);
+  window.addEventListener("load", () => window.scrollTo(0, 0), { once: true });
+}
+
+// --------------------------
+// Keep --nav-height in sync with the fixed nav bar
+// (used as margin-top for main / .page-thumbnail)
+// --------------------------
+function syncNavHeight() {
+  // Measure the fixed header (not only nav) so main clears the full bar
+  const header = document.querySelector("header");
+  if (!header) return;
+  const height = Math.ceil(header.getBoundingClientRect().height);
+  document.documentElement.style.setProperty("--nav-height", `${height}px`);
+}
+
+syncNavHeight();
+window.addEventListener("resize", syncNavHeight);
+if (document.fonts?.ready) {
+  document.fonts.ready.then(syncNavHeight);
+}
+
+// --------------------------
 // Mobile menu
 // --------------------------
 if (btnMenu && sidebar) {
@@ -147,7 +179,7 @@ document.addEventListener("click", (e) => {
     if (!loader.isConnected) return;
     loader.classList.add("page-loader--hidden");
     document.body.classList.remove("is-loading");
-    window.setTimeout(() => loader.remove(), 260);
+    window.setTimeout(() => loader.remove(), 450);
   };
 
   // Hide once *all* resources (images/videos/fonts) are loaded.
@@ -157,4 +189,51 @@ document.addEventListener("click", (e) => {
 
   // Safety fallback (prevents stuck loader if something hangs).
   window.setTimeout(hide, 8000);
+})();
+
+// --------------------------
+// Footer social icons: one-shot bounce / stretch / shake
+// - About page: play on entry
+// - Project / gallery pages: play the first time the footer is scrolled into view
+// --------------------------
+(() => {
+  const icons = document.querySelector("footer .icons");
+  if (!icons) return;
+  if (!icons.querySelector(".icon-instagram, .icon-x, .icon-linkedin")) return;
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  let played = false;
+  const play = () => {
+    if (played || reduceMotion) return;
+    played = true;
+    icons.classList.add("icons--animate");
+    window.setTimeout(() => {
+      icons.classList.remove("icons--animate");
+    }, 1200);
+  };
+
+  const isAboutPage = Boolean(document.querySelector("main.main-aboutpg"));
+
+  // About: animate shortly after landing on the page
+  if (isAboutPage) {
+    window.requestAnimationFrame(() => {
+      window.setTimeout(play, 280);
+    });
+    return;
+  }
+
+  // Everywhere else (project gallery / project pages): first time footer enters view
+  const footer = icons.closest("footer") || icons;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      play();
+      observer.disconnect();
+    },
+    { threshold: 0.45, rootMargin: "0px 0px -4% 0px" }
+  );
+  observer.observe(footer);
 })();

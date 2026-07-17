@@ -1,7 +1,17 @@
 html{
   scroll-behavior: smooth;
-
 }
+
+/* Lenis: prefer native scroll smoothing over CSS smooth */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
 
 h1 {
   font-size: 1.75rem;
@@ -10,7 +20,7 @@ h1 {
 }
 
 main {
-  margin-top: 9rem;
+  margin-top: var(--space-main-top);
 }
 
 p {
@@ -22,7 +32,7 @@ main.pg-with-thumbnail {
 }
 
 .pictogram-main-projectpg{
-  margin-top: 66px;
+  margin-top: var(--space-main-top);
 }
 
 .pictogram-main-projectpg .page-thumbnail{
@@ -36,14 +46,14 @@ main.pg-with-thumbnail {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 66px;
+  margin-top: var(--nav-height);
   margin-bottom: 4vh;
   /* max-width: 1200px; */
   margin-inline: auto;
   /* padding: 5vh 0; */
-  height: calc(80vh - 66px);
+  height: calc(80vh - var(--nav-height));
   min-height: 630px;
-  max-height: calc(80vh - 66px);
+  max-height: calc(80vh - var(--nav-height));
   background-color: #338AC9;
   position: relative;
 }
@@ -54,8 +64,29 @@ main.pg-with-thumbnail {
   padding: 10px 20px;
   text-decoration: none;
   left: 0;
-  color: #B2B2B2;
+  color: #ffffff;
+  font-family: "Geist Mono";
   top: 28px;
+  opacity: 0;
+  transform: scale(0.85);
+  transform-origin: left center;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.thumbnail-tooltip.is-visible{
+  pointer-events: auto;
+}
+
+.thumbnail-tooltip__text{
+  display: inline-block;
+  opacity: 0;
+  color: #ffffff;
+  font-family: "Geist Mono";
+}
+
+.thumbnail-tooltip__text i{
+  color: #ffffff;
 }
 
 .thumbnail-tooltip:hover{
@@ -96,6 +127,7 @@ main.pg-with-thumbnail {
   background-color: black;
   height: calc(100vh - 66px);
   max-height: calc(100vh - 66px);
+  cursor: pointer;
 }
 
 .page-thumbnail-elastic-mind video {

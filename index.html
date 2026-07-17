@@ -35,20 +35,30 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="responsive.css">
     <title>Nicole Wei</title>
+    <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
 </head>
 
 <body class="is-loading">
     <!-- Fullscreen loading overlay (hidden on window.load) -->
     <div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-label="Loading">
         <div class="page-loader__inner">
-            <div class="page-loader__spinner" aria-hidden="true"></div>
-            <p class="page-loader__text">Loading…</p>
+            <div class="page-loader__mark" aria-hidden="true">
+                <img class="page-loader__logo" src="assets/favicon.png" alt="">
+                <svg class="page-loader__ring" viewBox="0 0 72 72" fill="none">
+                    <circle class="page-loader__ring-track" cx="36" cy="36" r="30" />
+                    <circle class="page-loader__ring-arc" cx="36" cy="36" r="30" />
+                </svg>
+            </div>
+            <p class="page-loader__name">Nicole Wei</p>
+            <div class="page-loader__bar" aria-hidden="true">
+                <span class="page-loader__bar-fill"></span>
+            </div>
         </div>
     </div>
     <header>
         <nav>
             <a href="#" class="logo">
-                <img src="assets/favicon (uncut).png" alt="">
+                <img src="assets/favicon.png" alt="">
                 <p>Nicole Wei</p>
             </a>
             <ul>
@@ -116,16 +126,15 @@
                     <p class="work-caption">Creative coding, front-end, book design</p>
                 </div>
             </div>
-            <!-- WU poster -->
-            <div class="card card-wu">
-                <a href="work-wu.html">
+            <div class="card card-tldr">
+                <a href="work-tldr.html">
                     <div class="card-thumbnail">
-                        <img class="img-wu-poster thumb-img" src="assets/wuchienshiung(1.17).png" alt="">
+                        <img class="thumb-img img-tldr" src="assets/tldr ui.png" alt="">
                     </div>
                 </a>
                 <div class="card-text">
-                    <p class="work-title"><span class="bold">Wu Chien-Shiung — Biography poster</span> (2025)</p>
-                    <p class="work-caption">Poster Design</p>
+                    <p class="work-title"><span class="bold"><i>TL;DR</i></span> (2025)</p>
+                    <p class="work-caption">UI / UX, Graphic</p>
                 </div>
             </div>
 
@@ -142,30 +151,6 @@
                 </div>
             </div>
 
-            <div class="card card-tldr">
-                <a href="work-tldr.html">
-                    <div class="card-thumbnail">
-                        <img class="thumb-img img-tldr" src="assets/tldr ui.png" alt="">
-                    </div>
-                </a>
-                <div class="card-text">
-                    <p class="work-title"><span class="bold"><i>TL;DR</i></span> (2025)</p>
-                    <p class="work-caption">UI / UX, Graphic</p>
-                </div>
-            </div>
-
-            <!-- <div class="card card-nightingale">
-                <a href="work-nightingale.html">
-                    <div class="card-thumbnail">
-                        <img class="thumb-img" src="assets/nightingale.png" alt="">
-                    </div>
-                </a>
-                <div class="card-text">
-                    <p class="work-title"><span class="bold"><i>Nightingale Bar</i> App design</span> (2023)</p>
-                    <p class="work-caption">UI / UX, Graphic</p>
-                </div>
-            </div> -->
-
             <div class="card card-dance">
                 <a href="work-nightingale.html" class="disabled-link">
                     <div class="card-thumbnail">
@@ -176,13 +161,10 @@
                     </div>
                 </a>
                 <div class="card-text">
-                    <p class="work-title"><span class="bold"><i>Cartography of dance</i> Web design</span> (2026)</p>
+                    <p class="work-title"><span class="bold"><i>Cartography of dance</i>: Web design</span> (2026)</p>
                     <p class="work-caption">Web Development, Graphic</p>
                 </div>
             </div>
-
-
-            
 
             <div class="card card-booklets">
                 <a href="work-hurricane.html">
@@ -196,6 +178,19 @@
                 </div>
             </div>
 
+            <!-- WU poster -->
+            <div class="card card-wu">
+                <a href="work-wu.html">
+                    <div class="card-thumbnail">
+                        <img class="img-wu-poster thumb-img" src="assets/wuchienshiung(1.17).png" alt="">
+                    </div>
+                </a>
+                <div class="card-text">
+                    <p class="work-title"><span class="bold">Wu Chien-Shiung — Biography poster</span> (2025)</p>
+                    <p class="work-caption">Poster Design</p>
+                </div>
+            </div>
+
             <div class="card card-videssay">
                 <a href="work-wherewhatwhere.html">
                     <div class="card-thumbnail">
@@ -206,6 +201,18 @@
                 <div class="card-text">
                     <p class="work-title"><span class="bold"><i>Where? What? Where? </i></span> (2025)</p>
                     <p class="work-caption">Video-editing, TouchDesigner</p>
+                </div>
+            </div>
+
+            <div class="card card-nightingale">
+                <a href="work-nightingale.html">
+                    <div class="card-thumbnail">
+                        <img class="thumb-img" src="assets/nightingale.png" alt="">
+                    </div>
+                </a>
+                <div class="card-text">
+                    <p class="work-title"><span class="bold"><i>Nightingale Bar</i> App design</span> (2023)</p>
+                    <p class="work-caption">UI / UX, Graphic</p>
                 </div>
             </div>
 
@@ -257,14 +264,19 @@
     </main>
     <hr>
     <footer>
-        <p>&copy; 2025 Nicole Wei</p>
+        <p>&copy; 2026 Nicole Wei</p>
         <div class="icons">
-            <a href="mailto:wei.yichen@wustl.edu" target="_blank" class="contact-entry"><i
-                    class="ph ph-envelope-simple">mail</i></a>
-            <a href="https://www.linkedin.com/in/ncwei/" target="_blank" class="contact-entry"><i
-                    class="ph-fill ph-linkedin-logo"></i></a>
-        </div>
+                <a href="mailto:wei.yichen@wustl.edu" target="_blank" class="contact-entry" aria-label="Email"><i
+                        class="ph ph-envelope-simple"></i></a>
+                <a href="https://www.instagram.com/YOUR_HANDLE/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-instagram" aria-label="Instagram"><i
+                        class="ph-fill ph-instagram-logo"></i></a>
+                <a href="https://x.com/YOUR_HANDLE/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x" aria-label="X"><i
+                        class="ph-fill ph-x-logo"></i></a>
+                <a href="https://www.linkedin.com/in/ncwei/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-linkedin" aria-label="LinkedIn"><i
+                        class="ph-fill ph-linkedin-logo"></i></a>
+            </div>
     </footer>
+    <script type="module" src="listing-scroll.js"></script>
     <script src="script.js"></script>
 </body>
 

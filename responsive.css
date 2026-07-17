@@ -37,18 +37,18 @@
 
   .cards {
     grid-template-columns: 1fr;
-    row-gap: 4.5vw;
+    row-gap: calc(var(--space) * 4.5);
   }
 
   .card {
-    gap: 2vw;
+    gap: calc(var(--space) * 2);
   }
 
   .main-aboutpg {
     margin-top: 7rem;
     margin-bottom: 2.5rem;
     padding-top: 0;
-    padding-inline: 3.5vw;
+    padding-inline: var(--space-page);
     max-width: none;
   }
 
