@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Noto+Sans+Symbols+2&display=swap"
         rel="stylesheet">
     <link rel="icon" href="assets/favicon.png">
     <!-- icons -->
@@ -62,44 +62,55 @@
                 <li><a href="about.html">About</a></li>
             </ul>
         </div>
-        <div class="content-about">
-            <img src="assets/avatar 1.png" class="img-avatar" alt="">
-            <div class="text-about">
-                <h1 class="no-display">About Me</h1>
-                <div>
-                <p>
-                    I'm Nicole Wei, a designer and creative technologist from Beijing,
-studying Communication Design (with an HCI minor) at WashU's Sam Fox
-School of Design & Visual Arts. I code and prototype interactive
-products, pairing a deep appreciation for design language with a
-product mindset in everything I build.
-                </p>
-                <p>Feel free to reach out if you have any inquiries!</p>
-                </div>
-                <div class="contact-info">
-                    <p><i class="ph ph-envelope-simple"></i>Email: <a href="mailto:wei.yichen@wustl.edu" target="_blank"
-                            class="contact-entry">weiyichen2004@gmail.com</a></p>
-                    <p><i class="ph ph-device-mobile"></i>Mobile: <a href="tel:3147881409"
-                            class="contact-entry">+1(314)788-1409</a></p>
-                    <p><i class="ph ph-file-text"></i><a href="assets/resume - nicole (7.16).pdf">Resume 简历</a></p>
-                </div>
-                <!-- <h1>Yichen (Nicole) Wei</h1> -->
-            </div>
-        </div>
-        <div class="cards">
-            <div class="card card-dephy no-display">
-                <div class="card-thumbnail"></div>
-                <div class="card-text">
-                    <p class="work-title"></p>
-                    <p class="work-caption"></p>
-                </div>
-            </div>
 
-            <div class="card no-display">
-                <div class="card-thumbnail"></div>
-                <div class="card-text">
-                    <p class="work-title"></p>
-                    <p class="work-caption"></p>
+        <div class="postcard" data-postcard>
+            <div class="postcard__scene">
+                <div class="postcard__tilt">
+                    <div class="postcard__card">
+                        <button type="button" class="postcard__face postcard__face--front" aria-label="Open postcard">
+                            <img
+                                class="postcard__cover"
+                                src="assets/about%20-%20postcard.png"
+                                alt="Welcome to my homepage — illustrated postcard"
+                                width="2250"
+                                height="1380"
+                                decoding="async"
+                            >
+                            <span class="postcard__hint" aria-hidden="true">Click to open</span>
+                        </button>
+
+                        <div class="postcard__face postcard__face--back" aria-hidden="true" role="button" tabindex="0" aria-label="Flip postcard closed">
+                            <div class="content-about">
+                                <div class="about-avatar">
+                                    <div class="about-bird-wrap">
+                                        <canvas id="about-bird-canvas" class="about-bird" role="button" tabindex="0" aria-label="Chirp the bird"></canvas>
+                                        <span class="about-bird-hover-star" aria-hidden="true">✶</span>
+                                    </div>
+                                    <img src="assets/avatar 1.png" class="img-avatar" alt="">
+                                </div>
+                                <div class="text-about">
+                                    <h1 class="no-display">About Me</h1>
+                                    <div>
+                                    <p>
+                                        I'm Nicole Wei, a designer and creative technologist from Beijing,
+                        studying Communication Design (with an HCI minor) at WashU's Sam Fox
+                        School of Design & Visual Arts. I code and prototype interactive
+                        products, bringing a deep appreciation for design language with a
+                        product mindset in everything I build.
+                                    </p>
+                                    <p>Feel free to reach out if you have any inquiries!</p>
+                                    </div>
+                                    <div class="contact-info">
+                                        <p><i class="ph ph-envelope-simple"></i>Email: <a href="mailto:wei.yichen@wustl.edu" target="_blank"
+                                                class="contact-entry">weiyichen2004@gmail.com</a></p>
+                                        <p><i class="ph ph-device-mobile"></i>Mobile: <a href="tel:3147881409"
+                                                class="contact-entry">+1(314)788-1409</a></p>
+                                        <p><i class="ph ph-file-text"></i><a href="assets/resume - nicole (7.16).pdf">Resume 简历</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,9 +122,9 @@ product mindset in everything I build.
             <div class="icons">
                 <a href="mailto:wei.yichen@wustl.edu" target="_blank" class="contact-entry" aria-label="Email"><i
                         class="ph ph-envelope-simple"></i></a>
-                <a href="https://www.instagram.com/YOUR_HANDLE/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-instagram" aria-label="Instagram"><i
+                <a href="https://www.instagram.com/nikuowwi/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-instagram" aria-label="Instagram"><i
                         class="ph-fill ph-instagram-logo"></i></a>
-                <a href="https://x.com/YOUR_HANDLE/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x" aria-label="X"><i
+                <a href="https://x.com/weieach" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x" aria-label="X"><i
                         class="ph-fill ph-x-logo"></i></a>
                 <a href="https://www.linkedin.com/in/ncwei/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-linkedin" aria-label="LinkedIn"><i
                         class="ph-fill ph-linkedin-logo"></i></a>
@@ -121,9 +132,17 @@ product mindset in everything I build.
         </footer>
     </div>
     </div>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+    </script>
+    <script type="module" src="about-postcard.js"></script>
+    <script type="module" src="loader-3d.js"></script>
     <script src="script.js"></script>
 </body>
 
 </html>
-
-<!-- <video src="your-video.mp4" autoplay loop muted></video> -->

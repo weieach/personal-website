@@ -170,25 +170,51 @@ document.addEventListener("click", (e) => {
 
 // --------------------------
 // Fullscreen page loader (index.html)
+// Waits for page load + 3D logo, then holds briefly so the
+// rotation is visible. Safety timeout prevents a stuck overlay.
 // --------------------------
 (() => {
   const loader = document.getElementById("page-loader");
   if (!loader) return;
 
+  let pageReady = document.readyState === "complete";
+  let modelReady = loader.dataset.modelReady === "true";
+  let hidden = false;
+  const HOLD_MS = 1800;
+
   const hide = () => {
-    if (!loader.isConnected) return;
+    if (hidden || !loader.isConnected) return;
+    hidden = true;
     loader.classList.add("page-loader--hidden");
     document.body.classList.remove("is-loading");
     window.setTimeout(() => loader.remove(), 450);
   };
 
-  // Hide once *all* resources (images/videos/fonts) are loaded.
-  window.addEventListener("load", () => {
-    window.requestAnimationFrame(hide);
-  });
+  const tryHide = () => {
+    if (!(pageReady && modelReady)) return;
+    window.setTimeout(hide, HOLD_MS);
+  };
 
-  // Safety fallback (prevents stuck loader if something hangs).
-  window.setTimeout(hide, 8000);
+  window.addEventListener(
+    "load",
+    () => {
+      pageReady = true;
+      tryHide();
+    },
+    { once: true }
+  );
+
+  window.addEventListener(
+    "page-loader:model-ready",
+    () => {
+      modelReady = true;
+      tryHide();
+    },
+    { once: true }
+  );
+
+  // Safety fallback (large GLB / hung network).
+  window.setTimeout(hide, 20000);
 })();
 
 // --------------------------
@@ -212,7 +238,7 @@ document.addEventListener("click", (e) => {
     icons.classList.add("icons--animate");
     window.setTimeout(() => {
       icons.classList.remove("icons--animate");
-    }, 1200);
+    }, 3200);
   };
 
   const isAboutPage = Boolean(document.querySelector("main.main-aboutpg"));

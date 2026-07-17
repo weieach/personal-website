@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Noto+Sans+Symbols+2&display=swap"
         rel="stylesheet">
     <link rel="icon" href="assets/favicon.png">
     <!-- icons -->
@@ -39,15 +39,12 @@
 </head>
 
 <body class="is-loading">
-    <!-- Fullscreen loading overlay (hidden on window.load) -->
+    <!-- Fullscreen loading overlay (hidden once page + 3D logo are ready) -->
     <div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-label="Loading">
         <div class="page-loader__inner">
             <div class="page-loader__mark" aria-hidden="true">
-                <img class="page-loader__logo" src="assets/favicon.png" alt="">
-                <svg class="page-loader__ring" viewBox="0 0 72 72" fill="none">
-                    <circle class="page-loader__ring-track" cx="36" cy="36" r="30" />
-                    <circle class="page-loader__ring-arc" cx="36" cy="36" r="30" />
-                </svg>
+                <img class="page-loader__fallback" src="assets/favicon.png" alt="">
+                <canvas id="page-loader-canvas" class="page-loader__canvas"></canvas>
             </div>
             <p class="page-loader__name">Nicole Wei</p>
             <div class="page-loader__bar" aria-hidden="true">
@@ -162,7 +159,7 @@
                 </a>
                 <div class="card-text">
                     <p class="work-title"><span class="bold"><i>Cartography of dance</i>: Web design</span> (2026)</p>
-                    <p class="work-caption">Web Development, Graphic</p>
+                    <p class="work-caption">Web Development, Graphic <span class="dev-note"><i class="ph-fill ph-gear" aria-hidden="true"></i> Coming soon</span></p>
                 </div>
             </div>
 
@@ -268,14 +265,23 @@
         <div class="icons">
                 <a href="mailto:wei.yichen@wustl.edu" target="_blank" class="contact-entry" aria-label="Email"><i
                         class="ph ph-envelope-simple"></i></a>
-                <a href="https://www.instagram.com/YOUR_HANDLE/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-instagram" aria-label="Instagram"><i
+                <a href="https://www.instagram.com/nikuowwi/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-instagram" aria-label="Instagram"><i
                         class="ph-fill ph-instagram-logo"></i></a>
-                <a href="https://x.com/YOUR_HANDLE/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x" aria-label="X"><i
+                <a href="https://x.com/weieach" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x" aria-label="X"><i
                         class="ph-fill ph-x-logo"></i></a>
                 <a href="https://www.linkedin.com/in/ncwei/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-linkedin" aria-label="LinkedIn"><i
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+    </script>
+    <script type="module" src="loader-3d.js"></script>
     <script type="module" src="listing-scroll.js"></script>
     <script src="script.js"></script>
 </body>

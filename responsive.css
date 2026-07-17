@@ -45,9 +45,9 @@
   }
 
   .main-aboutpg {
-    margin-top: 7rem;
+    margin-top: 0;
     margin-bottom: 2.5rem;
-    padding-top: 0;
+    padding-top: calc(var(--space-main-top) + 0.5rem);
     padding-inline: var(--space-page);
     max-width: none;
   }
@@ -62,11 +62,46 @@
     gap: 5.8vw;
   }
 
-  .img-avatar {
+  .postcard{
+    width: min(100%, 92vw);
+  }
+
+  .postcard__card{
+    aspect-ratio: 2250 / 1380;
+    min-height: 0;
+  }
+
+  .postcard__face--back{
+    padding: 1rem;
+    overflow: auto;
+  }
+
+  .postcard .content-about {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .postcard .about-avatar {
+    width: 100%;
+    max-width: 220px;
+    order: 2;
+    margin-inline: auto;
+  }
+
+  .about-avatar {
     width: 100%;
     max-width: 375px;
     order: 2;
-    /* width: 350px; */
+  }
+
+  .img-avatar {
+    width: 100%;
+  }
+
+  .about-bird-wrap {
+    top: -2%;
+    left: -15%;
+    width: 40%;
   }
 
   .content-about {
@@ -80,8 +115,8 @@
   }
 
   .contact-info {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
   }
 }
 
@@ -115,16 +150,29 @@
     border-bottom: 1px solid rgba(153, 153, 153, 0.2);
   }
 
-  /* adventurer */
+  /* adventurer — collapse breakouts to the text column below desktop */
 
-  .wrapper-design-system, .img-mockup, .img-casestudy-cover, .img-case-study-body{
-    max-width: 100%;
-    left: 0%;
+  .case-study-project .case-study-header,
+  .case-study-project .img-casestudy-cover{
     width: 100%;
+    max-width: 100%;
   }
 
-  .section-ui-design img{
-    left: 0%;
+  /* Keep back in-flow on small screens so it doesn't sit off-canvas */
+  .case-study-project .case-study-header .btn-back{
+    position: static;
+    margin: 0 0 0.5rem;
+    order: -1;
+  }
+
+  .case-study-project .wrapper-design-system,
+  .case-study-project .img-mockup,
+  .case-study-project .img-casestudy-cover,
+  .case-study-project .img-case-study-body,
+  .case-study-project .section-ui-design img{
+    max-width: 100%;
+    left: 0;
+    width: 100%;
   }
 }
 

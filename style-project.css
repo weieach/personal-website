@@ -352,6 +352,8 @@ h3 {
   color: #8A8FE5;
 }
 
+/* Default body images fill the text column; breakout images override below
+   with higher/equal specificity so width: 130–140% actually wins. */
 .case-study-project section img{
   width: 100%;
 }
@@ -548,10 +550,15 @@ h2{
 }
 
 /* case study */
-.main-projectpg.case-study-project{
+main.main-projectpg.case-study-project{
   flex-direction: column;
-  gap: 2rem;
+  gap: calc(var(--space) * 2);
   padding-inline: 0%;
+  margin-top: calc(var(--space-main-top) + var(--space) * 1.5);
+}
+
+.case-study-project .btn-back{
+  margin-right: 2.75rem;
 }
 
 .main-projectpg.case-study-project .project-caption{
@@ -560,19 +567,26 @@ h2{
   max-width: 80ch;
 }
 
+/* Same centered column as .project-caption; back floats outside via .btn-back */
 .case-study-header{
   width: 100%;
   max-width: 80ch;
   margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(var(--space) * 1);
   position: relative;
+}
+
+.case-study-header h1,
+.case-study-header h2{
+  margin: 0;
 }
 
 .case-study-header h2{
   text-transform: none;
   font-family: "Geist";
-  margin-top: 1rem;
-  margin-bottom: 20px;
-  
 }
 
 .case-study-project section{
@@ -655,10 +669,12 @@ h2{
   margin-inline: auto;
 }
 
-.img-case-study-body{
+.case-study-project .img-case-study-body{
   width: 140%;
+  max-width: none;
   position: relative;
-  right: 20%;
+  left: -20%;
+  right: auto;
 }
 
 
@@ -713,18 +729,20 @@ h2{
   width: 100%;
 }
 
-.section-ui-design img{
+.case-study-project .section-ui-design img,
+.case-study-project .img-mockup{
   width: 130%;
+  max-width: none;
   position: relative;
   left: -15%;
 }
 
-.section-design-system img{
-  width: 100%;
+.case-study-project .img-mockup{
+  margin-top: 1.3rem;
 }
 
-.img-mockup{
-  margin-top: 1.3rem;
+.section-design-system img{
+  width: 100%;
 }
 
 .btn-back{
@@ -738,7 +756,10 @@ h2{
   width: fit-content;
   gap: 0.5rem;
   position: absolute;
-  left: -35%;
+  /* Sit just outside the 80ch column, not a % that drifts off-canvas */
+  right: 100%;
+  left: auto;
+  margin-right: 1.25rem;
   top: 0;
 }
 
