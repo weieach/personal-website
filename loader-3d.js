@@ -337,7 +337,7 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
 })();
 
 // --------------------------
-// About page avatar accent ? starts after postcard opens
+// About page avatar accent
 // --------------------------
 (() => {
   const canvas = document.getElementById("about-bird-canvas");
@@ -353,11 +353,11 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
     });
   };
 
-  // Postcard flow: wait until the back is revealed
-  if (document.querySelector("[data-postcard]")) {
-    window.addEventListener("about:postcard-opened", start, { once: true });
-    return;
+  // Bird loads only after the postcard is flipped to the content side
+  const postcard = document.getElementById("about-postcard");
+  if (!postcard || postcard.classList.contains("is-flipped")) {
+    start();
+  } else {
+    window.addEventListener("about-postcard:flipped", start, { once: true });
   }
-
-  start();
 })();

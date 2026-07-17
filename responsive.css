@@ -45,9 +45,9 @@
   }
 
   .main-aboutpg {
-    margin-top: 0;
+    margin-top: 7rem;
     margin-bottom: 2.5rem;
-    padding-top: calc(var(--space-main-top) + 0.5rem);
+    padding-top: 0;
     padding-inline: var(--space-page);
     max-width: none;
   }
@@ -60,32 +60,6 @@
     position: static;
     width: auto;
     gap: 5.8vw;
-  }
-
-  .postcard{
-    width: min(100%, 92vw);
-  }
-
-  .postcard__card{
-    aspect-ratio: 2250 / 1380;
-    min-height: 0;
-  }
-
-  .postcard__face--back{
-    padding: 1rem;
-    overflow: auto;
-  }
-
-  .postcard .content-about {
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-
-  .postcard .about-avatar {
-    width: 100%;
-    max-width: 220px;
-    order: 2;
-    margin-inline: auto;
   }
 
   .about-avatar {
@@ -115,8 +89,8 @@
   }
 
   .contact-info {
-    margin-top: 1rem;
-    margin-bottom: 0;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 }
 

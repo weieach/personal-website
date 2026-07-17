@@ -62,55 +62,62 @@
                 <li><a href="about.html">About</a></li>
             </ul>
         </div>
-
-        <div class="postcard" data-postcard>
-            <div class="postcard__scene">
-                <div class="postcard__tilt">
-                    <div class="postcard__card">
-                        <button type="button" class="postcard__face postcard__face--front" aria-label="Open postcard">
-                            <img
-                                class="postcard__cover"
-                                src="assets/about%20-%20postcard.png"
-                                alt="Welcome to my homepage — illustrated postcard"
-                                width="2250"
-                                height="1380"
-                                decoding="async"
-                            >
-                            <span class="postcard__hint" aria-hidden="true">Click to open</span>
-                        </button>
-
-                        <div class="postcard__face postcard__face--back" aria-hidden="true" role="button" tabindex="0" aria-label="Flip postcard closed">
-                            <div class="content-about">
-                                <div class="about-avatar">
-                                    <div class="about-bird-wrap">
-                                        <canvas id="about-bird-canvas" class="about-bird" role="button" tabindex="0" aria-label="Chirp the bird"></canvas>
-                                        <span class="about-bird-hover-star" aria-hidden="true">✶</span>
-                                    </div>
-                                    <img src="assets/avatar 1.png" class="img-avatar" alt="">
-                                </div>
-                                <div class="text-about">
-                                    <h1 class="no-display">About Me</h1>
-                                    <div>
-                                    <p>
-                                        I'm Nicole Wei, a designer and creative technologist from Beijing,
-                        studying Communication Design (with an HCI minor) at WashU's Sam Fox
-                        School of Design & Visual Arts. I code and prototype interactive
-                        products, bringing a deep appreciation for design language with a
-                        product mindset in everything I build.
-                                    </p>
-                                    <p>Feel free to reach out if you have any inquiries!</p>
-                                    </div>
-                                    <div class="contact-info">
-                                        <p><i class="ph ph-envelope-simple"></i>Email: <a href="mailto:wei.yichen@wustl.edu" target="_blank"
-                                                class="contact-entry">weiyichen2004@gmail.com</a></p>
-                                        <p><i class="ph ph-device-mobile"></i>Mobile: <a href="tel:3147881409"
-                                                class="contact-entry">+1(314)788-1409</a></p>
-                                        <p><i class="ph ph-file-text"></i><a href="assets/resume - nicole (7.16).pdf">Resume 简历</a></p>
-                                    </div>
-                                </div>
+        <div class="postcard" id="about-postcard">
+            <div class="postcard__inner">
+                <button type="button" class="postcard__front" aria-expanded="false"
+                    aria-label="Flip the postcard to read about me">
+                    <img src="assets/about - postcard.png"
+                        alt="Postcard: a moon rising over a pink shore — welcome to my homepage">
+                    <span class="postcard__sheen" aria-hidden="true"></span>
+                </button>
+                <div class="postcard__back">
+                    <div class="content-about">
+                        <div class="about-avatar">
+                            <div class="about-bird-wrap">
+                                <canvas id="about-bird-canvas" class="about-bird" role="button" tabindex="0" aria-label="Chirp the bird"></canvas>
+                                <span class="about-bird-hover-star" aria-hidden="true">✶</span>
                             </div>
+                            <img src="assets/avatar 1.png" class="img-avatar" alt="">
+                        </div>
+                        <div class="text-about">
+                            <h1 class="no-display">About Me</h1>
+                            <div>
+                            <p>
+                                I'm Nicole Wei, a designer and creative technologist from Beijing,
+studying Communication Design (with an HCI minor) at WashU's Sam Fox
+School of Design & Visual Arts. I code and prototype interactive
+products, pairing a deep appreciation for design language with a
+product mindset in everything I build.
+                            </p>
+                            <p>Feel free to reach out if you have any inquiries!</p>
+                            </div>
+                            <div class="contact-info">
+                                <p><i class="ph ph-envelope-simple"></i>Email: <a href="mailto:wei.yichen@wustl.edu" target="_blank"
+                                        class="contact-entry">weiyichen2004@gmail.com</a></p>
+                                <p><i class="ph ph-device-mobile"></i>Mobile: <a href="tel:3147881409"
+                                        class="contact-entry">+1(314)788-1409</a></p>
+                                <p><i class="ph ph-file-text"></i><a href="assets/resume - nicole (7.16).pdf">Resume 简历</a></p>
+                            </div>
+                            <!-- <h1>Yichen (Nicole) Wei</h1> -->
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card card-dephy no-display">
+                <div class="card-thumbnail"></div>
+                <div class="card-text">
+                    <p class="work-title"></p>
+                    <p class="work-caption"></p>
+                </div>
+            </div>
+
+            <div class="card no-display">
+                <div class="card-thumbnail"></div>
+                <div class="card-text">
+                    <p class="work-title"></p>
+                    <p class="work-caption"></p>
                 </div>
             </div>
         </div>
@@ -146,3 +153,5 @@
 </body>
 
 </html>
+
+<!-- <video src="your-video.mp4" autoplay loop muted></video> -->

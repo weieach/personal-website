@@ -38,7 +38,6 @@ main.pg-with-thumbnail {
 .pictogram-main-projectpg .page-thumbnail{
   background-color: #3E5ED9;
   margin-top: 0;
-  
 }
 
 .page-thumbnail{
@@ -112,6 +111,15 @@ main.pg-with-thumbnail {
   height: calc(85vh - 66px);
   max-height: calc(85vh - 66px);
   background-color: #000000;
+}
+
+.page-thumbnail-wherewhatwhere{
+  --where-thumb-gap: 4vh;
+  background-color: #000000;
+  /* Top clears the fixed nav, then matches the gap below to the caption.
+     non-cs-pg flex gap is 2vh, so margin-bottom is gap minus that. */
+  margin-top: calc(var(--nav-height) + var(--where-thumb-gap));
+  margin-bottom: calc(var(--where-thumb-gap) - 2vh);
 }
 
 
@@ -557,10 +565,6 @@ main.main-projectpg.case-study-project{
   margin-top: calc(var(--space-main-top) + var(--space) * 1.5);
 }
 
-.case-study-project .btn-back{
-  margin-right: 2.75rem;
-}
-
 .main-projectpg.case-study-project .project-caption{
   position: relative;
   width: 100%;
@@ -756,10 +760,10 @@ main.main-projectpg.case-study-project{
   width: fit-content;
   gap: 0.5rem;
   position: absolute;
-  /* Sit just outside the 80ch column, not a % that drifts off-canvas */
+  /* Sit just outside the caption column, not a % that drifts off-canvas */
   right: 100%;
   left: auto;
-  margin-right: 1.25rem;
+  margin-right: 2.75rem;
   top: 0;
 }
 
