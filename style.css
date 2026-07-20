@@ -428,6 +428,23 @@ ul li{
     color: #121212;
 }
 
+/* Case studies: Visit site always visible, top-right with margin */
+.cards-single-column .thumbnail-cta,
+.cards-single-column .card-thumbnail:hover .thumbnail-cta,
+.cards-single-column .card-thumbnail:focus-within .thumbnail-cta{
+    top: 0.75rem;
+    right: 0.75rem;
+    left: auto;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    gap: 0;
+}
+
+.cards-single-column .btn-project-details{
+    display: none;
+}
+
 @media (prefers-reduced-motion: reduce){
     .thumbnail-cta,
     .btn-visit-site,
@@ -510,7 +527,7 @@ ul li{
     max-height: var(--case-study-thumb-max-h);
   }
 }
-.cards-single-column .card a{
+.cards-single-column .card > a{
     width: 100%;
 }
 

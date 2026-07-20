@@ -325,6 +325,14 @@
     gap: 0;
   }
 
+  /* Case studies keep a bit of inset from the thumbnail edge */
+  .cards-single-column .thumbnail-cta,
+  .cards-single-column .card-thumbnail:hover .thumbnail-cta,
+  .cards-single-column .card-thumbnail:focus-within .thumbnail-cta {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
   .btn-project-details {
     display: none;
   }
