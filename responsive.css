@@ -62,6 +62,45 @@
     gap: 5.8vw;
   }
 
+  /* About: drop the flippable postcard — content + bird only */
+  .postcard {
+    perspective: none;
+    width: 100%;
+    container-type: normal;
+  }
+
+  .postcard__inner {
+    display: block;
+    aspect-ratio: auto;
+    transform: none !important;
+    transform-style: flat;
+    will-change: auto;
+  }
+
+  .postcard__front {
+    display: none;
+  }
+
+  .postcard__back {
+    transform: none;
+    visibility: visible;
+    padding: 0;
+    background: transparent;
+    cursor: auto;
+    display: block;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+
+  .postcard__back .about-avatar {
+    width: 100%;
+    max-width: 375px;
+  }
+
+  .postcard-hint {
+    display: none;
+  }
+
   .about-avatar {
     width: 100%;
     max-width: 375px;
@@ -73,9 +112,10 @@
   }
 
   .about-bird-wrap {
-    top: -2%;
-    left: -15%;
-    width: 40%;
+    top: -18%;
+    left: auto;
+    right: -15%;
+    width: 50%;
   }
 
   .content-about {
@@ -177,7 +217,9 @@
 
 @media (width < 460px) {
   /* Revert thumbnail CTA to the original always-visible top-right visit button */
-  .thumbnail-cta {
+  .thumbnail-cta,
+  .card-thumbnail:hover .thumbnail-cta,
+  .card-thumbnail:focus-within .thumbnail-cta {
     position: absolute;
     top: 0;
     right: 0;
@@ -195,9 +237,22 @@
   .btn-visit-site {
     justify-content: end;
     gap: 0.25rem;
-    padding: 0;
-    padding-right: 10px;
-    border-width: 2.5px;
+    width: auto;
+    height: auto;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0 0 1.5px #121212;
+    transition: none;
+  }
+
+  .btn-visit-site:hover,
+  .btn-visit-site:focus-visible,
+  .cards a.btn-visit-site:hover {
+    font-weight: 400;
+    box-shadow: 0 0 0 1.5px #121212;
+    transform: none;
+    scale: 1;
   }
 
   nav ul {
@@ -211,15 +266,18 @@
 
   .sidebar {
     position: fixed;
-    top: 0;
+    inset: 0;
     z-index: 200;
-    width: 100vw;
-    height: 100svh;
+    width: auto;
+    height: auto;
+    /* Prefer dynamic viewport so the overlay tracks browser chrome show/hide */
+    min-height: 100vh;
+    min-height: 100dvh;
     background-color: #f6f6f6;
     display: flex;
     flex-direction: column;
     justify-content: end;
-    padding-bottom: 4vh;
+    padding-bottom: max(4vh, env(safe-area-inset-bottom, 0px));
   }
   
 

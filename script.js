@@ -39,18 +39,78 @@ if (document.fonts?.ready) {
 // --------------------------
 // Mobile menu
 // --------------------------
+let navScrollLocked = false;
+let navLockedScrollY = 0;
+
+function lockNavScroll() {
+  if (navScrollLocked) return;
+  navScrollLocked = true;
+  navLockedScrollY = window.scrollY;
+  document.body.classList.add("is-nav-open");
+  document.body.style.top = `-${navLockedScrollY}px`;
+}
+
+function unlockNavScroll() {
+  if (!navScrollLocked) return;
+  navScrollLocked = false;
+  document.body.classList.remove("is-nav-open");
+  document.body.style.top = "";
+  window.scrollTo(0, navLockedScrollY);
+}
+
+function syncSidebarViewport() {
+  if (!sidebar || sidebar.classList.contains("no-display")) return;
+  const vv = window.visualViewport;
+  const height = vv?.height ?? window.innerHeight;
+  const top = vv?.offsetTop ?? 0;
+  sidebar.style.height = `${Math.round(height)}px`;
+  sidebar.style.top = `${Math.round(top)}px`;
+  sidebar.style.bottom = "auto";
+}
+
+function clearSidebarViewport() {
+  if (!sidebar) return;
+  sidebar.style.height = "";
+  sidebar.style.top = "";
+  sidebar.style.bottom = "";
+}
+
+function syncSidebarOpenState() {
+  const open = Boolean(sidebar && !sidebar.classList.contains("no-display"));
+  if (open) {
+    syncSidebarViewport();
+    lockNavScroll();
+  } else {
+    clearSidebarViewport();
+    unlockNavScroll();
+  }
+}
+
 if (btnMenu && sidebar) {
   btnMenu.addEventListener("click", () => {
     sidebar.classList.toggle("no-display");
-    // btnMenu.innerHTML = `<i class="ph ph-x"></i>`;
+    syncSidebarOpenState();
   });
 }
 
 btnMenuAnchors.forEach((btnMenuAnchor) => {
   btnMenuAnchor.addEventListener("click", () => {
     sidebar?.classList.add("no-display");
+    syncSidebarOpenState();
   });
 });
+
+// Catch closes from other scripts (e.g. about-postcard.js)
+if (sidebar) {
+  new MutationObserver(syncSidebarOpenState).observe(sidebar, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+}
+
+window.visualViewport?.addEventListener("resize", syncSidebarViewport);
+window.visualViewport?.addEventListener("scroll", syncSidebarViewport);
+window.addEventListener("resize", syncSidebarViewport);
 
 // --------------------------
 // Disabled-link toaster
@@ -183,13 +243,38 @@ document.addEventListener("click", (e) => {
     const parent = visitBtn.parentNode;
     if (!parent) return;
 
+    // Normalize: "Visit site" left; favicon + arrow right (space-between)
+    const favicon = visitBtn.querySelector(".icon-visit-site");
+    const arrow = visitBtn.querySelector(".ph-arrow-up-right");
+    let label = visitBtn.querySelector(".btn-visit-site__label");
+    let trail = visitBtn.querySelector(".btn-visit-site__trail");
+
+    if (!label) {
+      label = document.createElement("span");
+      label.className = "btn-visit-site__label";
+      label.textContent = "Visit site";
+      visitBtn.insertBefore(label, visitBtn.firstChild);
+    } else if (arrow && label.contains(arrow)) {
+      label.textContent = "Visit site";
+    }
+
+    if (!trail) {
+      trail = document.createElement("span");
+      trail.className = "btn-visit-site__trail";
+      visitBtn.appendChild(trail);
+    }
+    if (favicon) trail.appendChild(favicon);
+    if (arrow) trail.appendChild(arrow);
+
     const group = document.createElement("div");
     group.className = "thumbnail-cta";
     parent.insertBefore(group, visitBtn);
 
     // The card's own project-page link (the anchor that isn't the visit button)
     const card = visitBtn.closest(".card");
-    const projectLink = card?.querySelector('a[href]:not(.btn-visit-site)');
+    const projectLink = [...(card?.querySelectorAll("a[href]") || [])].find(
+      (a) => !a.classList.contains("btn-visit-site")
+    );
     const href = projectLink?.getAttribute("href");
 
     if (href) {
@@ -199,9 +284,11 @@ document.addEventListener("click", (e) => {
       // Mirror "coming soon" behaviour if the project page is gated
       if (projectLink.classList.contains("disabled-link")) {
         detailsBtn.classList.add("disabled-link");
+        detailsBtn.innerHTML =
+          '<span class="btn-visit-site__label">Project details</span><i class="ph-fill ph-lock-simple" aria-hidden="true"></i>';
+      } else {
+        detailsBtn.textContent = "Project details";
       }
-      detailsBtn.innerHTML =
-        '<i class="ph-bold ph-arrow-right icon-cta-lead" aria-hidden="true"></i>Project details';
       group.appendChild(detailsBtn);
     }
 
@@ -226,8 +313,10 @@ document.addEventListener("click", (e) => {
   const hide = () => {
     if (hidden || !loader.isConnected) return;
     hidden = true;
-    loader.classList.add("page-loader--hidden");
+    // Unlock scroll before tear-down so the first touch isn't blocked
     document.body.classList.remove("is-loading");
+    loader.classList.add("page-loader--hidden");
+    window.dispatchEvent(new CustomEvent("page-loader:hidden"));
     window.setTimeout(() => loader.remove(), 450);
   };
 

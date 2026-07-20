@@ -16,7 +16,7 @@
     --space-nav-bottom: calc(var(--space) * 3);   /* nav bar bottom padding */
     --space-page: calc(var(--space) * 2.5);        /* .cards inline padding */
     --nav-height: 3.5rem;                          /* fallback; set from measured header in script.js */
-    --space-main-top: calc(var(--nav-height) + 0.75rem); /* clear fixed header + a little breathing room */
+    --space-main-top: var(--nav-height); /* clear fixed header exactly */
 }
 
 /* Lenis smooth scroll (listing + shared) */
@@ -333,7 +333,7 @@ ul li{
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 0.5rem;
+    gap: 0.8rem;
     opacity: 0;
     transform: translate(-50%, -46%) scale(0.94);
     pointer-events: none;
@@ -351,42 +351,74 @@ ul li{
 
 .btn-visit-site{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 0.35rem;
+    width: 11rem;
+    height: 2.75rem;
     font-size: 0.9rem;
     font-weight: 400;
+    text-align: left;
     text-decoration: none;
     color: #121212;
-    padding: 0.3rem 0.9rem 0.3rem 0.3rem;
+    padding: 0 0.85rem;
     background-color: #F6F6F6;
-    border: 2px solid #121212;
-    border-radius: 0;
+    border: none;
+    /* border-radius: 4px; */
+    box-shadow: 0 0 0 2px #121212;
     white-space: nowrap;
-    transition: font-weight 300ms ease-in-out;
+    transition: box-shadow 200ms ease;
+}
+
+.btn-project-details{
+    justify-content: flex-start;
+}
+
+.btn-project-details.disabled-link{
+    justify-content: space-between;
+    color: #9a9a9a;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 1.5px #9a9a9a;
+    cursor: not-allowed;
+}
+
+.btn-project-details.disabled-link .ph-fill{
+    color: #9a9a9a;
 }
 
 .btn-visit-site:hover,
-.btn-visit-site:focus-visible{
-    font-weight: 600;
+.btn-visit-site:focus-visible,
+.cards a.btn-visit-site:hover{
+    font-weight: 400;
+    box-shadow: 0 0 0 2.25px #121212;
+}
+
+.btn-project-details.disabled-link:hover,
+.btn-project-details.disabled-link:focus-visible,
+.cards a.btn-project-details.disabled-link:hover{
+    font-weight: 400;
+    box-shadow: 0 0 0 1.5px #9a9a9a;
+}
+
+.btn-visit-site__label{
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-visit-site__trail{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    flex-shrink: 0;
 }
 
 .icon-visit-site{
     width: 1.8rem;
-    margin-right: 0.15rem;
-}
-
-.icon-cta-lead{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.8rem;
-    font-size: 1.2rem;
-    margin-right: 0.15rem;
+    flex-shrink: 0;
 }
 
 .btn-visit-site .ph-bold{
-    color: #315095;
+    color: #121212;
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -1069,6 +1101,43 @@ video{
     
 }
 
+/* Thumbnails without Visit site: black frame on hover (matches .btn-visit-site),
+   framed on the thumbnail itself so caption margin is excluded.
+   Outline (not box-shadow) so overflow:hidden doesn't clip it.
+   Leave animates border + scale. */
+.cards .card-thumbnail:not(:has(.btn-visit-site)),
+.cards-single-column .card-thumbnail:not(:has(.btn-visit-site)) {
+    outline: 1px solid transparent;
+    outline-offset: 0;
+    scale: 1;
+    transition:
+        scale 300ms ease,
+        outline-color 140ms ease;
+}
+
+/* Scale the thumbnail, not the wrapping <a> (avoids the margin-bottom box) */
+.cards .card > a:has(> .card-thumbnail:not(:has(.btn-visit-site))):hover,
+.cards .card > a:has(> .card-thumbnail:not(:has(.btn-visit-site))):focus-visible,
+.cards-single-column .card > a:has(> .card-thumbnail:not(:has(.btn-visit-site))):hover,
+.cards-single-column .card > a:has(> .card-thumbnail:not(:has(.btn-visit-site))):focus-visible {
+    scale: 1;
+}
+
+.cards .card > a:hover > .card-thumbnail:not(:has(.btn-visit-site)),
+.cards .card > a:focus-visible > .card-thumbnail:not(:has(.btn-visit-site)),
+.cards-single-column .card > a:hover > .card-thumbnail:not(:has(.btn-visit-site)),
+.cards-single-column .card > a:focus-visible > .card-thumbnail:not(:has(.btn-visit-site)) {
+    outline-color: #121212;
+    scale: 1.002;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cards .card-thumbnail:not(:has(.btn-visit-site)),
+    .cards-single-column .card-thumbnail:not(:has(.btn-visit-site)) {
+        transition: none;
+    }
+}
+
 nav ul a:hover{
     font-weight: 600;
 }
@@ -1162,6 +1231,15 @@ nav ul a:hover{
 /* Fullscreen page loader (index) */
 /* ---------------------------- */
 body.is-loading{
+  overflow: hidden;
+}
+
+/* Freeze page scroll while the mobile nav overlay is open (iOS-safe) */
+body.is-nav-open{
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
   overflow: hidden;
 }
 

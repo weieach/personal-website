@@ -332,8 +332,9 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
       !loaderEl.isConnected ||
       loaderEl.classList.contains("page-loader--hidden")
     ) {
-      api?.dispose();
       observer.disconnect();
+      // Defer WebGL teardown so it doesn't jank the first scroll after unlock
+      window.setTimeout(() => api?.dispose(), 500);
     }
   });
   observer.observe(loaderEl, {
@@ -359,9 +360,14 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
     });
   };
 
-  // Bird loads only after the postcard is flipped to the content side
+  // Bird loads after flip (desktop). On mobile the postcard is static/open.
   const postcard = document.getElementById("about-postcard");
-  if (!postcard || postcard.classList.contains("is-flipped")) {
+  const mobileOpen =
+    window.matchMedia("(max-width: 959px)").matches ||
+    postcard?.classList.contains("is-flipped") ||
+    postcard?.classList.contains("is-static");
+
+  if (!postcard || mobileOpen) {
     start();
   } else {
     window.addEventListener("about-postcard:flipped", start, { once: true });

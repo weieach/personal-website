@@ -56,23 +56,30 @@ if (cardsRoot) {
     cards.forEach(prepTitleForTypewriter);
   }
 
+  // Lenis fights touch scrolling on phones; keep native scroll there
+  const preferNativeScroll =
+    window.matchMedia("(max-width: 959px)").matches ||
+    window.matchMedia("(pointer: coarse)").matches;
+
   if (reduceMotion) {
     cards.forEach((card) => card.classList.add("scroll-reveal-card--done"));
   } else if (cards.length) {
-    const lenis = new Lenis({
-      duration: 1.05,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 1.1,
-    });
+    if (!preferNativeScroll) {
+      const lenis = new Lenis({
+        duration: 1.05,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        touchMultiplier: 1.1,
+      });
 
-    lenis.scrollTo(0, { immediate: true });
+      lenis.scrollTo(0, { immediate: true });
 
-    const raf = (time) => {
-      lenis.raf(time);
+      const raf = (time) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      };
       requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
+    }
 
     whenListingReady(() => startListingReveals(cards));
   }
@@ -206,11 +213,24 @@ function whenListingReady(callback) {
     requestAnimationFrame(() => requestAnimationFrame(callback));
   };
 
-  if (document.readyState === "complete") {
-    run();
-  } else {
-    window.addEventListener("load", run, { once: true });
+  const loader = document.getElementById("page-loader");
+  const loaderGone =
+    !loader || loader.classList.contains("page-loader--hidden");
+
+  // Wait until the fullscreen loader unlocks scroll so reveal work
+  // doesn't compete with the first touch gesture after hide.
+  if (loaderGone) {
+    if (document.readyState === "complete") {
+      run();
+    } else {
+      window.addEventListener("load", run, { once: true });
+    }
+    return;
   }
+
+  window.addEventListener("page-loader:hidden", run, { once: true });
+  // Safety if the loader never fires (matches script.js fallback)
+  window.setTimeout(run, 22000);
 }
 
 function splitByViewport(blocks) {
