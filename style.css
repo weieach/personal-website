@@ -426,20 +426,30 @@ ul li{
     color: #121212;
 }
 
-/* Case studies: Visit site always visible, top-right with -5% right offset */
+/* Before script.js wraps Visit site into .thumbnail-cta, keep the raw button
+   out of flex flow — otherwise it flashes as a pill and reflows the video. */
+.card-thumbnail > .btn-visit-site{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (scripting: none) {
+    .card-thumbnail > .btn-visit-site{
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* Case studies: same hover-reveal CTAs as projects; overflow so pills aren’t clipped */
 .cards-single-column .card-thumbnail:has(.btn-visit-site){
     overflow: visible;
 }
 
-.cards-single-column .thumbnail-cta,
-.cards-single-column .card-thumbnail:hover .thumbnail-cta,
-.cards-single-column .card-thumbnail:focus-within .thumbnail-cta{
-    top: 0.75rem;
-    right: 0.75rem;
-    left: auto;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
+.cards-single-column .thumbnail-cta{
     gap: 0.3rem;
 }
 
