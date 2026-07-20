@@ -1,6 +1,5 @@
 const btnMenu = document.querySelector(".btn-burger");
 const sidebar = document.querySelector(".sidebar");
-const btnMenuAnchors = document.querySelectorAll(".sidebar a");
 const header = document.querySelector("header");
 let closeBtnOn = false;
 
@@ -86,6 +85,16 @@ function syncSidebarOpenState() {
   }
 }
 
+// Mirror footer social icons into the mobile overlay (below About)
+if (sidebar && !sidebar.querySelector(".icons")) {
+  const footerIcons = document.querySelector("footer .icons");
+  if (footerIcons) {
+    const clone = footerIcons.cloneNode(true);
+    clone.classList.remove("icons--animate");
+    sidebar.appendChild(clone);
+  }
+}
+
 if (btnMenu && sidebar) {
   btnMenu.addEventListener("click", () => {
     sidebar.classList.toggle("no-display");
@@ -93,11 +102,10 @@ if (btnMenu && sidebar) {
   });
 }
 
-btnMenuAnchors.forEach((btnMenuAnchor) => {
-  btnMenuAnchor.addEventListener("click", () => {
-    sidebar?.classList.add("no-display");
-    syncSidebarOpenState();
-  });
+sidebar?.addEventListener("click", (e) => {
+  if (!e.target.closest("a")) return;
+  sidebar.classList.add("no-display");
+  syncSidebarOpenState();
 });
 
 // Catch closes from other scripts (e.g. about-postcard.js)

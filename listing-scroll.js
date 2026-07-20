@@ -3,9 +3,8 @@ import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@12.42.2/+es
 
 /**
  * Listing pages (index / intern): related to project-page motion, but distinct.
- * Project pages ? fade + scale in place.
- * Listings ? rise only (no fade), decelerating ease, short cascade.
- * Case studies (intern) ? titles type in via Motion number ? string slice.
+ * Project pages → fade + scale in place.
+ * Listings → rise only (no fade), decelerating ease, short cascade.
  *
  * Initial Y offset lives in CSS so cards never paint at rest then jump down.
  */
@@ -18,11 +17,6 @@ const RISE_PX_DEFAULT = 28;
 const RISE_PX_SINGLE = 72;
 const STAGGER_S = 0.07;
 const STAGGER_CAP = 3;
-/** ms-ish feel: seconds per character for typewriter pace */
-const TYPE_SEC_PER_CHAR = 0.032;
-const TYPE_DURATION_MIN = 0.55;
-const TYPE_DURATION_MAX = 2.4;
-const TYPE_START_LAG = 0.12;
 
 const cardsRoot =
   document.querySelector(".cards") ||
@@ -51,10 +45,6 @@ if (cardsRoot) {
     history.scrollRestoration = "manual";
   }
   window.scrollTo(0, 0);
-
-  if (isSingleColumn && !reduceMotion) {
-    cards.forEach(prepTitleForTypewriter);
-  }
 
   // Lenis fights touch scrolling on phones; keep native scroll there
   const preferNativeScroll =
@@ -138,71 +128,6 @@ function revealCard(element, delay = 0) {
     element.style.removeProperty("transform");
     element.style.willChange = "auto";
   });
-
-  if (isSingleColumn) {
-    typeTitle(element, delay + TYPE_START_LAG);
-  }
-}
-
-/**
- * Motion JS typewriter pattern: animate 0 ? length, slice text onUpdate.
- * Restores original HTML (bold/italic) when finished.
- * @see https://motion.dev/examples/js-typewriter
- */
-function prepTitleForTypewriter(card) {
-  const title = card.querySelector(".work-title");
-  if (!title || title.dataset.typewriter === "ready") return;
-
-  const fullHtml = title.innerHTML;
-  const fullText = title.textContent.replace(/\s+/g, " ").trim();
-  if (!fullText) return;
-
-  title.dataset.fullHtml = fullHtml;
-  title.dataset.fullText = fullText;
-  title.setAttribute("aria-label", fullText);
-  title.innerHTML =
-    '<span class="typewriter-text"></span><span class="typewriter-caret" aria-hidden="true"></span>';
-  title.dataset.typewriter = "ready";
-}
-
-function typeTitle(card, delay = 0) {
-  const title = card.querySelector(".work-title");
-  if (!title || title.dataset.typewriter === "done") return;
-
-  const fullText = title.dataset.fullText;
-  const fullHtml = title.dataset.fullHtml;
-  const textSpan = title.querySelector(".typewriter-text");
-  if (!fullText || !textSpan) {
-    finishTitle(title);
-    return;
-  }
-
-  title.dataset.typewriter = "running";
-
-  const duration = Math.min(
-    TYPE_DURATION_MAX,
-    Math.max(TYPE_DURATION_MIN, fullText.length * TYPE_SEC_PER_CHAR)
-  );
-
-  // Slight ease-out: quick start, soft landing ? reads more intentional than
-  // flat linear, without needing Motion+ human-variance Typewriter.
-  animate(0, fullText.length, {
-    duration,
-    delay,
-    ease: [0.22, 0.85, 0.35, 1],
-    onUpdate: (latest) => {
-      textSpan.textContent = fullText.slice(0, Math.round(latest));
-    },
-  }).finished.then(() => {
-    finishTitle(title, fullHtml);
-  });
-}
-
-function finishTitle(title, fullHtml = title?.dataset.fullHtml) {
-  if (!title || title.dataset.typewriter === "done") return;
-  if (fullHtml) title.innerHTML = fullHtml;
-  title.classList.add("typewriter--done");
-  title.dataset.typewriter = "done";
 }
 
 function whenListingReady(callback) {
@@ -263,6 +188,5 @@ function showCards(cards) {
     el.classList.add("scroll-reveal-card--done");
     el.style.removeProperty("transform");
     el.style.willChange = "auto";
-    if (isSingleColumn) finishTitle(el.querySelector(".work-title"));
   });
 }

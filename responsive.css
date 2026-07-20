@@ -40,8 +40,63 @@
     row-gap: calc(var(--space) * 4.5);
   }
 
+  .cards-single-column {
+    gap: calc(var(--space) * 4.5);
+  }
+
   .card {
     gap: calc(var(--space) * 2);
+  }
+
+  /* Avoid hover scale flash on mobile (esp. absolute-fill videos like Superfast).
+     Use `none` — `scale: 1` still creates a transform layer and can make <video> flicker. */
+  .cards a:hover {
+    scale: none;
+    font-weight: 400;
+  }
+
+  .cards .card > a:hover > .card-thumbnail:not(:has(.btn-visit-site)),
+  .cards .card > a:focus-visible > .card-thumbnail:not(:has(.btn-visit-site)) {
+    scale: none;
+    outline-color: transparent;
+  }
+
+  /* Taller Wu thumb on mobile (more height at full-bleed width) */
+  .card-wu .card-thumbnail {
+    aspect-ratio: 0.95;
+  }
+
+  .card-wu .img-wu-poster {
+    width: auto;
+    max-width: 70%;
+    max-height: 88%;
+    height: auto;
+    scale: 1;
+  }
+
+  .card-gvd .card-thumbnail video {
+    width: 100%;
+    height: 100%;
+    scale: 1;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  /* Case studies: title + caption stacked on mobile */
+  .cards-single-column .card-text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    font-size: 93.75%; /* slight type scale-down; scoped so index rem spacing stays intact */
+  }
+
+  .cards-single-column .work-caption {
+    text-align: left;
+    font-size: 0.875em; /* keep caption ratio vs title (was 0.875rem on root) */
+  }
+
+  .cards-single-column .work-title-desc {
+    color: #121212;
   }
 
   .main-aboutpg {
@@ -196,6 +251,46 @@
   }
 }
 
+/* FS + Superfast: full-bleed video only on narrow phones; desktop inset look from 500px up */
+@media (width < 500px) {
+  .card-fs .card-thumbnail {
+    aspect-ratio: 1.45;
+  }
+
+  .card-fs .video-fs {
+    width: 100%;
+    scale: none;
+    margin-inline: 0;
+    border-radius: 0;
+  }
+
+  .card-superfast .card-thumbnail {
+    aspect-ratio: 1.55;
+    background-image: none;
+  }
+
+  .card-superfast .video-superfast {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    scale: none;
+    margin: 0;
+    object-fit: cover;
+    object-position: center;
+    outline: none;
+  }
+
+  /* Keep CTA centered (needs translate) but skip scale animation — that flickered the video */
+  .card-superfast .thumbnail-cta,
+  .card-superfast .card-thumbnail:hover .thumbnail-cta,
+  .card-superfast .card-thumbnail:focus-within .thumbnail-cta {
+    transform: translate(-50%, -50%);
+    transition: opacity 340ms ease;
+  }
+}
+
 @media (width < 700px) {
   .dino-screens-gallery {
     grid-template-columns: 1fr;
@@ -277,6 +372,7 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
+    gap: 1.25rem;
     padding-bottom: max(4vh, env(safe-area-inset-bottom, 0px));
   }
   
@@ -292,6 +388,18 @@
     font-size: 2rem;
     /* font-weight: 500; */
     text-decoration: none;
+  }
+
+  .sidebar .icons {
+    padding-inline: 6vw;
+  }
+
+  .sidebar .icons a {
+    font-size: 1.75rem;
+  }
+
+  .sidebar .contact-entry {
+    margin-left: 0;
   }
 
 
