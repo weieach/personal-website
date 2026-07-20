@@ -331,80 +331,78 @@ ul li{
     font-size: 1.7rem;
 }
 
-/* Thumbnail CTAs: Project-details + Visit-site stacked, centered, revealed on hover */
+/* Thumbnail CTAs: Project-details + Visit-site lined up horizontally, pinned top-right, revealed on hover */
 .thumbnail-cta{
     position: absolute;
-    left: 50%;
-    top: 50%;
+    top: 0.75rem;
+    right: 0.75rem;
+    left: auto;
     z-index: 150;
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.8rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.4rem;
     opacity: 0;
-    transform: translate(-50%, -46%) scale(0.94);
+    transform: translateY(-6px);
     pointer-events: none;
     transition:
-        opacity 340ms ease,
+        opacity 300ms ease,
         transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card-thumbnail:hover .thumbnail-cta,
 .card-thumbnail:focus-within .thumbnail-cta{
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translateY(0);
     pointer-events: auto;
 }
 
 .btn-visit-site{
-    display: flex;
-    justify-content: space-between;
+    display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    width: 11rem;
-    height: 2.75rem;
-    font-size: 0.9rem;
-    font-weight: 400;
+    width: auto;
+    height: auto;
+    font-size: 0.8rem;
+    font-weight: 500;
     text-align: left;
     text-decoration: none;
     color: #121212;
-    padding: 0 0.85rem;
+    padding: 0.4rem 0.7rem;
     background-color: #F6F6F6;
-    border: none;
-    /* border-radius: 4px; */
-    box-shadow: 0 0 0 2px #121212;
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    backdrop-filter: blur(14px) saturate(1.3);
+    border: 1.5px solid transparent;
+    border-radius: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
     white-space: nowrap;
-    transition: box-shadow 200ms ease;
-}
-
-.btn-project-details{
-    justify-content: flex-start;
+    transition: border-color 200ms ease;
 }
 
 .btn-project-details.disabled-link{
-    justify-content: space-between;
-    color: #9a9a9a;
+    color: #6f6f6f;
     background-color: #ffffff;
-    box-shadow: 0 0 0 1.5px #9a9a9a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     cursor: not-allowed;
 }
 
 .btn-project-details.disabled-link .ph-fill{
-    color: #9a9a9a;
+    color: #6f6f6f;
 }
 
 .btn-visit-site:hover,
 .btn-visit-site:focus-visible,
 .cards a.btn-visit-site:hover{
-    font-weight: 400;
-    box-shadow: 0 0 0 2.25px #121212;
+    font-weight: 500;
+    border-color: #121212;
 }
 
 .btn-project-details.disabled-link:hover,
 .btn-project-details.disabled-link:focus-visible,
 .cards a.btn-project-details.disabled-link:hover{
-    font-weight: 400;
-    box-shadow: 0 0 0 1.5px #9a9a9a;
+    font-weight: 500;
+    border-color: #121212;
 }
 
 .btn-visit-site__label{
@@ -420,7 +418,7 @@ ul li{
 }
 
 .icon-visit-site{
-    width: 1.8rem;
+    width: 1.1rem;
     flex-shrink: 0;
 }
 
@@ -428,7 +426,11 @@ ul li{
     color: #121212;
 }
 
-/* Case studies: Visit site always visible, top-right with margin */
+/* Case studies: Visit site always visible, top-right with -5% right offset */
+.cards-single-column .card-thumbnail:has(.btn-visit-site){
+    overflow: visible;
+}
+
 .cards-single-column .thumbnail-cta,
 .cards-single-column .card-thumbnail:hover .thumbnail-cta,
 .cards-single-column .card-thumbnail:focus-within .thumbnail-cta{
@@ -438,11 +440,7 @@ ul li{
     transform: none;
     opacity: 1;
     pointer-events: auto;
-    gap: 0;
-}
-
-.cards-single-column .btn-project-details{
-    display: none;
+    gap: 0.3rem;
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -531,9 +529,25 @@ ul li{
     width: 100%;
 }
 
-.cards-single-column .card a:hover{
+.cards-single-column .card a:not(.btn-visit-site):hover{
     opacity: 0.95;
     transition: opacity 300ms ease;
+}
+
+/* Visit site sits inside the card link — don't dim the whole stack (or the CTA) */
+.cards-single-column .card > a:has(.btn-visit-site):hover{
+    opacity: 1;
+}
+
+.cards-single-column .btn-visit-site{
+    opacity: 1;
+    background-color: #F6F6F6;
+}
+
+.cards-single-column .btn-visit-site:hover,
+.cards-single-column .btn-visit-site:focus-visible{
+    opacity: 1;
+    border-color: #121212;
 }
 
 

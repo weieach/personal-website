@@ -237,70 +237,83 @@ document.addEventListener("click", (e) => {
 });
 
 // --------------------------
-// Thumbnail CTAs: for any thumbnail that has a "Visit site" button AND whose
-// card links to its own project page, stack a "Project details" button above
-// "Visit site". Runs generically, so future cards using the same markup
-// (a project-page link wrapping a .card-thumbnail that contains .btn-visit-site)
-// get the second button automatically — no per-card markup needed.
+// Thumbnail CTAs: ensure every listing card gets a "Project details" button.
+// Cards that already have "Visit site" keep it (left) with details on the right.
+// Cards with no CTA (e.g. pictogram) get details only. Hidden below 500px via CSS.
 // --------------------------
 (() => {
-  document.querySelectorAll(".btn-visit-site").forEach((visitBtn) => {
-    // Already wrapped (idempotent / avoids double-processing)
-    if (visitBtn.closest(".thumbnail-cta")) return;
+  const cards = document.querySelectorAll(
+    ".cards > .card, .cards-single-column > .card"
+  );
 
-    const parent = visitBtn.parentNode;
-    if (!parent) return;
+  cards.forEach((card) => {
+    if (card.querySelector(".thumbnail-cta")) return;
 
-    // Normalize: "Visit site" left; favicon + arrow right (space-between)
-    const favicon = visitBtn.querySelector(".icon-visit-site");
-    const arrow = visitBtn.querySelector(".ph-arrow-up-right");
-    let label = visitBtn.querySelector(".btn-visit-site__label");
-    let trail = visitBtn.querySelector(".btn-visit-site__trail");
+    const thumb = card.querySelector(".card-thumbnail");
+    if (!thumb) return;
 
-    if (!label) {
-      label = document.createElement("span");
-      label.className = "btn-visit-site__label";
-      label.textContent = "Visit site";
-      visitBtn.insertBefore(label, visitBtn.firstChild);
-    } else if (arrow && label.contains(arrow)) {
-      label.textContent = "Visit site";
+    // Skip empty placeholder cards
+    const titleText =
+      card.querySelector(".work-title")?.textContent?.replace(/\s+/g, "") ?? "";
+    if (!titleText) return;
+
+    const projectLink = [...card.querySelectorAll("a[href]")].find(
+      (a) => !a.classList.contains("btn-visit-site")
+    );
+    if (!projectLink) return;
+
+    const href = projectLink.getAttribute("href");
+    if (!href) return;
+
+    const visitBtn = thumb.querySelector(":scope > .btn-visit-site");
+
+    if (visitBtn) {
+      const favicon = visitBtn.querySelector(".icon-visit-site");
+      visitBtn.querySelector(".ph-arrow-up-right")?.remove();
+      visitBtn.querySelector(".ph-arrow-right")?.remove();
+
+      let label = visitBtn.querySelector(".btn-visit-site__label");
+      let trail = visitBtn.querySelector(".btn-visit-site__trail");
+
+      if (!label) {
+        label = document.createElement("span");
+        label.className = "btn-visit-site__label";
+        label.textContent = "Visit site";
+        visitBtn.insertBefore(label, visitBtn.firstChild);
+      }
+
+      if (!trail) {
+        trail = document.createElement("span");
+        trail.className = "btn-visit-site__trail";
+        visitBtn.appendChild(trail);
+      }
+      if (favicon) trail.appendChild(favicon);
     }
-
-    if (!trail) {
-      trail = document.createElement("span");
-      trail.className = "btn-visit-site__trail";
-      visitBtn.appendChild(trail);
-    }
-    if (favicon) trail.appendChild(favicon);
-    if (arrow) trail.appendChild(arrow);
 
     const group = document.createElement("div");
     group.className = "thumbnail-cta";
-    parent.insertBefore(group, visitBtn);
 
-    // The card's own project-page link (the anchor that isn't the visit button)
-    const card = visitBtn.closest(".card");
-    const projectLink = [...(card?.querySelectorAll("a[href]") || [])].find(
-      (a) => !a.classList.contains("btn-visit-site")
-    );
-    const href = projectLink?.getAttribute("href");
-
-    if (href) {
-      const detailsBtn = document.createElement("a");
-      detailsBtn.className = "btn-visit-site btn-project-details";
-      detailsBtn.href = href;
-      // Mirror "coming soon" behaviour if the project page is gated
-      if (projectLink.classList.contains("disabled-link")) {
-        detailsBtn.classList.add("disabled-link");
-        detailsBtn.innerHTML =
-          '<span class="btn-visit-site__label">Project details</span><i class="ph-fill ph-lock-simple" aria-hidden="true"></i>';
-      } else {
-        detailsBtn.textContent = "Project details";
-      }
-      group.appendChild(detailsBtn);
+    if (visitBtn) {
+      thumb.insertBefore(group, visitBtn);
+      group.appendChild(visitBtn);
+    } else {
+      thumb.appendChild(group);
     }
 
-    group.appendChild(visitBtn);
+    const detailsBtn = document.createElement("a");
+    detailsBtn.className = "btn-visit-site btn-project-details";
+    detailsBtn.href = href;
+
+    if (projectLink.classList.contains("disabled-link")) {
+      detailsBtn.classList.add("disabled-link");
+      detailsBtn.innerHTML =
+        '<span class="btn-visit-site__label">Project details</span><i class="ph-fill ph-lock-simple" aria-hidden="true"></i>';
+    } else {
+      detailsBtn.innerHTML =
+        '<span class="btn-visit-site__label">Project details</span><i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>';
+    }
+
+    group.appendChild(detailsBtn);
   });
 })();
 

@@ -48,19 +48,6 @@
     gap: calc(var(--space) * 2);
   }
 
-  /* Avoid hover scale flash on mobile (esp. absolute-fill videos like Superfast).
-     Use `none` — `scale: 1` still creates a transform layer and can make <video> flicker. */
-  .cards a:hover {
-    scale: none;
-    font-weight: 400;
-  }
-
-  .cards .card > a:hover > .card-thumbnail:not(:has(.btn-visit-site)),
-  .cards .card > a:focus-visible > .card-thumbnail:not(:has(.btn-visit-site)) {
-    scale: none;
-    outline-color: transparent;
-  }
-
   /* Taller Wu thumb on mobile (more height at full-bleed width) */
   .card-wu .card-thumbnail {
     aspect-ratio: 0.95;
@@ -72,14 +59,6 @@
     max-height: 88%;
     height: auto;
     scale: 1;
-  }
-
-  .card-gvd .card-thumbnail video {
-    width: 100%;
-    height: 100%;
-    scale: 1;
-    object-fit: cover;
-    border-radius: 0;
   }
 
   /* Case studies: title + caption stacked on mobile */
@@ -251,8 +230,35 @@
   }
 }
 
-/* FS + Superfast: full-bleed video only on narrow phones; desktop inset look from 500px up */
+/* FS + Superfast + GVD: full-bleed video only on narrow phones; desktop inset look from 500px up */
 @media (width < 500px) {
+  /* Project category labels next to titles (index + case studies) */
+  .cards .work-caption,
+  .cards-single-column .work-caption {
+    font-size: 0.75rem;
+  }
+
+  /* Avoid hover scale flash on narrow phones (esp. absolute-fill videos).
+     Use `none` — `scale: 1` still creates a transform layer and can make <video> flicker. */
+  .cards a:hover {
+    scale: none;
+    font-weight: 400;
+  }
+
+  .cards .card > a:hover > .card-thumbnail:not(:has(.btn-visit-site)),
+  .cards .card > a:focus-visible > .card-thumbnail:not(:has(.btn-visit-site)) {
+    scale: none;
+    outline-color: transparent;
+  }
+
+  /* Hide Visit site / thumbnail CTAs on listing pages (index + case studies) */
+  .cards .thumbnail-cta,
+  .cards .btn-visit-site,
+  .cards-single-column .thumbnail-cta,
+  .cards-single-column .btn-visit-site {
+    display: none;
+  }
+
   .card-fs .card-thumbnail {
     aspect-ratio: 1.45;
   }
@@ -280,6 +286,14 @@
     object-fit: cover;
     object-position: center;
     outline: none;
+  }
+
+  .card-gvd .card-thumbnail video {
+    width: 100%;
+    height: 100%;
+    scale: 1;
+    object-fit: cover;
+    border-radius: 0;
   }
 
   /* Keep CTA centered (needs translate) but skip scale animation — that flickered the video */
@@ -325,12 +339,12 @@
     gap: 0;
   }
 
-  /* Case studies keep a bit of inset from the thumbnail edge */
+  /* Case studies: -5% right offset */
   .cards-single-column .thumbnail-cta,
   .cards-single-column .card-thumbnail:hover .thumbnail-cta,
   .cards-single-column .card-thumbnail:focus-within .thumbnail-cta {
-    top: 0.75rem;
-    right: 0.75rem;
+    top: 0;
+    right: -5%;
   }
 
   .btn-project-details {
