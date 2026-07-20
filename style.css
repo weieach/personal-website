@@ -1291,6 +1291,9 @@ body.is-loading header{
   margin: auto;
   object-fit: contain;
   opacity: 0.9;
+  transform: scale(0.6);
+  transform-origin: center center;
+  animation: page-loader-bird-enter 720ms cubic-bezier(0.22, 1, 0.36, 1) 80ms forwards;
   transition: opacity 280ms ease;
   z-index: 1;
   pointer-events: none;
@@ -1358,6 +1361,10 @@ body.is-loading header{
   opacity: 0;
 }
 
+@keyframes page-loader-bird-enter{
+  to { transform: scale(1); }
+}
+
 @keyframes page-loader-fade-pulse{
   0%, 100% { opacity: 0.45; }
   50% { opacity: 1; }
@@ -1373,11 +1380,13 @@ body.is-loading header{
     transition: opacity 160ms ease;
   }
   .page-loader__inner,
+  .page-loader__fallback,
   .page-loader__name,
   .page-loader__bar-fill{
     animation: none !important;
     transition: none;
   }
+  .page-loader__fallback{ transform: none; }
   .page-loader__name{ opacity: 1; }
   .page-loader__bar-fill{
     width: 100%;
