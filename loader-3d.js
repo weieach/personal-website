@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
 const MODEL_URL = "assets/Bird.glb";
 const ROTATION_SPEED = 0.55; // radians per second
@@ -7,7 +8,7 @@ const TILT_FORWARD = -0.55; // radians on X (nod toward camera)
 const TILT_MS = 160;
 const TILT_HOLD_MS = 70;
 const TILT_BACK_MS = 220;
-// ? and ? (unicode escapes keep encoding stable)
+// · and ✶ (unicode escapes keep encoding stable)
 const CHIRP_DOT = "\u00B7";
 const CHIRP_STAR = "\u2736";
 
@@ -21,6 +22,11 @@ let modelPromise = null;
 function loadModel() {
   if (!modelPromise) {
     const loader = new GLTFLoader();
+    const draco = new DRACOLoader();
+    draco.setDecoderPath(
+      "https://www.gstatic.com/draco/versioned/decoders/1.5.7/"
+    );
+    loader.setDRACOLoader(draco);
     modelPromise = new Promise((resolve, reject) => {
       loader.load(MODEL_URL, resolve, undefined, reject);
     });
