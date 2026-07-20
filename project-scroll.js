@@ -18,11 +18,13 @@ if (main) {
   const reduceMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
-  // Thumbnail + caption stay static; only media/content blocks animate
+  // Thumbnail + caption stay static; only media/content blocks animate.
+  // Initial opacity/scale lives in CSS so blocks never paint fully then snap.
   const blocks = collectRevealBlocks(main);
 
   if (reduceMotion) {
-    // leave content as-is
+    // Drop the CSS start pose (same as listing-scroll)
+    blocks.forEach((el) => el.classList.add("scroll-reveal-block--done"));
   } else {
     lenis = new Lenis({
       duration: 1.05,
@@ -48,10 +50,9 @@ if (main) {
         });
 
         const armBelow = () => {
+          // CSS already holds the start pose; only tip the compositor.
           below.forEach((el) => {
             if (el.classList.contains("scroll-reveal-block--done")) return;
-            el.style.opacity = "0";
-            el.style.transform = "scale(0.97)";
             el.style.willChange = "opacity, transform";
           });
 

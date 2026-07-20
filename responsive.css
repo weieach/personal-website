@@ -232,6 +232,28 @@
 
 /* FS + Superfast + GVD: full-bleed video only on narrow phones; desktop inset look from 500px up */
 @media (width < 500px) {
+  /* Project detail pages: stack label/value text rows (no horizontal text flex) */
+  .project-caption ul li:not(.list-case-study li),
+  .list-case-study-info li,
+  .floating-caption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .floating-caption {
+    align-items: center;
+  }
+
+  .list-case-study-info .entry-header {
+    width: auto;
+  }
+
+  .list-case-study-info .entry-header,
+  .project-caption ul li:not(.list-case-study li) h3 {
+    margin-bottom: 0;
+  }
+
   /* Project category labels next to titles (index + case studies) */
   .cards .work-caption,
   .cards-single-column .work-caption {

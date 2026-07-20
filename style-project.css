@@ -12,6 +12,24 @@ html.lenis {
   scroll-behavior: auto !important;
 }
 
+/* Project entrance: start hidden from first paint (no late-JS opacity flash).
+   Matches listing-scroll’s CSS start pose pattern. Thumbnail + caption stay put. */
+.main-projectpg > .img-casestudy-cover:not(.scroll-reveal-block--done),
+.main-projectpg .project-caption > section:not(.scroll-reveal-block--done),
+.main-projectpg .project-pics > *:not(.scroll-reveal-block--done):not(.placeholder-caption) {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce), (scripting: none) {
+  .main-projectpg > .img-casestudy-cover:not(.scroll-reveal-block--done),
+  .main-projectpg .project-caption > section:not(.scroll-reveal-block--done),
+  .main-projectpg .project-pics > *:not(.scroll-reveal-block--done):not(.placeholder-caption) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 
 h1 {
   font-size: 1.75rem;
