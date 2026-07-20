@@ -169,6 +169,47 @@ document.addEventListener("click", (e) => {
 });
 
 // --------------------------
+// Thumbnail CTAs: for any thumbnail that has a "Visit site" button AND whose
+// card links to its own project page, stack a "Project details" button above
+// "Visit site". Runs generically, so future cards using the same markup
+// (a project-page link wrapping a .card-thumbnail that contains .btn-visit-site)
+// get the second button automatically — no per-card markup needed.
+// --------------------------
+(() => {
+  document.querySelectorAll(".btn-visit-site").forEach((visitBtn) => {
+    // Already wrapped (idempotent / avoids double-processing)
+    if (visitBtn.closest(".thumbnail-cta")) return;
+
+    const parent = visitBtn.parentNode;
+    if (!parent) return;
+
+    const group = document.createElement("div");
+    group.className = "thumbnail-cta";
+    parent.insertBefore(group, visitBtn);
+
+    // The card's own project-page link (the anchor that isn't the visit button)
+    const card = visitBtn.closest(".card");
+    const projectLink = card?.querySelector('a[href]:not(.btn-visit-site)');
+    const href = projectLink?.getAttribute("href");
+
+    if (href) {
+      const detailsBtn = document.createElement("a");
+      detailsBtn.className = "btn-visit-site btn-project-details";
+      detailsBtn.href = href;
+      // Mirror "coming soon" behaviour if the project page is gated
+      if (projectLink.classList.contains("disabled-link")) {
+        detailsBtn.classList.add("disabled-link");
+      }
+      detailsBtn.innerHTML =
+        '<i class="ph-bold ph-arrow-right icon-cta-lead" aria-hidden="true"></i>Project details';
+      group.appendChild(detailsBtn);
+    }
+
+    group.appendChild(visitBtn);
+  });
+})();
+
+// --------------------------
 // Fullscreen page loader (index.html)
 // Waits for page load + 3D logo, then holds briefly so the
 // rotation is visible. Safety timeout prevents a stuck overlay.

@@ -52,6 +52,8 @@ nav {
 }
 nav ul a{
     font-size: 0.9rem;
+    font-weight: 400;
+    transition: font-weight 300ms ease-in-out;
 }
 
 body{
@@ -322,24 +324,16 @@ ul li{
     font-size: 1.7rem;
 }
 
-/* Visit-site CTA: centered on thumbnail, revealed on hover */
-.btn-visit-site{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.35rem;
+/* Thumbnail CTAs: Project-details + Visit-site stacked, centered, revealed on hover */
+.thumbnail-cta{
     position: absolute;
     left: 50%;
     top: 50%;
     z-index: 150;
-    font-size: 0.9rem;
-    text-decoration: none;
-    color: #121212;
-    padding: 0.55rem 0.9rem 0.55rem 0.55rem;
-    background-color: rgba(246, 246, 246, 0.92);
-    border: 2px solid #121212;
-    border-radius: 6px;
-    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
     opacity: 0;
     transform: translate(-50%, -46%) scale(0.94);
     pointer-events: none;
@@ -348,15 +342,46 @@ ul li{
         transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.card-thumbnail:has(> .btn-visit-site):hover .btn-visit-site,
-.card-thumbnail:has(> .btn-visit-site):focus-within .btn-visit-site{
+.card-thumbnail:hover .thumbnail-cta,
+.card-thumbnail:focus-within .thumbnail-cta{
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     pointer-events: auto;
 }
 
+.btn-visit-site{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-decoration: none;
+    color: #121212;
+    padding: 0.3rem 0.9rem 0.3rem 0.3rem;
+    background-color: #F6F6F6;
+    border: 2px solid #121212;
+    border-radius: 0;
+    white-space: nowrap;
+    transition: font-weight 300ms ease-in-out;
+}
+
+.btn-visit-site:hover,
+.btn-visit-site:focus-visible{
+    font-weight: 600;
+}
+
 .icon-visit-site{
     width: 1.8rem;
+    margin-right: 0.15rem;
+}
+
+.icon-cta-lead{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.8rem;
+    font-size: 1.2rem;
     margin-right: 0.15rem;
 }
 
@@ -365,7 +390,9 @@ ul li{
 }
 
 @media (prefers-reduced-motion: reduce){
-    .btn-visit-site{
+    .thumbnail-cta,
+    .btn-visit-site,
+    nav ul a{
         transition: none;
     }
 }
@@ -1044,9 +1071,6 @@ video{
 
 nav ul a:hover{
     font-weight: 600;
-    transition-property: font-weight;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
 }
 
 .logo:hover{
