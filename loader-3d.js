@@ -373,3 +373,19 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
     window.addEventListener("about-postcard:flipped", start, { once: true });
   }
 })();
+
+// --------------------------
+// Standalone bird-show.html
+// --------------------------
+(() => {
+  const canvas = document.getElementById("bird-show-canvas");
+  if (!canvas) return;
+
+  mountBird(canvas, {
+    onReady: (ok) => {
+      if (!ok) return;
+      canvas.classList.add("is-ready");
+      canvas.closest(".bird-show-wrap")?.classList.add("is-ready");
+    },
+  });
+})();

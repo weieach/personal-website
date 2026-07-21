@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .bird-show-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        #bird-show-canvas {
+            width: min(72vmin, 520px);
+            height: min(72vmin, 520px);
+            opacity: 0;
+            transition: opacity 420ms ease;
+            cursor: pointer;
+        }
+
+        #bird-show-canvas.is-ready {
+            opacity: 1;
+        }
+
+        .bird-chirps {
+            position: absolute;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .bird-chirps.is-chirping {
+            animation: bird-chirps-lift 1100ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .bird-chirp {
+            position: absolute;
+            font-size: calc(14px * var(--size, 1));
+            line-height: 1;
+            color: #1a1a1a;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            animation: bird-chirp-burst 1100ms cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms) forwards;
+        }
+
+        @keyframes bird-chirps-lift {
+            to {
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes bird-chirp-burst {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.6);
+            }
+            18% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(
+                        calc(-50% + var(--dx, 0px)),
+                        calc(-50% + var(--dy, 0px))
+                    )
+                    scale(1);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #bird-show-canvas {
+                transition: none;
+            }
+
+            .bird-chirp {
+                animation: none;
+                opacity: 0;
+            }
+
+            .bird-chirps.is-chirping {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bird-show-wrap">
+        <canvas id="bird-show-canvas" role="button" tabindex="0" aria-label="Chirp the bird"></canvas>
+    </div>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+    </script>
+    <script type="module" src="loader-3d.js"></script>
+</body>
+</html>
