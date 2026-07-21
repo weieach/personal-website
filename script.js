@@ -237,6 +237,98 @@ document.addEventListener("click", (e) => {
 });
 
 // --------------------------
+// Pictogram videos: bt709-tagged H.264 paints a different blue than CSS sRGB
+// depending on OS/GPU (iOS, Windows, macOS all disagree). Mirror frames onto a
+// canvas (same color pipeline as CSS) and tint the surrounding backgrounds to
+// the sampled frame color so the seam disappears everywhere.
+// --------------------------
+(() => {
+  const videos = document.querySelectorAll(
+    [
+      ".card-pictogram video",
+      ".pictogram-main-projectpg .page-thumbnail video",
+      "video.pictogram-motion",
+    ].join(", ")
+  );
+  if (!videos.length) return;
+
+  const backgroundsFor = (video) => {
+    const targets = [];
+    if (video.classList.contains("pictogram-motion")) {
+      // Background lives on the replacement canvas (same class).
+      const visual = video.nextElementSibling;
+      if (visual?.classList?.contains("pictogram-visual")) targets.push(visual);
+    }
+    const thumb = video.closest(".card-thumbnail, .page-thumbnail");
+    if (thumb) targets.push(thumb);
+    const recorded = video
+      .closest(".item-pictogram-recorded")
+      ?.querySelector(":scope > div");
+    if (recorded) targets.push(recorded);
+    return targets;
+  };
+
+  videos.forEach((video) => {
+    if (video.dataset.pictogramSynced) return;
+    video.dataset.pictogramSynced = "1";
+
+    const canvas = document.createElement("canvas");
+    canvas.className = `${video.className} pictogram-visual`.trim();
+    canvas.setAttribute("aria-hidden", "true");
+    video.insertAdjacentElement("afterend", canvas);
+    video.classList.add("pictogram-source");
+
+    const ctx = canvas.getContext("2d", { alpha: false, willReadFrequently: true });
+    if (!ctx) return;
+
+    let tinted = false;
+
+    const paint = () => {
+      const w = video.videoWidth;
+      const h = video.videoHeight;
+      if (!w || !h) return;
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+      }
+      ctx.drawImage(video, 0, 0, w, h);
+
+      if (!tinted) {
+        try {
+          const [r, g, b] = ctx.getImageData(8, 8, 1, 1).data;
+          if (r + g + b > 30) {
+            const color = `rgb(${r}, ${g}, ${b})`;
+            backgroundsFor(video).forEach((el) => {
+              el.style.backgroundColor = color;
+            });
+            tinted = true;
+          }
+        } catch {
+          // Ignore tainted-canvas failures; CSS fallback remains.
+        }
+      }
+    };
+
+    const tick = () => {
+      paint();
+      if (typeof video.requestVideoFrameCallback === "function") {
+        video.requestVideoFrameCallback(tick);
+      } else {
+        requestAnimationFrame(tick);
+      }
+    };
+
+    const start = () => {
+      paint();
+      tick();
+    };
+
+    if (video.readyState >= 2) start();
+    else video.addEventListener("loadeddata", start, { once: true });
+  });
+})();
+
+// --------------------------
 // Thumbnail CTAs: ensure every listing card gets a "Project details" button.
 // Cards that already have "Visit site" keep it (left) with details on the right.
 // Cards with no CTA (e.g. pictogram) get details only. Hidden below 500px via CSS.

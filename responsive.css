@@ -333,19 +333,6 @@
   }
 }
 
-/* iOS Safari honors the pictogram video's bt709 transfer curve and renders it
-   at ~#3653D3 instead of the sRGB-authored #3E5ED9 that desktop/CSS use,
-   leaving a visible seam against the CSS backgrounds. Match the shifted color
-   on iOS only so it blends seamlessly there. */
-@supports (-webkit-touch-callout: none) {
-  .card-pictogram .card-thumbnail,
-  .pictogram-main-projectpg .page-thumbnail,
-  .pictogram-motion,
-  .item-pictogram-recorded > div {
-    background-color: #3653D3;
-  }
-}
-
 @media (width < 460px) {
   /* Revert thumbnail CTA to the original always-visible top-right visit button */
   .thumbnail-cta,

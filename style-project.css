@@ -141,9 +141,13 @@ main.pg-with-thumbnail {
 }
 
 
-.page-thumbnail video{
+.page-thumbnail video,
+.page-thumbnail canvas.pictogram-visual{
   object-fit: contain;
   max-height: 100%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
 }
 
 .page-thumbnail.page-thumbnail-elastic-mind {
@@ -433,7 +437,8 @@ h3 {
   max-width: 100vh;
 }
 
-.pictogram-motion{
+.pictogram-motion,
+canvas.pictogram-visual.pictogram-motion{
   /* aspect-ratio: 10/10; */
   padding: 3% 5%;
   background-color: #3E5ED9;

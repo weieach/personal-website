@@ -702,7 +702,9 @@ video{
     background-size: 57%;
     background-position: center;
     background-repeat: no-repeat;
-    
+    aspect-ratio: 631/387;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-mm .card-thumbnail{
@@ -710,8 +712,10 @@ video{
 }
 
 .video-superfast{
-    scale: 0.9;
+    scale: 0.98;
     width: 100%;
+    height: auto;
+    flex-shrink: 0;
     outline: 0.5vw solid black;
     outline-offset: -0.5vw;
 }
@@ -753,13 +757,34 @@ video{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
+    justify-content: center;
+    align-items: center;
 }
 
-.card-pictogram video{
-    scale: 0.85;
+.card-pictogram video,
+.card-pictogram canvas.pictogram-visual{
+    scale: 0.78;
     width: 90%;
+    height: auto;
+    flex-shrink: 0;
      /* aspect-ratio: 800/490; */
     object-fit: contain;
+}
+
+/* Hidden decode source for canvas-mirrored pictogram videos (see script.js) */
+video.pictogram-source{
+    position: absolute;
+    width: 0 !important;
+    height: 0 !important;
+    max-width: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+    scale: none !important;
+    overflow: hidden;
 }
 
 .card-booklets .card-thumbnail{
