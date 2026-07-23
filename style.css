@@ -830,6 +830,18 @@ video.pictogram-source{
     border-radius: 1.4rem;
 }
 
+.card-schneider .card-thumbnail{
+    background-color: #53c66c;
+}
+
+.card-schneider .card-thumbnail .thumb-img{
+    width: 100%;
+    scale: 0.82;
+    /* border-radius: 1.4rem; */
+    object-fit: contain;
+    object-position: top center;
+}
+
 .card-nijimu .card-thumbnail{
     background-color: #000000;
 }
