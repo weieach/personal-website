@@ -599,6 +599,12 @@ main.main-projectpg.case-study-project{
   max-width: 100ch;
 }
 
+.nijimu-project .project-caption a + .ph-arrow-up-right{
+  font-size: 0.85em;
+  margin-left: 0.15em;
+  vertical-align: middle;
+}
+
 /* Same centered column as .project-caption; back floats outside via .btn-back */
 .case-study-header{
   width: 100%;
@@ -659,6 +665,11 @@ main.main-projectpg.case-study-project{
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+}
+
+.list-case-study-info-awards .entry-content-link{
+  display: inline;
+  white-space: nowrap;
 }
 
 .list-case-study-info-awards .entry-content ul{
