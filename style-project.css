@@ -585,13 +585,18 @@ main.main-projectpg.case-study-project{
   flex-direction: column;
   gap: calc(var(--space) * 2);
   padding-inline: 0%;
-  margin-top: calc(var(--space-main-top) + var(--space) * 1.5);
+  margin-top: calc(var(--space-main-top) *2);
 }
 
 .main-projectpg.case-study-project .project-caption{
   position: relative;
   width: 100%;
   max-width: 80ch;
+}
+
+.main-projectpg.case-study-project.nijimu-project .case-study-header,
+.main-projectpg.case-study-project.nijimu-project .project-caption{
+  max-width: 100ch;
 }
 
 /* Same centered column as .project-caption; back floats outside via .btn-back */
@@ -623,8 +628,7 @@ main.main-projectpg.case-study-project{
 .list-case-study-info{
   display: grid;
   grid-template-columns: auto auto;
-  
-  grid-template-rows: 50% 50%;
+  grid-auto-rows: auto;
   column-gap: 4rem;
   row-gap: 0.1rem;
   justify-content: space-between;
@@ -638,6 +642,38 @@ main.main-projectpg.case-study-project{
   flex-direction: row;
   gap: 1rem;
   border: none;
+}
+
+.list-case-study-info-awards{
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.list-case-study-info-awards .entry-header{
+  flex-shrink: 0;
+}
+
+.list-case-study-info-awards .entry-content{
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.list-case-study-info-awards .entry-content ul{
+  margin: 0;
+  padding-left: 1.15rem;
+  list-style: disc;
+  list-style-position: outside;
+}
+
+.list-case-study-info-awards .entry-content ul li{
+  display: list-item;
+  gap: 0;
+  font-family: "geist";
+  font-size: 0.95rem;
+  list-style: disc;
 }
 
 .list-case-study-info .entry-header{

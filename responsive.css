@@ -166,6 +166,19 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
+
+  /* Case study: fill the padded column on small screens; keep back in-flow */
+  .case-study-project .case-study-header,
+  .case-study-project .img-casestudy-cover{
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .case-study-project .case-study-header .btn-back{
+    position: static;
+    margin: 0 0 0.5rem;
+    order: -1;
+  }
 }
 
 @media (width < 1350px) {
@@ -198,24 +211,9 @@
     border-bottom: 1px solid rgba(153, 153, 153, 0.2);
   }
 
-  /* adventurer — collapse breakouts to the text column below desktop */
-
-  .case-study-project .case-study-header,
-  .case-study-project .img-casestudy-cover{
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Keep back in-flow on small screens so it doesn't sit off-canvas */
-  .case-study-project .case-study-header .btn-back{
-    position: static;
-    margin: 0 0 0.5rem;
-    order: -1;
-  }
-
+  /* Collapse breakout images (130–140% + offset) so they don't overflow */
   .case-study-project .wrapper-design-system,
   .case-study-project .img-mockup,
-  .case-study-project .img-casestudy-cover,
   .case-study-project .img-case-study-body,
   .case-study-project .section-ui-design img{
     max-width: 100%;
