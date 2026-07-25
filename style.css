@@ -643,7 +643,7 @@ video{
 .card-fs .card-thumbnail{
     background-color: #E08494;
     position: relative;
-    background-image: url("assets/fs-thumbnail-1.png");
+    background-image: url("assets/fs/fs-thumbnail-1.png");
     background-size: 75%;
     background-repeat: no-repeat;
     background-position: center;
@@ -698,7 +698,7 @@ video{
 .card-superfast .card-thumbnail{
     background-color: black;
     margin-bottom: 1rem;
-    background-image: url("assets/superfast-print-bookcover.png");
+    background-image: url("assets/superfast/superfast-print-bookcover.png");
     background-size: 57%;
     background-position: center;
     background-repeat: no-repeat;
@@ -722,7 +722,7 @@ video{
 
 .card-videssay .card-thumbnail{
     background-color: white;
-    background-image: url("assets/wherewhatwhere-staticthumb.png");
+    background-image: url("assets/wherewhatwhere/wherewhatwhere-staticthumb.png");
     background-size: cover;
     background-position: center;
 }
@@ -733,7 +733,7 @@ video{
 }
 
 .card-wu .card-thumbnail{
-    background-image: url("assets/wu\ blurred\ bg\ 1.png");
+    background-image: url("assets/wu/wu\ blurred\ bg\ 1.png");
     background-size: contain;
     background-size: 200%;
     background-position-y: 12%;
@@ -753,7 +753,7 @@ video{
 .card-pictogram .card-thumbnail{
     background-color: #3E5ED9;
     aspect-ratio: 800/620;
-    background-image: url("assets/pictogram-static-thumb-grid.png");
+    background-image: url("assets/pictogram/pictogram-static-thumb-grid.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -788,7 +788,7 @@ video.pictogram-source{
 }
 
 .card-booklets .card-thumbnail{
-    background-image: url("assets/hurricane-cover-new.png");
+    background-image: url("assets/hurricane/hurricane-cover-new.png");
     background-size: cover;
     aspect-ratio: 3000/1900;
     outline: 2px solid #F5F5F5;
@@ -811,13 +811,13 @@ video.pictogram-source{
 }
 
 .card-dephy .card-thumbnail{
-    background-image: url("assets/node_3\ 1.png");
+    background-image: url("assets/dephy/node_3\ 1.png");
     background-size: contain;
     background-position: center;
 }
 
 .card-gvd .card-thumbnail{
-    /* background-image: url("assets/gvd-thumb.png"); */
+    /* background-image: url("assets/gvd/gvd-thumb.png"); */
     background-color: #531957;
     background-size: cover;
     background-position: center;
@@ -852,14 +852,14 @@ video.pictogram-source{
 }
 
 .card-dino .card-thumbnail{
-    /* background-image: url("assets/dino-mockup.png"); */
-    background-image: url("assets/dino-thumb.png");
+    /* background-image: url("assets/dino/dino-mockup.png"); */
+    background-image: url("assets/dino/dino-thumb.png");
     background-size: contain;
     background-position: center;
 }
 
 .card-bird .card-thumbnail{
-    background-image: url("assets/bird-thumb.png");
+    background-image: url("assets/concert/bird-thumb.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -1167,7 +1167,7 @@ video.pictogram-source{
 
 .elastic-thumbnail{
     aspect-ratio: 27/21;
-    background-image: url("assets/elastic-staticthumb.png");
+    background-image: url("assets/elasticmind/elastic-staticthumb.png");
     background-size: contain;
 }
 

@@ -123,7 +123,7 @@ main.pg-with-thumbnail {
 }
 
 .page-thumbnail-tldr{
-  background-image: url(assets/tldr\ mockup.png);
+  background-image: url(assets/tldr/tldr\ mockup.png);
   background-size: cover;
   background-position: center 25%;
   height: calc(85vh - 66px);
