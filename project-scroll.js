@@ -108,17 +108,212 @@ document.addEventListener("click", (e) => {
 });
 
 setupElasticThumbnailTooltip();
+setupCaseStudyToc();
+mutePageVideos();
+setupWalkthroughLightbox();
 
-function scrollToTarget(target) {
+function scrollToTarget(target, offset = 0) {
   if (lenis) {
     lenis.scrollTo(target, {
-      offset: 0,
+      offset,
       duration: 1.2,
     });
     return;
   }
 
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!offset) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+
+  window.scrollTo({
+    top: target.getBoundingClientRect().top + window.scrollY + offset,
+    behavior: "smooth",
+  });
+}
+
+function setupCaseStudyToc() {
+  const page = document.querySelector(".case-study-toc-enabled");
+  const caption = page?.querySelector(".project-caption");
+  if (!caption) return;
+
+  const sections = [...caption.querySelectorAll(":scope > section")].filter(
+    (section) => section.querySelector("h3")
+  );
+  if (sections.length < 3) return;
+
+  const rail = document.createElement("aside");
+  rail.className = "case-study-toc";
+  rail.setAttribute("role", "navigation");
+  rail.setAttribute("aria-label", "Sections");
+
+  const inner = document.createElement("div");
+  inner.className = "case-study-toc__inner";
+  const list = document.createElement("ul");
+
+  const items = sections.map((section, i) => {
+    const label =
+      section.dataset.tocLabel || section.querySelector("h3").textContent.trim();
+
+    if (!section.id) {
+      section.id = `section-${slugify(label) || i + 1}`;
+    }
+
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    link.href = `#${section.id}`;
+    link.textContent = label;
+    item.appendChild(link);
+    list.appendChild(item);
+
+    return { section, item };
+  });
+
+  inner.appendChild(list);
+  rail.appendChild(inner);
+  caption.prepend(rail);
+
+  const navHeight = () =>
+    parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue("--nav-height")
+    ) || 56;
+
+  let activeIndex = -1;
+  let frame = 0;
+
+  const update = () => {
+    frame = 0;
+    const top = navHeight();
+    const line = top + window.innerHeight * 0.3;
+
+    // Rail appears only once the reader is past the opening section
+    rail.classList.toggle(
+      "is-visible",
+      items[0].section.getBoundingClientRect().bottom < top + 24
+    );
+
+    let next = 0;
+    items.forEach(({ section }, i) => {
+      if (section.getBoundingClientRect().top <= line) next = i;
+    });
+
+    if (next === activeIndex) return;
+    items[activeIndex]?.item.classList.remove("is-active");
+    items[next].item.classList.add("is-active");
+    activeIndex = next;
+  };
+
+  const schedule = () => {
+    if (!frame) frame = requestAnimationFrame(update);
+  };
+
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule);
+  update();
+
+  rail.addEventListener("click", (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) return;
+
+    // Stop the page-wide hash handler, which scrolls without a nav offset
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (target.dataset.tocScroll === "top") {
+      scrollToTop();
+      return;
+    }
+
+    scrollToTarget(target, -(navHeight() + 32));
+  });
+}
+
+function scrollToTop() {
+  if (lenis) {
+    lenis.scrollTo(0, { duration: 1.2 });
+    return;
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function setupWalkthroughLightbox() {
+  const grid = document.querySelector(".walkthrough-image-grid");
+  if (!grid) return;
+
+  const overlay = document.createElement("div");
+  overlay.className = "image-lightbox";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Image preview");
+  overlay.innerHTML = `
+    <button type="button" class="image-lightbox__close" aria-label="Close">&times;</button>
+    <img class="image-lightbox__img" alt="">
+  `;
+  document.body.appendChild(overlay);
+
+  const preview = overlay.querySelector(".image-lightbox__img");
+
+  const open = (source) => {
+    preview.src = source.currentSrc || source.src;
+    preview.alt = source.alt || "";
+    overlay.classList.add("is-open");
+    document.body.classList.add("is-lightbox-open");
+    lenis?.stop();
+  };
+
+  const close = () => {
+    if (!overlay.classList.contains("is-open")) return;
+    overlay.classList.remove("is-open");
+    document.body.classList.remove("is-lightbox-open");
+    lenis?.start();
+  };
+
+  grid.addEventListener("click", (e) => {
+    const source = e.target.closest("img");
+    if (!source || !grid.contains(source)) return;
+    open(source);
+  });
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay || e.target.closest(".image-lightbox__close")) {
+      close();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+}
+
+function mutePageVideos() {
+  const videos = document.querySelectorAll(".main-projectpg video");
+  if (!videos.length) return;
+
+  videos.forEach((video) => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+    video.setAttribute("muted", "");
+
+    // Keep silent even if the native controls unmute UI is used
+    video.addEventListener("volumechange", () => {
+      if (!video.muted || video.volume > 0) {
+        video.muted = true;
+        video.volume = 0;
+      }
+    });
+  });
 }
 
 function setupElasticThumbnailTooltip() {

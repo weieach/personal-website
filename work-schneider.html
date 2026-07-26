@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NNMQQX9QC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2NNMQQX9QC');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="assets/favicon.png">
+    <!-- icons -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="style-project.css">
+    <link rel="stylesheet" href="responsive.css">
+    <title>Nicole Wei: Schneider Electric AI+Power Platform (2026)</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="assets/favicon.png" alt="bird-logo">
+                <p>Nicole Wei</p>
+            </a>
+            <ul>
+                <li><a href="index.html">Projects</a></li>
+                <li><a href="intern.html">Case Studies</a></li>
+                <!-- <li><a href="playground.html">Playground</a></li> -->
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
+        </nav>
+    </header>
+    <main class="main-projectpg case-study-project schneider-project case-study-toc-enabled">
+        <div class="sidebar no-display">
+            <ul>
+                <li><a href="index.html">Projects</a></li>
+                <li><a href="intern.html">Case Studies</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+
+        <div class="case-study-header">
+            <h1>Schneider Electric: AI+Power</h1>
+            <h2>An agentic factory platform that pairs PowerGPT with busbar topology monitoring, risk insight, and
+                embodied inspection workflows for industrial operations.</h2>
+            <a href="intern.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
+        </div>
+        <div class="img-casestudy-cover img-casestudy-cover-schneider">
+            <img src="assets/schneider/agent-homepage.png" alt="Schneider Electric AI+Power agent homepage">
+        </div>
+        <div class="project-caption">
+            <section class="section-case-study" data-toc-scroll="top">
+                <h3 class="no-display">Overview</h3>
+                <ul class="list-case-study list-case-study-info">
+                    <li>
+                        <p class="entry-header">Role</p>
+                        <p class="entry-content">AI Product Design Intern (Digital Innovation department)</p>
+                    </li>
+                    <li>
+                        <p class="entry-header">Timeline</p>
+                        <p class="entry-content">May 2026 - June 2026</p>
+                    </li>
+                    <li>
+                        <p class="entry-header">Company</p>
+                        <p class="entry-content">Schneider Electric</p>
+                    </li>
+                    <li>
+                        <p class="entry-header">Tools</p>
+                        <p class="entry-content">Cursor (Claude Opus 4.8, Fable 5), Figma</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="section-problem">
+                <h3>Context &amp; problem</h3>
+                <p>As the sole designer and AI product intern on this project, I was responsible for building a platform
+                    prototype from scratch: an integrated system pairing automated inspection with robot dispatch across
+                    the company's factories. A public demo date was set before the product existed, so my role centered
+                    on building out the frontend as the clearest way to make the product intent legible.</p>
+                <p>Almost all of my input was verbal, drawn from interviewing engineers, R&amp;D colleagues, and on-duty
+                    factory workers, and from working directly alongside the team lead. Translating that unstructured
+                    domain expertise into a design driven by a product mindset was the key task. The problems identified
+                    were as follows:</p>
+                <ul class="list-case-study list-case-study-problems">
+                    <li>
+                        <h4>Maintenance should be preventive, not reactive</h4>
+                        <p>Factory inspection runs on fixed intervals and human judgment, so early signs of degradation
+                            are easy to miss until they become failures.</p>
+                    </li>
+                    <li>
+                        <h4>Domain knowledge is scattered</h4>
+                        <p>Maintenance expertise sits in separate documents and in individual engineers' heads, never
+                            consolidated into structured, shared knowledge. Because none of it is a reusable asset, root
+                            cause diagnosis stays dependent on a few experienced people and cannot scale as equipment and
+                            data grow.</p>
+                    </li>
+                    <li>
+                        <h4>Readily available field response is crucial </h4>
+                        <p>Inspection tasks like photo capture, thermal measurement, and status confirmation all require staff on site, yet faults can occur at any hour. The gap between detecting a problem and reaching it is bounded by travel time, and it widens exactly when conditions are most hazardous.
+
+
+                        </p>
+                    </li>
+                </ul>
+            </section>
+            <section class="section-process">
+                <h3>Process &amp; iteration</h3>
+                <p class="section-process-intro">With no UI design or product spec in place, I tried out a highly
+                    iterative, AI-native process in Cursor, testing different models against each other as their
+                    capabilities kept shifting. Building directly in code meant the prototypes were interactive and
+                    largely self-explanatory, which made cycling through feedback and revision fast.</p>
+                <div class="product-highlight-entries">
+                    <div class="product-highlight-entry">
+                        <div class="captioned-item">
+                            <img src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar">
+                        </div>
+                        <div>
+                            <p>My first iteration took a dashboard mindset: the factory as a network of nodes featuring
+                                different types of equipment. The topology is legible at a glance, while clicking on a
+                                node to inspect it or talking to the agent below offers more information on the
+                                equipment's status.</p>
+                        </div>
+                    </div>
+                    <div class="product-highlight-entry">
+                        <div class="captioned-item">
+                            <img src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log">
+                        </div>
+                        <div>
+                            <p>In a second iteration, I added a task queue, giving real-time visual confirmation and
+                                history for the tasks the agent carries out as it multitasks, and docked the chat as a
+                                persistent panel instead of click-to-open to keep the agent's updates always in view.</p>
+                        </div>
+                    </div>
+                    <div class="product-highlight-entry">
+                        <div class="captioned-item">
+                            <img src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log">
+                        </div>
+                        <div>
+                            <p>I added a knowledge graph view over the node map, documenting the potential causes of
+                                equipment failure. I chose a top-down tree to illustrate cause and effect relationships.
+                                Agent messages can render as clickable components, such as a checklist that updates
+                                itself.</p>
+                        </div>
+                    </div>
+                    <div class="product-highlight-entry">
+                        <div class="captioned-item">
+                            <img src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score">
+                        </div>
+                        <div>
+                            <p>I implemented the equipment node tree in radial distribution to optimize space. Raw
+                                telemetry and the model's confidence now printed in the message dock, so a recommendation
+                                can be traced back to the readings behind it.</p>
+                        </div>
+                    </div>
+                    <div class="product-highlight-entry">
+                        <div class="captioned-item">
+                            <img src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat">
+                        </div>
+                        <div>
+                            <p>A major pivot came when me and my leader decided that a task-first interface was the right
+                                structure (as opposed to graph-first or chat-first), since the agent should be able to
+                                schedule tasks rather than only run them one-off or execute them immediately. The user
+                                gets an at-a-glance view of completed and upcoming tasks, and can update them
+                                efficiently.</p>
+                        </div>
+                    </div>
+                    <!-- <div class="product-highlight-entry">
+                        <div class="captioned-item">
+                            <img src="assets/schneider/Screenshot 2026-06-12 at 15.55.06 1.png" alt="Create-skill screen showing a device matrix of Schneider equipment grouped by power category">
+                        </div>
+                        <div>
+                            <p>Busbar was only the first asset class. The flow was generalised into a device matrix where
+                                an engineer picks equipment and generates a reusable skill agent, letting the diagnostic
+                                logic carry across product lines instead of being rebuilt each time.</p>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+            <section class="section-product-walkthrough">
+                <h3>Full Walkthrough</h3>
+                <div class="product-highlight-entries">
+                    <div class="product-highlight-entry">
+                        <div class="captioned-item">
+                            <video class="video-app-highlights" src="assets/schneider/pgpt pt1 edit.mp4" autoplay loop muted
+                                playsinline controls></video>
+                        </div>
+                        <div>
+                            <p>Flow 1: Creating an agent</p>
+                        </div>
+                    </div>
+                    <div class="product-highlight-entry">
+                        <div class="captioned-item video-inset-border">
+                            <video class="video-app-highlights" src="assets/schneider/pgpt pt2 edit new.mp4" autoplay loop muted
+                                playsinline controls></video>
+                        </div>
+                        <div>
+                            <p>Flow 2: Scheduling and running an inspection task</p>
+                        </div>
+                    </div>
+                    <div class="product-highlight-entry">
+                        <div class="captioned-item video-inset-border">
+                            <video class="video-app-highlights" src="assets/schneider/pgpt pt3 edit.mp4" autoplay loop muted
+                                playsinline controls></video>
+                        </div>
+                        <div>
+                            <p>Flow 3: Encountering a triggered alert</p>
+                        </div>
+                    </div>
+                    <div class="walkthrough-image-grid">
+                        <div class="captioned-item">
+                            <img src="assets/schneider/final-1.png" alt="Scenario picker for creating a maintenance agent: predictive maintenance, daily operations, or alarm convergence">
+                        </div>
+                        <div class="captioned-item">
+                            <img src="assets/schneider/final-2.png" alt="Task panel home with schedule, status counters, task records, and the PowerGPT agent chat">
+                        </div>
+                        <div class="captioned-item">
+                            <img src="assets/schneider/final-3.png" alt="Knowledge graph view of busbar fault factors beside the agent dialogue and alert records">
+                        </div>
+                        <div class="captioned-item">
+                            <img src="assets/schneider/final-4.png" alt="3D factory simulation with robot call controls, highlighted cabinets, and short-circuit precursor diagnosis in chat">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section-outcome">
+                <h3>Outcome &amp; impact</h3>
+                <p>AI + Power was presented across nine demos at Schneider Electric's Beijing innovation campus to an
+                    audience of more than 500, including national leadership from Schneider's China teams and
+                    representatives from partner firms. During the demo, the system was wired directly to factory
+                    equipment on the exhibition floor, where it detected a fault, raised an alert, and dispatched a robot
+                    to shut the machine down in real time. The project was later shown at the World Artificial Intelligence Conference (WAIC)
+                    in Shanghai.</p>
+                <p>The platform has since entered formal development; as a result, my internship was extended from three
+                    months into a full year, where I work alongside engineers and product designers to carry the
+                    prototype to production.</p>
+                <div class="product-highlight-entries">
+                    <div class="captioned-item">
+                        <video class="video-app-highlights" src="assets/schneider/robot edit.mp4" autoplay loop muted
+                            playsinline controls></video>
+                    </div>
+                    <div class="outcome-media-row">
+                        <div class="captioned-item">
+                            <img src="assets/schneider/outcome-2.jpg" alt="Group watching a live demo of the digital ecosystem and robotic inspection setup">
+                            <div class="floating-caption">
+                                <p class="floating-caption-details">Live demo at Schneider Beijing Campus, June 24th</p>
+                            </div>
+                        </div>
+                        <div class="captioned-item">
+                            <img src="assets/schneider/waic.jpg" alt="AI + Power showcased at the WAIC conference in Shanghai">
+                            <div class="floating-caption">
+                                <p class="floating-caption-details">WAIC conference, Shanghai, July 17th</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <hr>
+    <footer>
+        <p>&copy; 2026 Nicole Wei</p>
+        <div class="icons">
+            <a href="mailto:wei.yichen@wustl.edu" target="_blank" class="contact-entry" aria-label="Email"><i
+                    class="ph ph-envelope-simple"></i></a>
+            <a href="https://www.instagram.com/nikuowwi/" target="_blank" rel="noopener noreferrer"
+                class="contact-entry icon-instagram" aria-label="Instagram"><i
+                    class="ph-fill ph-instagram-logo"></i></a>
+            <a href="https://x.com/weieach" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x"
+                aria-label="X"><i class="ph-fill ph-x-logo"></i></a>
+            <a href="https://www.linkedin.com/in/ncwei/" target="_blank" rel="noopener noreferrer"
+                class="contact-entry icon-linkedin" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a>
+        </div>
+    </footer>
+    <script type="module" src="project-scroll.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

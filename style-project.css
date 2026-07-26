@@ -595,7 +595,9 @@ main.main-projectpg.case-study-project{
 }
 
 .main-projectpg.case-study-project.nijimu-project .case-study-header,
-.main-projectpg.case-study-project.nijimu-project .project-caption{
+.main-projectpg.case-study-project.nijimu-project .project-caption,
+.main-projectpg.case-study-project.schneider-project .case-study-header,
+.main-projectpg.case-study-project.schneider-project .project-caption{
   max-width: 100ch;
 }
 
@@ -704,6 +706,14 @@ main.main-projectpg.case-study-project{
   font-size: 0.95rem;
 }
 
+.section-problem > p{
+  margin-bottom: 1rem;
+}
+
+.section-problem > p:last-of-type{
+  margin-bottom: 2.5rem;
+}
+
 .list-case-study-problems{
   margin: 0;
   display: flex;
@@ -743,6 +753,21 @@ main.main-projectpg.case-study-project{
   margin-inline: auto;
 }
 
+.img-casestudy-cover-schneider{
+  background-color: #53c66c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.img-casestudy-cover-schneider img{
+  width: 100%;
+  scale: 0.82;
+  object-fit: contain;
+  object-position: top center;
+}
+
 .case-study-project .img-case-study-body{
   width: 140%;
   max-width: none;
@@ -759,6 +784,18 @@ main.main-projectpg.case-study-project{
   border-radius: 0px;
 }
 
+.video-inset-border{
+  position: relative;
+}
+
+.video-inset-border::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px #fff;
+  pointer-events: none;
+}
+
 .product-highlight-entries{
   display: flex;
   flex-direction: column;
@@ -768,12 +805,245 @@ main.main-projectpg.case-study-project{
 
 }
 
+.outcome-media-row{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+
+.outcome-media-row .captioned-item{
+  flex: 1;
+  min-width: 0;
+  gap: 0.75rem;
+}
+
+.outcome-media-row img{
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.outcome-media-row .floating-caption{
+  text-align: left;
+}
+
+.outcome-media-row .floating-caption-details{
+  font-family: "Geist Mono";
+  font-size: 0.8rem;
+  margin: 0;
+  opacity: 0.55;
+}
+
+@media (width < 700px){
+  .outcome-media-row{
+    flex-direction: column;
+  }
+}
+
 .product-highlight-entry{
   display: flex;
   flex-direction: column;
   align-items: end;
   gap: 0rem;
   
+}
+
+.section-process .section-process-intro{
+  max-width: 80ch;
+  margin-bottom: 3rem;
+}
+
+.section-process .product-highlight-entries,
+.section-product-walkthrough .product-highlight-entries{
+  gap: 2.25rem;
+}
+
+.section-process .product-highlight-entry,
+.section-product-walkthrough .product-highlight-entry{
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+.section-process .product-highlight-entry > .captioned-item,
+.section-product-walkthrough .product-highlight-entry > .captioned-item{
+  margin: 0;
+}
+
+.section-process .product-highlight-entry p,
+.section-product-walkthrough .product-highlight-entry p{
+  margin-bottom: 0;
+}
+
+/* Numbered rail in the left gutter of the process section: each circle is
+   centred on its image, linked by a dashed line drawn in two pieces — one
+   across the image, one across the caption and the gap to the next entry. */
+.section-process{
+  --process-rail-x: 2.4rem;   /* rail centre, left of the caption column */
+  --process-step-size: 1.7rem;
+}
+
+.section-process .product-highlight-entries{
+  counter-reset: process-step;
+}
+
+.section-process .product-highlight-entry{
+  counter-increment: process-step;
+}
+
+.section-process .product-highlight-entry > .captioned-item::before{
+  content: counter(process-step);
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: calc(100% + var(--process-rail-x) - var(--process-step-size) / 2);
+  translate: 0 -50%;
+  width: var(--process-step-size);
+  height: var(--process-step-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #55565A;
+  border-radius: 999px;
+  background-color: #F6F6F6;
+  font-family: "Geist Mono";
+  font-size: 0.7rem;
+  color: #55565A;
+}
+
+.section-process .product-highlight-entry > .captioned-item::after,
+.section-process .product-highlight-entry:not(:last-child) > .captioned-item + div::before{
+  content: "";
+  position: absolute;
+  right: calc(100% + var(--process-rail-x));
+  border-left: 1px dashed #55565A;
+}
+
+.section-process .product-highlight-entry > .captioned-item::after{
+  top: 0;
+  bottom: 0;
+}
+
+.section-process .product-highlight-entry:first-child > .captioned-item::after{
+  top: 50%;
+}
+
+.section-process .product-highlight-entry:last-child > .captioned-item::after{
+  bottom: 50%;
+}
+
+.section-process .product-highlight-entry > .captioned-item + div{
+  position: relative;
+}
+
+.section-process .product-highlight-entry:not(:last-child) > .captioned-item + div::before{
+  top: -1.2rem;   /* row gap above the caption */
+  bottom: -2.25rem;   /* gap to the next entry */
+}
+
+/* Gutter disappears before the rail does, so drop it early */
+@media (width < 1150px){
+  .section-process .product-highlight-entry > .captioned-item::before,
+  .section-process .product-highlight-entry > .captioned-item::after,
+  .section-process .product-highlight-entry > .captioned-item + div::before{
+    display: none;
+  }
+}
+
+.section-product-walkthrough .product-highlight-entry p{
+  text-align: center;
+}
+
+.walkthrough-image-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.walkthrough-image-grid img,
+.section-product-walkthrough .video-app-highlights{
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.walkthrough-image-grid img{
+  width: 100%;
+  display: block;
+  cursor: zoom-in;
+}
+
+@media (width < 700px){
+  .walkthrough-image-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+.image-lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3vw;
+  background: rgba(246, 246, 246, 0.42);
+  backdrop-filter: blur(20px) saturate(1.15);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+  cursor: zoom-out;
+}
+
+.image-lightbox.is-open{
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.image-lightbox__img{
+  max-width: min(1200px, 92vw);
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 18px 56px rgba(0, 0, 0, 0.22);
+  cursor: default;
+}
+
+.image-lightbox__close{
+  position: absolute;
+  top: calc(var(--nav-height) + 0.75rem);
+  right: 1.25rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.72);
+  color: #121212;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-lightbox__close:hover{
+  background: #fff;
+}
+
+body.is-lightbox-open{
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .image-lightbox{
+    transition: none;
+  }
 }
 
 .product-highlight-entry div{
@@ -855,6 +1125,117 @@ main.main-projectpg.case-study-project{
 
 .btn-back i{
   color: #6f6f6f;
+}
+
+/* Sticky section rail: sits in the left gutter of the caption column,
+   built by project-scroll.js from the section headings.
+   `clip` instead of the inherited `overflow-x: hidden` so the rail's
+   sticky child still tracks the viewport instead of main's scrollport. */
+main.main-projectpg.case-study-toc-enabled{
+  overflow-x: clip;
+}
+
+.case-study-toc{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Anchored to the viewport's left gutter (same inset as the nav) instead of
+     to the caption's left edge, so the rail holds its place on screen as the
+     gutter widens. min() keeps it clear of the text on narrower windows. */
+  left: min(calc(50% - 50vw + var(--space-nav)), -13rem);
+  width: 11rem;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.case-study-toc.is-visible{
+  pointer-events: auto;
+}
+
+.case-study-toc__inner{
+  position: sticky;
+  top: calc(var(--nav-height) + 3.5rem);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.case-study-toc.is-visible .case-study-toc__inner{
+  opacity: 1;
+  transform: none;
+}
+
+.case-study-toc ul{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.project-caption .case-study-toc li{
+  display: block;
+  margin: 0;
+  gap: 0;
+}
+
+.case-study-toc a{
+  position: relative;
+  display: block;
+  padding-left: 1rem;
+  font-family: "Geist Mono";
+  font-size: 0.7rem;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.35;
+  transition: opacity 0.25s ease, color 0.25s ease;
+}
+
+.case-study-toc a::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.52em;
+  width: 0.25rem;
+  height: 1px;
+  background-color: currentColor;
+  transform-origin: left center;
+  transition: scale 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.case-study-toc a:hover{
+  opacity: 0.75;
+}
+
+.case-study-toc li.is-active a{
+  opacity: 1;
+  color: #4E7E44;
+}
+
+.case-study-toc li.is-active a::before{
+  scale: 2.5 1;
+}
+
+.dark-mode .case-study-toc li.is-active a{
+  color: #8A8FE5;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .case-study-toc__inner,
+  .case-study-toc a,
+  .case-study-toc a::before{
+    transition: none;
+  }
+}
+
+/* No room for the rail once the caption column loses its gutter */
+@media (width < 1450px){
+  .case-study-toc{
+    display: none;
+  }
 }
 
 .wrapper-design-system{
