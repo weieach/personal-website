@@ -1127,22 +1127,18 @@ body.is-lightbox-open{
   color: #6f6f6f;
 }
 
-/* Sticky section rail: sits in the left gutter of the caption column,
-   built by project-scroll.js from the section headings.
-   `clip` instead of the inherited `overflow-x: hidden` so the rail's
-   sticky child still tracks the viewport instead of main's scrollport. */
+/* Fixed section rail: left-aligned with the logo text (--space-nav),
+   built by project-scroll.js from the section headings. */
 main.main-projectpg.case-study-toc-enabled{
   overflow-x: clip;
 }
 
 .case-study-toc{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  /* Anchored to the viewport's left gutter (same inset as the nav) instead of
-     to the caption's left edge, so the rail holds its place on screen as the
-     gutter widens. min() keeps it clear of the text on narrower windows. */
-  left: min(calc(50% - 50vw + var(--space-nav)), -13rem);
+  /* Fixed to the viewport so left matches the logo text inset exactly
+     (nav padding = --space-nav), independent of caption column width. */
+  position: fixed;
+  top: calc(var(--nav-height) + 3.5rem);
+  left: var(--space-nav);
   width: 11rem;
   z-index: 5;
   pointer-events: none;
@@ -1153,8 +1149,6 @@ main.main-projectpg.case-study-toc-enabled{
 }
 
 .case-study-toc__inner{
-  position: sticky;
-  top: calc(var(--nav-height) + 3.5rem);
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -1199,7 +1193,7 @@ main.main-projectpg.case-study-toc-enabled{
   position: absolute;
   left: 0;
   top: 0.52em;
-  width: 0.25rem;
+  width: 0.4rem;
   height: 1px;
   background-color: currentColor;
   transform-origin: left center;
@@ -1216,7 +1210,7 @@ main.main-projectpg.case-study-toc-enabled{
 }
 
 .case-study-toc li.is-active a::before{
-  scale: 2.5 1;
+  scale: 1.75 1;
 }
 
 .dark-mode .case-study-toc li.is-active a{

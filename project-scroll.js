@@ -185,12 +185,13 @@ function setupCaseStudyToc() {
     frame = 0;
     const top = navHeight();
     const line = top + window.innerHeight * 0.3;
+    const captionBox = caption.getBoundingClientRect();
+    const pastOpening =
+      items[0].section.getBoundingClientRect().bottom < top + 24;
+    // Hide once the caption has scrolled away (fixed rail no longer tracks it)
+    const withinCaption = captionBox.bottom > top + 120;
 
-    // Rail appears only once the reader is past the opening section
-    rail.classList.toggle(
-      "is-visible",
-      items[0].section.getBoundingClientRect().bottom < top + 24
-    );
+    rail.classList.toggle("is-visible", pastOpening && withinCaption);
 
     let next = 0;
     items.forEach(({ section }, i) => {
