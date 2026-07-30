@@ -859,9 +859,12 @@ main.main-projectpg.case-study-project{
 }
 
 .main-projectpg.case-study-project.nijimu-project .case-study-header,
-.main-projectpg.case-study-project.nijimu-project .project-caption,
-.main-projectpg.case-study-project.schneider-project .project-caption{
+.main-projectpg.case-study-project.nijimu-project .project-caption{
   max-width: 100ch;
+}
+
+.main-projectpg.case-study-project.schneider-project .project-caption{
+  max-width: 120ch;
 }
 
 /* Resolve once against body-copy font so mono headings and Geist body share the same measure.
@@ -876,7 +879,7 @@ main.main-projectpg.case-study-project{
 .main-projectpg.case-study-project.schneider-project .project-caption{
   font-family: "Geist", sans-serif;
   font-size: 0.92rem;
-  --schneider-prose-max: 80ch;
+  --schneider-prose-max: 90ch;
 }
 
 .main-projectpg.case-study-project.schneider-project .case-study-header,
@@ -1227,7 +1230,7 @@ main.main-projectpg.case-study-project{
 
 .section-process .product-highlight-entry,
 .section-product-walkthrough .product-highlight-entry{
-  gap: 1rem;
+  gap: 1.2rem;
   align-items: stretch;
 }
 
