@@ -418,14 +418,131 @@ document.addEventListener("click", (e) => {
   const loader = document.getElementById("page-loader");
   if (!loader) return;
 
+  const TIP_ROTATE_MS = 10000;
+  const TIP_EASE = [0.22, 1, 0.36, 1];
+  const tips = [
+    {
+      weight: 0.2,
+      text: "Currently building custom web-native 3D shaders and a Chrome job application plugin.",
+    },
+    {
+      weight: 0.3,
+      text: "A creative technologist, design engineer, and digital artist.",
+    },
+    {
+      weight: 0.5,
+      text: "Graduating in May 2027 and open to design engineer roles. Come say hi!",
+    },
+  ];
+
+  const tipViewport = loader.querySelector(".page-loader__tip-viewport");
+  const tipText = loader.querySelector(".page-loader__tip-text");
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const pickWeighted = () => {
+    const roll = Math.random();
+    let cumulative = 0;
+    for (const tip of tips) {
+      cumulative += tip.weight;
+      if (roll < cumulative) return tip.text;
+    }
+    return tips[tips.length - 1].text;
+  };
+
+  const pickOther = (current) => {
+    const pool = tips.filter((tip) => tip.text !== current);
+    if (!pool.length) return current;
+    return pool[Math.floor(Math.random() * pool.length)].text;
+  };
+
+  if (tipText) tipText.textContent = pickWeighted();
+
   let pageReady = document.readyState === "complete";
   let modelReady = loader.dataset.modelReady === "true";
   let hidden = false;
+  let tipTimer = null;
+  let tipRotating = false;
   const HOLD_MS = 1800;
+
+  const stopTipRotation = () => {
+    if (tipTimer != null) {
+      window.clearInterval(tipTimer);
+      tipTimer = null;
+    }
+  };
+
+  const rotateTip = async () => {
+    if (hidden || tipRotating || !tipText || !tipViewport) return;
+    const next = pickOther(tipText.textContent);
+    if (next === tipText.textContent) return;
+
+    tipRotating = true;
+
+    if (reduceMotion) {
+      tipText.textContent = next;
+      tipRotating = false;
+      return;
+    }
+
+    const outgoing = tipText.cloneNode(true);
+    outgoing.classList.add("page-loader__tip-text--outgoing");
+    outgoing.style.width = `${tipText.getBoundingClientRect().width}px`;
+    tipViewport.appendChild(outgoing);
+
+    tipText.textContent = next;
+    tipText.style.opacity = "0";
+    tipText.style.transform = "translateY(-10px)";
+
+    try {
+      const { animate } = await import(
+        "https://cdn.jsdelivr.net/npm/motion@12.42.2/+esm"
+      );
+      if (hidden || !loader.isConnected) {
+        outgoing.remove();
+        tipText.style.opacity = "";
+        tipText.style.transform = "";
+        return;
+      }
+
+      await Promise.all([
+        animate(
+          outgoing,
+          { y: 14, opacity: 0 },
+          { duration: 0.42, ease: TIP_EASE }
+        ).finished,
+        animate(
+          tipText,
+          { y: [-10, 0], opacity: [0, 1] },
+          { duration: 0.42, ease: TIP_EASE }
+        ).finished,
+      ]);
+    } catch {
+      tipText.style.opacity = "1";
+      tipText.style.transform = "none";
+    }
+
+    outgoing.remove();
+    tipText.style.opacity = "";
+    tipText.style.transform = "";
+    tipRotating = false;
+  };
+
+  if (tipText && tipViewport) {
+    tipTimer = window.setInterval(() => {
+      if (hidden) {
+        stopTipRotation();
+        return;
+      }
+      rotateTip();
+    }, TIP_ROTATE_MS);
+  }
 
   const hide = () => {
     if (hidden || !loader.isConnected) return;
     hidden = true;
+    stopTipRotation();
     // Unlock scroll before tear-down so the first touch isn't blocked
     document.body.classList.remove("is-loading");
     loader.classList.add("page-loader--hidden");

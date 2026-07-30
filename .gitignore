@@ -7,6 +7,7 @@
 
 # local large asset dumps
 asset-bin/
+assets/fs/bin/
 
 # local working notes
 instructions/

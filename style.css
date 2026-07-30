@@ -849,6 +849,7 @@ video.pictogram-source{
 .card-nijimu .card-thumbnail video{
     width: 100%;
     object-fit: contain;
+    scale: 1;
 }
 
 .card-dino .card-thumbnail{
@@ -1428,6 +1429,73 @@ body.is-loading header{
   animation: page-loader-bar 1.25s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
+.page-loader__tip{
+  position: absolute;
+  left: 50%;
+  bottom: max(1.75rem, env(safe-area-inset-bottom, 0px) + 1rem);
+  transform: translateX(-50%);
+  margin: 0;
+  width: max-content;
+  max-width: calc(100% - 2.5rem);
+  text-align: center;
+  font: 400 0.875rem/1.45 "Geist", system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  color: rgba(18, 18, 18, 0.5);
+  white-space: nowrap;
+  transition: opacity 280ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-loader__tip-viewport{
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+.page-loader__tip-text{
+  display: inline-block;
+  color: rgba(18, 18, 18, 0.5);
+  will-change: transform, opacity;
+}
+
+.page-loader__tip-text--outgoing{
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.page-loader__tip-label{
+  display: inline;
+  margin-right: 0.4em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(18, 18, 18, 0.72);
+}
+
+@media (width < 700px){
+  .page-loader__tip{
+    width: min(26rem, calc(100% - 2.5rem));
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  .page-loader__tip-viewport{
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .page-loader__tip-text,
+  .page-loader__tip-text--outgoing{
+    white-space: normal;
+    text-wrap: balance;
+  }
+}
+
 .page-loader--hidden{
   opacity: 0;
   visibility: hidden;
@@ -1437,6 +1505,11 @@ body.is-loading header{
 .page-loader--hidden .page-loader__inner{
   transform: translateY(calc(-2.5vh - 12px)) scale(0.98);
   opacity: 0;
+}
+
+.page-loader--hidden .page-loader__tip{
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
 }
 
 @keyframes page-loader-bird-enter{
@@ -1460,7 +1533,8 @@ body.is-loading header{
   .page-loader__inner,
   .page-loader__fallback,
   .page-loader__name,
-  .page-loader__bar-fill{
+  .page-loader__bar-fill,
+  .page-loader__tip{
     animation: none !important;
     transition: none;
   }

@@ -120,6 +120,8 @@ main.pg-with-thumbnail {
 
 .page-thumbnail-fs{
   background-color: #E18594;
+  height: calc(89vh - var(--nav-height));
+  max-height: calc(89vh - var(--nav-height));
 }
 
 .page-thumbnail-tldr{
@@ -134,22 +136,144 @@ main.pg-with-thumbnail {
 .page-thumbnail-wherewhatwhere{
   --where-thumb-gap: 4vh;
   background-color: #000000;
-  /* Top clears the fixed nav, then matches the gap below to the caption.
-     non-cs-pg flex gap is 2vh, so margin-bottom is gap minus that. */
+  /* Top clears the fixed nav; bottom gap comes from .non-cs-pg .page-thumbnail */
   margin-top: calc(var(--nav-height) + var(--where-thumb-gap));
-  margin-bottom: calc(var(--where-thumb-gap) - 2vh);
 }
 
 .page-thumbnail-nijimu{
+  --nijimu-thumb-margin: 1.75rem;
+  --nijimu-clip-w: 28vw;
+  --nijimu-clip-max-h: 28vw;
+  background-color: #000000;
+  /* Full viewport under the fixed nav so page bg never peeks through */
+  margin-top: 0;
+  height: 100svh;
+  max-height: 100svh;
+  min-height: 0;
+  padding-top: var(--nav-height);
+  box-sizing: border-box;
+  overflow: hidden;
+  /* bottom gap from .non-cs-pg .page-thumbnail */
+}
+
+.nijimu-thumb-stage{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  will-change: filter, opacity;
+}
+
+.page-thumbnail-nijimu .nijimu-thumb-hero{
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  translate: 0 -4%;
+  z-index: 1;
+  object-fit: contain;
+  max-height: calc(78% - (var(--nijimu-thumb-margin) * 2));
+  max-width: calc(78% - (var(--nijimu-thumb-margin) * 2));
+  width: auto;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.88);
+  transform-origin: center center;
+  will-change: opacity, transform;
+}
+
+.nijimu-thumb-clips{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.page-thumbnail-nijimu .nijimu-thumb-clip{
+  position: absolute;
+  width: var(--nijimu-clip-w);
+  height: auto;
+  max-width: var(--nijimu-clip-w);
+  max-height: var(--nijimu-clip-max-h);
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.88);
+  transform-origin: center center;
+  will-change: opacity, transform;
+}
+
+.page-thumbnail-nijimu .nijimu-thumb-clip:nth-child(1){
+  left: var(--nijimu-thumb-margin);
+  top: var(--nijimu-thumb-margin);
+}
+
+.page-thumbnail-nijimu .nijimu-thumb-clip:nth-child(2){
+  right: var(--nijimu-thumb-margin);
+  top: 12%;
+}
+
+.page-thumbnail-nijimu .nijimu-thumb-clip:nth-child(3){
+  left: 22%;
+  bottom: var(--nijimu-thumb-margin);
+}
+
+@media (max-width: 959px) {
+  .page-thumbnail-nijimu{
+    --nijimu-thumb-margin: 1rem;
+    --nijimu-clip-w: 58vw;
+    --nijimu-clip-max-h: 42vw;
+  }
+
+  .page-thumbnail-nijimu .nijimu-thumb-hero{
+    max-height: calc(72% - (var(--nijimu-thumb-margin) * 2));
+    max-width: calc(88% - (var(--nijimu-thumb-margin) * 2));
+  }
+
+  .page-thumbnail-nijimu .nijimu-thumb-clip:nth-child(2){
+    top: 4%;
+  }
+
+  .page-thumbnail-nijimu .nijimu-thumb-clip:nth-child(3){
+    left: 12%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-thumbnail-nijimu .nijimu-thumb-hero{
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  .nijimu-thumb-clip{
+    display: none;
+  }
+}
+
+/* Nijimu: black nav while over the thumbnail; restores once nav bottom hits thumbnail end */
+html:has(.page-thumbnail-nijimu) header,
+html:has(.page-thumbnail-nijimu) nav,
+html:has(.page-thumbnail-nijimu) nav ul,
+html:has(.page-thumbnail-nijimu) nav a,
+html:has(.page-thumbnail-nijimu) .logo p,
+html:has(.page-thumbnail-nijimu) .btn-burger span{
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+html.nijimu-nav-dark header,
+html.nijimu-nav-dark nav,
+html.nijimu-nav-dark nav ul{
   background-color: #000000;
 }
 
-.page-thumbnail-nijimu img{
-  object-fit: contain;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  max-width: 100%;
+html.nijimu-nav-dark nav a,
+html.nijimu-nav-dark nav ul a,
+html.nijimu-nav-dark .logo p,
+html.nijimu-nav-dark .btn-burger span,
+html.nijimu-nav-dark .btn-burger i{
+  color: #F6F6F6;
 }
 
 
@@ -160,6 +284,10 @@ main.pg-with-thumbnail {
   width: auto;
   height: auto;
   max-width: 100%;
+}
+
+.page-thumbnail.page-thumbnail-fs video {
+  /* max-height: 80%; */
 }
 
 .page-thumbnail.page-thumbnail-elastic-mind {
@@ -201,20 +329,45 @@ main.pg-with-thumbnail {
   justify-content: center;
 }
 
+.project-pics:has(.fs-movie-demo) {
+  gap: calc(var(--space) * 4);
+}
+
 .project-pics > * {
   width: 100%;
   scale: 1;
 }
 
+.project-pics:has(.fs-movie-demo) > .captioned-item {
+  max-width: 1150px;
+}
+
 .fs-movie-demo {
   width: 100%;
+  max-width: 1150px;
   scale: 1;
+}
+
+.captioned-item:has(.fs-movie-demo) {
+  position: relative;
+}
+
+.captioned-item:has(.fs-movie-demo)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.5vh;
+  background: #F6F6F6;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .captioned-item {
   display: flex;
   flex-direction: column;
-  gap: 1.8vw;
+  gap: calc(var(--space) * 1.5);
   position: relative;
   justify-content: center;
   align-items: center;
@@ -246,7 +399,6 @@ main.pg-with-thumbnail {
 }
 
 .floating-caption-detail{
-  /* font-size: 0.92rem; */
   opacity: 0.5;
   display: flex;
   align-items: center;
@@ -304,15 +456,26 @@ h3 {
 }
 
 .non-cs-pg{
+  --project-subtitle-to-body-gap: 2.25rem;
+  --non-cs-flex-gap: 2vh;
   display: flex;
   flex-direction: column !important;
-  gap: 2vh;
+  gap: var(--non-cs-flex-gap);
+}
+
+/* Thumbnail → title: 1.5× subtitle → body; subtract flex gap so the total matches */
+.non-cs-pg .page-thumbnail {
+  margin-bottom: calc(var(--project-subtitle-to-body-gap) * 1.5 - var(--non-cs-flex-gap));
+}
+
+.non-cs-pg:has(.page-thumbnail) .project-caption > h1 {
+  margin-top: 0;
 }
 
 
 .project-caption {
   width: 100%;
-  max-width: 55ch;
+  max-width: 65ch;
   position: relative;
   margin-inline: auto;
   padding: 0;
@@ -332,17 +495,46 @@ h3 {
     position: fixed;
   } */
 
-.project-caption p {
-  margin-bottom: 1rem;
+/* Keep floating media captions in sync with project body copy at all breakpoints.
+   Target `p` directly so global `p { font-size: 0.98rem }` does not win. */
+.project-caption p,
+.floating-caption p {
   font-size: 0.92rem;
   line-height: 1.28;
   font-weight: 350;
+}
+
+.project-caption p {
+  margin-bottom: 1rem;
   opacity: 0.7;
 }
 
 .project-caption a {
   /* font-family: "Geist Mono"; */
   /* text-transform: uppercase; */
+}
+
+.project-caption ul:not(.list-case-study) a:has(.ph-globe) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  text-decoration: none;
+}
+
+.project-caption ul:not(.list-case-study) a:has(.ph-globe) span {
+  text-decoration: underline;
+}
+
+.project-caption ul:not(.list-case-study) a .ph-globe {
+  font-size: 1.15em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.project-caption ul:not(.list-case-study) a .ph-arrow-up-right {
+  font-size: 1.05em;
+  line-height: 1;
+  text-decoration: none;
 }
 
 .project-caption ul:not(.list-case-study) {
@@ -354,8 +546,21 @@ h3 {
 }
 
 .project-caption ul li:not(.list-case-study li) {
-  margin-bottom: 0rem;
-  display: contents;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  column-gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 0;
+  padding-block: 1rem;
+}
+
+.project-caption ul:not(.list-case-study) > li:last-child {
+  padding-bottom: 0;
+}
+
+.project-caption ul:not(.list-case-study) > li:not(:last-child) {
+  border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
 }
 
 .project-caption ul li:not(.list-case-study li) > h3 {
@@ -368,10 +573,24 @@ h3 {
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (width >= 1350px) {
+  .project-caption ul li:not(.list-case-study li) > h3 {
+    padding-right: 50px;
+  }
 }
 
 .project-caption ul li p:not(.list-case-study li p) {
   font-family: "Geist", sans-serif;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.project-caption ul:not(.list-case-study):has(a) > li > p:not(:has(a)) {
+  padding-left: 0.1em;
 }
 
 
@@ -497,11 +716,16 @@ h2{
 .project-subtitle {
   font-size: 0.92rem;
   margin-top: 0;
-  margin-bottom: 2.25rem;
+  margin-bottom: var(--project-subtitle-to-body-gap, 2.25rem);
   color: rgb(88, 88, 88);
   font-weight: 400;
   font-family: "Geist Mono", monospace;
   text-transform: uppercase;
+}
+
+.project-caption > .project-subtitle + .btn-back + p,
+.project-caption > .project-subtitle + p {
+  margin-top: 0;
 }
 
 .flexbox-tldr-demo{
@@ -872,7 +1096,6 @@ main.main-projectpg.case-study-project{
 
 .outcome-media-row .floating-caption-details{
   font-family: "Geist Mono";
-  font-size: 0.8rem;
   margin: 0;
   opacity: 0.55;
 }

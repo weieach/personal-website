@@ -9,7 +9,7 @@
 
   .project-caption {
     width: 100%;
-    max-width: 55ch;
+    max-width: 65ch;
     position: static;
   }
 
@@ -231,12 +231,21 @@
 /* FS + Superfast + GVD: full-bleed video only on narrow phones; desktop inset look from 500px up */
 @media (width < 500px) {
   /* Project detail pages: stack label/value text rows (no horizontal text flex) */
+  .project-caption ul:not(.list-case-study) {
+    grid-template-columns: 1fr;
+  }
+
   .project-caption ul li:not(.list-case-study li),
   .list-case-study-info li,
   .floating-caption {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
+  }
+
+  .project-caption ul li:not(.list-case-study li) {
+    grid-column: 1 / -1;
   }
 
   .floating-caption {
