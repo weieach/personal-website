@@ -176,8 +176,13 @@
 
   .case-study-project .case-study-header .btn-back{
     position: static;
-    margin: 0 0 0.5rem;
+    margin: 0 0 calc(var(--space) * 2);
     order: -1;
+  }
+
+  .btn-back{
+    padding: 0.4rem 0.7rem;
+    gap: 0.35rem;
   }
 }
 
@@ -197,18 +202,48 @@
   }
 
   .list-case-study{
-    grid-template-columns: auto;
     grid-template-rows: repeat(4, auto);
     row-gap: 1.4rem;
     margin-bottom: 1rem;
   }
 
-  .case-study-project .section-case-study-info{
-    margin-bottom: 3rem;
+  .list-case-study-info{
+    grid-template-columns: max-content 1fr;
+    /* Spacing comes from li padding-block; extra row-gap made gaps uneven */
+    row-gap: 0;
   }
 
-  .list-case-study-info li:not(  .list-case-study-info li:last-child){
+  .list-case-study-info > li{
+    grid-column: 1 / -1;
+    padding-inline: 0;
+    padding-block: 0.9rem;
+  }
+
+  .list-case-study-info > li:not(:last-child){
     border-bottom: 1px solid rgba(153, 153, 153, 0.2);
+  }
+
+  .list-case-study-info > li:last-child{
+    border-bottom: none;
+  }
+
+  /* Match .project-caption's inline padding (main already has 5%) */
+  .main-projectpg.case-study-project .case-study-header{
+    padding-inline: 5%;
+    margin-bottom: calc(var(--space) * 4);
+  }
+
+  /* Cancel main flex gap so header→cover spacing equals section gap */
+  .main-projectpg.case-study-project .case-study-header + .img-casestudy-cover{
+    margin-top: calc(var(--space) * -2);
+  }
+
+  .case-study-project section{
+    margin-bottom: calc(var(--space) * 5);
+  }
+
+  .case-study-project .section-case-study-info{
+    margin-bottom: calc(var(--space) * 5.5);
   }
 
   /* Collapse breakout images (130–140% + offset) so they don't overflow */
@@ -219,6 +254,27 @@
     max-width: 100%;
     left: 0;
     width: 100%;
+  }
+}
+
+/* Mid widths: match desktop case-study spacing/padding; hide back button */
+@media (width < 1350px) and (width >= 960px) {
+  .case-study-project .case-study-header .btn-back{
+    display: none;
+  }
+
+  .main-projectpg.case-study-project{
+    padding-inline: 0;
+  }
+
+  .main-projectpg.case-study-project .project-caption,
+  .main-projectpg.case-study-project .case-study-header{
+    padding-inline: 0;
+    margin-bottom: 0;
+  }
+
+  .main-projectpg.case-study-project .case-study-header + .img-casestudy-cover{
+    margin-top: 0;
   }
 }
 
@@ -254,6 +310,7 @@
 
   .list-case-study-info .entry-header {
     width: auto;
+    padding-right: 0;
   }
 
   .list-case-study-info .entry-header,

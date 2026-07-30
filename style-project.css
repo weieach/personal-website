@@ -860,9 +860,44 @@ main.main-projectpg.case-study-project{
 
 .main-projectpg.case-study-project.nijimu-project .case-study-header,
 .main-projectpg.case-study-project.nijimu-project .project-caption,
-.main-projectpg.case-study-project.schneider-project .case-study-header,
 .main-projectpg.case-study-project.schneider-project .project-caption{
   max-width: 100ch;
+}
+
+/* Resolve once against body-copy font so mono headings and Geist body share the same measure.
+   Plain 80ch on each tag differs because ch uses that element's own font. */
+@property --schneider-prose-max {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+.main-projectpg.case-study-project.schneider-project .case-study-header,
+.main-projectpg.case-study-project.schneider-project .project-caption{
+  font-family: "Geist", sans-serif;
+  font-size: 0.92rem;
+  --schneider-prose-max: 80ch;
+}
+
+.main-projectpg.case-study-project.schneider-project .case-study-header,
+.main-projectpg.case-study-project.schneider-project .project-caption section > :is(h3, h4),
+.main-projectpg.case-study-project.schneider-project .project-caption section > p,
+.main-projectpg.case-study-project.schneider-project .project-caption .product-highlight-entry p,
+.main-projectpg.case-study-project.schneider-project .project-caption .list-case-study{
+  max-width: var(--schneider-prose-max);
+}
+
+.main-projectpg.case-study-project.schneider-project .case-study-header,
+.main-projectpg.case-study-project.schneider-project .project-caption section > h3,
+.main-projectpg.case-study-project.schneider-project .project-caption section > p,
+.main-projectpg.case-study-project.schneider-project .project-caption .product-highlight-entry p,
+.main-projectpg.case-study-project.schneider-project .project-caption .list-case-study{
+  margin-inline: auto;
+}
+
+.main-projectpg.case-study-project.schneider-project .case-study-header h2,
+.main-projectpg.case-study-project.schneider-project .list-case-study li p{
+  font-size: 0.92rem;
 }
 
 .nijimu-project .project-caption a + .ph-arrow-up-right{
@@ -879,7 +914,7 @@ main.main-projectpg.case-study-project{
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: calc(var(--space) * 1);
+  gap: 0;
   position: relative;
 }
 
@@ -888,37 +923,69 @@ main.main-projectpg.case-study-project{
   margin: 0;
 }
 
+.case-study-header h1{
+  margin-bottom: calc(var(--space) * 1);
+}
+
+@media (width >= 1350px){
+  .case-study-header h1{
+    margin-bottom: var(--space*3);
+  }
+}
+
 .case-study-header h2{
   text-transform: none;
   font-family: "Geist";
 }
 
 .case-study-project section{
-  margin-bottom: 4.5rem;
+  margin-bottom: 3.75rem;
 }
 
 .list-case-study-info{
   display: grid;
-  grid-template-columns: auto auto;
+  /* Two entries per row; label cols size to longest header (+1vw via padding) */
+  grid-template-columns: max-content 1fr max-content 1fr;
   grid-auto-rows: auto;
-  column-gap: 4rem;
-  row-gap: 0.1rem;
-  justify-content: space-between;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  column-gap: 0;
+  row-gap: 0;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
   width: 100%;
 }
 
-.list-case-study-info li{
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
+.list-case-study-info > li{
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 2;
+  column-gap: 0;
+  align-items: baseline;
+  padding-block: 1.1rem;
   border: none;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.2);
+}
+
+/* Keep a continuous shared rule across the pair (gap is padding, not column-gap) */
+.list-case-study-info > li:nth-child(odd){
+  padding-right: 2rem;
+}
+
+.list-case-study-info > li:nth-child(even):not(.list-case-study-info-awards){
+  padding-left: 2rem;
+}
+
+/* On wide 2-up layout, drop the border under the final row pair */
+@media (width >= 1350px){
+  .main-projectpg.case-study-project:not(.schneider-project) .list-case-study-info > li:last-child,
+  .main-projectpg.case-study-project:not(.schneider-project) .list-case-study-info > li:nth-last-child(2):nth-child(odd){
+    border-bottom: none;
+  }
 }
 
 .list-case-study-info-awards{
   grid-column: 1 / -1;
   width: 100%;
+  padding-inline: 0;
 }
 
 .list-case-study-info-awards .entry-header{
@@ -926,6 +993,7 @@ main.main-projectpg.case-study-project{
 }
 
 .list-case-study-info-awards .entry-content{
+  grid-column: 2 / -1;
   flex: 1;
   min-width: 0;
   display: flex;
@@ -948,13 +1016,15 @@ main.main-projectpg.case-study-project{
 .list-case-study-info-awards .entry-content ul li{
   display: list-item;
   gap: 0;
-  font-family: "geist";
-  font-size: 0.95rem;
+  font-family: "Geist", sans-serif;
   list-style: disc;
 }
 
 .list-case-study-info .entry-header{
-  width: 140px;
+  width: auto;
+  /* +1vw beyond the longest label's fit-content (included in column max-content) */
+  padding-right: calc(3vw + 20px);
+  box-sizing: content-box;
   font-family: "geist mono";
   color: #4E7E44;
 }
@@ -965,9 +1035,30 @@ main.main-projectpg.case-study-project{
   margin-bottom: 1.3rem;
 }
 
+.list-case-study-info .entry-header{
+  margin-bottom: 0;
+}
+
 .list-case-study-info .entry-content{
-  font-family: "geist";
-  font-size: 0.95rem;
+  font-family: "Geist", sans-serif;
+}
+
+/* Schneider: one info entry per row */
+.main-projectpg.case-study-project.schneider-project .list-case-study-info{
+  grid-template-columns: max-content 1fr;
+}
+
+.main-projectpg.case-study-project.schneider-project .list-case-study-info > li{
+  grid-column: 1 / -1;
+  padding-inline: 0;
+}
+
+.main-projectpg.case-study-project.schneider-project .list-case-study-info > li:not(:last-child){
+  border-bottom: 1px solid rgba(153, 153, 153, 0.2);
+}
+
+.main-projectpg.case-study-project.schneider-project .list-case-study-info > li:last-child{
+  border-bottom: none;
 }
 
 .section-problem > p{
@@ -976,6 +1067,14 @@ main.main-projectpg.case-study-project{
 
 .section-problem > p:last-of-type{
   margin-bottom: 2.5rem;
+}
+
+.section-outcome > p{
+  margin-bottom: 1.35rem;
+}
+
+.section-outcome > p:last-of-type{
+  margin-bottom: 1.75rem;
 }
 
 .list-case-study-problems{
@@ -1002,14 +1101,16 @@ main.main-projectpg.case-study-project{
 }
 
 .list-case-study li p{
-  font-family: "geist";
   margin: 0;
+}
+
+.list-case-study-info .entry-header,
+.list-case-study-info .entry-content{
   opacity: 1;
-  font-size: 0.9rem;
 }
 
 .list-case-study-problems li p{
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .img-casestudy-cover{
@@ -1116,17 +1217,17 @@ main.main-projectpg.case-study-project{
 
 .section-process .section-process-intro{
   max-width: 80ch;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .section-process .product-highlight-entries,
 .section-product-walkthrough .product-highlight-entries{
-  gap: 2.25rem;
+  gap: 2rem;
 }
 
 .section-process .product-highlight-entry,
 .section-product-walkthrough .product-highlight-entry{
-  gap: 1.2rem;
+  gap: 1rem;
   align-items: stretch;
 }
 
@@ -1140,11 +1241,8 @@ main.main-projectpg.case-study-project{
   margin-bottom: 0;
 }
 
-/* Numbered rail in the left gutter of the process section: each circle is
-   centred on its image, linked by a dashed line drawn in two pieces — one
-   across the image, one across the caption and the gap to the next entry. */
+/* Circled step number beside each process caption */
 .section-process{
-  --process-rail-x: 2.4rem;   /* rail centre, left of the caption column */
   --process-step-size: 1.7rem;
 }
 
@@ -1156,13 +1254,16 @@ main.main-projectpg.case-study-project{
   counter-increment: process-step;
 }
 
-.section-process .product-highlight-entry > .captioned-item::before{
+.section-process .product-highlight-entry > .captioned-item + div{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.section-process .product-highlight-entry > .captioned-item + div::before{
   content: counter(process-step);
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  right: calc(100% + var(--process-rail-x) - var(--process-step-size) / 2);
-  translate: 0 -50%;
+  flex-shrink: 0;
   width: var(--process-step-size);
   height: var(--process-step-size);
   display: flex;
@@ -1174,45 +1275,7 @@ main.main-projectpg.case-study-project{
   font-family: "Geist Mono";
   font-size: 0.7rem;
   color: #55565A;
-}
-
-.section-process .product-highlight-entry > .captioned-item::after,
-.section-process .product-highlight-entry:not(:last-child) > .captioned-item + div::before{
-  content: "";
-  position: absolute;
-  right: calc(100% + var(--process-rail-x));
-  border-left: 1px dashed #55565A;
-}
-
-.section-process .product-highlight-entry > .captioned-item::after{
-  top: 0;
-  bottom: 0;
-}
-
-.section-process .product-highlight-entry:first-child > .captioned-item::after{
-  top: 50%;
-}
-
-.section-process .product-highlight-entry:last-child > .captioned-item::after{
-  bottom: 50%;
-}
-
-.section-process .product-highlight-entry > .captioned-item + div{
-  position: relative;
-}
-
-.section-process .product-highlight-entry:not(:last-child) > .captioned-item + div::before{
-  top: -1.2rem;   /* row gap above the caption */
-  bottom: -2.25rem;   /* gap to the next entry */
-}
-
-/* Gutter disappears before the rail does, so drop it early */
-@media (width < 1150px){
-  .section-process .product-highlight-entry > .captioned-item::before,
-  .section-process .product-highlight-entry > .captioned-item::after,
-  .section-process .product-highlight-entry > .captioned-item + div::before{
-    display: none;
-  }
+  margin-top: 0.1em;
 }
 
 .section-product-walkthrough .product-highlight-entry p{
@@ -1327,9 +1390,7 @@ body.is-lightbox-open{
 }
 
 .product-highlight-entry p{
-  font-size: 0.9rem;
   opacity: 0.6;
-  line-height: 1.28;
 }
 
 .section-mockup img{
@@ -1423,18 +1484,29 @@ main.main-projectpg.case-study-toc-enabled{
   transform: none;
 }
 
-.case-study-toc ul{
+.case-study-toc ul,
+.project-caption .case-study-toc ul{
   margin: 0;
+  margin-top: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
+  grid-template-columns: none;
   gap: 0.9rem;
+  row-gap: 0.9rem;
+  column-gap: 0;
 }
 
-.project-caption .case-study-toc li{
+.project-caption .case-study-toc li,
+.project-caption .case-study-toc ul > li:not(:last-child),
+.project-caption .case-study-toc ul > li:last-child{
   display: block;
+  grid-column: auto;
+  grid-template-columns: none;
   margin: 0;
   gap: 0;
+  padding-block: 0;
+  border-bottom: none;
 }
 
 .case-study-toc a{
