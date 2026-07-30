@@ -1495,8 +1495,8 @@ main.main-projectpg.case-study-toc-enabled{
   display: flex;
   flex-direction: column;
   grid-template-columns: none;
-  gap: 0.9rem;
-  row-gap: 0.9rem;
+  gap: 0.95rem;
+  row-gap: 0.95rem;
   column-gap: 0;
 }
 
@@ -1515,7 +1515,7 @@ main.main-projectpg.case-study-toc-enabled{
 .case-study-toc a{
   position: relative;
   display: block;
-  padding-left: 1rem;
+  padding-left: 1.2rem;
   font-family: "Geist Mono";
   font-size: 0.7rem;
   line-height: 1.35;
@@ -1524,6 +1524,12 @@ main.main-projectpg.case-study-toc-enabled{
   color: inherit;
   opacity: 0.35;
   transition: opacity 0.25s ease, color 0.25s ease;
+}
+
+@media (width >= 1350px){
+  .case-study-toc a{
+    font-size: 0.78rem;
+  }
 }
 
 .case-study-toc a::before{
