@@ -633,6 +633,17 @@ h3 {
   background-color: #171717;
 }
 
+/* TL;DR: slightly darker page chrome than default dark-mode #171717 */
+.dark-mode.tldr-project,
+.dark-mode.tldr-project nav,
+.dark-mode.tldr-project nav ul,
+.dark-mode.tldr-project h1,
+.dark-mode.tldr-project p,
+.dark-mode.tldr-project .sidebar,
+.dark-mode.tldr-project .sidebar a{
+  background-color: #121212;
+}
+
 /* `*` sets #121212 on every node; caption `p { color: inherit }` then
    overrides `.dark-mode p` and picks up that dark color from ul/li.
    Force light copy color on caption paragraphs. */
@@ -753,6 +764,10 @@ h2{
   max-width: 900px;
   justify-content: center;
   margin-bottom: 0.5rem;
+}
+
+.tldr-project-pics > .captioned-item:first-child {
+  margin-top: calc(var(--space) * 3);
 }
 
 .flexbox-tldr-demo video{
