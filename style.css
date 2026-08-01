@@ -1231,7 +1231,7 @@ nav ul a:hover{
 /* dark mode */
 .dark-mode, .dark-mode nav, .dark-mode nav ul, .dark-mode h1, .dark-mode p{
     color: #f2f2f2;
-    background-color: #000000;
+    background-color: #171717;
 }
 
 .dark-mode i, .dark-mode a{
@@ -1257,7 +1257,7 @@ nav ul a:hover{
 
 .dark-mode .sidebar, .dark-mode .sidebar a{
     color: #f2f2f2;
-    background-color: #000000;
+    background-color: #171717;
 }
 
 /* sidebar */
@@ -1331,10 +1331,7 @@ body.is-loading header{
 
 .page-loader{
   position: fixed;
-  top: var(--nav-height);
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 250; /* below header (300), above page content */
   display: flex;
   align-items: center;
@@ -1349,8 +1346,9 @@ body.is-loading header{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.45rem;
-  transform: translateY(-2.5vh);
+  gap: 0.25rem;
+  /* Optical center: slight lift so bird sits a bit above true midpoint */
+  transform: translateY(-0.35rem);
   transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease;
 }
 
@@ -1403,7 +1401,7 @@ body.is-loading header{
 }
 
 .page-loader__name{
-  margin: 0;
+  margin: -1rem 0 0;
   font: 600 0.95rem/1 "Geist", system-ui, sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1432,68 +1430,54 @@ body.is-loading header{
 .page-loader__tip{
   position: absolute;
   left: 50%;
-  bottom: max(1.75rem, env(safe-area-inset-bottom, 0px) + 1rem);
+  bottom: max(2rem, env(safe-area-inset-bottom, 0px) + 1.25rem);
   transform: translateX(-50%);
   margin: 0;
-  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  width: min(30rem, calc(100% - 2.5rem));
   max-width: calc(100% - 2.5rem);
   text-align: center;
   font: 400 0.875rem/1.45 "Geist", system-ui, sans-serif;
   letter-spacing: 0.01em;
   color: rgba(18, 18, 18, 0.5);
-  white-space: nowrap;
+  text-wrap: balance;
   transition: opacity 280ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .page-loader__tip-viewport{
   position: relative;
-  display: inline-block;
+  display: block;
   overflow: hidden;
-  vertical-align: bottom;
   max-width: 100%;
 }
 
 .page-loader__tip-text{
-  display: inline-block;
+  display: block;
   color: rgba(18, 18, 18, 0.5);
   will-change: transform, opacity;
+  text-wrap: balance;
 }
 
 .page-loader__tip-text--outgoing{
   position: absolute;
   left: 0;
   top: 0;
+  width: 100%;
   margin: 0;
   pointer-events: none;
-  white-space: nowrap;
+  text-wrap: balance;
 }
 
 .page-loader__tip-label{
-  display: inline;
-  margin-right: 0.4em;
+  display: block;
+  margin: 0;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(18, 18, 18, 0.72);
-}
-
-@media (width < 700px){
-  .page-loader__tip{
-    width: min(26rem, calc(100% - 2.5rem));
-    white-space: normal;
-    text-wrap: balance;
-  }
-
-  .page-loader__tip-viewport{
-    display: inline-block;
-    max-width: 100%;
-  }
-
-  .page-loader__tip-text,
-  .page-loader__tip-text--outgoing{
-    white-space: normal;
-    text-wrap: balance;
-  }
 }
 
 .page-loader--hidden{
@@ -1503,7 +1487,7 @@ body.is-loading header{
 }
 
 .page-loader--hidden .page-loader__inner{
-  transform: translateY(calc(-2.5vh - 12px)) scale(0.98);
+  transform: translateY(calc(-0.35rem - 12px)) scale(0.98);
   opacity: 0;
 }
 

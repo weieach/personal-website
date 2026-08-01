@@ -44,7 +44,26 @@
     <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
 </head>
 
-<body>
+<body class="is-loading">
+    <!-- Fullscreen loading overlay (hidden once page + 3D logo are ready) -->
+    <div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-label="Loading">
+        <div class="page-loader__inner">
+            <div class="page-loader__mark" aria-hidden="true">
+                <img class="page-loader__fallback" src="assets/favicon%20(uncut).png" alt="">
+                <canvas id="page-loader-canvas" class="page-loader__canvas"></canvas>
+            </div>
+            <p class="page-loader__name">Nicole Wei</p>
+            <div class="page-loader__bar" aria-hidden="true">
+                <span class="page-loader__bar-fill"></span>
+            </div>
+        </div>
+        <p class="page-loader__tip">
+            <span class="page-loader__tip-label">Tip</span>
+            <span class="page-loader__tip-viewport">
+                <span class="page-loader__tip-text">Graduating in May 2027 and open to design engineer roles. Come say hi!</span>
+            </span>
+        </p>
+    </div>
     <header>
         <nav>
             <a href="index.html" class="logo">
@@ -187,6 +206,15 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+    </script>
+    <script type="module" src="loader-3d.js"></script>
     <script type="module" src="listing-scroll.js"></script>
     <script src="script.js"></script>
 </body>

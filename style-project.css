@@ -288,6 +288,7 @@ html.nijimu-nav-dark .btn-burger i{
 
 .page-thumbnail.page-thumbnail-fs video {
   /* max-height: 80%; */
+  border-radius: 10px;
 }
 
 .page-thumbnail.page-thumbnail-elastic-mind {
@@ -346,6 +347,7 @@ html.nijimu-nav-dark .btn-burger i{
   width: 100%;
   max-width: 1150px;
   scale: 1;
+  border-radius: 10px;
 }
 
 .captioned-item:has(.fs-movie-demo) {
@@ -360,14 +362,19 @@ html.nijimu-nav-dark .btn-burger i{
   right: 0;
   height: 0.5vh;
   background: #F6F6F6;
+  border-radius: 10px;
   z-index: 1;
   pointer-events: none;
+}
+
+.dark-mode .captioned-item:has(.fs-movie-demo)::before {
+  background: #171717;
 }
 
 .captioned-item {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--space) * 1.5);
+  gap: calc(var(--space) * 2);
   position: relative;
   justify-content: center;
   align-items: center;
@@ -394,16 +401,12 @@ html.nijimu-nav-dark .btn-burger i{
   font-family: "Geist Mono";
   text-transform: uppercase;
   font-weight: 400;
-  opacity: 0.8;
-  
 }
 
 .floating-caption-detail{
-  opacity: 0.5;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  
 }
 
 
@@ -461,6 +464,8 @@ h3 {
   display: flex;
   flex-direction: column !important;
   gap: var(--non-cs-flex-gap);
+  /* Extra room after last media item before footer */
+  margin-bottom: calc(var(--space) * 8);
 }
 
 /* Thumbnail → title: 1.5× subtitle → body; subtract flex gap so the total matches */
@@ -502,11 +507,12 @@ h3 {
   font-size: 0.92rem;
   line-height: 1.28;
   font-weight: 350;
+  color: inherit;
+  opacity: 0.7;
 }
 
 .project-caption p {
   margin-bottom: 1rem;
-  opacity: 0.7;
 }
 
 .project-caption a {
@@ -523,6 +529,7 @@ h3 {
 
 .project-caption ul:not(.list-case-study) a:has(.ph-globe) span {
   text-decoration: underline;
+  color: inherit; /* avoid `*` #121212 sticking on dark pages */
 }
 
 .project-caption ul:not(.list-case-study) a .ph-globe {
@@ -561,6 +568,10 @@ h3 {
 
 .project-caption ul:not(.list-case-study) > li:not(:last-child) {
   border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.dark-mode .project-caption ul:not(.list-case-study) > li:not(:last-child) {
+  border-bottom-color: color-mix(in srgb, #f2f2f2 14%, transparent);
 }
 
 .project-caption ul li:not(.list-case-study li) > h3 {
@@ -619,7 +630,15 @@ h3 {
 }
 
 .dark-mode-lighter, .dark-mode-lighter nav, .dark-mode-lighter nav ul, .dark-mode-lighter p, .dark-mode-lighter h1, .dark-mode-lighter h2, .dark-mode-lighter h3{
-  background-color: #1C1C1C;
+  background-color: #171717;
+}
+
+/* `*` sets #121212 on every node; caption `p { color: inherit }` then
+   overrides `.dark-mode p` and picks up that dark color from ul/li.
+   Force light copy color on caption paragraphs. */
+.dark-mode .project-caption p,
+.dark-mode .floating-caption p{
+  color: #f2f2f2;
 }
 
 .dark-mode ul h3{
@@ -1201,7 +1220,6 @@ main.main-projectpg.case-study-project{
 .outcome-media-row .floating-caption-details{
   font-family: "Geist Mono";
   margin: 0;
-  opacity: 0.55;
 }
 
 @media (width < 700px){
