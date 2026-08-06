@@ -2,7 +2,7 @@ html{
   scroll-behavior: smooth;
 }
 
-@media (max-width: 959px), (pointer: coarse) {
+@media (pointer: coarse) {
   html {
     scroll-behavior: auto;
   }
@@ -291,20 +291,17 @@ html.nijimu-nav-dark nav ul{
   border: none;
   background: transparent;
   cursor: zoom-in;
-  /* Center on the right edge so ~half hangs off-screen; negative rotate tilts inward */
-  transform: translate(58%, -50%) rotate(-9deg);
+  /* Parked fully off-screen to the right; slides in to half-visible */
+  transform: translate(120%, -50%) rotate(-9deg);
   transform-origin: center center;
-  opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition:
-    opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0.4s,
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.55s;
 }
 
 .nijimu-certificate.is-visible{
-  opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translate(50%, -50%) rotate(-9deg);
@@ -366,7 +363,7 @@ html.nijimu-nav-dark nav ul{
 @media (width < 960px) {
   .nijimu-certificate{
     width: clamp(5.5rem, 28vw, 10rem);
-    transform: translate(60%, -50%) rotate(-8deg);
+    transform: translate(120%, -50%) rotate(-8deg);
   }
 
   .nijimu-certificate.is-visible{

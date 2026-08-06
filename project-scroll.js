@@ -22,10 +22,8 @@ if (main) {
   // Initial opacity/scale lives in CSS so blocks never paint fully then snap.
   const blocks = collectRevealBlocks(main);
 
-  // Lenis fights touch scrolling on phones; keep native scroll there
-  const preferNativeScroll =
-    window.matchMedia("(max-width: 959px)").matches ||
-    window.matchMedia("(pointer: coarse)").matches;
+  // Lenis fights touch scrolling; keep native scroll on coarse pointers
+  const preferNativeScroll = window.matchMedia("(pointer: coarse)").matches;
 
   if (reduceMotion) {
     // Drop the CSS start pose (same as listing-scroll)
@@ -120,10 +118,7 @@ mutePageVideos();
 setupWalkthroughLightbox();
 
 function scrollBehavior() {
-  const preferNativeScroll =
-    window.matchMedia("(max-width: 959px)").matches ||
-    window.matchMedia("(pointer: coarse)").matches;
-  return preferNativeScroll ? "auto" : "smooth";
+  return window.matchMedia("(pointer: coarse)").matches ? "auto" : "smooth";
 }
 
 function scrollToTarget(target, offset = 0) {
