@@ -18,8 +18,9 @@ const thumb = document.querySelector(".page-thumbnail-nijimu");
 const stage = thumb?.querySelector(".nijimu-thumb-stage");
 const hero = thumb?.querySelector(".nijimu-thumb-hero");
 const clips = thumb ? [...thumb.querySelectorAll(".nijimu-thumb-clip")] : [];
+const mobileStatic = window.matchMedia("(max-width: 959px)").matches;
 
-if (thumb && stage && hero && clips.length) {
+if (thumb && stage && hero && clips.length && !mobileStatic) {
   const reduceMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
@@ -28,6 +29,12 @@ if (thumb && stage && hero && clips.length) {
     hero.style.opacity = "1";
     hero.style.transform = "none";
   } else {
+    // Desktop only — keep mobile from fetching collage clips
+    clips.forEach((clip) => {
+      clip.preload = "auto";
+      clip.load();
+    });
+
     let running = false;
     let generation = 0;
     let inView = true;
@@ -150,18 +157,23 @@ if (thumb && stage && hero && clips.length) {
   }
 }
 
-// Black nav over the thumbnail; restore default once the nav bottom hits the thumbnail end.
+// Black nav over the thumbnail on desktop only; mobile keeps the default nav color.
 // Initial dark state is on <html class="nijimu-nav-dark"> + critical CSS in <head> (no FOUC).
 {
   const header = document.querySelector("header");
   const root = document.documentElement;
   const certificate = document.querySelector(".nijimu-certificate");
+  const desktopNavMq = window.matchMedia("(min-width: 960px)");
   if (header && thumb) {
     const syncNav = () => {
       const pastThumb =
         thumb.getBoundingClientRect().bottom <=
         header.getBoundingClientRect().bottom;
-      root.classList.toggle("nijimu-nav-dark", !pastThumb);
+      if (desktopNavMq.matches) {
+        root.classList.toggle("nijimu-nav-dark", !pastThumb);
+      } else {
+        root.classList.remove("nijimu-nav-dark");
+      }
       certificate?.classList.toggle("is-visible", pastThumb);
     };
 
@@ -169,10 +181,27 @@ if (thumb && stage && hero && clips.length) {
 
     window.addEventListener("scroll", syncNav, { passive: true });
     window.addEventListener("resize", syncNav, { passive: true });
+    desktopNavMq.addEventListener("change", syncNav);
 
     const navObserver = new IntersectionObserver(syncNav, {
       threshold: [0, 0.25, 0.5, 0.75, 1],
     });
     navObserver.observe(thumb);
+  }
+}
+
+// Mobile: show native controls on project highlight videos (not thumb clips)
+{
+  const mq = window.matchMedia("(max-width: 959px)");
+  const vids = document.querySelectorAll(".project-pics .video-app-highlights");
+  if (vids.length) {
+    const syncControls = () => {
+      vids.forEach((video) => {
+        if (mq.matches) video.setAttribute("controls", "");
+        else video.removeAttribute("controls");
+      });
+    };
+    syncControls();
+    mq.addEventListener("change", syncControls);
   }
 }

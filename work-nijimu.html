@@ -21,19 +21,21 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- First paint: dark nav before stylesheets/JS (avoids light flash over black thumb) -->
+    <!-- First paint: dark nav on desktop only (mobile uses static thumb, no color switch) -->
     <style>
-      html.nijimu-nav-dark header,
-      html.nijimu-nav-dark nav,
-      html.nijimu-nav-dark nav ul{
-        background-color: #000000;
-      }
-      html.nijimu-nav-dark nav a,
-      html.nijimu-nav-dark nav ul a,
-      html.nijimu-nav-dark .logo p,
-      html.nijimu-nav-dark .btn-burger span,
-      html.nijimu-nav-dark .btn-burger i{
-        color: #F6F6F6;
+      @media (min-width: 960px) {
+        html.nijimu-nav-dark header,
+        html.nijimu-nav-dark nav,
+        html.nijimu-nav-dark nav ul{
+          background-color: #000000;
+        }
+        html.nijimu-nav-dark nav a,
+        html.nijimu-nav-dark nav ul a,
+        html.nijimu-nav-dark .logo p,
+        html.nijimu-nav-dark .btn-burger span,
+        html.nijimu-nav-dark .btn-burger i{
+          color: #F6F6F6;
+        }
       }
     </style>
     <!-- google font -->
@@ -87,12 +89,13 @@
             </ul>
         </div>
         <div class="page-thumbnail page-thumbnail-nijimu">
+            <img class="nijimu-thumb-static" src="assets/nijimu/square%20thumbnail.png" alt="nijimu — An Ambient Interface For Forgetting">
             <div class="nijimu-thumb-stage">
                 <img class="nijimu-thumb-hero" src="assets/nijimu/nijimu-title_image.jpg" alt="nijimu title image">
                 <div class="nijimu-thumb-clips" aria-hidden="true">
-                    <video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 1.mov" muted loop playsinline preload="auto"></video>
-                    <video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 2.m4v" muted loop playsinline preload="auto"></video>
-                    <video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 4.mov" muted loop playsinline preload="auto"></video>
+                    <video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 1.mov" muted loop playsinline preload="none"></video>
+                    <video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 2.m4v" muted loop playsinline preload="none"></video>
+                    <video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 4.mov" muted loop playsinline preload="none"></video>
                 </div>
             </div>
         </div>

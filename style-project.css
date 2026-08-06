@@ -133,7 +133,7 @@ main.pg-with-thumbnail {
 .page-thumbnail-tldr{
   background-image: url(assets/tldr/tldr\ mockup.png);
   background-size: cover;
-  background-position: center 25%;
+  background-position: 20% 25%;
   height: calc(85vh - 66px);
   max-height: calc(85vh - 66px);
   background-color: #000000;
@@ -160,6 +160,10 @@ main.pg-with-thumbnail {
   box-sizing: border-box;
   overflow: hidden;
   /* bottom gap from .non-cs-pg .page-thumbnail */
+}
+
+.nijimu-thumb-static{
+  display: none;
 }
 
 .nijimu-thumb-stage{
@@ -226,23 +230,26 @@ main.pg-with-thumbnail {
 }
 
 @media (max-width: 959px) {
+  /* Mobile: static square art instead of the animated collage */
   .page-thumbnail-nijimu{
-    --nijimu-thumb-margin: 1rem;
-    --nijimu-clip-w: 58vw;
-    --nijimu-clip-max-h: 42vw;
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    margin-top: var(--nav-height);
+    padding-top: 0;
   }
 
-  .page-thumbnail-nijimu .nijimu-thumb-hero{
-    max-height: calc(72% - (var(--nijimu-thumb-margin) * 2));
-    max-width: calc(88% - (var(--nijimu-thumb-margin) * 2));
+  .nijimu-thumb-stage{
+    display: none;
   }
 
-  .page-thumbnail-nijimu .nijimu-thumb-clip:nth-child(2){
-    top: 4%;
-  }
-
-  .page-thumbnail-nijimu .nijimu-thumb-clip:nth-child(3){
-    left: 12%;
+  .nijimu-thumb-static{
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center;
   }
 }
 
@@ -258,20 +265,22 @@ main.pg-with-thumbnail {
   }
 }
 
-/* Nijimu: black nav while over the thumbnail; restores once nav bottom hits thumbnail end */
-html:has(.page-thumbnail-nijimu) header,
-html:has(.page-thumbnail-nijimu) nav,
-html:has(.page-thumbnail-nijimu) nav ul,
-html:has(.page-thumbnail-nijimu) nav a,
-html:has(.page-thumbnail-nijimu) .logo p,
-html:has(.page-thumbnail-nijimu) .btn-burger span{
-  transition: background-color 0.35s ease, color 0.35s ease;
-}
+/* Nijimu: black nav while over the thumbnail (desktop only; mobile keeps default nav) */
+@media (min-width: 960px) {
+  html:has(.page-thumbnail-nijimu) header,
+  html:has(.page-thumbnail-nijimu) nav,
+  html:has(.page-thumbnail-nijimu) nav ul,
+  html:has(.page-thumbnail-nijimu) nav a,
+  html:has(.page-thumbnail-nijimu) .logo p,
+  html:has(.page-thumbnail-nijimu) .btn-burger span{
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
 
-html.nijimu-nav-dark header,
-html.nijimu-nav-dark nav,
-html.nijimu-nav-dark nav ul{
-  background-color: #000000;
+  html.nijimu-nav-dark header,
+  html.nijimu-nav-dark nav,
+  html.nijimu-nav-dark nav ul{
+    background-color: #000000;
+  }
 }
 
 /* Core77 certificate: floats from the right once past the thumbnail */
@@ -387,12 +396,14 @@ html.nijimu-nav-dark nav ul{
   }
 }
 
-html.nijimu-nav-dark nav a,
-html.nijimu-nav-dark nav ul a,
-html.nijimu-nav-dark .logo p,
-html.nijimu-nav-dark .btn-burger span,
-html.nijimu-nav-dark .btn-burger i{
-  color: #F6F6F6;
+@media (min-width: 960px) {
+  html.nijimu-nav-dark nav a,
+  html.nijimu-nav-dark nav ul a,
+  html.nijimu-nav-dark .logo p,
+  html.nijimu-nav-dark .btn-burger span,
+  html.nijimu-nav-dark .btn-burger i{
+    color: #F6F6F6;
+  }
 }
 
 
@@ -752,7 +763,7 @@ h3 {
   background-color: #171717;
 }
 
-/* TL;DR: slightly darker page chrome than default dark-mode #171717 */
+/* TL;DR: pure black page chrome (vs default dark-mode #171717) */
 .dark-mode.tldr-project,
 .dark-mode.tldr-project nav,
 .dark-mode.tldr-project nav ul,
@@ -760,14 +771,15 @@ h3 {
 .dark-mode.tldr-project p,
 .dark-mode.tldr-project .sidebar,
 .dark-mode.tldr-project .sidebar a{
-  background-color: #121212;
+  background-color: #000000;
 }
 
 /* `*` sets #121212 on every node; caption `p { color: inherit }` then
    overrides `.dark-mode p` and picks up that dark color from ul/li.
    Force light copy color on caption paragraphs. */
 .dark-mode .project-caption p,
-.dark-mode .floating-caption p{
+.dark-mode .floating-caption p,
+.dark-mode .floating-caption p *{
   color: #f2f2f2;
 }
 
@@ -879,32 +891,65 @@ h2{
 
 .flexbox-tldr-demo{
   display: flex;
-  gap: 1rem;
+  gap: clamp(1.5rem, 2.75vw, 2.75rem);
   max-width: 900px;
   justify-content: center;
   margin-bottom: 0.5rem;
+}
+
+.tldr-demo-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--space) * 2);
+  margin: 0;
+  width: 33%;
+  min-width: 0;
+}
+
+.tldr-demo-caption{
+  display: none;
 }
 
 .tldr-project-pics > .captioned-item:first-child {
   margin-top: calc(var(--space) * 3);
 }
 
+.tldr-project video,
+.flexbox-tldr-demo video,
+.video-tldr-walkthrough{
+  border-radius: clamp(1rem, 3.5vw, 2rem);
+}
+
 .flexbox-tldr-demo video{
   /* aspect-ratio: 10/10; */
   /* height: 100%; */
-  width: 33%;
-  border-radius: 2rem;
+  width: 100%;
   background-color: black;
   margin: 0;
 }
 
+/* Bare videos still in the demo flex (e.g. walkthrough) keep prior sizing */
+.flexbox-tldr-demo > video{
+  width: 33%;
+}
+
 .video-tldr-walkthrough{
   max-width: 330px;
-  border-radius: 2rem;
 }
 
 .img-tldr-ui{
   width: 90%;
+}
+
+.tldr-hifi-scroll{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.tldr-hifi-scroll-tip{
+  display: none;
 }
 
 

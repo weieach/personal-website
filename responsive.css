@@ -295,6 +295,97 @@
     padding: 0.4rem 0.7rem;
     gap: 0.35rem;
   }
+
+  /* All project pages: roomier stack between media blocks, tighter caption type.
+     Scoped to the page container so it wins over the .project-pics gap above. */
+  .main-projectpg .project-pics {
+    gap: calc(var(--space) * 10);
+  }
+
+  .main-projectpg .captioned-item {
+    gap: calc(var(--space) * 3);
+  }
+
+  .main-projectpg .floating-caption p {
+    font-size: 0.85rem;
+  }
+
+  /* TL;DR phone demos: vertical stack (non-scrollable) */
+  .flexbox-tldr-demo:has(.tldr-demo-item) {
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--space) * 8);
+  }
+
+  .tldr-demo-item {
+    width: min(72%, 18rem);
+    gap: calc(var(--space) * 3);
+  }
+
+  .flexbox-tldr-demo video {
+    width: 100%;
+  }
+
+  .flexbox-tldr-demo > video {
+    width: min(72%, 18rem);
+  }
+
+  .tldr-demo-caption {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Hi-fi UI sheet: enlarged, swipe horizontally */
+  .tldr-hifi-scroll {
+    width: 100vw;
+    max-width: none;
+    margin-inline: calc(50% - 50vw);
+    padding-inline: 5vw;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .tldr-hifi-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tldr-hifi-scroll picture {
+    flex-shrink: 0;
+    display: flex;
+  }
+
+  .tldr-hifi-scroll .img-tldr-ui {
+    width: 320vw;
+    max-width: none;
+    height: auto;
+  }
+
+  .tldr-hifi-scroll-tip {
+    display: inline;
+  }
+
+  .tldr-hifi-scroll-tip i {
+    font-size: 0.9em;
+    vertical-align: -0.05em;
+  }
+
+  /* Mockups: square crop, full-bleed width */
+  .tldr-mockup-item {
+    width: 100vw;
+    max-width: none;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  .tldr-mockup-item .img-tldr-mockup {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center;
+  }
 }
 
 @media (width < 1350px) {

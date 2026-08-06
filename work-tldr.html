@@ -103,15 +103,26 @@
         <div class="project-pics tldr-project-pics">
             <div class="captioned-item">
                 <div class="flexbox-tldr-demo">
-                    <video src="assets/tldr/tldr-home.mp4" autoplay loop muted playsinline></video>
-                    <video src="assets/tldr/tldr-congrats.mp4" autoplay loop muted playsinline></video>
-                    <video src="assets/tldr/tldr-setting.mp4" autoplay loop muted playsinline></video>
+                    <figure class="tldr-demo-item">
+                        <video src="assets/tldr/tldr-home.mp4" autoplay loop muted playsinline></video>
+                        <figcaption class="tldr-demo-caption floating-caption">
+                            <p class="floating-caption-detail">Swipable bite-sized reading feed</p>
+                        </figcaption>
+                    </figure>
+                    <figure class="tldr-demo-item">
+                        <video src="assets/tldr/tldr-congrats.mp4" autoplay loop muted playsinline></video>
+                        <figcaption class="tldr-demo-caption floating-caption">
+                            <p class="floating-caption-detail">Session completion &amp; reward state</p>
+                        </figcaption>
+                    </figure>
+                    <figure class="tldr-demo-item">
+                        <video src="assets/tldr/tldr-setting.mp4" autoplay loop muted playsinline></video>
+                        <figcaption class="tldr-demo-caption floating-caption">
+                            <p class="floating-caption-detail">Reading length &amp; preference controls</p>
+                        </figcaption>
+                    </figure>
                     <!-- <video src="assets/tldr/tldr video demo.mp4" class="tldr-video-demo" autoplay loop controls muted></video> -->
                     <!-- <video src="assets/tldr/tldr app recording.mp4" autoplay loop controls muted></video> -->
-                </div>
-                <div class="floating-caption">
-                    <p class="floating-caption-header">UI / UX</p>
-                    <p class="floating-caption-detail">Interaction design</p>
                 </div>
             </div>
             <div class="captioned-item">
@@ -120,7 +131,7 @@
                 <video src="assets/tldr/tldr-main.mp4" autoplay loop muted playsinline></video>
                 </div>
                 <div class="floating-caption">
-                    <p class="floating-caption-header">Prototyping</p>
+                    <p class="floating-caption-title">Prototyping</p>
                     <p class="floating-caption-detail">Reading flow walkthrough</p>
                 </div>
             </div>
@@ -130,14 +141,20 @@
                     <p class="floating-caption-detail">Product Logo</p>
                 </div>
             </div>
-            <div class="captioned-item ">
-                <img class="img-tldr-ui" src="assets/tldr/tldr app ui.png" alt="hi-fi UI">
-                
-                <div class="floating-caption">
-                    <p class="floating-caption-detail">Hi-fi UI Design</p>
+            <div class="captioned-item">
+                <div class="tldr-hifi-scroll">
+                    <picture>
+                        <source media="(width < 960px)" srcset="assets/tldr/tldr%20ui%20all-mobile.png">
+                        <img class="img-tldr-ui" src="assets/tldr/tldr app ui.png" alt="hi-fi UI">
+                    </picture>
                 </div>
-                <img src="assets/tldr/tldr mockup.png" alt="mockup">
-                <img src="assets/tldr/tldr-mockup-2phone.png" alt="">
+                <div class="floating-caption">
+                    <p class="floating-caption-detail">Hi-fi UI Design<span class="tldr-hifi-scroll-tip"> (scroll right for more<i class="ph-bold ph-arrow-right" aria-hidden="true"></i>)</span></p>
+                </div>
+            </div>
+            <div class="captioned-item tldr-mockup-item">
+                <img class="img-tldr-mockup" src="assets/tldr/tldr mockup.png" alt="mockup">
+                <img class="img-tldr-mockup" src="assets/tldr/tldr-mockup-2phone.png" alt="mockup">
                 <div class="floating-caption">
                     <p class="floating-caption-detail">Mockup</p>
                 </div>
