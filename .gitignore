@@ -11,3 +11,6 @@ assets/fs/bin/
 
 # local working notes
 instructions/
+
+# local Cursor rules
+.cursor/

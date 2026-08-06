@@ -807,6 +807,16 @@ video.pictogram-source{
     background-color: #000000;
     /* aspect-ratio: 10/6; */
     aspect-ratio: 800/490;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-tldr .card-thumbnail picture{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .card-nightingale .card-thumbnail{
