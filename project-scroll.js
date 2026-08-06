@@ -22,22 +22,29 @@ if (main) {
   // Initial opacity/scale lives in CSS so blocks never paint fully then snap.
   const blocks = collectRevealBlocks(main);
 
+  // Lenis fights touch scrolling on phones; keep native scroll there
+  const preferNativeScroll =
+    window.matchMedia("(max-width: 959px)").matches ||
+    window.matchMedia("(pointer: coarse)").matches;
+
   if (reduceMotion) {
     // Drop the CSS start pose (same as listing-scroll)
     blocks.forEach((el) => el.classList.add("scroll-reveal-block--done"));
   } else {
-    lenis = new Lenis({
-      duration: 1.05,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 1.1,
-    });
+    if (!preferNativeScroll) {
+      lenis = new Lenis({
+        duration: 1.05,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        touchMultiplier: 1.1,
+      });
 
-    const raf = (time) => {
-      lenis.raf(time);
+      const raf = (time) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      };
       requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
+    }
 
     if (blocks.length) {
       requestAnimationFrame(() => {
@@ -112,6 +119,13 @@ setupCaseStudyToc();
 mutePageVideos();
 setupWalkthroughLightbox();
 
+function scrollBehavior() {
+  const preferNativeScroll =
+    window.matchMedia("(max-width: 959px)").matches ||
+    window.matchMedia("(pointer: coarse)").matches;
+  return preferNativeScroll ? "auto" : "smooth";
+}
+
 function scrollToTarget(target, offset = 0) {
   if (lenis) {
     lenis.scrollTo(target, {
@@ -121,14 +135,16 @@ function scrollToTarget(target, offset = 0) {
     return;
   }
 
+  const behavior = scrollBehavior();
+
   if (!offset) {
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    target.scrollIntoView({ behavior, block: "start" });
     return;
   }
 
   window.scrollTo({
     top: target.getBoundingClientRect().top + window.scrollY + offset,
-    behavior: "smooth",
+    behavior,
   });
 }
 
@@ -238,7 +254,7 @@ function scrollToTop() {
     return;
   }
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: scrollBehavior() });
 }
 
 function slugify(text) {
@@ -250,7 +266,8 @@ function slugify(text) {
 
 function setupWalkthroughLightbox() {
   const grid = document.querySelector(".walkthrough-image-grid");
-  if (!grid) return;
+  const certificate = document.querySelector(".nijimu-certificate");
+  if (!grid && !certificate) return;
 
   const overlay = document.createElement("div");
   overlay.className = "image-lightbox";
@@ -265,9 +282,10 @@ function setupWalkthroughLightbox() {
 
   const preview = overlay.querySelector(".image-lightbox__img");
 
-  const open = (source) => {
+  const open = (source, { certificate = false } = {}) => {
     preview.src = source.currentSrc || source.src;
     preview.alt = source.alt || "";
+    overlay.classList.toggle("image-lightbox--certificate", certificate);
     overlay.classList.add("is-open");
     document.body.classList.add("is-lightbox-open");
     lenis?.stop();
@@ -276,14 +294,21 @@ function setupWalkthroughLightbox() {
   const close = () => {
     if (!overlay.classList.contains("is-open")) return;
     overlay.classList.remove("is-open");
+    overlay.classList.remove("image-lightbox--certificate");
     document.body.classList.remove("is-lightbox-open");
     lenis?.start();
   };
 
-  grid.addEventListener("click", (e) => {
+  grid?.addEventListener("click", (e) => {
     const source = e.target.closest("img");
     if (!source || !grid.contains(source)) return;
     open(source);
+  });
+
+  certificate?.addEventListener("click", () => {
+    const source = certificate.querySelector("img");
+    if (!source) return;
+    open(source, { certificate: true });
   });
 
   overlay.addEventListener("click", (e) => {

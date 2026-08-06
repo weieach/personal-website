@@ -1490,12 +1490,7 @@ body.is-loading header{
 }
 
 .page-loader__tip-label{
-  display: block;
-  margin: 0;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(18, 18, 18, 0.72);
+  display: none;
 }
 
 .page-loader--hidden{

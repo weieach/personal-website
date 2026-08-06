@@ -155,12 +155,14 @@ if (thumb && stage && hero && clips.length) {
 {
   const header = document.querySelector("header");
   const root = document.documentElement;
+  const certificate = document.querySelector(".nijimu-certificate");
   if (header && thumb) {
     const syncNav = () => {
       const pastThumb =
         thumb.getBoundingClientRect().bottom <=
         header.getBoundingClientRect().bottom;
       root.classList.toggle("nijimu-nav-dark", !pastThumb);
+      certificate?.classList.toggle("is-visible", pastThumb);
     };
 
     syncNav();

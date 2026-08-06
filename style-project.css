@@ -2,6 +2,12 @@ html{
   scroll-behavior: smooth;
 }
 
+@media (max-width: 959px), (pointer: coarse) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* Lenis: prefer native scroll smoothing over CSS smooth */
 html.lenis,
 html.lenis body {
@@ -266,6 +272,122 @@ html.nijimu-nav-dark header,
 html.nijimu-nav-dark nav,
 html.nijimu-nav-dark nav ul{
   background-color: #000000;
+}
+
+/* Core77 certificate: floats from the right once past the thumbnail */
+.nijimu-caption-band{
+  position: relative;
+  width: 100%;
+}
+
+.nijimu-certificate{
+  position: fixed;
+  top: 52%;
+  right: 0;
+  z-index: 50;
+  width: clamp(7.5rem, 16vw, 17.5rem);
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+  /* Center on the right edge so ~half hangs off-screen; negative rotate tilts inward */
+  transform: translate(58%, -50%) rotate(-9deg);
+  transform-origin: center center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.4s,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nijimu-certificate.is-visible{
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(50%, -50%) rotate(-9deg);
+}
+
+.nijimu-certificate.is-visible:hover,
+.nijimu-certificate.is-visible:focus-visible{
+  transform: translate(46%, -50%) rotate(-7deg);
+  outline: none;
+}
+
+.nijimu-certificate__frame{
+  display: block;
+  overflow: hidden;
+  border: 1.5px solid #E7E7E7;
+  border-radius: clamp(0.75rem, 1.4vw, 1.35rem);
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.35s ease;
+}
+
+.nijimu-certificate.is-visible:hover .nijimu-certificate__frame,
+.nijimu-certificate.is-visible:focus-visible .nijimu-certificate__frame{
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.09);
+}
+
+.nijimu-certificate img{
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+}
+
+.nijimu-certificate__caption{
+  position: absolute;
+  right: calc(100% + 0.7rem);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: clamp(0.68rem, 1.05vw, 0.82rem);
+  line-height: 1.28;
+  font-weight: 350;
+  color: inherit;
+  text-align: right;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow:
+    0 0 12px var(--color-bg),
+    0 0 24px var(--color-bg),
+    0 0 36px var(--color-bg);
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nijimu-certificate.is-visible:hover .nijimu-certificate__caption,
+.nijimu-certificate.is-visible:focus-visible .nijimu-certificate__caption{
+  opacity: 0.7;
+}
+
+@media (width < 960px) {
+  .nijimu-certificate{
+    width: clamp(5.5rem, 28vw, 10rem);
+    transform: translate(60%, -50%) rotate(-8deg);
+  }
+
+  .nijimu-certificate.is-visible{
+    transform: translate(52%, -50%) rotate(-8deg);
+  }
+
+  .nijimu-certificate.is-visible:hover,
+  .nijimu-certificate.is-visible:focus-visible{
+    transform: translate(48%, -50%) rotate(-6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nijimu-certificate,
+  .nijimu-certificate.is-visible,
+  .nijimu-certificate.is-visible:hover,
+  .nijimu-certificate.is-visible:focus-visible,
+  .nijimu-certificate__caption,
+  .nijimu-certificate__frame{
+    transition: none;
+  }
 }
 
 html.nijimu-nav-dark nav a,
@@ -1350,7 +1472,7 @@ main.main-projectpg.case-study-project{
   align-items: center;
   justify-content: center;
   padding: 3vw;
-  background: rgba(246, 246, 246, 0.42);
+  background: rgba(246, 246, 246, 0.2);
   backdrop-filter: blur(20px) saturate(1.15);
   -webkit-backdrop-filter: blur(20px) saturate(1.15);
   opacity: 0;
@@ -1376,12 +1498,20 @@ main.main-projectpg.case-study-project{
   cursor: default;
 }
 
+.image-lightbox--certificate .image-lightbox__img{
+  max-width: min(920px, 78vw);
+  max-height: 72vh;
+  border-radius: clamp(0.4rem, 0.7vw, 0.65rem);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+}
+
 .image-lightbox__close{
   position: absolute;
-  top: calc(var(--nav-height) + 0.75rem);
-  right: 1.25rem;
+  top: calc(var(--nav-height) / 2);
+  right: var(--space-nav);
+  transform: translateY(-50%);
   border: none;
-  background: rgba(255, 255, 255, 0.72);
+  background: transparent;
   color: #121212;
   width: 2.4rem;
   height: 2.4rem;
@@ -1392,10 +1522,12 @@ main.main-projectpg.case-study-project{
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
 }
 
 .image-lightbox__close:hover{
-  background: #fff;
+  background: transparent;
+  opacity: 0.55;
 }
 
 body.is-lightbox-open{
