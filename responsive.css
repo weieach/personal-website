@@ -31,21 +31,66 @@
 }
 
 @media (width < 960px) {
+  /* Listing pages (index / intern): roomier page + nav margins on phones */
+  :root {
+    --space-page: calc(var(--space) * 5);
+    --space-nav: calc(var(--space) * 5);
+    --space-caption: calc(var(--space) * 2); /* thumb → title */
+  }
+
+  /* Loader: slightly more space between bird mark and name */
+  .page-loader__identity {
+    margin-top: -0.65rem;
+  }
+
+  /* Projects / case-study archives: tighter space above footer */
+  main:has(.cards, .cards-single-column) {
+    margin-bottom: calc(var(--space) * 6);
+  }
+
+  /* Projects index: title case instead of all-caps headers */
+  .cards .work-title {
+    text-transform: none;
+  }
+
+  /* Archive titles: slightly smaller, no italics */
+  .cards .work-title,
+  .cards-single-column .work-title {
+    font-size: 0.875rem;
+  }
+
+  .cards .work-title i,
+  .cards-single-column .work-title i {
+    font-style: normal;
+  }
+
   .elastic-main-projectpg {
     flex-direction: row;
   }
 
   .cards {
     grid-template-columns: 1fr;
-    row-gap: calc(var(--space) * 4.5);
+    row-gap: calc(var(--space-caption) * 2); /* 2× thumb → title */
   }
 
   .cards-single-column {
-    gap: calc(var(--space) * 4.5);
+    gap: calc(var(--space-caption) * 2);
   }
 
   .card {
-    gap: calc(var(--space) * 2);
+    gap: 0;
+  }
+
+  /* Thumb → title: pad the text block (thumbnail margin collapses after nested-<a> repair) */
+  .cards .card-thumbnail,
+  .cards-single-column .card-thumbnail {
+    margin-bottom: 0;
+  }
+
+  .cards .card-text,
+  .cards-single-column .card-text {
+    margin-top: var(--space-caption);
+    gap: calc(var(--space) * 0.6); /* title → category caption */
   }
 
   /* Taller Wu thumb on mobile (more height at full-bleed width) */
@@ -61,12 +106,78 @@
     scale: 1;
   }
 
+  /* Taller listing thumbs */
+  .card-booklets .card-thumbnail {
+    aspect-ratio: 1.2;
+  }
+
+  .card-tldr .card-thumbnail {
+    aspect-ratio: 1.4;
+  }
+
+  .card-nijimu .card-thumbnail {
+    aspect-ratio: 1.35; /* slightly less tall than sibling thumbs */
+  }
+
+  .card-pictogram .card-thumbnail {
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Media fills the new taller / square frames */
+  .card-nijimu .card-thumbnail video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    scale: none;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .card-tldr .card-thumbnail .img-tldr {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    scale: 0.9;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .card-pictogram .card-thumbnail video,
+  .card-pictogram .card-thumbnail canvas.pictogram-visual {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    scale: 0.9;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .card-booklets .card-thumbnail {
+    background-size: cover;
+    background-position: center;
+  }
+
   /* Case studies: title + caption stacked on mobile */
   .cards-single-column .card-text {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.35rem;
     font-size: 93.75%; /* slight type scale-down; scoped so index rem spacing stays intact */
+  }
+
+  .cards .work-caption,
+  .cards-single-column .work-caption {
+    text-transform: none;
   }
 
   .cards-single-column .work-caption {
@@ -450,7 +561,9 @@
   }
 
   .btn-burger {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
 
@@ -467,7 +580,7 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
-    gap: 1.25rem;
+    gap: calc(var(--space) * 8);
     padding-bottom: max(4vh, env(safe-area-inset-bottom, 0px));
   }
   
@@ -475,13 +588,23 @@
   .sidebar ul {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0;
     padding-inline: 6vw;
   }
 
-  .sidebar a {
-    font-size: 2rem;
-    /* font-weight: 500; */
+  .sidebar ul li {
+    border-bottom: 1px solid rgba(18, 18, 18, 0.12);
+  }
+
+  .sidebar ul li:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar ul a {
+    display: block;
+    font-size: 2.25rem;
+    line-height: 1.15;
+    padding-block: 0.85rem;
     text-decoration: none;
   }
 

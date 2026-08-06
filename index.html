@@ -54,9 +54,11 @@
                 <img class="page-loader__fallback" src="assets/favicon%20(uncut).png" alt="">
                 <canvas id="page-loader-canvas" class="page-loader__canvas"></canvas>
             </div>
-            <p class="page-loader__name">Nicole Wei</p>
-            <div class="page-loader__bar" aria-hidden="true">
-                <span class="page-loader__bar-fill"></span>
+            <div class="page-loader__identity">
+                <p class="page-loader__name">Nicole Wei</p>
+                <div class="page-loader__bar" aria-hidden="true">
+                    <span class="page-loader__bar-fill"></span>
+                </div>
             </div>
         </div>
         <p class="page-loader__tip">
@@ -105,7 +107,7 @@
 
                 </a>
                 <div class="card-text">
-                    <p class="work-title"><span class="bold">Microsite: flying Squirrels Wiki</span> (2025)</p>
+                    <p class="work-title"><span class="bold">Microsite: Flying Squirrels Wiki</span> (2025)</p>
                     <p class="work-caption">UI / UX, Front-end</p>
                 </div>
             </div>
@@ -127,7 +129,10 @@
             <div class="card card-tldr">
                 <a href="work-tldr.html">
                     <div class="card-thumbnail">
-                        <img class="thumb-img img-tldr" src="assets/tldr/tldr ui.png" alt="">
+                        <picture>
+                            <source media="(width < 960px)" srcset="assets/tldr/tldr%20ui-mobile%20vp.png">
+                            <img class="thumb-img img-tldr" src="assets/tldr/tldr ui.png" alt="">
+                        </picture>
                     </div>
                 </a>
                 <div class="card-text">
@@ -149,7 +154,7 @@
                     </div>
                 </a>
                 <div class="card-text">
-                    <p class="work-title"><span class="bold">nijimu</span> Speculative memory wellness tool (2026)</p>
+                    <p class="work-title"><span class="bold">nijimu:</span> Speculative memory wellness tool (2026)</p>
                     <p class="work-caption">UI / UX, Web Dev</p>
                 </div>
             </div>
