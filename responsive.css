@@ -108,7 +108,7 @@
 
   /* Listing thumbs (460px–959px): pre-adjustment ARs */
   .card-booklets .card-thumbnail {
-    aspect-ratio: 1.2;
+    aspect-ratio: 1355 / 953; /* match index thumb asset */
   }
 
   .card-tldr .card-thumbnail {
@@ -161,11 +161,6 @@
     scale: 0.9;
     object-fit: cover;
     object-position: center;
-  }
-
-  .card-booklets .card-thumbnail {
-    background-size: cover;
-    background-position: center;
   }
 
   /* Case studies: title + caption stacked on mobile */
@@ -613,10 +608,13 @@
   .card-fs .card-thumbnail,
   .card-superfast .card-thumbnail,
   .card-dance .card-thumbnail,
-  .card-booklets .card-thumbnail,
   .card-tldr .card-thumbnail,
   .card-nijimu .card-thumbnail {
     aspect-ratio: 1;
+  }
+
+  .card-booklets .card-thumbnail {
+    aspect-ratio: 1355 / 953;
   }
 
   .card-fs .card-thumbnail {
