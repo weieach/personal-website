@@ -112,11 +112,43 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card card-elastic">
                 <a href="work-elasticmind.html">
                     <div class="card-thumbnail elastic-thumbnail">
-                        <video class="video-elastic" src="assets/elasticmind/showcase - 2 juxtaposed copy.mp4" autoplay loop
-                            muted playsinline></video>
+                        <video class="video-elastic video-elastic--desktop"
+                            src="assets/elasticmind/showcase - 2 juxtaposed copy.mp4"
+                            autoplay loop muted playsinline></video>
+                        <video class="video-elastic video-elastic--mobile"
+                            data-src="assets/elasticmind/elastic-mind-seq.mp4"
+                            loop muted playsinline></video>
+                        <script>
+                          (function () {
+                            var root = document.currentScript.parentElement;
+                            var desktop = root.querySelector('.video-elastic--desktop');
+                            var mobile = root.querySelector('.video-elastic--mobile');
+                            if (!desktop || !mobile) return;
+                            var mq = window.matchMedia('(width < 460px)');
+                            function apply() {
+                              if (mq.matches) {
+                                desktop.pause();
+                                if (!mobile.getAttribute('src') && mobile.dataset.src) {
+                                  mobile.src = mobile.dataset.src;
+                                }
+                                mobile.play().catch(function () {});
+                              } else {
+                                mobile.pause();
+                                if (mobile.getAttribute('src')) {
+                                  mobile.removeAttribute('src');
+                                  mobile.load();
+                                }
+                                desktop.play().catch(function () {});
+                              }
+                            }
+                            apply();
+                            if (mq.addEventListener) mq.addEventListener('change', apply);
+                            else if (mq.addListener) mq.addListener(apply);
+                          })();
+                        </script>
                         <!-- <video class="video-elastic" src="assets/showcase - all 3  juxtaposed.mp4" autoplay loop muted></video> -->
                     </div>
                 </a>

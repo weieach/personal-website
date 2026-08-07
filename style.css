@@ -694,6 +694,11 @@ video{
     scale: 0.95;
 }
 
+/* Mobile seq thumb: only under 960px (src also gated in index.html) */
+.video-elastic--mobile{
+    display: none;
+}
+
 .video-mm{
     object-fit: contain;
     width: 90%;

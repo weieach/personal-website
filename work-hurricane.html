@@ -61,13 +61,17 @@
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg non-cs-pg">
+    <main class="main-projectpg non-cs-pg pg-with-thumbnail">
         <div class="sidebar no-display">
             <ul>
                 <li><a href="index.html">Projects</a></li>
                 <li><a href="intern.html">Case Studies</a></li>
                 <li><a href="about.html">About</a></li>
             </ul>
+        </div>
+        <div class="page-thumbnail page-thumbnail-hurricane">
+            <img class="hurricane-thumb-desktop" src="assets/hurricane/hurricane-pg-thumbnail-desktop.png" alt="How does a hurricane form?">
+            <img class="hurricane-thumb-mobile" src="assets/hurricane/hurricane-pg-thumbnail-mobile.png" alt="How does a hurricane form?">
         </div>
         <div class="project-caption">
             <h1>How does a hurricane form?</h1>
@@ -97,19 +101,36 @@
             </div> -->
             <div class="captioned-item">
                 <img src="assets/hurricane/hurricane-fullspreads.png" alt="">
-                <p>Full overview</p>
+                <div class="floating-caption">
+                    <p class="floating-caption-detail">Full overview</p>
+                </div>
             </div>
             <div class="captioned-item" id="hu-item-1">
-                <img src="assets/hurricane/typeonly-1perrow-1.png" class="hurricane-seq" alt="Keyframes">
-                <p>(1) Words only</p>
+                <picture class="hurricane-seq">
+                    <source media="(width < 960px)" srcset="assets/hurricane/typeonly-1perrow-1.png">
+                    <img src="assets/hurricane/typeonly-2perrow-1.png" alt="Keyframes">
+                </picture>
+                <div class="floating-caption">
+                    <p class="floating-caption-detail">(1) Words only</p>
+                </div>
             </div>
             <div class="captioned-item" id="hu-item-2">
-                <img src="assets/hurricane/imageonly-1perrow-1.png" class="hurricane-seq" alt="Keyframes">
-                <p>(2) Images only</p>
+                <picture class="hurricane-seq">
+                    <source media="(width < 960px)" srcset="assets/hurricane/imageonly-1perrow-1.png">
+                    <img src="assets/hurricane/imageonly-2perrow-1.png" alt="Keyframes">
+                </picture>
+                <div class="floating-caption">
+                    <p class="floating-caption-detail">(2) Images only</p>
+                </div>
             </div>
             <div class="captioned-item" id="hu-item-3">
-                <img src="assets/hurricane/type+image-1perrow-1.png" class="hurricane-seq" alt="Keyframes">
-                <p>(3) Word + image combined</p>
+                <picture class="hurricane-seq">
+                    <source media="(width < 960px)" srcset="assets/hurricane/type+image-1perrow-1.png">
+                    <img src="assets/hurricane/type+image-2perrow-1.png" alt="Keyframes">
+                </picture>
+                <div class="floating-caption">
+                    <p class="floating-caption-detail">(3) Word + image combined</p>
+                </div>
             </div>
         </div>
     </main>

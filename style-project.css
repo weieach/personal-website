@@ -633,7 +633,8 @@ h3 {
 /* Keep floating media captions in sync with project body copy at all breakpoints.
    Target `p` directly so global `p { font-size: 0.98rem }` does not win. */
 .project-caption p,
-.floating-caption p {
+.floating-caption p,
+.sf-mobile-blurb {
   font-size: 0.92rem;
   line-height: 1.28;
   font-weight: 350;
@@ -641,7 +642,8 @@ h3 {
   opacity: 0.7;
 }
 
-.project-caption p {
+.project-caption p,
+.sf-mobile-blurb {
   margin-bottom: 1rem;
 }
 
@@ -774,12 +776,26 @@ h3 {
   background-color: #000000;
 }
 
+/* Superfast: slightly lifted dark chrome */
+.dark-mode.superfast-project,
+.dark-mode.superfast-project nav,
+.dark-mode.superfast-project nav ul,
+.dark-mode.superfast-project h1,
+.dark-mode.superfast-project h2,
+.dark-mode.superfast-project h3,
+.dark-mode.superfast-project p,
+.dark-mode.superfast-project .sidebar,
+.dark-mode.superfast-project .sidebar a{
+  background-color: #1C1C1C;
+}
+
 /* `*` sets #121212 on every node; caption `p { color: inherit }` then
    overrides `.dark-mode p` and picks up that dark color from ul/li.
    Force light copy color on caption paragraphs. */
 .dark-mode .project-caption p,
 .dark-mode .floating-caption p,
-.dark-mode .floating-caption p *{
+.dark-mode .floating-caption p *,
+.dark-mode .sf-mobile-blurb{
   color: #f2f2f2;
 }
 
@@ -857,6 +873,14 @@ canvas.pictogram-visual.pictogram-motion{
 
 .sf-bookcover{
   max-width: 850px;
+}
+
+/* Superfast: mobile-only web blurb before walkthrough */
+.sf-mobile-blurb{
+  display: none;
+  width: 100%;
+  max-width: 65ch; /* match .project-caption */
+  margin-inline: auto;
 }
 
 .work-wu-poster{
@@ -1039,7 +1063,50 @@ h2{
 }
 
 .hurricane-seq{
-  width: 80%;
+  width: 100%;
+  display: block;
+}
+
+.hurricane-seq img{
+  width: 100%;
+  display: block;
+}
+
+/* Hurricane page thumb: natural image proportion (no forced frame) */
+.page-thumbnail-hurricane{
+  background-color: #000000;
+  margin-top: var(--nav-height); /* below nav, not under it */
+  padding-top: 0;
+  height: auto;
+  max-height: none;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.hurricane-thumb-desktop{
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.hurricane-thumb-mobile{
+  display: none;
+}
+
+@media (max-width: 959px) {
+  .hurricane-thumb-desktop{
+    display: none;
+  }
+
+  .hurricane-thumb-mobile{
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
 }
 
 /* case study */
