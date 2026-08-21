@@ -185,6 +185,9 @@
   }
 
   .main-aboutpg {
+    flex: none;
+    justify-content: flex-start;
+    align-items: stretch;
     margin-top: 7rem;
     margin-bottom: 2.5rem;
     padding-top: 0;
@@ -235,6 +238,7 @@
   .postcard__back .about-avatar {
     width: 100%;
     max-width: 375px;
+    margin-inline: auto;
   }
 
   .postcard-hint {
@@ -244,6 +248,8 @@
   .about-avatar {
     width: 100%;
     max-width: 375px;
+    /* Stacked layout: keep the photo centered in the column */
+    margin-inline: auto;
     order: 2;
   }
 
@@ -594,12 +600,6 @@
   .card-superfast .card-thumbnail:focus-within .thumbnail-cta {
     transform: translate(-50%, -50%);
     transition: opacity 340ms ease;
-  }
-}
-
-@media (width < 700px) {
-  .dino-screens-gallery {
-    grid-template-columns: 1fr;
   }
 }
 

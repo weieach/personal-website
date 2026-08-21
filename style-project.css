@@ -512,6 +512,10 @@ main.pg-with-thumbnail {
 
 }
 
+.captioned-item.no-display{
+  display: none;
+}
+
 .floating-caption-wrap{
   display: flex;
   flex-direction: column;
@@ -636,7 +640,6 @@ h3 {
 .floating-caption p,
 .sf-mobile-blurb {
   font-size: 0.92rem;
-  line-height: 1.28;
   font-weight: 350;
   color: inherit;
   opacity: 0.7;
@@ -644,7 +647,13 @@ h3 {
 
 .project-caption p,
 .sf-mobile-blurb {
+  line-height: 1.4;
   margin-bottom: 1rem;
+}
+
+.project-caption .floating-caption p,
+.floating-caption p {
+  line-height: 1.28;
 }
 
 .project-caption a {
@@ -815,7 +824,8 @@ h3 {
 }
 
 .dark-mode .list-case-study-problems h4{
-  color: #B2B2B2;
+  color: #F2F2F2;
+  font-weight: 400;
 }
 
 .dark-mode .list-case-study-problems li{
@@ -994,7 +1004,7 @@ h2{
 
 
 .dino-landing-demo{
-  max-width: 800px;
+  max-width: 900px;
   margin-inline: auto;
 }
 
@@ -1003,7 +1013,7 @@ h2{
 }
 
 .item-dino-recorded video{
-  max-width: 600px;
+  max-width: 900px;
   /* margin-inline: auto; */
 }
 
@@ -1012,20 +1022,128 @@ h2{
   max-width: 1100px;
 }
 
-.dino-screens-gallery{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  width: 100vw;
-  max-width: 1200px;
-  margin-top: 1.5rem;
-  padding-inline: 5%;
+.section-product-highlights .captioned-item > h4{
+  font-family: "Geist Mono";
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: inherit;
+  opacity: 0.6;
+  margin-bottom: 0;
 }
 
+.dark-mode .section-product-highlights .captioned-item > h4{
+  color: #f2f2f2;
+}
+
+.dino-screens-featured,
+.dino-screens-gallery{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 0;
+  padding-inline: 0;
+}
+
+/* Class `display: flex` outranks the UA `[hidden]` rule */
+.dino-screens-gallery[hidden]{
+  display: none;
+}
+
+.dino-screens-featured figure,
+.dino-screens-gallery figure{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+  width: 100%;
+  margin: 0;
+}
+
+.dino-screens-featured img,
 .dino-screens-gallery img{
   width: 100%;
+  max-width: none;
   height: auto;
   display: block;
+}
+
+.dino-screens-featured .floating-caption p,
+.dino-screens-gallery .floating-caption p{
+  margin-bottom: 0;
+}
+
+.section-product-highlights .floating-caption p{
+  opacity: 0.6;
+}
+
+.captioned-item > .btn-see-all{
+  width: 100%;
+}
+
+.btn-see-all{
+  align-self: stretch;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.6rem 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font-family: "Geist Mono";
+  font-weight: 400;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.btn-see-all::before,
+.btn-see-all::after{
+  content: "";
+  flex: 1 1 0;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.25;
+}
+
+.btn-see-all:hover{
+  background: none;
+}
+
+.btn-see-all span,
+.btn-see-all i{
+  color: inherit;
+  flex: 0 0 auto;
+}
+
+.btn-see-all__mid{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btn-see-all i{
+  font-size: 0.9rem;
+  transition: rotate 0.3s ease;
+}
+
+.btn-see-all[aria-expanded="true"] i{
+  rotate: 180deg;
+}
+
+.dark-mode .btn-see-all{
+  background: none;
+  color: #f2f2f2;
+}
+
+.dark-mode .btn-see-all:hover{
+  background: none;
+}
+
+.dark-mode .btn-see-all span,
+.dark-mode .btn-see-all i{
+  color: inherit;
 }
 
 .img-dino-early-logos{
@@ -1046,6 +1164,68 @@ h2{
 
 .img-dino-mockup{
   width: 100%;
+}
+
+.section-dino-results .outcome-media-row{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.section-dino-results .outcome-media-row .captioned-item{
+  flex: none;
+  width: 100%;
+  max-width: 50%;
+  align-items: stretch;
+}
+
+.section-dino-results .outcome-tweet-row{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.section-dino-results .outcome-tweet-row .captioned-item{
+  flex: none;
+  width: 100%;
+  max-width: 50%;
+}
+
+.section-dino-results .outcome-media-row .captioned-item.outcome-photo{
+  max-width: 85%;
+}
+
+.section-dino-results .outcome-media-row .captioned-item p{
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.section-dino-results .outcome-media-row img{
+  aspect-ratio: auto;
+  object-fit: contain;
+  height: auto;
+  padding: 0.7rem 1.25rem;
+  background-color: #000;
+  border-radius: 8px;
+}
+
+.section-dino-results .outcome-media-row img.outcome-tweet-poster{
+  padding-left: 0.4rem;
+}
+
+.section-dino-results .outcome-media-row .outcome-photo img{
+  padding: 0;
+  background-color: transparent;
+}
+
+@media (width < 700px){
+  .section-dino-results .outcome-media-row .captioned-item{
+    max-width: none;
+  }
 }
 
 .dephy-project-pics > div{
@@ -1233,17 +1413,17 @@ main.main-projectpg.case-study-project{
   border-bottom: 1px solid rgba(153, 153, 153, 0.2);
 }
 
-/* Keep a continuous shared rule across the pair (gap is padding, not column-gap) */
-.list-case-study-info > li:nth-child(odd){
-  padding-right: 2rem;
-}
-
-.list-case-study-info > li:nth-child(even):not(.list-case-study-info-awards){
-  padding-left: 2rem;
-}
-
-/* On wide 2-up layout, drop the border under the final row pair */
 @media (width >= 1350px){
+  /* Pair gutter for the 2-up grid only; stacked rows must stay flush left */
+  .list-case-study-info > li:nth-child(odd){
+    padding-right: 2rem;
+  }
+
+  .list-case-study-info > li:nth-child(even):not(.list-case-study-info-awards){
+    padding-left: 2rem;
+  }
+
+  /* Drop the border under the final row pair */
   .main-projectpg.case-study-project:not(.schneider-project) .list-case-study-info > li:last-child,
   .main-projectpg.case-study-project:not(.schneider-project) .list-case-study-info > li:nth-last-child(2):nth-child(odd){
     border-bottom: none;
@@ -1366,6 +1546,10 @@ main.main-projectpg.case-study-project{
 .list-case-study li h4{
   font-weight: 500;
   margin-bottom: 0.7rem;
+}
+
+.list-case-study-problems h4{
+  font-weight: 400;
 }
 
 .list-case-study li p{
@@ -1829,6 +2013,11 @@ main.main-projectpg.case-study-toc-enabled{
 
 .case-study-toc li.is-active a::before{
   scale: 1.75 1;
+}
+
+/* `color: inherit` picks up `*` #121212; force light inactive labels. */
+.dark-mode .case-study-toc a{
+  color: #f2f2f2;
 }
 
 .dark-mode .case-study-toc li.is-active a{

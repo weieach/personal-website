@@ -40,6 +40,9 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="responsive.css">
+    <link rel="preload" as="image" href="assets/about/avatar-750.webp"
+        imagesrcset="assets/about/avatar-750.webp 750w, assets/about/avatar-1125.webp 1125w"
+        imagesizes="(max-width: 959px) min(375px, 100vw), 300px" fetchpriority="high">
     <title>Nicole Wei</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta property="og:type" content="website">
@@ -91,7 +94,8 @@
                 <button type="button" class="postcard__front" aria-expanded="true" aria-hidden="true"
                     tabindex="-1"
                     aria-label="Flip the postcard to read about me">
-                    <img src="assets/about - postcard.png"
+                    <!-- src is hydrated by about-postcard.js only when the cover is shown -->
+                    <img data-src="assets/about - postcard.png"
                         alt="Postcard: a moon rising over a pink shore — welcome to my homepage">
                     <span class="postcard__sheen" aria-hidden="true"></span>
                 </button>
@@ -102,7 +106,13 @@
                                 <canvas id="about-bird-canvas" class="about-bird" role="button" tabindex="0" aria-label="Chirp the bird"></canvas>
                                 <span class="about-bird-hover-star" aria-hidden="true">✶</span>
                             </div>
-                            <img src="assets/avatar 1.png" class="img-avatar" alt="">
+                            <picture>
+                                <source type="image/webp"
+                                    srcset="assets/about/avatar-750.webp 750w, assets/about/avatar-1125.webp 1125w"
+                                    sizes="(max-width: 959px) min(375px, 100vw), 300px">
+                                <img src="assets/about/avatar-750.jpg" class="img-avatar" alt=""
+                                    width="750" height="1000" fetchpriority="high" decoding="async">
+                            </picture>
                         </div>
                         <div class="text-about">
                             <h1 class="no-display">About Me</h1>

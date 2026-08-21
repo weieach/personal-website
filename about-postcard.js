@@ -41,6 +41,14 @@ if (postcard && inner && front && back) {
     }
   };
 
+  // Cover art is only worth downloading when the cover is actually shown
+  const hydrateCover = () => {
+    const img = front.querySelector("img[data-src]");
+    if (!img) return;
+    img.src = img.dataset.src;
+    img.removeAttribute("data-src");
+  };
+
   // Cover hidden / mobile: no flip UI — content and bird are shown immediately
   if (COVER_HIDDEN || window.matchMedia(MOBILE_MQ).matches) {
     postcard.classList.add("is-flipped", "is-static");
@@ -51,6 +59,8 @@ if (postcard && inner && front && back) {
     rememberFlip(true);
     notifyFlipped();
   } else {
+    hydrateCover();
+
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;

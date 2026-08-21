@@ -64,10 +64,13 @@ body{
 
 .about-body{
     min-height: 100vh;
-    /* background-color: #E08494; */
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+}
+
+.about-body > :last-child{
+    flex-shrink: 0;
 }
 
 main{
@@ -80,17 +83,20 @@ main{
 
 
 .main-aboutpg{
-    padding-top: 12.5vw;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Center in the band below the fixed header, not the full viewport */
+    padding-top: var(--nav-height);
     padding-inline: 5vw;
+    padding-bottom: 0;
     margin-top: 0;
-    margin-bottom: 0rem;
+    margin-bottom: 0;
     /* Let the postcard shadow + bird overhang render past main's box
        (overflow-x: hidden on main would clip them vertically) */
     overflow: visible;
-    padding-bottom: 3rem;
-    /* max-width: 70ch; */
-    /* height: calc(100vh - 16.5rem); */
-    /* background-color: #E08494; */
 }
 
 
@@ -140,6 +146,11 @@ footer{
 
 .postcard-hint.is-visible{
     opacity: 1;
+}
+
+/* The class above sets display, so [hidden] needs to win explicitly */
+.postcard-hint[hidden]{
+    display: none;
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -912,10 +923,15 @@ video.pictogram-source{
     flex-shrink: 0;
 }
 
+.about-avatar picture{
+    display: block;
+}
+
 .img-avatar{
     /* width: 100%;
     max-width: 350px; */
     width: 100%;
+    height: auto;
     display: block;
 }
 

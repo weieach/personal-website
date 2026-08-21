@@ -116,6 +116,7 @@ setupElasticThumbnailTooltip();
 setupCaseStudyToc();
 mutePageVideos();
 setupWalkthroughLightbox();
+setupSeeAllToggles();
 
 function scrollBehavior() {
   return window.matchMedia("(pointer: coarse)").matches ? "auto" : "smooth";
@@ -374,6 +375,69 @@ function setupElasticThumbnailTooltip() {
         { opacity: [0, 1] },
         { duration: 0.3, easing: [0.22, 1, 0.36, 1] }
       );
+    });
+  });
+}
+
+function setupSeeAllToggles() {
+  const buttons = document.querySelectorAll(".btn-see-all[aria-controls]");
+  if (!buttons.length) return;
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  buttons.forEach((button) => {
+    const panel = document.getElementById(button.getAttribute("aria-controls"));
+    if (!panel) return;
+
+    const label = button.querySelector(".btn-see-all__label");
+    const moreLabel = label?.textContent.trim() || "See all";
+    const lessLabel = button.dataset.labelLess || "Show less";
+    let animating = false;
+
+    button.addEventListener("click", () => {
+      if (animating) return;
+
+      const expanded = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!expanded));
+      if (label) label.textContent = expanded ? moreLabel : lessLabel;
+
+      if (reduceMotion) {
+        panel.hidden = expanded;
+        return;
+      }
+
+      const settle = () => {
+        animating = false;
+        panel.style.removeProperty("height");
+        panel.style.removeProperty("opacity");
+        panel.style.removeProperty("overflow");
+      };
+
+      animating = true;
+      panel.style.overflow = "hidden";
+
+      if (expanded) {
+        const height = panel.scrollHeight;
+        animate(
+          panel,
+          { height: [`${height}px`, "0px"], opacity: [1, 0] },
+          REVEAL
+        ).finished.then(() => {
+          panel.hidden = true;
+          settle();
+        });
+        return;
+      }
+
+      panel.hidden = false;
+      const height = panel.scrollHeight;
+      animate(
+        panel,
+        { height: ["0px", `${height}px`], opacity: [0, 1] },
+        REVEAL
+      ).finished.then(settle);
     });
   });
 }

@@ -36,6 +36,16 @@
   function markWarm(id) {
     const key = id || pageId();
     if (!HUBS.has(key)) return;
+
+    // A prerendered page hasn't been seen yet; only count it once activated,
+    // otherwise a discarded prerender would suppress the real visit's intro.
+    if (document.prerendering) {
+      document.addEventListener("prerenderingchange", () => markWarm(key), {
+        once: true,
+      });
+      return;
+    }
+
     const warm = readWarm();
     if (warm[key]) {
       document.documentElement.classList.add("hub-warm");
@@ -76,31 +86,37 @@
     return type === "slow-2g" || type === "2g";
   }
 
+  const VIDEO_RE = /\.(mp4|mov|m4v|webm)(\?|#|$)/i;
+
   function collectMediaUrls(html, baseHref) {
     const doc = new DOMParser().parseFromString(html, "text/html");
     const urls = new Set();
+
+    // One URL, taken as-is (paths here may contain spaces)
     const add = (raw) => {
-      if (!raw) return;
-      String(raw)
-        .split(",")
-        .forEach((part) => {
-          const token = part.trim().split(/\s+/)[0];
-          if (!token || token.startsWith("data:")) return;
-          try {
-            urls.add(new URL(token, baseHref).href);
-          } catch {
-            /* ignore */
-          }
-        });
+      const token = raw?.trim();
+      if (!token || token.startsWith("data:")) return;
+      try {
+        const href = new URL(token, baseHref).href;
+        // Listing videos are far too heavy to pull speculatively
+        if (!VIDEO_RE.test(href)) urls.add(href);
+      } catch {
+        /* ignore */
+      }
     };
 
-    doc
-      .querySelectorAll("img, video, source, [data-src]")
-      .forEach((el) => {
-        add(el.getAttribute("src"));
-        add(el.getAttribute("data-src"));
-        add(el.getAttribute("srcset"));
-      });
+    // Comma-separated candidates, each "url [descriptor]"
+    const addSrcset = (raw) => {
+      if (!raw) return;
+      raw.split(",").forEach((part) => add(part.trim().split(/\s+/)[0]));
+    };
+
+    doc.querySelectorAll("img, picture source, [data-src]").forEach((el) => {
+      if (el.tagName === "VIDEO" || el.closest("video")) return;
+      add(el.getAttribute("src"));
+      add(el.getAttribute("data-src"));
+      addSrcset(el.getAttribute("srcset"));
+    });
 
     // CSS backgrounds tied to this listing's card modifiers (e.g. .card-dino)
     const cardMods = new Set();
@@ -138,6 +154,11 @@
     return [...urls];
   }
 
+  // Speculative work is capped so a background warm-up never competes with
+  // the visit the user is actually having.
+  const WARM_BUDGET_BYTES = 6 * 1024 * 1024;
+  const WARM_MAX_FILE_BYTES = 3 * 1024 * 1024;
+
   function warmFetch(url) {
     return fetch(url, {
       credentials: "same-origin",
@@ -146,15 +167,47 @@
     }).catch(() => null);
   }
 
+  async function sizeOf(url) {
+    try {
+      const res = await fetch(url, { method: "HEAD", priority: "low" });
+      if (!res.ok) return null;
+      const len = Number(res.headers.get("content-length"));
+      return Number.isFinite(len) && len > 0 ? len : null;
+    } catch {
+      return null;
+    }
+  }
+
   function prerenderUrl(url) {
-    if (!HTMLScriptElement.supports?.("speculationrules")) return false;
+    if (!HTMLScriptElement.supports?.("speculationrules")) return;
     const el = document.createElement("script");
     el.type = "speculationrules";
     el.textContent = JSON.stringify({
       prerender: [{ source: "list", urls: [url] }],
     });
     document.head.appendChild(el);
-    return true;
+  }
+
+  async function warmCache(href) {
+    const res = await warmFetch(href);
+    if (!res?.ok) return;
+
+    const media = collectMediaUrls(await res.text(), href);
+    const onThisPage = new Set(
+      [...document.querySelectorAll("img")]
+        .map((el) => el.currentSrc || el.src)
+        .filter(Boolean)
+    );
+
+    let spent = 0;
+    for (const url of media) {
+      if (onThisPage.has(url)) continue;
+      const size = await sizeOf(url);
+      if (size && size > WARM_MAX_FILE_BYTES) continue;
+      if (spent + (size || 0) > WARM_BUDGET_BYTES) break;
+      await warmFetch(url);
+      spent += size || 0;
+    }
   }
 
   function prefetchListing(id) {
@@ -162,22 +215,10 @@
     if (document.prerendering) return;
 
     const href = new URL(id, location.href).href;
-    if (prerenderUrl(href)) return;
-
-    warmFetch(href).then(async (res) => {
-      if (!res?.ok) return;
-      const html = await res.text();
-      const media = collectMediaUrls(html, href);
-      const already = new Set(
-        [...document.querySelectorAll("img[src], video[src], source[src]")]
-          .map((el) => el.currentSrc || el.src)
-          .filter(Boolean)
-      );
-      for (const url of media) {
-        if (already.has(url)) continue;
-        await warmFetch(url);
-      }
-    });
+    // Chrome can hand over an already-rendered page; the cache warm-up keeps
+    // the plain navigation fast everywhere else (and if prerender is dropped).
+    prerenderUrl(href);
+    warmCache(href);
   }
 
   function whenListingIdle(fn) {
