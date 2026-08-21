@@ -410,13 +410,26 @@ document.addEventListener("click", (e) => {
 })();
 
 // --------------------------
-// Fullscreen page loader (index.html)
+// Fullscreen page loader (index.html / intern.html)
 // Waits for page load + 3D logo, then holds briefly so the
 // rotation is visible. Safety timeout prevents a stuck overlay.
+// Same-session revisits skip the cold start (see hub-session.js).
 // --------------------------
 (() => {
   const loader = document.getElementById("page-loader");
   if (!loader) return;
+
+  const hub = window.NCWeiHub;
+  // Trust the early hub-session flag (false on hard refresh even if previously warm)
+  const skipColdStart = document.documentElement.classList.contains("hub-warm");
+
+  if (skipColdStart) {
+    document.body.classList.remove("is-loading");
+    loader.remove();
+    hub?.markWarm?.();
+    window.dispatchEvent(new CustomEvent("page-loader:hidden"));
+    return;
+  }
 
   const TIP_ROTATE_MS = 10000;
   const TIP_EASE = [0.22, 1, 0.36, 1];
@@ -546,6 +559,7 @@ document.addEventListener("click", (e) => {
     // Unlock scroll before tear-down so the first touch isn't blocked
     document.body.classList.remove("is-loading");
     loader.classList.add("page-loader--hidden");
+    hub?.markWarm?.();
     window.dispatchEvent(new CustomEvent("page-loader:hidden"));
     window.setTimeout(() => loader.remove(), 450);
   };
@@ -575,6 +589,15 @@ document.addEventListener("click", (e) => {
 
   // Safety fallback (large GLB / hung network).
   window.setTimeout(hide, 20000);
+})();
+
+// About (no fullscreen loader): mark warm once the page is interactive
+(() => {
+  const hub = window.NCWeiHub;
+  if (!hub?.isHub?.() || hub.pageId() !== "about.html") return;
+  const mark = () => hub.markWarm();
+  if (document.readyState === "complete") mark();
+  else window.addEventListener("load", mark, { once: true });
 })();
 
 // --------------------------

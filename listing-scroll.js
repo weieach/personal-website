@@ -46,33 +46,42 @@ if (cardsRoot) {
   }
   window.scrollTo(0, 0);
 
-  // Lenis fights touch scrolling on phones; keep native scroll there
+  if (reduceMotion) {
+    cards.forEach((card) => card.classList.add("scroll-reveal-card--done"));
+  } else if (
+    document.documentElement.classList.contains("hub-warm") &&
+    cards.length
+  ) {
+    // Same-session revisit: show cards at rest (no rise choreography)
+    cards.forEach((card) => card.classList.add("scroll-reveal-card--done"));
+    setupListingScroll();
+  } else if (cards.length) {
+    setupListingScroll();
+    whenListingReady(() => startListingReveals(cards));
+  }
+}
+
+function setupListingScroll() {
   const preferNativeScroll =
     window.matchMedia("(max-width: 959px)").matches ||
     window.matchMedia("(pointer: coarse)").matches;
 
-  if (reduceMotion) {
-    cards.forEach((card) => card.classList.add("scroll-reveal-card--done"));
-  } else if (cards.length) {
-    if (!preferNativeScroll) {
-      const lenis = new Lenis({
-        duration: 1.05,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        touchMultiplier: 1.1,
-      });
+  if (preferNativeScroll) return;
 
-      lenis.scrollTo(0, { immediate: true });
+  const lenis = new Lenis({
+    duration: 1.05,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    touchMultiplier: 1.1,
+  });
 
-      const raf = (time) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      };
-      requestAnimationFrame(raf);
-    }
+  lenis.scrollTo(0, { immediate: true });
 
-    whenListingReady(() => startListingReveals(cards));
-  }
+  const raf = (time) => {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  };
+  requestAnimationFrame(raf);
 }
 
 function startListingReveals(cards) {

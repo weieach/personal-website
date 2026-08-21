@@ -6,7 +6,11 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@12.42.2/+esm";
  * - Subtle pointer tilt on the front, lerped in a single rAF loop that only
  *   runs while needed (performance-friendly: one composited transform).
  * - Mobile (<960px): skip the flip — show content + bird directly.
+ * - COVER_HIDDEN: temporarily skip the cover on all viewports.
+ * - Same-session revisit: restore open postcard without replaying the intro.
  */
+const COVER_HIDDEN = true; // set false to bring the flip cover back
+
 const FLIP = {
   duration: 0.85,
   easing: [0.22, 1, 0.36, 1],
@@ -28,21 +32,35 @@ if (postcard && inner && front && back) {
     window.dispatchEvent(new CustomEvent("about-postcard:flipped"));
   };
 
-  // Mobile: no flip UI — content and bird are shown immediately
-  if (window.matchMedia(MOBILE_MQ).matches) {
+  const flipKey = window.NCWeiHub?.ABOUT_FLIP_KEY || "ncwei:about-flipped";
+  const rememberFlip = (open) => {
+    try {
+      sessionStorage.setItem(flipKey, open ? "1" : "0");
+    } catch {
+      /* ignore */
+    }
+  };
+
+  // Cover hidden / mobile: no flip UI — content and bird are shown immediately
+  if (COVER_HIDDEN || window.matchMedia(MOBILE_MQ).matches) {
     postcard.classList.add("is-flipped", "is-static");
     front.setAttribute("aria-expanded", "true");
     front.setAttribute("aria-hidden", "true");
     front.setAttribute("tabindex", "-1");
     hint?.setAttribute("hidden", "");
+    rememberFlip(true);
     notifyFlipped();
   } else {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    let flipDeg = 0; // 0 = front, 180 = back
-    let flipped = false;
+    const restoreOpen =
+      document.documentElement.classList.contains("hub-warm") &&
+      sessionStorage.getItem(flipKey) === "1";
+
+    let flipDeg = restoreOpen ? 180 : 0; // 0 = front, 180 = back
+    let flipped = restoreOpen;
     let flipAnimation = null;
 
     const tilt = { x: 0, y: 0, targetX: 0, targetY: 0 };
@@ -51,7 +69,16 @@ if (postcard && inner && front && back) {
 
     // Hover hint: show in footer after 2s without a click
     let hintTimer = 0;
-    let hintDismissed = false;
+    let hintDismissed = restoreOpen;
+
+    if (restoreOpen) {
+      postcard.classList.add("is-flipped");
+      front.setAttribute("aria-expanded", "true");
+      front.setAttribute("tabindex", "-1");
+      hint?.setAttribute("hidden", "");
+      inner.style.transform = "rotateX(0deg) rotateY(180deg)";
+      notifyFlipped();
+    }
 
     const clearHintTimer = () => {
       if (!hintTimer) return;
@@ -101,6 +128,7 @@ if (postcard && inner && front && back) {
     const setFlipped = (next) => {
       if (flipped === next) return;
       flipped = next;
+      rememberFlip(next);
 
       if (next) dismissHint();
 

@@ -1145,6 +1145,31 @@ video.pictogram-source{
     pointer-events: none;
 }
 
+/* Temporary: cover hidden — show about content without the flip card chrome */
+.postcard.is-static{
+    perspective: none;
+}
+.postcard.is-static .postcard__inner{
+    display: block;
+    aspect-ratio: auto;
+    transform: none !important;
+    transform-style: flat;
+    will-change: auto;
+}
+.postcard.is-static .postcard__front{
+    display: none;
+}
+.postcard.is-static .postcard__back{
+    transform: none;
+    visibility: visible;
+    padding: 0;
+    background: transparent;
+    cursor: auto;
+    display: block;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+}
+
 /* Text stays selectable; links keep their own affordance */
 .postcard__back p{
     cursor: auto;
@@ -1342,6 +1367,22 @@ nav ul a:hover{
 /* ---------------------------- */
 /* Fullscreen page loader (index) */
 /* ---------------------------- */
+
+/* Same-session hub revisit: skip loader flash before script.js runs */
+html.hub-warm body.is-loading{
+  overflow: auto;
+}
+html.hub-warm body.is-loading header{
+  pointer-events: auto;
+}
+html.hub-warm .page-loader{
+  display: none !important;
+}
+html.hub-warm .cards > .card:not(.scroll-reveal-card--done),
+html.hub-warm .cards-single-column > .card:not(.scroll-reveal-card--done){
+  transform: none;
+}
+
 body.is-loading{
   overflow: hidden;
 }

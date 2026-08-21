@@ -315,6 +315,9 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
   const loaderEl = document.getElementById("page-loader");
   if (!canvas || !loaderEl) return;
 
+  // Warm hub revisit: loader is skipped — don't spin up WebGL for it
+  if (document.documentElement.classList.contains("hub-warm")) return;
+
   const api = mountBird(canvas, {
     onReady: () => {
       const mark = canvas.closest(".page-loader__mark");
