@@ -832,6 +832,10 @@ h3 {
   border-left: 3px solid #8A8FE5;
 }
 
+.dark-mode .main-projectpg.gvd-project .list-case-study-problems li{
+  border-left-color: var(--gvd-primary);
+}
+
 
 
 .elastic-main-projectpg .project-pics > *{
@@ -1308,7 +1312,7 @@ main.main-projectpg.case-study-project{
   max-width: 100ch;
 }
 
-.main-projectpg.case-study-project.schneider-project .project-caption{
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption{
   max-width: 120ch;
 }
 
@@ -1320,31 +1324,33 @@ main.main-projectpg.case-study-project{
   initial-value: 0px;
 }
 
-.main-projectpg.case-study-project.schneider-project .case-study-header,
-.main-projectpg.case-study-project.schneider-project .project-caption{
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .case-study-header,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption{
   font-family: "Geist", sans-serif;
   font-size: 0.92rem;
   --schneider-prose-max: 90ch;
 }
 
-.main-projectpg.case-study-project.schneider-project .case-study-header,
-.main-projectpg.case-study-project.schneider-project .project-caption section > :is(h3, h4),
-.main-projectpg.case-study-project.schneider-project .project-caption section > p,
-.main-projectpg.case-study-project.schneider-project .project-caption .product-highlight-entry p,
-.main-projectpg.case-study-project.schneider-project .project-caption .list-case-study{
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .case-study-header,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption section > :is(h3, h4),
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption section > p,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption .product-highlight-entry p,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption .list-case-study,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption .gvd-redesign-pairs{
   max-width: var(--schneider-prose-max);
 }
 
-.main-projectpg.case-study-project.schneider-project .case-study-header,
-.main-projectpg.case-study-project.schneider-project .project-caption section > h3,
-.main-projectpg.case-study-project.schneider-project .project-caption section > p,
-.main-projectpg.case-study-project.schneider-project .project-caption .product-highlight-entry p,
-.main-projectpg.case-study-project.schneider-project .project-caption .list-case-study{
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .case-study-header,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption section > h3,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption section > p,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption .product-highlight-entry p,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption .list-case-study,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption .gvd-redesign-pairs{
   margin-inline: auto;
 }
 
-.main-projectpg.case-study-project.schneider-project .case-study-header h2,
-.main-projectpg.case-study-project.schneider-project .list-case-study li p{
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .case-study-header h2,
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .list-case-study li p{
   font-size: 0.92rem;
 }
 
@@ -1424,8 +1430,8 @@ main.main-projectpg.case-study-project{
   }
 
   /* Drop the border under the final row pair */
-  .main-projectpg.case-study-project:not(.schneider-project) .list-case-study-info > li:last-child,
-  .main-projectpg.case-study-project:not(.schneider-project) .list-case-study-info > li:nth-last-child(2):nth-child(odd){
+  .main-projectpg.case-study-project:not(:is(.schneider-project, .gvd-project)) .list-case-study-info > li:last-child,
+  .main-projectpg.case-study-project:not(:is(.schneider-project, .gvd-project)) .list-case-study-info > li:nth-last-child(2):nth-child(odd){
     border-bottom: none;
   }
 }
@@ -1491,21 +1497,21 @@ main.main-projectpg.case-study-project{
   font-family: "Geist", sans-serif;
 }
 
-/* Schneider: one info entry per row */
-.main-projectpg.case-study-project.schneider-project .list-case-study-info{
+/* Schneider / GVD: one info entry per row */
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .list-case-study-info{
   grid-template-columns: max-content 1fr;
 }
 
-.main-projectpg.case-study-project.schneider-project .list-case-study-info > li{
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .list-case-study-info > li{
   grid-column: 1 / -1;
   padding-inline: 0;
 }
 
-.main-projectpg.case-study-project.schneider-project .list-case-study-info > li:not(:last-child){
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .list-case-study-info > li:not(:last-child){
   border-bottom: 1px solid rgba(153, 153, 153, 0.2);
 }
 
-.main-projectpg.case-study-project.schneider-project .list-case-study-info > li:last-child{
+.main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .list-case-study-info > li:last-child{
   border-bottom: none;
 }
 
@@ -1541,6 +1547,20 @@ main.main-projectpg.case-study-project{
   border-left: 3px solid #4E7E44;
 }
 
+.main-projectpg.case-study-project.gvd-project{
+  --gvd-primary: #A875A6;
+  --gvd-label: #BD96BB;
+}
+
+.main-projectpg.case-study-project.gvd-project .list-case-study-info .entry-header,
+.main-projectpg.case-study-project.gvd-project h3{
+  color: var(--gvd-primary);
+}
+
+.main-projectpg.case-study-project.gvd-project .list-case-study-problems li{
+  border-left-color: var(--gvd-primary);
+}
+
 
 
 .list-case-study li h4{
@@ -1570,6 +1590,11 @@ main.main-projectpg.case-study-project{
   margin-inline: auto;
 }
 
+.img-casestudy-cover video{
+  width: 100%;
+  display: block;
+}
+
 .img-casestudy-cover-schneider{
   background-color: #53c66c;
   display: flex;
@@ -1583,6 +1608,114 @@ main.main-projectpg.case-study-project{
   scale: 0.82;
   object-fit: contain;
   object-position: top center;
+}
+
+.img-casestudy-cover-gvd{
+  background-color: #531957;
+  border: 1.5px solid #531957;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.img-casestudy-cover-gvd video{
+  width: 100%;
+  scale: 0.82;
+  border-radius: 1.4rem;
+  object-fit: contain;
+}
+
+.gvd-redesign-pairs{
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.gvd-redesign-pair,
+.gvd-redesign-screens,
+.gvd-redesign-screen{
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.gvd-redesign-pair{
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin: 0;
+}
+
+.gvd-redesign-pair h4{
+  font-weight: 500;
+  margin: 0;
+}
+
+.gvd-redesign-screens{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.gvd-redesign-screen{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.gvd-redesign-screen span{
+  font-family: "Geist Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #55565A;
+  text-align: center;
+}
+
+.gvd-redesign-screen:first-child span{
+  color: var(--gvd-label);
+}
+
+.gvd-redesign-screen img{
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.04), 0 8px 18px rgba(0, 0, 0, 0.03);
+}
+
+.gvd-redesign-pair figcaption{
+  font-size: 0.92rem;
+  opacity: 0.6;
+  width: 100%;
+  max-width: none;
+  margin-top: -0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+.dark-mode .gvd-redesign-pair h4,
+.dark-mode .gvd-redesign-pair figcaption{
+  color: #f2f2f2;
+}
+
+.dark-mode .gvd-redesign-screen span{
+  color: #9a9a9a;
+}
+
+.dark-mode .gvd-redesign-screen:first-child span{
+  color: var(--gvd-label);
+}
+
+.dark-mode .gvd-redesign-screen img{
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.55), 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.dark-mode .gvd-project .case-study-toc li.is-active a{
+  color: var(--gvd-primary);
 }
 
 .case-study-project .img-case-study-body{
@@ -2009,6 +2142,10 @@ main.main-projectpg.case-study-toc-enabled{
 .case-study-toc li.is-active a{
   opacity: 1;
   color: #4E7E44;
+}
+
+.gvd-project .case-study-toc li.is-active a{
+  color: var(--gvd-primary);
 }
 
 .case-study-toc li.is-active a::before{

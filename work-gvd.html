@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
-    <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu">
     <!-- stylesheet -->
@@ -60,22 +60,23 @@
     <meta name="twitter:image" content="https://www.ncwei.com/assets/og-image.jpg">
 </head>
 
-<body>
+<body class="dark-mode">
     <header>
         <nav>
             <a href="index.html" class="logo">
-                <img src="assets/favicon.png" alt="">
+                <img src="assets/favicon.png" alt="bird-logo">
                 <p>Nicole Wei</p>
             </a>
             <ul>
                 <li><a href="index.html">Projects</a></li>
                 <li><a href="intern.html">Case Studies</a></li>
+                <!-- <li><a href="playground.html">Playground</a></li> -->
                 <li><a href="about.html">About</a></li>
             </ul>
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg non-cs-pg">
+    <main class="main-projectpg case-study-project gvd-project case-study-toc-enabled">
         <div class="sidebar no-display">
             <ul>
                 <li><a href="index.html">Projects</a></li>
@@ -83,32 +84,137 @@
                 <li><a href="about.html">About</a></li>
             </ul>
         </div>
-        <div class="project-caption">
-            <h1><i>Gender Violence Database</i> – Web Redesign</h1>
-            <h2 class="project-subtitle">UI / UX Design, Web Dev</h2>
+
+        <div class="case-study-header">
+            <h1>Gender Violence Database</h1>
+            <h2>A research database redesigned to clarify content structure and make gender-violence scholarship easier to find and use.</h2>
             <a href="intern.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
-            <p>Full case study coming soon.</p>
         </div>
-        <div class="placeholder-caption"></div>
-        <div class="project-pics">
-            <div class="captioned-item">
-                <video src="assets/gvd/gvd 2.6 ver thumb.mp4" autoplay loop muted playsinline></video>
-            </div>
+        <div class="img-casestudy-cover img-casestudy-cover-gvd">
+            <video src="assets/gvd/gvd 2.6 ver thumb.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="project-caption">
+            <section class="section-case-study" data-toc-scroll="top">
+                <h3 class="no-display">Overview</h3>
+                <ul class="list-case-study list-case-study-info">
+                    <li>
+                        <p class="entry-header">Role</p>
+                        <p class="entry-content">UI / UX Designer &amp; Developer</p>
+                    </li>
+                    <li>
+                        <p class="entry-header">Timeline</p>
+                        <p class="entry-content">October 2025 - April 2026</p>
+                    </li>
+                    <li>
+                        <p class="entry-header">Organization</p>
+                        <p class="entry-content">WashU Humanities Digital Workshop</p>
+                    </li>
+                    <li>
+                        <p class="entry-header">Tools</p>
+                        <p class="entry-content">HTML, CSS, JavaScript, Vue</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="section-problem">
+                <h3>Context &amp; problem</h3>
+                <p>As the UI/UX designer and front-end developer, I led the redesign of the Gender Violence Database’s
+                    interface and visual identity. The database is a public research resource on gender-based violence,
+                    but its existing structure made the collection difficult to navigate, browse, and search.</p>
+                <p>I designed and built the new interface in HTML, CSS, and vanilla JavaScript, then collaborated with
+                    engineers to integrate it into the existing Vue codebase for launch. The redesign focused on two
+                    core problems:</p>
+                <ul class="list-case-study list-case-study-problems">
+                    <li>
+                        <h4>Research was difficult to discover</h4>
+                        <p>The database contained extensive scholarship, but its hierarchy, navigation, and search
+                            experience did not clearly expose how the collection was organized. Users often needed to
+                            already know what they were looking for, limiting browsing and discovery.</p>
+                    </li>
+                    <li>
+                        <h4>The visual system lacked clarity</h4>
+                        <p>Weak hierarchy and limited visual distinction made dense pages difficult to scan and created
+                            inconsistencies across views. The redesign needed a clearer system that could organize
+                            complex research while maintaining the credibility of an academic resource.</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="section-redesign-highlights">
+                <h3>Redesign highlights</h3>
+                <div class="gvd-redesign-pairs">
+                    <figure class="gvd-redesign-pair">
+                        <h4>Homepage</h4>
+                        <figcaption>The homepage shifts from a static title treatment to a search-first entry point, with a clearer identity and wayfinding.</figcaption>
+                        <div class="gvd-redesign-screens">
+                            <div class="gvd-redesign-screen">
+                                <img src="assets/gvd/redesign highlights screens/homepage-new.png" alt="Redesigned Gender Violence Database homepage">
+                                <span>After</span>
+                            </div>
+                            <div class="gvd-redesign-screen">
+                                <img src="assets/gvd/redesign highlights screens/homepage-old.png" alt="Previous Gender Violence Database homepage">
+                                <span>Before</span>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="gvd-redesign-pair">
+                        <h4>Browse</h4>
+                        <figcaption>Browse and search move from a dense text list to scannable result cards, with tag filters, journal browsing, and more readable metadata.</figcaption>
+                        <div class="gvd-redesign-screens">
+                            <div class="gvd-redesign-screen">
+                                <img src="assets/gvd/redesign highlights screens/search-new.png" alt="Redesigned Gender Violence Database browse and search results">
+                                <span>After</span>
+                            </div>
+                            <div class="gvd-redesign-screen">
+                                <img src="assets/gvd/redesign highlights screens/search-old.png" alt="Previous Gender Violence Database search results">
+                                <span>Before</span>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="gvd-redesign-pair">
+                        <h4>Glossary</h4>
+                        <figcaption>The glossary becomes a browsable schema: a category index on the left, nested definitions on the right.</figcaption>
+                        <div class="gvd-redesign-screens">
+                            <div class="gvd-redesign-screen">
+                                <img src="assets/gvd/redesign highlights screens/glossary-new.png" alt="Redesigned Gender Violence Database glossary">
+                                <span>After</span>
+                            </div>
+                            <div class="gvd-redesign-screen">
+                                <img src="assets/gvd/redesign highlights screens/glossary-old.png" alt="Previous Gender Violence Database glossary">
+                                <span>Before</span>
+                            </div>
+                        </div>
+                    </figure>
+                    <figure class="gvd-redesign-pair">
+                        <h4>Support &amp; Resources</h4>
+                        <figcaption>Crisis resources are recast as Support &amp; Resources — carded entries with clearer hierarchy for scanning under stress.</figcaption>
+                        <div class="gvd-redesign-screens">
+                            <div class="gvd-redesign-screen">
+                                <img src="assets/gvd/redesign highlights screens/help-new.png" alt="Redesigned Gender Violence Database support and resources page">
+                                <span>After</span>
+                            </div>
+                            <div class="gvd-redesign-screen">
+                                <img src="assets/gvd/redesign highlights screens/help-old.png" alt="Previous Gender Violence Database help page">
+                                <span>Before</span>
+                            </div>
+                        </div>
+                    </figure>
+                </div>
+            </section>
         </div>
     </main>
     <hr>
     <footer>
         <p>&copy; 2026 Nicole Wei</p>
         <div class="icons">
-                <a href="mailto:wei.yichen@wustl.edu" target="_blank" class="contact-entry" aria-label="Email"><i
-                        class="ph ph-envelope-simple"></i></a>
-                <a href="https://www.instagram.com/nikuowwi/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-instagram" aria-label="Instagram"><i
-                        class="ph-fill ph-instagram-logo"></i></a>
-                <a href="https://x.com/weieach" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x" aria-label="X"><i
-                        class="ph-fill ph-x-logo"></i></a>
-                <a href="https://www.linkedin.com/in/ncwei/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-linkedin" aria-label="LinkedIn"><i
-                        class="ph-fill ph-linkedin-logo"></i></a>
-            </div>
+            <a href="mailto:wei.yichen@wustl.edu" target="_blank" class="contact-entry" aria-label="Email"><i
+                    class="ph ph-envelope-simple"></i></a>
+            <a href="https://www.instagram.com/nikuowwi/" target="_blank" rel="noopener noreferrer"
+                class="contact-entry icon-instagram" aria-label="Instagram"><i
+                    class="ph-fill ph-instagram-logo"></i></a>
+            <a href="https://x.com/weieach" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x"
+                aria-label="X"><i class="ph-fill ph-x-logo"></i></a>
+            <a href="https://www.linkedin.com/in/ncwei/" target="_blank" rel="noopener noreferrer"
+                class="contact-entry icon-linkedin" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a>
+        </div>
     </footer>
     <script type="module" src="project-scroll.js"></script>
     <script src="script.js"></script>
