@@ -108,7 +108,7 @@
 
   /* Listing thumbs (460px–959px): pre-adjustment ARs */
   .card-booklets .card-thumbnail {
-    aspect-ratio: 1355 / 953; /* match index thumb asset */
+    aspect-ratio: 1524 / 1080;
   }
 
   .card-tldr .card-thumbnail {
@@ -614,7 +614,7 @@
   }
 
   .card-booklets .card-thumbnail {
-    aspect-ratio: 1355 / 953;
+    aspect-ratio: 1524 / 1080;
   }
 
   .card-fs .card-thumbnail {
