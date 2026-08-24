@@ -1251,6 +1251,15 @@ h2{
   display: block;
 }
 
+.hurricane-form-vid{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  background-color: #000000;
+  scale: 1;
+}
+
 .hurricane-seq img{
   width: 100%;
   display: block;
