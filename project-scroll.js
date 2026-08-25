@@ -161,7 +161,15 @@ function setupCaseStudyToc() {
 
   const inner = document.createElement("div");
   inner.className = "case-study-toc__inner";
+
+  // A plain div, not <nav>: the global header `nav`/`nav ul` rules would give
+  // the rail a background and a horizontal bar layout. The wrapping <aside>
+  // already carries role="navigation".
+  const sidebar = document.createElement("div");
+  sidebar.className = "line-sidebar";
+
   const list = document.createElement("ul");
+  list.className = "line-sidebar__list";
 
   const items = sections.map((section, i) => {
     const label =
@@ -172,16 +180,30 @@ function setupCaseStudyToc() {
     }
 
     const item = document.createElement("li");
+    item.className = "line-sidebar__item";
+
+    const marker = document.createElement("span");
+    marker.className = "line-sidebar__marker";
+    marker.setAttribute("aria-hidden", "true");
+
     const link = document.createElement("a");
+    link.className = "line-sidebar__label";
     link.href = `#${section.id}`;
-    link.textContent = label;
-    item.appendChild(link);
+
+    const index = document.createElement("span");
+    index.className = "line-sidebar__index";
+    index.setAttribute("aria-hidden", "true");
+    index.textContent = String(i + 1).padStart(2, "0");
+
+    link.append(index, document.createTextNode(label));
+    item.append(marker, link);
     list.appendChild(item);
 
     return { section, item };
   });
 
-  inner.appendChild(list);
+  sidebar.appendChild(list);
+  inner.appendChild(sidebar);
   rail.appendChild(inner);
   caption.prepend(rail);
 
@@ -192,6 +214,13 @@ function setupCaseStudyToc() {
 
   let activeIndex = -1;
   let frame = 0;
+
+  const proximity = setupLineSidebarProximity(
+    sidebar,
+    list,
+    items.map(({ item }) => item),
+    () => activeIndex
+  );
 
   const update = () => {
     frame = 0;
@@ -212,8 +241,11 @@ function setupCaseStudyToc() {
 
     if (next === activeIndex) return;
     items[activeIndex]?.item.classList.remove("is-active");
+    items[activeIndex]?.item.removeAttribute("aria-current");
     items[next].item.classList.add("is-active");
+    items[next].item.setAttribute("aria-current", "true");
     activeIndex = next;
+    proximity.start();
   };
 
   const schedule = () => {
@@ -225,7 +257,11 @@ function setupCaseStudyToc() {
   update();
 
   rail.addEventListener("click", (e) => {
-    const link = e.target.closest('a[href^="#"]');
+    // The item's widened hit area swallows clicks beside the label, so fall
+    // back to the anchor inside whichever item was hit.
+    const link =
+      e.target.closest('a[href^="#"]') ||
+      e.target.closest(".line-sidebar__item")?.querySelector('a[href^="#"]');
     if (!link) return;
 
     const target = document.querySelector(link.getAttribute("href"));
@@ -242,6 +278,79 @@ function setupCaseStudyToc() {
 
     scrollToTarget(target, -(navHeight() + 32));
   });
+}
+
+/**
+ * Cursor-proximity effect for the section rail (ported from react-bits
+ * LineSidebar). One rAF loop eases every item's `--effect` toward its target
+ * with frame-rate independent smoothing, so colour, shift and marker scale all
+ * move together instead of staggering separate CSS transitions.
+ */
+function setupLineSidebarProximity(sidebar, list, elements, getActiveIndex) {
+  const PROXIMITY_RADIUS = 50;
+  const SMOOTHING_S = 0.1;
+  const falloff = (p) => p * p * (3 - 2 * p);
+
+  const targets = elements.map(() => 0);
+  const current = elements.map(() => 0);
+  let raf = 0;
+  let last = 0;
+
+  const runFrame = (now) => {
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    const k = 1 - Math.exp(-dt / SMOOTHING_S);
+    const active = getActiveIndex();
+    let moving = false;
+
+    elements.forEach((el, i) => {
+      const target = Math.max(targets[i], active === i ? 1 : 0);
+      const next = current[i] + (target - current[i]) * k;
+      const settled = Math.abs(target - next) < 0.0015;
+      current[i] = settled ? target : next;
+      el.style.setProperty("--effect", current[i].toFixed(4));
+      if (!settled) moving = true;
+    });
+
+    raf = moving ? requestAnimationFrame(runFrame) : 0;
+  };
+
+  const start = () => {
+    if (raf) return;
+    last = performance.now();
+    raf = requestAnimationFrame(runFrame);
+  };
+
+  const settleNow = () => {
+    const active = getActiveIndex();
+    elements.forEach((el, i) => {
+      current[i] = active === i ? 1 : 0;
+      el.style.setProperty("--effect", String(current[i]));
+    });
+  };
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return { start: settleNow };
+  }
+
+  sidebar.addEventListener("pointermove", (e) => {
+    if (e.pointerType === "touch") return;
+
+    const pointerY = e.clientY - list.getBoundingClientRect().top;
+    elements.forEach((el, i) => {
+      const center = el.offsetTop + el.offsetHeight / 2;
+      const distance = Math.abs(pointerY - center);
+      targets[i] = falloff(Math.max(0, 1 - distance / PROXIMITY_RADIUS));
+    });
+    start();
+  });
+
+  sidebar.addEventListener("pointerleave", () => {
+    targets.fill(0);
+    start();
+  });
+
+  return { start };
 }
 
 function scrollToTop() {

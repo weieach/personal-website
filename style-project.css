@@ -1723,10 +1723,6 @@ main.main-projectpg.case-study-project{
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.55), 0 8px 28px rgba(0, 0, 0, 0.35);
 }
 
-.dark-mode .gvd-project .case-study-toc li.is-active a{
-  color: var(--gvd-primary);
-}
-
 .case-study-project .img-case-study-body{
   width: 140%;
   max-width: none;
@@ -2069,6 +2065,20 @@ main.main-projectpg.case-study-toc-enabled{
   width: 11rem;
   z-index: 5;
   pointer-events: none;
+  background: none;
+
+  /* LineSidebar tuning. --effect (0..1) is set per item by the rAF lerp in
+     project-scroll.js, so colour, shift and scale stay in step. */
+  --toc-text-color: #121212;
+  --toc-marker-color: #6c6c6c;
+  --toc-accent-color: #4E7E44;
+  --marker-length: 0.85rem;
+  --marker-gap: 0.35rem;
+  --marker-offset: 0.48rem;
+  --tick-scale: 0.5;
+  --max-shift: 8px;
+  --item-gap: 0.95rem;
+  --font-size: 0.7rem;
 }
 
 .case-study-toc.is-visible{
@@ -2087,22 +2097,32 @@ main.main-projectpg.case-study-toc-enabled{
   transform: none;
 }
 
-.case-study-toc ul,
-.project-caption .case-study-toc ul{
+.case-study-toc .line-sidebar{
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: calc(var(--marker-length) + var(--marker-gap));
+}
+
+.case-study-toc .line-sidebar__list,
+.project-caption .case-study-toc .line-sidebar__list{
+  list-style: none;
   margin: 0;
   margin-top: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   grid-template-columns: none;
-  gap: 0.95rem;
-  row-gap: 0.95rem;
+  gap: var(--item-gap);
+  row-gap: var(--item-gap);
   column-gap: 0;
 }
 
-.project-caption .case-study-toc li,
-.project-caption .case-study-toc ul > li:not(:last-child),
-.project-caption .case-study-toc ul > li:last-child{
+.case-study-toc .line-sidebar__item,
+.project-caption .case-study-toc .line-sidebar__item,
+.project-caption .case-study-toc .line-sidebar__list > li:not(:last-child),
+.project-caption .case-study-toc .line-sidebar__list > li:last-child{
+  position: relative;
   display: block;
   grid-column: auto;
   grid-template-columns: none;
@@ -2110,71 +2130,90 @@ main.main-projectpg.case-study-toc-enabled{
   gap: 0;
   padding-block: 0;
   border-bottom: none;
+  cursor: pointer;
 }
 
-.case-study-toc a{
+/* Widen the pointer target so items react a touch before the cursor arrives */
+.case-study-toc .line-sidebar__item::before{
+  content: "";
+  position: absolute;
+  inset: -6px -1.5rem;
+}
+
+.case-study-toc .line-sidebar__label{
   position: relative;
-  display: block;
-  padding-left: 1.2rem;
+  display: inline-flex;
+  align-items: baseline;
   font-family: "Geist Mono";
-  font-size: 0.7rem;
+  font-size: var(--font-size);
   line-height: 1.35;
   letter-spacing: 0.03em;
   text-decoration: none;
+  /* Keep the index and its title on one line; the rail has no background, so
+     the few px a long title spills past 11rem read as open space. */
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--toc-accent-color) calc(var(--effect, 0) * 100%), var(--toc-text-color));
+  opacity: calc(0.35 + var(--effect, 0) * 0.65);
+  transform: translateX(calc(var(--effect, 0) * var(--max-shift)));
+}
+
+/* `*` sets #121212 on every node, so the index must inherit the label mix. */
+.case-study-toc .line-sidebar__index{
+  margin-right: 0.45rem;
+  font-size: 0.85em;
   color: inherit;
-  opacity: 0.35;
-  transition: opacity 0.25s ease, color 0.25s ease;
+}
+
+.case-study-toc .line-sidebar__marker{
+  position: absolute;
+  top: var(--marker-offset);
+  left: calc(-1 * var(--marker-length) - var(--marker-gap));
+  height: 1px;
+  width: var(--marker-length);
+  background-color: color-mix(in srgb, var(--toc-accent-color) calc(var(--effect, 0) * 100%), var(--toc-marker-color));
+  transform-origin: left center;
+  transform: translateY(-50%) scaleX(calc(0.7 + var(--effect, 0) * 0.5));
+}
+
+/* Short static tick centred in the gap between two items */
+.case-study-toc .line-sidebar__item:not(:last-child)::after{
+  content: "";
+  position: absolute;
+  top: calc(100% + var(--item-gap) / 2);
+  left: calc(-1 * var(--marker-length) - var(--marker-gap));
+  height: 1px;
+  width: calc(var(--marker-length) * var(--tick-scale));
+  background-color: var(--toc-marker-color);
+  opacity: 0.5;
+  transform-origin: left center;
+  transform: translateY(-50%) scaleX(calc(0.7 + var(--effect, 0) * 0.6));
 }
 
 @media (width >= 1350px){
-  .case-study-toc a{
-    font-size: 0.78rem;
+  .case-study-toc{
+    --font-size: 0.78rem;
+    --marker-offset: 0.53rem;
   }
 }
 
-.case-study-toc a::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.52em;
-  width: 0.4rem;
-  height: 1px;
-  background-color: currentColor;
-  transform-origin: left center;
-  transition: scale 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+.dark-mode .case-study-toc{
+  --toc-text-color: #f2f2f2;
+  --toc-marker-color: #8b8b8b;
+  --toc-accent-color: #8A8FE5;
 }
 
-.case-study-toc a:hover{
-  opacity: 0.75;
-}
-
-.case-study-toc li.is-active a{
-  opacity: 1;
-  color: #4E7E44;
-}
-
-.gvd-project .case-study-toc li.is-active a{
-  color: var(--gvd-primary);
-}
-
-.case-study-toc li.is-active a::before{
-  scale: 1.75 1;
-}
-
-/* `color: inherit` picks up `*` #121212; force light inactive labels. */
-.dark-mode .case-study-toc a{
-  color: #f2f2f2;
-}
-
-.dark-mode .case-study-toc li.is-active a{
-  color: #8A8FE5;
+.gvd-project .case-study-toc,
+.dark-mode .gvd-project .case-study-toc{
+  --toc-accent-color: var(--gvd-primary);
 }
 
 @media (prefers-reduced-motion: reduce){
-  .case-study-toc__inner,
-  .case-study-toc a,
-  .case-study-toc a::before{
+  .case-study-toc__inner{
     transition: none;
+  }
+
+  .case-study-toc .line-sidebar__label{
+    transform: none;
   }
 }
 
