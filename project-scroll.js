@@ -418,7 +418,8 @@ function slugify(text) {
 function setupWalkthroughLightbox() {
   const grid = document.querySelector(".walkthrough-image-grid");
   const certificate = document.querySelector(".nijimu-certificate");
-  if (!grid && !certificate) return;
+  const elasticPoster = document.querySelector(".elastic-poster");
+  if (!grid && !certificate && !elasticPoster) return;
 
   const overlay = document.createElement("div");
   overlay.className = "image-lightbox";
@@ -433,10 +434,11 @@ function setupWalkthroughLightbox() {
 
   const preview = overlay.querySelector(".image-lightbox__img");
 
-  const open = (source, { certificate = false } = {}) => {
+  const open = (source, { certificate = false, poster = false } = {}) => {
     preview.src = source.currentSrc || source.src;
     preview.alt = source.alt || "";
     overlay.classList.toggle("image-lightbox--certificate", certificate);
+    overlay.classList.toggle("image-lightbox--poster", poster);
     overlay.classList.add("is-open");
     document.body.classList.add("is-lightbox-open");
     lenis?.stop();
@@ -446,6 +448,7 @@ function setupWalkthroughLightbox() {
     if (!overlay.classList.contains("is-open")) return;
     overlay.classList.remove("is-open");
     overlay.classList.remove("image-lightbox--certificate");
+    overlay.classList.remove("image-lightbox--poster");
     document.body.classList.remove("is-lightbox-open");
     lenis?.start();
   };
@@ -460,6 +463,16 @@ function setupWalkthroughLightbox() {
     const source = certificate.querySelector("img");
     if (!source) return;
     open(source, { certificate: true });
+  });
+
+  elasticPoster?.addEventListener("click", () => {
+    open(elasticPoster, { poster: true });
+  });
+
+  elasticPoster?.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    open(elasticPoster, { poster: true });
   });
 
   overlay.addEventListener("click", (e) => {

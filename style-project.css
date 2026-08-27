@@ -558,7 +558,17 @@ main.pg-with-thumbnail {
 } */
 
 #el-item-4{
-  width: 80%;
+  width: 100%;
+  max-width: 1200px;
+}
+
+#el-item-2 video,
+#el-item-3 video{
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: calc(90vh - var(--nav-height));
+  object-fit: contain;
 }
 
 
@@ -968,6 +978,7 @@ html:has(.nijimu-page.dark-mode) {
 
 .elastic-poster{
   max-width: 1050px;
+  cursor: zoom-in;
 }
 
 .motion-teaser{
@@ -2049,6 +2060,11 @@ main.main-projectpg.case-study-project{
   max-height: 72vh;
   border-radius: clamp(0.4rem, 0.7vw, 0.65rem);
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+}
+
+.image-lightbox--poster .image-lightbox__img{
+  max-width: 96vw;
+  max-height: 96vh;
 }
 
 .image-lightbox__close{
