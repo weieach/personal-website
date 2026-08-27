@@ -190,6 +190,35 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
   }
 }
 
+// Experimental section: page goes dark once the gallery above it has fully
+// scrolled off, and stays dark until the section leaves the viewport
+{
+  const experimental = document.querySelector(".nijimu-experimental");
+  if (experimental) {
+    const previousItem = experimental.previousElementSibling;
+    let queued = false;
+
+    const update = () => {
+      queued = false;
+      const previousGone =
+        !previousItem || previousItem.getBoundingClientRect().bottom <= 0;
+      const rect = experimental.getBoundingClientRect();
+      const onScreen = rect.bottom > 0 && rect.top < window.innerHeight;
+      document.body.classList.toggle("dark-mode", previousGone && onScreen);
+    };
+
+    const schedule = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+  }
+}
+
 // Mobile: show native controls on project highlight videos (not thumb clips)
 {
   const mq = window.matchMedia("(max-width: 959px)");

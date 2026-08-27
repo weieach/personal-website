@@ -42,6 +42,8 @@ if (main) {
         requestAnimationFrame(raf);
       };
       requestAnimationFrame(raf);
+
+      attachScrollSnap(main, lenis);
     }
 
     if (blocks.length) {
@@ -120,6 +122,46 @@ setupSeeAllToggles();
 
 function scrollBehavior() {
   return window.matchMedia("(pointer: coarse)").matches ? "auto" : "smooth";
+}
+
+/** Lenis owns the scroll, so CSS scroll-snap can't be used — register its Snap addon.
+ *  Coarse pointers keep native scroll, and snap via CSS instead.
+ *  Snap is landscape-only (width >= height), matching the full-bleed CSS stages. */
+function attachScrollSnap(main, lenisInstance) {
+  const targets = main.querySelectorAll("[data-scroll-snap]");
+  if (!targets.length) return;
+
+  const landscapeMq = window.matchMedia("(min-aspect-ratio: 1/1)");
+
+  import("https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis-snap.mjs")
+    .then(({ default: Snap }) => {
+      const snap = new Snap(lenisInstance, {
+        type: "proximity",
+        duration: 0.9,
+        // evaluate after Lenis has coasted to a stop, and only pull from nearby,
+        // so a deliberate scroll can still leave the clip behind
+        debounce: 520,
+        distanceThreshold: "32%",
+      });
+      // ignoreTransform: measure layout position, not the reveal animation's transform
+      targets.forEach((el) =>
+        snap.addElement(el, { align: ["center"], ignoreTransform: true })
+      );
+
+      const syncSnap = () => {
+        if (landscapeMq.matches) {
+          snap.start();
+          snap.resize();
+        } else {
+          snap.stop();
+        }
+      };
+
+      syncSnap();
+      landscapeMq.addEventListener("change", syncSnap);
+      window.addEventListener("resize", syncSnap);
+    })
+    .catch(() => {});
 }
 
 function scrollToTarget(target, offset = 0) {

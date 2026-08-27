@@ -300,7 +300,7 @@ main.pg-with-thumbnail {
   border: none;
   background: transparent;
   cursor: zoom-in;
-  /* Parked fully off-screen to the right; slides in to half-visible */
+  /* Parked fully off-screen to the right; slides in mostly tucked */
   transform: translate(120%, -50%) rotate(-9deg);
   transform-origin: center center;
   visibility: hidden;
@@ -313,12 +313,12 @@ main.pg-with-thumbnail {
 .nijimu-certificate.is-visible{
   visibility: visible;
   pointer-events: auto;
-  transform: translate(50%, -50%) rotate(-9deg);
+  transform: translate(64%, -50%) rotate(-9deg);
 }
 
 .nijimu-certificate.is-visible:hover,
 .nijimu-certificate.is-visible:focus-visible{
-  transform: translate(46%, -50%) rotate(-7deg);
+  transform: translate(56%, -50%) rotate(-7deg);
   outline: none;
 }
 
@@ -326,7 +326,7 @@ main.pg-with-thumbnail {
   display: block;
   overflow: hidden;
   border: 1.5px solid #E7E7E7;
-  border-radius: clamp(0.75rem, 1.4vw, 1.35rem);
+  border-radius: clamp(0.28rem, 0.5vw, 0.45rem);
   background: #fff;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
   transition: box-shadow 0.35s ease;
@@ -376,12 +376,12 @@ main.pg-with-thumbnail {
   }
 
   .nijimu-certificate.is-visible{
-    transform: translate(52%, -50%) rotate(-8deg);
+    transform: translate(64%, -50%) rotate(-8deg);
   }
 
   .nijimu-certificate.is-visible:hover,
   .nijimu-certificate.is-visible:focus-visible{
-    transform: translate(48%, -50%) rotate(-6deg);
+    transform: translate(56%, -50%) rotate(-6deg);
   }
 }
 
@@ -622,6 +622,131 @@ h3 {
 
 .non-cs-pg .project-pics > *{
   width: 100%;
+}
+
+.nijimu-project-pics > .captioned-item:first-child {
+  /* Match thumbnail → title: 1.5× subtitle → body, minus the parent flex gap */
+  margin-top: calc(var(--project-subtitle-to-body-gap) * 1.5 - var(--non-cs-flex-gap));
+}
+
+/* Experimental section: extra breathing room, then its own items at the gallery gap.
+   Full-bleed snap is landscape-only (width >= height); tall windows keep normal clips. */
+.nijimu-experimental {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  margin-top: calc(var(--space) * 20);
+}
+
+.nijimu-experimental__heading {
+  width: 100%;
+  margin: 0 0 calc(var(--space) * 6);
+  text-align: center;
+}
+
+.nijimu-experimental .video-app-highlights {
+  width: 100%;
+  background-color: #171717;
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .nijimu-experimental {
+    /* clips butt against each other so each one snaps to a clean full screen */
+    gap: 0;
+  }
+
+  /* Full-bleed stage per clip: same frame as .page-thumbnail-nijimu, so a snapped
+     clip fills the viewport exactly while the padding clears the fixed nav */
+  .nijimu-experimental .captioned-item {
+    position: relative;
+    box-sizing: border-box;
+    width: 100vw;
+    max-width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    height: 100svh;
+    padding-top: var(--nav-height);
+    gap: 0;
+  }
+
+  .nijimu-experimental .video-app-highlights {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* Under 960px main is padded, so bleed out to its padding box instead of 100vw */
+@media (width < 960px) and (min-aspect-ratio: 1/1) {
+  .nijimu-experimental .captioned-item {
+    width: calc(100% + (var(--space-page) * 2));
+    max-width: none;
+    margin-inline: calc(var(--space-page) * -1);
+  }
+}
+
+/* Touch devices skip Lenis, so fall back to native scroll snapping */
+@media (pointer: coarse) and (min-aspect-ratio: 1/1) {
+  html:has(.nijimu-experimental) {
+    scroll-snap-type: y proximity;
+  }
+
+  .nijimu-experimental .captioned-item {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+}
+
+/* Scrolling into the experimental section flips the page to dark mode */
+.nijimu-page,
+.nijimu-page header,
+.nijimu-page nav,
+.nijimu-page nav ul,
+.nijimu-page nav a,
+.nijimu-page .logo p,
+.nijimu-page .btn-burger span,
+.nijimu-page h1,
+.nijimu-page h2,
+.nijimu-page h3,
+.nijimu-page p,
+.nijimu-page hr,
+.nijimu-page footer {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+html:has(.nijimu-page.dark-mode) {
+  background-color: #171717;
+}
+
+/* Nijimu light-mode accent; dark mode stays a single neutral */
+.nijimu-page h3,
+.nijimu-page ul h3,
+.nijimu-page .list-case-study-info .entry-header {
+  color: #A3A3AB;
+}
+
+.nijimu-page.dark-mode h2,
+.nijimu-page.dark-mode h3,
+.nijimu-page.dark-mode ul h3,
+.nijimu-page.dark-mode .list-case-study-info .entry-header {
+  color: #E3E3E3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nijimu-page,
+  .nijimu-page header,
+  .nijimu-page nav,
+  .nijimu-page nav ul,
+  .nijimu-page nav a,
+  .nijimu-page .logo p,
+  .nijimu-page .btn-burger span,
+  .nijimu-page h1,
+  .nijimu-page h2,
+  .nijimu-page h3,
+  .nijimu-page p,
+  .nijimu-page hr,
+  .nijimu-page footer {
+    transition: none;
+  }
 }
 
 .placeholder-caption {
