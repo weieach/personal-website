@@ -143,10 +143,14 @@ function attachScrollSnap(main, lenisInstance) {
         debounce: 520,
         distanceThreshold: "32%",
       });
-      // ignoreTransform: measure layout position, not the reveal animation's transform
-      targets.forEach((el) =>
-        snap.addElement(el, { align: ["center"], ignoreTransform: true })
-      );
+      // Snap to the video itself so center-align tracks the clip, not a 100vh frame
+      targets.forEach((el) => {
+        const snapTarget = el.querySelector("video") || el;
+        snap.addElement(snapTarget, { align: ["center"], ignoreTransform: true });
+        snapTarget.addEventListener("loadedmetadata", () => {
+          if (landscapeMq.matches) snap.resize();
+        });
+      });
 
       const syncSnap = () => {
         if (landscapeMq.matches) {

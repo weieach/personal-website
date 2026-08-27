@@ -646,32 +646,22 @@ h3 {
 
 .nijimu-experimental .video-app-highlights {
   width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
   background-color: #171717;
 }
 
 @media (min-aspect-ratio: 1/1) {
-  .nijimu-experimental {
-    /* clips butt against each other so each one snaps to a clean full screen */
-    gap: 0;
-  }
-
-  /* Full-bleed stage per clip: same frame as .page-thumbnail-nijimu, so a snapped
-     clip fills the viewport exactly while the padding clears the fixed nav */
+  /* Full-bleed width; height follows the clip's native aspect ratio */
   .nijimu-experimental .captioned-item {
     position: relative;
     box-sizing: border-box;
     width: 100vw;
     max-width: 100vw;
     margin-inline: calc(50% - 50vw);
-    height: 100svh;
-    padding-top: var(--nav-height);
-    gap: 0;
-  }
-
-  .nijimu-experimental .video-app-highlights {
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    height: auto;
+    padding-top: 0;
   }
 }
 
@@ -690,7 +680,7 @@ h3 {
     scroll-snap-type: y proximity;
   }
 
-  .nijimu-experimental .captioned-item {
+  .nijimu-experimental .video-app-highlights {
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
