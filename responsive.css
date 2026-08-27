@@ -320,7 +320,7 @@
     font-size: 0.85rem;
   }
 
-  /* TL;DR phone demos: vertical stack (non-scrollable) */
+  /* TL;DR phone demos: vertical stack, equal width */
   .flexbox-tldr-demo:has(.tldr-demo-item) {
     flex-direction: column;
     align-items: center;
@@ -329,15 +329,12 @@
 
   .tldr-demo-item {
     width: min(72%, 18rem);
+    flex: none;
     gap: calc(var(--space) * 3);
   }
 
   .flexbox-tldr-demo video {
     width: 100%;
-  }
-
-  .flexbox-tldr-demo > video {
-    width: min(72%, 18rem);
   }
 
   .tldr-demo-caption {
@@ -366,6 +363,7 @@
   .tldr-hifi-scroll picture {
     flex-shrink: 0;
     display: flex;
+    width: auto;
   }
 
   .tldr-hifi-scroll .img-tldr-ui {

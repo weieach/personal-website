@@ -119,6 +119,7 @@ setupCaseStudyToc();
 mutePageVideos();
 setupWalkthroughLightbox();
 setupSeeAllToggles();
+setupTldrDemoFocus();
 
 function scrollBehavior() {
   return window.matchMedia("(pointer: coarse)").matches ? "auto" : "smooth";
@@ -503,6 +504,54 @@ function mutePageVideos() {
         video.volume = 0;
       }
     });
+  });
+}
+
+function setupTldrDemoFocus() {
+  const row = document.querySelector(".flexbox-tldr-demo:has(.tldr-demo-item)");
+  if (!row) return;
+
+  const items = [...row.querySelectorAll(".tldr-demo-item")];
+  const videos = items
+    .map((item) => item.querySelector("video"))
+    .filter(Boolean);
+  if (videos.length < 2) return;
+
+  const coarseMq = window.matchMedia("(pointer: coarse)");
+
+  const activate = (activeItem) => {
+    row.classList.add("is-focusing");
+    items.forEach((item) => {
+      const on = item === activeItem;
+      item.classList.toggle("is-active", on);
+      const video = item.querySelector("video");
+      if (!video) return;
+      if (on) video.play().catch(() => {});
+      else video.pause();
+    });
+  };
+
+  const clear = () => {
+    row.classList.remove("is-focusing");
+    items.forEach((item) => item.classList.remove("is-active"));
+    videos.forEach((video) => video.play().catch(() => {}));
+  };
+
+  items.forEach((item) => {
+    item.addEventListener("pointerenter", (e) => {
+      if (e.pointerType === "touch") return;
+      activate(item);
+    });
+    item.addEventListener("click", () => {
+      if (!coarseMq.matches) return;
+      if (item.classList.contains("is-active")) clear();
+      else activate(item);
+    });
+  });
+
+  row.addEventListener("pointerleave", (e) => {
+    if (e.pointerType === "touch") return;
+    clear();
   });
 }
 

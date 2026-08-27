@@ -1055,28 +1055,69 @@ h2{
 
 .flexbox-tldr-demo{
   display: flex;
-  gap: clamp(1.5rem, 2.75vw, 2.75rem);
-  max-width: 900px;
+  gap: 1.75rem;
+  width: 100%;
+  max-width: 1200px;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .tldr-demo-item{
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
   gap: calc(var(--space) * 2);
   margin: 0;
-  width: 33%;
-  min-width: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.flexbox-tldr-demo.is-focusing .tldr-demo-item:not(.is-active){
+  opacity: 0.38;
+  filter: grayscale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tldr-demo-item{
+    transition: none;
+  }
 }
 
 .tldr-demo-caption{
   display: none;
 }
 
+.tldr-demo-tap-tip{
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .tldr-demo-hover-tip{
+    display: none;
+  }
+
+  .tldr-demo-tap-tip{
+    display: flex;
+  }
+}
+
 .tldr-project-pics > .captioned-item:first-child {
   margin-top: calc(var(--space) * 3);
+}
+
+@media (width >= 960px) {
+  .project-pics.tldr-project-pics {
+    gap: 10vh;
+  }
+
+  .tldr-project-pics .captioned-item {
+    gap: 2.5rem;
+  }
 }
 
 .tldr-project video,
@@ -1086,16 +1127,11 @@ h2{
 }
 
 .flexbox-tldr-demo video{
-  /* aspect-ratio: 10/10; */
-  /* height: 100%; */
   width: 100%;
+  height: auto;
+  display: block;
   background-color: black;
   margin: 0;
-}
-
-/* Bare videos still in the demo flex (e.g. walkthrough) keep prior sizing */
-.flexbox-tldr-demo > video{
-  width: 33%;
 }
 
 .video-tldr-walkthrough{
@@ -1103,13 +1139,19 @@ h2{
 }
 
 .img-tldr-ui{
-  width: 90%;
+  width: 100%;
 }
 
 .tldr-hifi-scroll{
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.tldr-hifi-scroll picture{
+  display: flex;
+  justify-content: center;
+  width: 90%;
 }
 
 .tldr-hifi-scroll-tip{
