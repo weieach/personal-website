@@ -907,6 +907,8 @@ video.pictogram-source{
 
 .card-nijimu .card-thumbnail{
     background-color: #000000;
+    aspect-ratio: 1.8;
+    align-items: flex-start;
 }
 
 .card-nijimu .card-thumbnail video{
