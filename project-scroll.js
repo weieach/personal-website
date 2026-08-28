@@ -492,6 +492,8 @@ function mutePageVideos() {
   if (!videos.length) return;
 
   videos.forEach((video) => {
+    if (video.classList.contains("allows-sound")) return;
+
     video.muted = true;
     video.defaultMuted = true;
     video.volume = 0;
