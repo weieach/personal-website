@@ -878,14 +878,31 @@ video.pictogram-source{
 
 .card-schneider .card-thumbnail{
     background-color: #53c66c;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.6rem, 2.2%, 1.25rem);
+    padding: 5% 4%;
 }
 
 .card-schneider .card-thumbnail .thumb-img{
+    flex: 1 1 0;
+    min-width: 0;
     width: 100%;
-    scale: 0.82;
-    /* border-radius: 1.4rem; */
+    height: auto;
+    max-width: none;
+    max-height: 100%;
+    margin: 0;
+    scale: none;
     object-fit: contain;
-    object-position: top center;
+    object-position: center;
+}
+
+.card-schneider .card-thumbnail .schneider-thumb-phone{
+    height: 54%;
+    width: auto;
+    flex: 0 0 auto;
+    margin: 0;
+    object-fit: contain;
 }
 
 .card-nijimu .card-thumbnail{

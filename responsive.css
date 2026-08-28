@@ -486,6 +486,11 @@
   .main-projectpg.case-study-project .case-study-header + .img-casestudy-cover{
     margin-top: 0;
   }
+
+  /* Schneider body is 120ch; without a gutter it goes edge-to-edge in this range */
+  .main-projectpg.case-study-project.schneider-project .project-caption{
+    padding-inline: 5%;
+  }
 }
 
 @media (width < 800px) {
