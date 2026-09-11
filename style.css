@@ -113,7 +113,8 @@ hr{
 
 
 footer{
-    padding: 2rem 4vw;
+    padding-block: var(--space-nav);
+    padding-inline: var(--space-nav);
     display: flex;
     justify-content: space-between;
     align-items: center;

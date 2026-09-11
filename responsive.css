@@ -184,12 +184,13 @@
     color: #121212;
   }
 
-  .main-aboutpg {
+  main.main-aboutpg {
     flex: none;
     justify-content: flex-start;
     align-items: stretch;
-    margin-top: 7rem;
-    margin-bottom: 2.5rem;
+    /* Clear the fixed header only — 7rem was listing-page spacing */
+    margin-top: calc(var(--nav-height) + 1.5rem);
+    margin-bottom: 1.25rem;
     padding-top: 0;
     padding-inline: var(--space-page);
     max-width: none;
@@ -235,22 +236,16 @@
     -webkit-backface-visibility: visible;
   }
 
-  .postcard__back .about-avatar {
+  .postcard__back .about-avatar,
+  .about-avatar {
     width: 100%;
-    max-width: 375px;
+    max-width: none;
     margin-inline: auto;
+    order: 2;
   }
 
   .postcard-hint {
     display: none;
-  }
-
-  .about-avatar {
-    width: 100%;
-    max-width: 375px;
-    /* Stacked layout: keep the photo centered in the column */
-    margin-inline: auto;
-    order: 2;
   }
 
   .img-avatar {
@@ -275,8 +270,8 @@
   }
 
   .contact-info {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
   }
 
   /* Case study: fill the padded column on small screens; keep back in-flow */
