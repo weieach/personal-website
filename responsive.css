@@ -48,6 +48,27 @@
     margin-bottom: calc(var(--space) * 6);
   }
 
+  main:has(.projects-cta) {
+    margin-bottom: calc(var(--space) * 3);
+  }
+
+  .projects-cta {
+    padding-top: calc(var(--space) * 3);
+  }
+
+  .projects-cta__button {
+    width: min(9.25rem, 50vw);
+  }
+
+  .projects-cta__label {
+    font-size: 0.88rem;
+  }
+
+  .projects-cta__caption {
+    font-size: 0.8rem;
+    max-width: 16.5rem;
+  }
+
   /* Projects index: title case instead of all-caps headers */
   .cards .work-title {
     text-transform: none;

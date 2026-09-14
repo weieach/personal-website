@@ -61,6 +61,8 @@ if (cardsRoot) {
   }
 }
 
+setupProjectsCta();
+
 function setupListingScroll() {
   const preferNativeScroll =
     window.matchMedia("(max-width: 959px)").matches ||
@@ -198,4 +200,46 @@ function showCards(cards) {
     el.style.removeProperty("transform");
     el.style.willChange = "auto";
   });
+}
+
+function setupProjectsCta() {
+  const cta = document.querySelector(".projects-cta");
+  const link = cta?.querySelector(".projects-cta__link");
+  const arrow = link?.querySelector(".projects-cta__button i");
+  if (!cta || !link || !arrow) return;
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  const skipReveal = document.documentElement.classList.contains("hub-warm");
+
+  if (reduceMotion || skipReveal) {
+    cta.classList.add("scroll-reveal-card--done");
+  } else {
+    inView(
+      cta,
+      () => {
+        if (cta.classList.contains("scroll-reveal-card--done")) return;
+        animate(
+          cta,
+          { y: [28, 0] },
+          { duration: 0.7, easing: [0.16, 1, 0.3, 1] }
+        ).finished.then(() => {
+          cta.classList.add("scroll-reveal-card--done");
+          cta.style.removeProperty("transform");
+        });
+      },
+      { amount: 0.35 }
+    );
+  }
+
+  if (reduceMotion) return;
+
+  const nudge = (x) =>
+    animate(arrow, { x }, { duration: 0.35, easing: [0.22, 1, 0.36, 1] });
+
+  link.addEventListener("pointerenter", () => nudge(5));
+  link.addEventListener("pointerleave", () => nudge(0));
+  link.addEventListener("focusin", () => nudge(5));
+  link.addEventListener("focusout", () => nudge(0));
 }
