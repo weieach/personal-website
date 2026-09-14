@@ -206,6 +206,7 @@ function setupProjectsCta() {
   const cta = document.querySelector(".projects-cta");
   const link = cta?.querySelector(".projects-cta__link");
   const arrow = link?.querySelector(".projects-cta__button i");
+  const caption = cta?.querySelector(".projects-cta__caption");
   if (!cta || !link || !arrow) return;
 
   const reduceMotion = window.matchMedia(
@@ -213,24 +214,60 @@ function setupProjectsCta() {
   ).matches;
   const skipReveal = document.documentElement.classList.contains("hub-warm");
 
+  const showCaptionRest = () => {
+    if (!caption) return;
+    caption.classList.add("is-revealed");
+    caption.querySelectorAll(".projects-cta__line").forEach((line) => {
+      line.style.removeProperty("transform");
+      line.style.willChange = "auto";
+    });
+  };
+
+  const prepareCaptionLines = () => {
+    if (!caption) return [];
+    return [...caption.querySelectorAll(".projects-cta__line")];
+  };
+
   if (reduceMotion || skipReveal) {
-    cta.classList.add("scroll-reveal-card--done");
+    showCaptionRest();
   } else {
-    inView(
-      cta,
-      () => {
-        if (cta.classList.contains("scroll-reveal-card--done")) return;
-        animate(
-          cta,
-          { y: [28, 0] },
-          { duration: 0.7, easing: [0.16, 1, 0.3, 1] }
-        ).finished.then(() => {
-          cta.classList.add("scroll-reveal-card--done");
-          cta.style.removeProperty("transform");
-        });
-      },
-      { amount: 0.35 }
-    );
+    const startCaptionReveal = () => {
+      const lines = prepareCaptionLines();
+      if (!lines.length) {
+        showCaptionRest();
+        return;
+      }
+
+      inView(
+        caption,
+        () => {
+          if (caption.classList.contains("is-revealed")) return;
+
+          const reveals = lines.map((line, i) =>
+            animate(
+              line,
+              { y: ["115%", "0%"] },
+              {
+                duration: 0.75,
+                delay: 0.08 + i * 0.12,
+                easing: [0.16, 1, 0.3, 1],
+              }
+            ).finished
+          );
+
+          Promise.all(reveals).then(() => {
+            showCaptionRest();
+          });
+        },
+        { amount: 0.55, margin: "0px 0px -6% 0px" }
+      );
+    };
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => startCaptionReveal());
+    } else {
+      startCaptionReveal();
+    }
   }
 
   if (reduceMotion) return;

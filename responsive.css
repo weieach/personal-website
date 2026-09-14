@@ -201,10 +201,6 @@
     font-size: 0.875em; /* keep caption ratio vs title (was 0.875rem on root) */
   }
 
-  .cards-single-column .work-title-desc {
-    color: #121212;
-  }
-
   main.main-aboutpg {
     flex: none;
     justify-content: flex-start;
