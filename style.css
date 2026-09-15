@@ -814,13 +814,12 @@ video.pictogram-source{
 }
 
 .card-booklets .card-thumbnail{
-    /* Content area of hurricane-cover.mp4 after cropping ~198px pillarboxes */
-    aspect-ratio: 1524 / 1080;
+    aspect-ratio: 1353 / 954;
     outline: 2px solid #F5F5F5;
     overflow: hidden;
 }
 
-.card-booklets .card-thumbnail video{
+.card-booklets .card-thumbnail img{
     width: 100%;
     height: 100%;
     display: block;
