@@ -1,0 +1,32 @@
+.tag-shape-layer {
+  position: fixed; inset: 0; width: 100%; height: 100%; z-index: 350;
+  pointer-events: none; mix-blend-mode: normal;
+}
+.project-filter, [data-collection-nav] { display: inline-flex; align-items: center; }
+.tag-shape-slot {
+  display: inline-block; flex: 0 0 auto; width: 0; height: 18px;
+  margin-right: 0; vertical-align: middle;
+  transition: width 260ms cubic-bezier(.22, .7, .2, 1), margin-right 260ms cubic-bezier(.22, .7, .2, 1);
+}
+[data-shape-key]:is(:hover, :focus-visible, .has-collection-shape, .is-shape-departing, [aria-pressed="true"]) > .tag-shape-slot {
+  width: 20px; margin-right: 5px;
+}
+.project-filter__label { display: inline-block; }
+@media (prefers-reduced-motion: reduce) { .tag-shape-slot { transition: none; } }
+.project-filter__count { white-space: pre; }
+.has-collection-shape > .tag-shape-slot { transition: none; }
+
+/* Two sibling buttons share one pill visually, without nested controls. */
+.project-filter-group { position: relative; display: inline-flex; align-items: center; }
+.project-filter--all.has-clear { padding-right: 28px; }
+.project-filter-clear {
+  position: absolute; right: 9px; top: 50%; translate: 0 -50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%;
+  background: transparent; color: var(--color-interactive-muted); font: inherit;
+  font-size: 1.15rem; line-height: 1; cursor: pointer;
+  transition: color 180ms ease-out;
+}
+.project-filter-clear[hidden] { display: none; }
+.project-filter-clear:hover, .project-filter-clear:focus-visible { color: var(--color-bg); }
+.project-filter-clear:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }

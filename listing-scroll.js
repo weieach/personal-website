@@ -1,4 +1,3 @@
-import Lenis from "https://cdn.jsdelivr.net/npm/lenis@1.3.25/+esm";
 import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@12.42.2/+esm";
 
 /**
@@ -44,7 +43,7 @@ if (cardsRoot) {
   if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
   }
-  window.scrollTo(0, 0);
+  if (location.hash !== "#about") window.scrollTo(0, 0);
 
   if (reduceMotion) {
     cards.forEach((card) => card.classList.add("scroll-reveal-card--done"));
@@ -54,37 +53,12 @@ if (cardsRoot) {
   ) {
     // Same-session revisit: show cards at rest (no rise choreography)
     cards.forEach((card) => card.classList.add("scroll-reveal-card--done"));
-    setupListingScroll();
   } else if (cards.length) {
-    setupListingScroll();
     whenListingReady(() => startListingReveals(cards));
   }
 }
 
 setupProjectsCta();
-
-function setupListingScroll() {
-  const preferNativeScroll =
-    window.matchMedia("(max-width: 959px)").matches ||
-    window.matchMedia("(pointer: coarse)").matches;
-
-  if (preferNativeScroll) return;
-
-  const lenis = new Lenis({
-    duration: 1.05,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-    touchMultiplier: 1.1,
-  });
-
-  lenis.scrollTo(0, { immediate: true });
-
-  const raf = (time) => {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  };
-  requestAnimationFrame(raf);
-}
 
 function startListingReveals(cards) {
   let cascadeStep = 0;
@@ -146,15 +120,14 @@ function whenListingReady(callback) {
   const run = () => {
     if (started) return;
     started = true;
-    requestAnimationFrame(() => requestAnimationFrame(callback));
+    requestAnimationFrame(callback);
   };
 
   const loader = document.getElementById("page-loader");
   const loaderGone =
-    !loader || loader.classList.contains("page-loader--hidden");
+    !loader || loader.dataset.falling === "true" || loader.classList.contains("page-loader--hidden");
 
-  // Wait until the fullscreen loader unlocks scroll so reveal work
-  // doesn't compete with the first touch gesture after hide.
+  // Reveal underneath the sheet as soon as it starts falling.
   if (loaderGone) {
     if (document.readyState === "complete") {
       run();
@@ -164,6 +137,7 @@ function whenListingReady(callback) {
     return;
   }
 
+  window.addEventListener("page-loader:falling", run, { once: true });
   window.addEventListener("page-loader:hidden", run, { once: true });
   // Safety if the loader never fires (matches script.js fallback)
   window.setTimeout(run, 22000);

@@ -1,0 +1,175 @@
+/* The site uses one dark theme; project imagery keeps its original colors. */
+:root {
+  color-scheme: dark;
+  --color-bg: #161616;
+  --color-text: #f2f2f2;
+  --color-text-muted: #aaaaaa;
+  --color-surface-muted: #262626;
+  --color-border: #555555;
+  --color-interactive-muted: #666666;
+  --highlight-duration: 180ms;
+  --highlight-easing: ease-out;
+}
+
+html,
+body,
+body.dark-mode {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Page-specific dark styles must never paint a rectangle behind blended text. */
+body > header,
+body > header * {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+
+body > header a,
+body > header .logo p {
+  letter-spacing: 0.04em;
+}
+
+.page-loader,
+.dark-mode .sidebar,
+.dark-mode .sidebar a,
+.postcard__back {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.page-loader__tip,
+.page-loader__tip-label,
+.page-loader__tip-text {
+  color: var(--color-text);
+}
+
+.projects-cta__caption,
+.postcard-hint {
+  color: var(--color-text-muted);
+}
+
+.page-loader__bar {
+  background: #444444;
+}
+
+.page-loader__bar-fill {
+  background: var(--color-text);
+}
+
+.project-filter {
+  --tag-border: var(--color-interactive-muted);
+  color: var(--color-text);
+  border-color: var(--tag-border);
+  transition:
+    border-color var(--highlight-duration) var(--highlight-easing),
+    color var(--highlight-duration) var(--highlight-easing);
+}
+
+.project-filter:hover {
+  --tag-border: var(--color-text);
+  border-color: var(--tag-border);
+}
+
+.project-filter[aria-pressed="true"] {
+  --tag-border: #888888;
+  background: var(--color-text);
+  border-color: var(--tag-border);
+  color: var(--color-bg);
+}
+
+.project-filter__count {
+  color: var(--tag-border);
+  transition: color var(--highlight-duration) var(--highlight-easing);
+}
+
+[data-project-grid] .work-title {
+  color: var(--color-interactive-muted);
+  transition: color var(--highlight-duration) var(--highlight-easing);
+}
+
+[data-project-grid] .work-title * {
+  color: inherit;
+}
+
+[data-project-grid] .card:has(.card-thumbnail:hover) .work-title,
+[data-project-grid] .card:has(.card-thumbnail:focus-within) .work-title,
+[data-project-grid] .card:has(a:focus-visible) .work-title {
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-filter,
+  .project-filter__count,
+  [data-project-grid] .work-title { transition: none; }
+}
+
+.project-filter:focus-visible {
+  outline-color: var(--color-text);
+}
+
+.projects-cta__button {
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+
+.dark-mode .btn-visit-site,
+.dark-mode .btn-visit-site *,
+.dark-mode .btn-project-details,
+.dark-mode .btn-project-details * {
+  color: var(--color-text);
+}
+
+.btn-visit-site,
+.cards-single-column .btn-visit-site {
+  background-color: var(--color-surface-muted);
+}
+
+.dark-mode .btn-project-details.disabled-link {
+  background-color: var(--color-surface-muted);
+}
+
+.dark-mode .btn-project-details.disabled-link,
+.dark-mode .btn-project-details.disabled-link * {
+  color: var(--color-text-muted);
+}
+
+.cards a.btn-visit-site,
+.cards-single-column a.btn-visit-site {
+  transition: box-shadow 200ms ease;
+}
+
+.cards a.btn-visit-site:hover,
+.cards a.btn-visit-site:focus-visible,
+.cards-single-column a.btn-visit-site:hover,
+.cards-single-column a.btn-visit-site:focus-visible {
+  border-color: transparent;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0);
+  scale: 1;
+}
+
+.cards a.btn-visit-site:focus-visible {
+  outline: 2px solid var(--color-text-muted);
+  outline-offset: 2px;
+}
+
+.cards > .card.card-booklets .card-thumbnail {
+  border: 0;
+  outline: none;
+}
+
+.dev-note {
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+}
+
+.about-bird-hover-star,
+.bird-chirp {
+  color: var(--color-text);
+}
+
+.dark-mode .section-process .product-highlight-entry > .captioned-item + div::before {
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}

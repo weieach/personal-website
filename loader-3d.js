@@ -1,3 +1,5 @@
+import { animate as animateMotion } from "https://cdn.jsdelivr.net/npm/motion@12.42.2/+esm";
+import { installLoaderExit } from "./loader-paper.js?v=5";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
@@ -139,7 +141,7 @@ function spawnChirps(canvas) {
   window.setTimeout(() => layer.classList.remove("is-chirping"), 1100);
 }
 
-function mountBird(canvas, { onReady, shouldDispose } = {}) {
+function mountBird(canvas, { onReady, shouldDispose, jumpOnClick = false } = {}) {
   if (!canvas) return;
 
   const renderer = new THREE.WebGLRenderer({
@@ -174,6 +176,8 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
   let rafId = 0;
   let disposed = false;
   let spinning = true;
+  let frozen = false;
+  let lastWidth = 0, lastHeight = 0;
   let chirping = false;
   let spinElapsed = 0;
   let tiltX = 0;
@@ -182,11 +186,12 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
   canvas.style.cursor = "pointer";
   canvas.setAttribute("role", "button");
   canvas.setAttribute("tabindex", "0");
-  canvas.setAttribute("aria-label", "Chirp the bird");
+  canvas.setAttribute("aria-label", jumpOnClick ? "Make the bird jump" : "Chirp the bird");
 
   function resize() {
     const { clientWidth: w, clientHeight: h } = canvas;
-    if (!w || !h) return;
+    if (!w || !h || (w === lastWidth && h === lastHeight)) return;
+    lastWidth = w; lastHeight = h;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
@@ -212,8 +217,14 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
     camera.updateProjectionMatrix();
   }
 
+  function jump() {
+    if (!model || chirping || disposed || frozen) return false;
+    playChirp();
+    return true;
+  }
+
   async function playChirp() {
-    if (!model || chirping || disposed) return;
+    if (!model || chirping || disposed || frozen) return;
     chirping = true;
     spinning = false;
     spawnChirps(canvas);
@@ -222,6 +233,14 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
       await wait(120);
       spinning = true;
       chirping = false;
+      return;
+    }
+
+    if (jumpOnClick) {
+      try {
+        await animateMotion(canvas, { y: [0, -54] }, { duration: .18, ease: 'easeOut' });
+        await animateMotion(canvas, { y: 0 }, { type: 'spring', stiffness: 300, damping: 12, mass: .75 });
+      } finally { spinning = true; chirping = false; }
       return;
     }
 
@@ -272,11 +291,11 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
     resize();
 
     if (model) {
-      if (spinning && !reduceMotion) {
+      if (spinning && !frozen && !reduceMotion) {
         spinElapsed += delta;
       }
       model.rotation.y = spinElapsed * ROTATION_SPEED;
-      model.rotation.x = tiltX;
+      if (!frozen) model.rotation.x = tiltX;
     }
 
     renderer.render(scene, camera);
@@ -304,11 +323,15 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
       onReady?.(false);
     });
 
-  return { dispose };
+  return {
+    jump,
+    dispose,
+    freeze() { frozen = true; canvas.style.pointerEvents = "none"; canvas.removeAttribute("tabindex"); },
+  };
 }
 
 // --------------------------
-// Page loader (index.html)
+// Page loader (playground.html)
 // --------------------------
 (() => {
   const canvas = document.getElementById("page-loader-canvas");
@@ -319,9 +342,9 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
   if (document.documentElement.classList.contains("hub-warm")) return;
 
   const api = mountBird(canvas, {
-    onReady: () => {
+    onReady: (ok) => {
       const mark = canvas.closest(".page-loader__mark");
-      mark?.classList.add("is-ready");
+      if (ok) mark?.classList.add("is-ready");
       loaderEl.dataset.modelReady = "true";
       window.dispatchEvent(new CustomEvent("page-loader:model-ready"));
     },
@@ -329,6 +352,8 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
       !loaderEl.isConnected ||
       loaderEl.classList.contains("page-loader--hidden"),
   });
+
+  installLoaderExit(loaderEl, api, reduceMotion);
 
   const observer = new MutationObserver(() => {
     if (
@@ -353,15 +378,52 @@ function mountBird(canvas, { onReady, shouldDispose } = {}) {
   const canvas = document.getElementById("about-bird-canvas");
   if (!canvas) return;
 
+  let api = null;
+  let jumped = false;
+  let shouldJump = false;
+  let footerObserver = null;
+
+  const tryJump = () => {
+    if (jumped || !shouldJump || !api?.jump()) return;
+    jumped = true;
+    footerObserver?.disconnect();
+  };
+
+  const requestJump = () => {
+    shouldJump = true;
+    start();
+    tryJump();
+  };
+
   const start = () => {
-    mountBird(canvas, {
+    if (api) return;
+    api = mountBird(canvas, {
+      jumpOnClick: true,
       onReady: (ok) => {
         if (!ok) return;
         canvas.classList.add("is-ready");
         canvas.closest(".about-bird-wrap")?.classList.add("is-ready");
+        tryJump();
       },
     });
   };
+
+  const drawer = canvas.closest('.about-drawer');
+  if (drawer) {
+    const footer = drawer.querySelector('footer');
+    if (drawer.classList.contains('is-open')) start();
+    else window.addEventListener('about-drawer:open', () => start(), { once: true });
+
+    if (footer) {
+      footerObserver = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) requestJump();
+      });
+      footerObserver.observe(footer);
+    }
+
+    window.addEventListener('about-drawer:arrived', requestJump);
+    return;
+  }
 
   // Bird loads after flip (desktop). On mobile the postcard is static/open.
   const postcard = document.getElementById("about-postcard");

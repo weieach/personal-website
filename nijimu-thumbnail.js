@@ -29,12 +29,6 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
     hero.style.opacity = "1";
     hero.style.transform = "none";
   } else {
-    // Desktop only — keep mobile from fetching collage clips
-    clips.forEach((clip) => {
-      clip.preload = "auto";
-      clip.load();
-    });
-
     let running = false;
     let generation = 0;
     let inView = true;
@@ -122,6 +116,10 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
 
     const loop = async () => {
       if (running) return;
+      clips.forEach((clip) => {
+        window.SiteMedia?.load(clip);
+        clip.preload = "auto";
+      });
       running = true;
       const gen = ++generation;
 
@@ -142,7 +140,7 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        inView = Boolean(entry?.isIntersecting);
+        inView = Boolean(entry?.isIntersecting) && !document.hidden;
         if (inView) {
           loop();
         } else {
@@ -154,26 +152,24 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
     );
 
     observer.observe(thumb);
+    document.addEventListener("visibilitychange", () => {
+      const rect = thumb.getBoundingClientRect();
+      inView = !document.hidden && rect.bottom > 0 && rect.top < innerHeight;
+      if (inView) loop();
+      else stop();
+    });
   }
 }
 
-// Black nav over the thumbnail on desktop only; mobile keeps the default nav color.
-// Initial dark state is on <html class="nijimu-nav-dark"> + critical CSS in <head> (no FOUC).
+// Reveal the award certificate after scrolling beyond the thumbnail.
 {
   const header = document.querySelector("header");
-  const root = document.documentElement;
   const certificate = document.querySelector(".nijimu-certificate");
-  const desktopNavMq = window.matchMedia("(min-width: 960px)");
   if (header && thumb) {
     const syncNav = () => {
       const pastThumb =
         thumb.getBoundingClientRect().bottom <=
         header.getBoundingClientRect().bottom;
-      if (desktopNavMq.matches) {
-        root.classList.toggle("nijimu-nav-dark", !pastThumb);
-      } else {
-        root.classList.remove("nijimu-nav-dark");
-      }
       certificate?.classList.toggle("is-visible", pastThumb);
     };
 
@@ -181,41 +177,11 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
 
     window.addEventListener("scroll", syncNav, { passive: true });
     window.addEventListener("resize", syncNav, { passive: true });
-    desktopNavMq.addEventListener("change", syncNav);
 
     const navObserver = new IntersectionObserver(syncNav, {
       threshold: [0, 0.25, 0.5, 0.75, 1],
     });
     navObserver.observe(thumb);
-  }
-}
-
-// Experimental section: page goes dark once the gallery above it has fully
-// scrolled off, and stays dark until the section leaves the viewport
-{
-  const experimental = document.querySelector(".nijimu-experimental");
-  if (experimental) {
-    const previousItem = experimental.previousElementSibling;
-    let queued = false;
-
-    const update = () => {
-      queued = false;
-      const previousGone =
-        !previousItem || previousItem.getBoundingClientRect().bottom <= 0;
-      const rect = experimental.getBoundingClientRect();
-      const onScreen = rect.bottom > 0 && rect.top < window.innerHeight;
-      document.body.classList.toggle("dark-mode", previousGone && onScreen);
-    };
-
-    const schedule = () => {
-      if (queued) return;
-      queued = true;
-      requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
   }
 }
 

@@ -1,0 +1,310 @@
+/* Shared Playground detail grid. Work case studies keep their own layout. */
+main.main-projectpg.playground-project {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-flow: row dense;
+  gap: 16px;
+  width: auto;
+  max-width: none;
+  margin: var(--nav-height) var(--page-inline-space) 64px;
+  padding: 0;
+}
+
+.playground-project > .project-caption,
+.playground-project > .nijimu-caption-band {
+  grid-column: 1 / -1;
+  position: relative;
+  inset: auto;
+  margin-block: 1rem;
+}
+
+.playground-project .placeholder-caption { display: none; }
+
+main.playground-project .project-caption.playground-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+main.playground-project > .nijimu-caption-band { margin: 0; }
+
+.playground-summary-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+
+.playground-summary .playground-summary-info > :is(h1, h2, ul) {
+  margin: 0;
+  width: 100%;
+}
+
+main.playground-project .btn-back {
+  display: none;
+}
+
+main.playground-project .playground-summary h1 {
+  font-size: 2rem;
+}
+
+.playground-summary-description { min-width: 0; }
+.playground-summary .playground-summary-description > p:first-child { margin-top: 0; }
+.playground-summary .playground-summary-description > p:last-child { margin-bottom: 0; }
+
+main.main-projectpg.playground-project .project-pics > .playground-media-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-column: 1 / -1;
+  gap: 16px;
+  opacity: 1;
+  transform: none;
+}
+
+main.playground-project .playground-media-pair > .playground-tile { grid-column: auto; }
+
+main.playground-project .project-pics,
+main.playground-project .nijimu-experimental,
+main.playground-project .playground-group {
+  display: contents;
+  opacity: 1;
+  transform: none;
+}
+
+main.playground-project .playground-tile {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / -1;
+  position: relative;
+  inset: auto;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  /* One full grid row is 16:9, including rows with paired portrait assets. */
+  height: 56.25cqw;
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  scale: none;
+  background: transparent;
+  opacity: 1;
+  transform: none;
+}
+
+main.playground-project .playground-tile--portrait { grid-column: span 1; }
+main.playground-project .playground-tile--fullwidth { grid-column: 1 / -1; }
+
+main.playground-project > .work-wu-poster {
+  grid-column: 1 / -1;
+  max-width: none;
+  margin: 0;
+}
+
+main.playground-project > .work-wu-poster .playground-media {
+  background: #2B78FF;
+}
+
+main.playground-project > .work-wu-poster .playground-media > img {
+  scale: 0.8;
+}
+
+main.playground-project .playground-tile:has(img.wu-street-mockup) {
+  grid-column: 1 / -1;
+  height: auto;
+}
+
+main.playground-project .playground-media:has(img.wu-street-mockup) {
+  flex: none;
+  aspect-ratio: 2 / 3;
+  height: auto;
+}
+
+main.playground-project .playground-media:has(img.wu-street-mockup) > img.wu-street-mockup {
+  object-fit: cover;
+}
+
+main.playground-project .playground-media {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: #161616;
+}
+
+main.playground-project .playground-media > :is(img, video, canvas, picture),
+main.playground-project .playground-media > picture > img {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+  scale: none;
+}
+
+/* Keep the decoder in the rendered layout: display:none/zero-sized videos
+   can have autoplay and frame delivery suspended by the browser. */
+main.playground-project .playground-media > .pictogram-source {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  opacity: 1;
+  scale: 0.7 !important;
+}
+
+main.playground-project .playground-media > canvas.pictogram-visual {
+  z-index: 1;
+  pointer-events: none;
+}
+
+main.playground-project .page-thumbnail-tldr .playground-media > img,
+main.playground-project .playground-media > img.img-tldr-mockup {
+  width: 100%;
+  height: auto;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+}
+
+/* Two mockups share one row and cover the standard tile height. */
+main.playground-project.tldr-project .tldr-mockup-pair .playground-media > img.img-tldr-mockup {
+  inset: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+main.playground-project.tldr-project .tldr-mockup-pair > .captioned-item:first-child .playground-media > img.img-tldr-mockup {
+  object-position: left center;
+}
+
+/* Hi-fi sheet spans the row at its own ratio, instead of letterboxing inside the 16:9 tile. */
+main.playground-project .playground-tile:has(img.img-tldr-ui) {
+  height: auto;
+}
+
+main.playground-project .playground-media:has(img.img-tldr-ui) {
+  flex: none;
+  height: auto;
+}
+
+main.playground-project .playground-media:has(img.img-tldr-ui) > picture,
+main.playground-project .playground-media:has(img.img-tldr-ui) > picture > img.img-tldr-ui {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+main.playground-project .playground-media > video,
+main.playground-project .playground-media > canvas.pictogram-visual {
+  scale: 0.7;
+}
+
+main.playground-project.fs-project .playground-media:has(> video) {
+  background: #E08494;
+}
+
+main.playground-project.fs-project .playground-media-pair > .captioned-item:first-child .playground-media {
+  background: #9BB5DC;
+}
+
+main.playground-project.fs-project .playground-media-pair > .captioned-item:last-child .playground-media {
+  background: #EBC15C;
+}
+
+main.playground-project.fs-project .project-pics > .playground-tile--fullwidth:last-child .playground-media {
+  background: #262424;
+}
+
+main.playground-project.fs-project .playground-media > video {
+  scale: 0.8;
+}
+
+main.playground-project.fs-project .project-pics > .playground-tile {
+  max-width: none;
+}
+
+main.playground-project.tldr-project .playground-media:has(> video) {
+  background: #000;
+}
+
+main.playground-project.mitwerk-project .playground-media:has(> img) {
+  background: #f3f3f3;
+}
+
+.playground-project #el-item-4 { max-width: none; }
+.playground-project :is(#el-item-2, #el-item-3) video {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+}
+
+main.playground-project .playground-tile > :is(.floating-caption, .floating-caption-wrap) {
+  flex: none;
+  position: static;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+  transform: none;
+}
+
+.playground-project .playground-group > .floating-caption-wrap,
+.playground-project .nijimu-experimental__heading,
+.playground-project .sf-mobile-blurb {
+  grid-column: 1 / -1;
+}
+
+.playground-project .tldr-hifi-scroll-tip { display: none; }
+
+main.playground-project .playground-tile--composite {
+  background: #000;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+@media (width < 960px) {
+  main.main-projectpg.playground-project { grid-template-columns: minmax(0, 1fr); }
+  main.playground-project .project-caption.playground-summary,
+  main.main-projectpg.playground-project .project-pics > .playground-media-pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  main.playground-project .playground-tile--portrait { grid-column: 1 / -1; }
+  main.playground-project .page-thumbnail-nijimu .nijimu-thumb-static {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: contain;
+  }
+}

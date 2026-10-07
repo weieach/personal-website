@@ -9,7 +9,7 @@ let closeBtnOn = false;
 const isGalleryPage = Boolean(
   document.querySelector(".cards, .cards-single-column")
 );
-if (isGalleryPage) {
+if (isGalleryPage && location.hash !== "#about") {
   if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
   }
@@ -148,12 +148,12 @@ function ensureToastStyles() {
       padding: 12px 18px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(246, 246, 246, 1.0);
+      background: var(--color-surface-muted);
       color: #fff;
       box-shadow: 0 12px 40px rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      font: 500 14px/1.35 "Geist", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font: 500 14px/1.35 "Neurial Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       animation: toast-in 160ms ease-out;
     }
     .toast__message{ flex: 1; }
@@ -161,7 +161,7 @@ function ensureToastStyles() {
       appearance: none;
       border: none;
       background: transparent;
-      color: black;
+      color: inherit;
       cursor: pointer;
       padding: 2px 6px;
       border-radius: 8px;
@@ -281,12 +281,28 @@ document.addEventListener("click", (e) => {
     const ctx = canvas.getContext("2d", { alpha: false, willReadFrequently: true });
     if (!ctx) return;
 
+    const isGridThumbnail = !!video.closest('.card-pictogram');
     let tinted = false;
 
     const paint = () => {
       const w = video.videoWidth;
       const h = video.videoHeight;
       if (!w || !h) return;
+      if (isGridThumbnail) {
+        // Draw the padding and artwork through one color pipeline. Stretch a
+        // background pixel from this decoded frame instead of guessing a CSS
+        // blue or mixing the video's color profile with a static image.
+        const size = Math.max(w, h);
+        if (canvas.width !== size || canvas.height !== size) {
+          canvas.width = canvas.height = size;
+        }
+        ctx.drawImage(video, 8, 8, 1, 1, 0, 0, size, size);
+        const scale = size * 0.84 / Math.max(w, h);
+        const width = w * scale;
+        const height = h * scale;
+        ctx.drawImage(video, (size - width) / 2, (size - height) / 2, width, height);
+        return;
+      }
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w;
         canvas.height = h;
@@ -329,9 +345,9 @@ document.addEventListener("click", (e) => {
 })();
 
 // --------------------------
-// Thumbnail CTAs: ensure every listing card gets a "Project details" button.
+// Thumbnail CTAs: projects without detail pages only offer an optional Visit site link.
 // Cards that already have "Visit site" keep it (left) with details on the right.
-// Cards with no CTA (e.g. pictogram) get details only. Hidden below 500px via CSS.
+// Other cards with no CTA get details only. Hidden below 500px via CSS.
 // --------------------------
 (() => {
   const cards = document.querySelectorAll(
@@ -339,6 +355,17 @@ document.addEventListener("click", (e) => {
   );
 
   cards.forEach((card) => {
+    const archived = card.dataset.collection?.toLowerCase() === "archive" ||
+      Boolean(card.closest('[data-project-collection="archive"]'));
+    const hasDetails = !archived && card.dataset.projectDetails !== "false";
+    if (!hasDetails) {
+      card.querySelectorAll(".btn-project-details").forEach(link => link.remove());
+      // Strip project-page links even when a card without details is copied
+      // from the main grid. Preserve the independent Visit site link.
+      card.querySelectorAll("a:not(.btn-visit-site)").forEach(link => {
+        link.replaceWith(...link.childNodes);
+      });
+    }
     if (card.querySelector(".thumbnail-cta")) return;
 
     const thumb = card.querySelector(".card-thumbnail");
@@ -352,12 +379,11 @@ document.addEventListener("click", (e) => {
     const projectLink = [...card.querySelectorAll("a[href]")].find(
       (a) => !a.classList.contains("btn-visit-site")
     );
-    if (!projectLink) return;
-
-    const href = projectLink.getAttribute("href");
-    if (!href) return;
+    const href = projectLink?.getAttribute("href");
+    if (hasDetails && !href) return;
 
     const visitBtn = thumb.querySelector(":scope > .btn-visit-site");
+    if (!hasDetails && !visitBtn) return;
 
     if (visitBtn) {
       const favicon = visitBtn.querySelector(".icon-visit-site");
@@ -371,15 +397,17 @@ document.addEventListener("click", (e) => {
         label = document.createElement("span");
         label.className = "btn-visit-site__label";
         label.textContent = "Visit site";
-        visitBtn.insertBefore(label, visitBtn.firstChild);
+        visitBtn.appendChild(label);
       }
 
-      if (!trail) {
-        trail = document.createElement("span");
-        trail.className = "btn-visit-site__trail";
-        visitBtn.appendChild(trail);
+      if (favicon) {
+        if (!trail) {
+          trail = document.createElement("span");
+          trail.className = "btn-visit-site__trail";
+        }
+        trail.appendChild(favicon);
+        visitBtn.insertBefore(trail, label);
       }
-      if (favicon) trail.appendChild(favicon);
     }
 
     const group = document.createElement("div");
@@ -391,6 +419,8 @@ document.addEventListener("click", (e) => {
     } else {
       thumb.appendChild(group);
     }
+
+    if (!hasDetails) return;
 
     const detailsBtn = document.createElement("a");
     detailsBtn.className = "btn-visit-site btn-project-details";
@@ -410,7 +440,7 @@ document.addEventListener("click", (e) => {
 })();
 
 // --------------------------
-// Fullscreen page loader (index.html / intern.html)
+// Fullscreen page loader (playground.html / work.html)
 // Waits for page load + 3D logo, then holds briefly so the
 // rotation is visible. Safety timeout prevents a stuck overlay.
 // Same-session revisits skip the cold start (see hub-session.js).
@@ -432,19 +462,14 @@ document.addEventListener("click", (e) => {
   }
 
   const TIP_ROTATE_MS = 10000;
-  const TIP_EASE = [0.22, 1, 0.36, 1];
   const tips = [
     {
-      weight: 0.2,
-      text: "Currently building custom web-native 3D shaders and a Chrome job application plugin.",
-    },
-    {
-      weight: 0.3,
-      text: "A creative technologist, design engineer, and digital artist.",
+      weight: 0.5,
+      text: "Creative technologist / product designer / graphic artist",
     },
     {
       weight: 0.5,
-      text: "Graduating in May 2027 and open to design engineer roles. Come say hi!",
+      text: "Graduating in May 2027. Come say hi!",
     },
   ];
 
@@ -486,60 +511,44 @@ document.addEventListener("click", (e) => {
     }
   };
 
-  const rotateTip = async () => {
+  const rotateTip = () => {
     if (hidden || tipRotating || !tipText || !tipViewport) return;
     const next = pickOther(tipText.textContent);
     if (next === tipText.textContent) return;
 
     tipRotating = true;
 
-    if (reduceMotion) {
+    if (reduceMotion || !window.gsap) {
       tipText.textContent = next;
       tipRotating = false;
       return;
     }
 
-    const outgoing = tipText.cloneNode(true);
-    outgoing.classList.add("page-loader__tip-text--outgoing");
-    outgoing.style.width = `${tipText.getBoundingClientRect().width}px`;
-    tipViewport.appendChild(outgoing);
-
-    tipText.textContent = next;
-    tipText.style.opacity = "0";
-    tipText.style.transform = "translateY(-10px)";
-
-    try {
-      const { animate } = await import(
-        "https://cdn.jsdelivr.net/npm/motion@12.42.2/+esm"
-      );
+    const flip = window.gsap.timeline({
+      onComplete: () => {
+        window.gsap.set(tipText, { clearProps: "transform" });
+        tipRotating = false;
+      },
+    });
+    flip.to(tipText, {
+      rotateX: -90,
+      duration: 0.35,
+      ease: "power2.in",
+      transformOrigin: "50% 50%",
+    });
+    flip.call(() => {
       if (hidden || !loader.isConnected) {
-        outgoing.remove();
-        tipText.style.opacity = "";
-        tipText.style.transform = "";
+        flip.kill();
+        tipRotating = false;
         return;
       }
-
-      await Promise.all([
-        animate(
-          outgoing,
-          { y: 14, opacity: 0 },
-          { duration: 0.42, ease: TIP_EASE }
-        ).finished,
-        animate(
-          tipText,
-          { y: [-10, 0], opacity: [0, 1] },
-          { duration: 0.42, ease: TIP_EASE }
-        ).finished,
-      ]);
-    } catch {
-      tipText.style.opacity = "1";
-      tipText.style.transform = "none";
-    }
-
-    outgoing.remove();
-    tipText.style.opacity = "";
-    tipText.style.transform = "";
-    tipRotating = false;
+      tipText.textContent = next;
+    });
+    flip.fromTo(
+      tipText,
+      { rotateX: 90 },
+      { rotateX: 0, duration: 0.4, ease: "power2.out", transformOrigin: "50% 50%" }
+    );
   };
 
   if (tipText && tipViewport) {
@@ -552,16 +561,27 @@ document.addEventListener("click", (e) => {
     }, TIP_ROTATE_MS);
   }
 
-  const hide = () => {
+  const hide = async () => {
     if (hidden || !loader.isConnected) return;
     hidden = true;
     stopTipRotation();
-    // Unlock scroll before tear-down so the first touch isn't blocked
+    // Keep the page locked until the cover has physically cleared the viewport.
+    try {
+      if (window.SiteLoader) await Promise.race([
+        window.SiteLoader.exit(),
+        new Promise(resolve => setTimeout(resolve, 3000)),
+      ]);
+      else {
+        loader.dataset.falling = 'true';
+        window.dispatchEvent(new CustomEvent('page-loader:falling'));
+        await loader.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 180 }).finished;
+      }
+    } catch (error) { console.warn('Loader exit interrupted', error); }
     document.body.classList.remove("is-loading");
     loader.classList.add("page-loader--hidden");
     hub?.markWarm?.();
     window.dispatchEvent(new CustomEvent("page-loader:hidden"));
-    window.setTimeout(() => loader.remove(), 450);
+    loader.remove();
   };
 
   const tryHide = () => {
