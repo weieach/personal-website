@@ -61,7 +61,9 @@
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=motion-2"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
-    <script type="module" src="tag-shapes.js?v=14"></script>
+    <script type="module" src="tag-shapes.js?v=17"></script>
+    <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
+    <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
 
 <body class="dark-mode">
@@ -90,7 +92,7 @@
             </ul>
         </div>
         <div class="page-thumbnail page-thumbnail-wherewhatwhere">
-            <video src="assets/wherewhatwhere/personalessay(smaller).mp4" class="film-wherewhatwhere" autoplay muted loop playsinline></video>
+            <video data-media-src="assets/wherewhatwhere/personalessay(smaller).mp4" class="film-wherewhatwhere" data-media-autoplay muted loop playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/745ed91f5669.webp"></video><noscript data-media-fallback><video src="assets/wherewhatwhere/personalessay(smaller).mp4" class="film-wherewhatwhere" muted loop playsinline controls preload="none"></video></noscript>
         </div>
         <div class="project-caption">
             <h1><i>Where? What? Where?</i> Video Essay</h1>
@@ -121,11 +123,11 @@
         <div class="placeholder-caption"></div>
         <div class="project-pics">
             <div class="captioned-item">
-                <video src="assets/wherewhatwhere/personalessay(smaller).mp4" class="film-wherewhatwhere" controls loop playsinline></video>
+                <video data-media-src="assets/wherewhatwhere/personalessay(smaller).mp4" class="film-wherewhatwhere" controls loop playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/745ed91f5669.webp"></video><noscript data-media-fallback><video src="assets/wherewhatwhere/personalessay(smaller).mp4" class="film-wherewhatwhere" controls loop playsinline></video></noscript>
                 <p>Full film (best experienced with sound on)</p>
             </div>
             <div class="captioned-item">
-                <img src="assets/wherewhatwhere/videssay-thumbnail.png" alt="Keyframes">
+                <img data-media-src="assets/wherewhatwhere/videssay-thumbnail.png" alt="Keyframes" width="1505" height="1033" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/wherewhatwhere/videssay-thumbnail.png" alt="Keyframes"></noscript>
                 <p>Keyframes</p>
             </div>
         </div>
@@ -144,7 +146,9 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script type="module" src="project-scroll.js?v=gsap-1"></script>
+    <script src="media-config.js?v=1"></script>
+    <script src="media-loader.js?v=1"></script>
+    <script type="module" src="project-scroll.js?v=media-1"></script>
     <script src="script.js?v=optional-details-1"></script>
 </body>
 

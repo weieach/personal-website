@@ -61,9 +61,11 @@
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=motion-2"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
-    <script type="module" src="tag-shapes.js?v=14"></script>
+    <script type="module" src="tag-shapes.js?v=17"></script>
     <link rel="stylesheet" href="about-drawer.css?v=3">
     <script type="module" src="about-drawer.js?v=4"></script>
+    <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
+    <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
 
 <body class="dark-mode">
@@ -98,7 +100,7 @@
                 personalized adventure.</h2>
             <a href="work.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
         </div>
-        <img class="img-casestudy-cover" src="assets/adventurer/adventurer-thumb.png" alt="">
+        <img class="img-casestudy-cover" data-media-src="assets/adventurer/adventurer-thumb.png" alt="" width="2648" height="1496" loading="lazy" decoding="async"><noscript data-media-fallback><img class="img-casestudy-cover" src="assets/adventurer/adventurer-thumb.png" alt=""></noscript>
         <div class="project-caption">
             <section class="section-case-study" data-toc-scroll="top">
                 <h3 class="no-display">Overview</h3>
@@ -159,8 +161,9 @@
                                 their story and are prompted to make a choice that determines how the narrative unfolds.
                                 </p>
                         </div>
-                        <video class="video-app-highlights" src="assets/adventurer/adventurer-focus(v2).mp4" autoplay loop muted
-                            playsinline></video>
+                        <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-focus(v2).mp4" data-media-autoplay loop muted
+                            playsinline width="2164" height="2160" preload="none" data-media-poster="assets/media-posters/3d55121807c3.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-focus(v2).mp4" loop muted
+                            playsinline controls preload="none"></video></noscript>
 
                     </div>
                     <div class="product-highlight-entry">
@@ -172,8 +175,9 @@
                                 accomplishment in real time.
                             </p>
                         </div>
-                        <video class="video-app-highlights" src="assets/adventurer/adventurer-narrative.mp4" autoplay loop muted
-                            playsinline></video>
+                        <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-narrative.mp4" data-media-autoplay loop muted
+                            playsinline width="2156" height="2160" preload="none" data-media-poster="assets/media-posters/b664ec14c1ea.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-narrative.mp4" loop muted
+                            playsinline controls preload="none"></video></noscript>
 
                     </div>
 
@@ -185,8 +189,9 @@
                                 educational audio content.
                             </p>
                         </div>
-                        <video class="video-app-highlights" src="assets/adventurer/adventurer-store.mp4" autoplay loop muted
-                            playsinline></video>
+                        <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-store.mp4" data-media-autoplay loop muted
+                            playsinline width="2156" height="2160" preload="none" data-media-poster="assets/media-posters/64728289822a.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-store.mp4" loop muted
+                            playsinline controls preload="none"></video></noscript>
 
                     </div>
 
@@ -199,16 +204,17 @@
                                 rewards.
                             </p>
                         </div>
-                        <video class="video-app-highlights" src="assets/adventurer/adventurer-clan.mp4" autoplay loop muted
-                            playsinline></video>
+                        <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-clan.mp4" data-media-autoplay loop muted
+                            playsinline width="2156" height="2160" preload="none" data-media-poster="assets/media-posters/172107f1ff3f.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-clan.mp4" loop muted
+                            playsinline controls preload="none"></video></noscript>
 
                     </div>
                 </div>
             </section>
             <section class="section-ui-design">
                 <h3>UI design</h3>
-                <img src="assets/adventurer/adventurer full ui (web).png" class="img-mockup" alt="hi-fi UI">
-                <img src="assets/adventurer/adventurer-mockup.png" class="img-mockup" alt="hi-fi UI">
+                <img data-media-src="assets/adventurer/adventurer full ui (web).png" class="img-mockup" alt="hi-fi UI" width="2087" height="1745" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/adventurer full ui (web).png" class="img-mockup" alt="hi-fi UI"></noscript>
+                <img data-media-src="assets/adventurer/adventurer-mockup.png" class="img-mockup" alt="hi-fi UI" width="1986" height="1280" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/adventurer-mockup.png" class="img-mockup" alt="hi-fi UI"></noscript>
             </section>
             <!-- <section class="section-mockup">
                 <h3>Mockup</h3>
@@ -217,7 +223,7 @@
             <section class="section-design-system">
                 <h3>Design system</h3>
                 <div class="wrapper-design-system">
-                <img src="assets/adventurer/design system.png" alt="Keyframes">
+                <img data-media-src="assets/adventurer/design system.png" alt="Keyframes" width="1999" height="2688" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/design system.png" alt="Keyframes"></noscript>
                 </div>
             </section>
             <div class="placeholder-caption"></div>
@@ -256,10 +262,11 @@
                             </div>
                             <picture>
                                 <source type="image/webp"
-                                    srcset="assets/about/avatar-750.webp 750w, assets/about/avatar-1125.webp 1125w"
+                                    data-media-srcset="assets/about/avatar-750.webp 750w, assets/about/avatar-1125.webp 1125w"
                                     sizes="(max-width: 959px) min(375px, 100vw), 300px">
-                                <img src="assets/about/avatar-750.jpg" class="img-avatar" alt="Nicole Wei"
-                                    width="750" height="1000" loading="lazy" decoding="async">
+                                <img data-media-src="assets/about/avatar-750.jpg" class="img-avatar" alt="Nicole Wei"
+                                    width="750" height="1000" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/about/avatar-750.jpg" class="img-avatar" alt="Nicole Wei"
+                                    width="750" height="1000" loading="lazy" decoding="async"></noscript>
                             </picture>
                         </div>
                         <div class="text-about">
@@ -301,7 +308,9 @@
             </div>
         </div>
     </section>
-    <script type="module" src="project-scroll.js?v=gsap-1"></script>
+    <script src="media-config.js?v=1"></script>
+    <script src="media-loader.js?v=1"></script>
+    <script type="module" src="project-scroll.js?v=media-1"></script>
     <script src="script.js?v=optional-details-1"></script>
 </body>
 

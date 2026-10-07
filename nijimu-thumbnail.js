@@ -29,12 +29,6 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
     hero.style.opacity = "1";
     hero.style.transform = "none";
   } else {
-    // Desktop only — keep mobile from fetching collage clips
-    clips.forEach((clip) => {
-      clip.preload = "auto";
-      clip.load();
-    });
-
     let running = false;
     let generation = 0;
     let inView = true;
@@ -122,6 +116,10 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
 
     const loop = async () => {
       if (running) return;
+      clips.forEach((clip) => {
+        window.SiteMedia?.load(clip);
+        clip.preload = "auto";
+      });
       running = true;
       const gen = ++generation;
 
@@ -142,7 +140,7 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        inView = Boolean(entry?.isIntersecting);
+        inView = Boolean(entry?.isIntersecting) && !document.hidden;
         if (inView) {
           loop();
         } else {
@@ -154,6 +152,12 @@ if (thumb && stage && hero && clips.length && !mobileStatic) {
     );
 
     observer.observe(thumb);
+    document.addEventListener("visibilitychange", () => {
+      const rect = thumb.getBoundingClientRect();
+      inView = !document.hidden && rect.bottom > 0 && rect.top < innerHeight;
+      if (inView) loop();
+      else stop();
+    });
   }
 }
 

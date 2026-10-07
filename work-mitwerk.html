@@ -62,7 +62,9 @@
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=motion-2"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
-    <script type="module" src="tag-shapes.js?v=14"></script>
+    <script type="module" src="tag-shapes.js?v=17"></script>
+    <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
+    <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
 
 <body class="dark-mode mitwerk-project">
@@ -91,7 +93,7 @@
             </ul>
         </div>
         <div class="page-thumbnail page-thumbnail-mitwerk">
-            <img src="assets/mitwerk/cover.png" alt="MitWerk iteration visualizer">
+            <img data-media-src="assets/mitwerk/cover.png" alt="MitWerk iteration visualizer" width="3452" height="1920" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/mitwerk/cover.png" alt="MitWerk iteration visualizer"></noscript>
         </div>
         <div class="project-caption">
             <h1>MitWerk</h1>
@@ -136,9 +138,11 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script type="module" src="project-scroll.js?v=gsap-1"></script>
+    <script src="media-config.js?v=1"></script>
+    <script src="media-loader.js?v=1"></script>
+    <script type="module" src="project-scroll.js?v=media-1"></script>
     <script src="script.js?v=optional-details-1"></script>
-    <script src="playground-layout.js?v=9"></script>
+    <script src="playground-layout.js?v=media-1"></script>
 </body>
 
 </html>

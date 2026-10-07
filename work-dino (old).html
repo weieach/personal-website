@@ -46,7 +46,9 @@
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=motion-2"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
-    <script type="module" src="tag-shapes.js?v=14"></script>
+    <script type="module" src="tag-shapes.js?v=17"></script>
+    <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
+    <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
 
 <body class="dark-mode">
@@ -95,19 +97,19 @@
         <div class="placeholder-caption"></div>
         <div class="project-pics dino-project-pics">
             <div class="captioned-item">
-                <video src="assets/dino/dino create event.mov" class="dino-event-demo" autoplay loop controls muted></video>
+                <video data-media-src="assets/dino/dino create event.mov" class="dino-event-demo" data-media-autoplay loop controls muted width="2424" height="1756" preload="none" data-media-poster="assets/media-posters/71c226f855e5.webp"></video><noscript data-media-fallback><video src="assets/dino/dino create event.mov" class="dino-event-demo" loop controls muted></video></noscript>
                 <p>Feature demo: Creating an event on the website</p>
             </div>
             <div class="captioned-item ">
-                <img src="assets/dino/dino-screens.png" alt="hi-fi UI">
+                <img data-media-src="assets/dino/dino-screens.png" alt="hi-fi UI" width="1824" height="3371" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens.png" alt="hi-fi UI"></noscript>
                 <p>Hi-fi UI</p>
             </div>
             <div class="captioned-item item-dino-recorded">
-                <video src="assets/dino/dino landing page.mov" class="dino-landing-demo" autoplay loop controls muted></video>
+                <video data-media-src="assets/dino/dino landing page.mov" class="dino-landing-demo" data-media-autoplay loop controls muted width="3184" height="1778" preload="none" data-media-poster="assets/media-posters/8c40d1a8168d.webp"></video><noscript data-media-fallback><video src="assets/dino/dino landing page.mov" class="dino-landing-demo" loop controls muted></video></noscript>
                 <p>Landing page</p>
             </div>
             <div class="captioned-item ">
-                <img src="assets/dino/dino-twitter.png" alt="hi-fi UI">
+                <img data-media-src="assets/dino/dino-twitter.png" alt="hi-fi UI" width="1410" height="865" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-twitter.png" alt="hi-fi UI"></noscript>
                 <p>Event branding material</p>
             </div>
         </div>
@@ -126,7 +128,9 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script type="module" src="project-scroll.js?v=gsap-1"></script>
+    <script src="media-config.js?v=1"></script>
+    <script src="media-loader.js?v=1"></script>
+    <script type="module" src="project-scroll.js?v=media-1"></script>
     <script src="script.js?v=optional-details-1"></script>
 </body>
 

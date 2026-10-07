@@ -368,6 +368,7 @@ function setupWalkthroughLightbox() {
   const preview = overlay.querySelector(".image-lightbox__img");
 
   const open = (source, { certificate = false, poster = false } = {}) => {
+    window.SiteMedia?.load(source);
     preview.src = source.currentSrc || source.src;
     preview.alt = source.alt || "";
     overlay.classList.toggle("image-lightbox--certificate", certificate);
@@ -458,7 +459,8 @@ function setupTldrDemoFocus() {
       item.classList.toggle("is-active", on);
       const video = item.querySelector("video");
       if (!video) return;
-      if (on) video.play().catch(() => {});
+      if (window.SiteMedia) window.SiteMedia.setBlocked(video, !on);
+      else if (on) video.play().catch(() => {});
       else video.pause();
     });
   };
@@ -466,7 +468,10 @@ function setupTldrDemoFocus() {
   const clear = () => {
     row.classList.remove("is-focusing");
     items.forEach((item) => item.classList.remove("is-active"));
-    videos.forEach((video) => video.play().catch(() => {}));
+    videos.forEach((video) => {
+      if (window.SiteMedia) window.SiteMedia.setBlocked(video, false);
+      else video.play().catch(() => {});
+    });
   };
 
   items.forEach((item) => {

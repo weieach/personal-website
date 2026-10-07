@@ -12,10 +12,10 @@ const shapes = {
   'Branding & Identity': { color: '#ff9475', a: [9, 7.3, .4, .4, 1, 1], b: [2, 2.3, 6.2, 14.7, 1, 1.1] },
   'Creative Coding': { color: '#9ddd83', a: [10, .6, 1.3, 1.4, 1.25, 1], b: [12, .2, 4.5, .5, .95, 1.1] },
   'Motion Graphics': { color: '#73d9d1', a: [6, 1, 7, 8, 1, 1], b: [4, 10, 10, 10, 1, 1] },
-  Poster: { color: '#f0d573', a: [5, .3, .3, .3], b: [4, 15, 15, 15], scale: [1, .4, 1] },
+  Poster: { color: '#f0d573', a: [12, .5, 1.2, 1.2, 1, 1], b: [1, .3, 1, .3, 1, 1] },
   'UI / UX': { color: '#86cadf', a: [4, 4, 4, 4], b: [4, 4, 4, 4], scale: [1, 1, .55] },
   'Vibe Coding': { color: '#eea5f0', a: [10, 2.5, 1.4, 13.6, 1, 1], b: [12, .5, 10.6, 1.7, .8, 1.2] },
-  'Web Development': { color: '#b7d5a0', a: [9, 7.3, .4, .4, 1.2, 1], b: [4.4, 2.3, 6.2, 14.7, 1, 1.1] },
+  'Web Development': { color: '#b7d5a0', a: [11, .6, 11, 11, 1, 1], b: [2, .5, .4, 14.9, 1.35, .9] },
 };
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const states = new Map();
@@ -84,7 +84,7 @@ function paint(key, x, y, size, rotation, opacity = 1, roll = 0, pitch = 0) {
   }
   if (cached.rotation === null || Math.abs(cached.rotation - rotation) > .008 || Math.abs(cached.pitch - pitch) > .008) {
     const mesh = makeMesh(key);
-    mesh.rotation.set(.4 + pitch, .55 + rotation, -.16);
+    mesh.rotation.set(1.05 + pitch, .55 + rotation, -.16);
     scene.add(mesh); renderer.render(scene, camera); scene.remove(mesh);
     cached.context.clearRect(0, 0, 112, 112);
     cached.context.drawImage(renderer.domElement, 0, 0);

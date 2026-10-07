@@ -61,7 +61,9 @@
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=motion-2"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
-    <script type="module" src="tag-shapes.js?v=14"></script>
+    <script type="module" src="tag-shapes.js?v=17"></script>
+    <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
+    <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
 
 <body class="dark-mode">
@@ -109,18 +111,18 @@
         <div class="placeholder-caption"></div>
         <div class="project-pics dephy-project-pics">
             <div class="captioned-item">
-                <img src="assets/dephy/node_3 1.png" alt="product promotion">
-                <img src="assets/dephy/dephy3.png" alt="product promotion">
+                <img data-media-src="assets/dephy/node_3 1.png" alt="product promotion" width="1305" height="644" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dephy/node_3 1.png" alt="product promotion"></noscript>
+                <img data-media-src="assets/dephy/dephy3.png" alt="product promotion" width="1517" height="848" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dephy/dephy3.png" alt="product promotion"></noscript>
                 <p>Product promotion</p>
             </div>
             <div class="captioned-item">
-                <img src="assets/dephy/dephy5.png" alt="hi-fi UI">
-                <img src="assets/dephy/dephy6.png" alt="hi-fi UI">
+                <img data-media-src="assets/dephy/dephy5.png" alt="hi-fi UI" width="1470" height="827" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dephy/dephy5.png" alt="hi-fi UI"></noscript>
+                <img data-media-src="assets/dephy/dephy6.png" alt="hi-fi UI" width="1470" height="824" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dephy/dephy6.png" alt="hi-fi UI"></noscript>
                 <p>Event banner</p>
             </div>
             <div class="captioned-item">
-                <img src="assets/dephy/dephy1.png" alt="hi-fi UI">
-                <img src="assets/dephy/dephy2.png" alt="hi-fi UI">
+                <img data-media-src="assets/dephy/dephy1.png" alt="hi-fi UI" width="1728" height="954" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dephy/dephy1.png" alt="hi-fi UI"></noscript>
+                <img data-media-src="assets/dephy/dephy2.png" alt="hi-fi UI" width="1728" height="954" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dephy/dephy2.png" alt="hi-fi UI"></noscript>
                 <p>Landing page UI</p>
             </div>
             <!-- <div class="captioned-item">
@@ -145,7 +147,9 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script type="module" src="project-scroll.js?v=gsap-1"></script>
+    <script src="media-config.js?v=1"></script>
+    <script src="media-loader.js?v=1"></script>
+    <script type="module" src="project-scroll.js?v=media-1"></script>
     <script src="script.js?v=optional-details-1"></script>
 </body>
 

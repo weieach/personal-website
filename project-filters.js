@@ -109,10 +109,10 @@
       const visible = inCollection(project) && (tag === null || tags.has(tag));
       card.hidden = !visible;
       if (visible) count += 1;
-      // Stop hidden thumbnails consuming video playback; resume visible loops.
+      // The media controller resumes only thumbnails that are in the viewport.
       card.querySelectorAll("video").forEach((video) => {
         if (!visible) video.pause();
-        else if (video.autoplay && getComputedStyle(video).display !== "none") {
+        else if (!window.SiteMedia && video.autoplay && getComputedStyle(video).display !== "none") {
           video.play().catch(() => {});
         }
       });

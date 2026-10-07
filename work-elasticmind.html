@@ -62,7 +62,9 @@
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=motion-2"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
-    <script type="module" src="tag-shapes.js?v=14"></script>
+    <script type="module" src="tag-shapes.js?v=17"></script>
+    <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
+    <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
 
 <body class="dark-mode dark-mode-lighter">
@@ -91,7 +93,7 @@
             </ul>
         </div>
         <div class="page-thumbnail page-thumbnail-elastic-mind">
-            <video src="assets/elasticmind/(10.4)%20elastic-mind-thumb.mp4" autoplay muted loop playsinline></video>
+            <video data-media-src="assets/elasticmind/(10.4)%20elastic-mind-thumb.mp4" data-media-autoplay muted loop playsinline width="2556" height="2160" preload="none" data-media-poster="assets/media-posters/9b95846c348d.webp"></video><noscript data-media-fallback><video src="assets/elasticmind/(10.4)%20elastic-mind-thumb.mp4" muted loop playsinline controls preload="none"></video></noscript>
             <a href="#elastic-h1" class="thumbnail-tooltip">
                 <span class="thumbnail-tooltip__text">(Scroll down to learn more <i class="ph-bold ph-arrow-down"></i>)</span>
             </a>
@@ -147,7 +149,7 @@
         <div class="placeholder-caption"></div>
         <div class="project-pics">
             <div class="captioned-item playground-tile--fullwidth" id="el-item-1">
-                <img src="assets/elasticmind/elastic-poster-effect.png" class="elastic-poster" alt="Design and the Elastic Mind exhibition poster" role="button" tabindex="0" aria-label="View poster full screen">
+                <img data-media-src="assets/elasticmind/elastic-poster-effect.png" class="elastic-poster" alt="Design and the Elastic Mind exhibition poster" role="button" tabindex="0" aria-label="View poster full screen" width="1807" height="2558" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/elasticmind/elastic-poster-effect.png" class="elastic-poster" alt="Design and the Elastic Mind exhibition poster" role="button" tabindex="0" aria-label="View poster full screen"></noscript>
                 <div class="floating-caption">
                     <p class="floating-caption-title">poster design</p>
                     <p class="floating-caption-detail">A1 (23.4 x 33.1 inch)</p>
@@ -155,7 +157,7 @@
             </div>
 
             <div class="captioned-item">
-                <img src="assets/elasticmind/elastic mind-poster stand.png" alt="">
+                <img data-media-src="assets/elasticmind/elastic mind-poster stand.png" alt="" width="2528" height="1696" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/elasticmind/elastic mind-poster stand.png" alt=""></noscript>
                 <div class="floating-caption">
                     <p class="floating-caption-title">poster design</p>
                     <p class="floating-caption-detail">Mockup</p>
@@ -165,7 +167,7 @@
 
             <div class="playground-media-pair">
             <div class="captioned-item" id="el-item-3">
-                <video src="assets/elasticmind/elastic-3d-poster.mp4" autoplay muted playsinline loop></video>
+                <video data-media-src="assets/elasticmind/elastic-3d-poster.mp4" data-media-autoplay muted playsinline loop width="2828" height="4000" preload="none" data-media-poster="assets/media-posters/c8bc6dc07536.webp"></video><noscript data-media-fallback><video src="assets/elasticmind/elastic-3d-poster.mp4" muted playsinline loop controls preload="none"></video></noscript>
                 <div class="floating-caption">
                     <!-- <p class="floating-caption-title">motion graphic</p> -->
                     <p class="floating-caption-title">3D poster</p>
@@ -173,7 +175,7 @@
             </div>
 
             <div class="captioned-item" id="el-item-2">
-                <video class="allows-sound" src="assets/elasticmind/elastic-mind-seq.mp4" autoplay muted controls playsinline loop></video>
+                <video class="allows-sound" data-media-src="assets/elasticmind/elastic-mind-seq.mp4" data-media-autoplay muted controls playsinline loop width="1080" height="1920" preload="none" data-media-poster="assets/media-posters/5936b39478dc.webp"></video><noscript data-media-fallback><video class="allows-sound" src="assets/elasticmind/elastic-mind-seq.mp4" muted controls playsinline loop></video></noscript>
                 <div class="floating-caption-wrap">
                     <div class="floating-caption">
                         <!-- <p class="floating-caption-title">motion graphic</p> -->
@@ -189,7 +191,7 @@
             </div>
 
             <div class="captioned-item" id="el-item-4">
-                <video src="assets/elasticmind/ar-recorded.mp4" autoplay controls loop muted playsinline></video>
+                <video data-media-src="assets/elasticmind/ar-recorded.mp4" data-media-autoplay controls loop muted playsinline width="3174" height="1590" preload="none" data-media-poster="assets/media-posters/b896ad45bc00.webp"></video><noscript data-media-fallback><video src="assets/elasticmind/ar-recorded.mp4" controls loop muted playsinline></video></noscript>
                 <div class="floating-caption">
                     <!-- <p class="floating-caption-title">motion graphics</p> -->
                     <p class="floating-caption-detail">AR version of 3D poster</p>
@@ -223,9 +225,11 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script type="module" src="project-scroll.js?v=gsap-1"></script>
+    <script src="media-config.js?v=1"></script>
+    <script src="media-loader.js?v=1"></script>
+    <script type="module" src="project-scroll.js?v=media-1"></script>
     <script src="script.js?v=optional-details-1"></script>
-    <script src="playground-layout.js?v=9"></script>
+    <script src="playground-layout.js?v=media-1"></script>
 </body>
 
 </html>

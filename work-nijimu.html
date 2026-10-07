@@ -65,7 +65,9 @@
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=motion-2"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
-    <script type="module" src="tag-shapes.js?v=14"></script>
+    <script type="module" src="tag-shapes.js?v=17"></script>
+    <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
+    <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
 
 <body class="nijimu-page dark-mode">
@@ -94,13 +96,13 @@
             </ul>
         </div>
         <div class="page-thumbnail page-thumbnail-nijimu">
-            <img class="nijimu-thumb-static" src="assets/nijimu/square%20thumbnail.png" alt="nijimu — An Ambient Interface For Forgetting">
+            <img class="nijimu-thumb-static" data-media-src="assets/nijimu/square%20thumbnail.png" alt="nijimu — An Ambient Interface For Forgetting" width="2200" height="2200" loading="lazy" decoding="async"><noscript data-media-fallback><img class="nijimu-thumb-static" src="assets/nijimu/square%20thumbnail.png" alt="nijimu — An Ambient Interface For Forgetting"></noscript>
             <div class="nijimu-thumb-stage">
-                <img class="nijimu-thumb-hero" src="assets/nijimu/nijimu-title_image.jpg" alt="nijimu title image">
+                <img class="nijimu-thumb-hero" data-media-src="assets/nijimu/nijimu-title_image.jpg" alt="nijimu title image" width="4800" height="1874" loading="lazy" decoding="async"><noscript data-media-fallback><img class="nijimu-thumb-hero" src="assets/nijimu/nijimu-title_image.jpg" alt="nijimu title image"></noscript>
                 <div class="nijimu-thumb-clips" aria-hidden="true">
-                    <video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 1.mov" muted loop playsinline preload="none"></video>
-                    <video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 2.m4v" muted loop playsinline preload="none"></video>
-                    <video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 4.mov" muted loop playsinline preload="none"></video>
+                    <video class="nijimu-thumb-clip" data-media-src="assets/nijimu/nijimu snippets - 1.mov" muted loop playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/9dd08bd0c407.webp" data-media-managed="external"></video><noscript data-media-fallback><video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 1.mov" muted loop playsinline preload="none" controls></video></noscript>
+                    <video class="nijimu-thumb-clip" data-media-src="assets/nijimu/nijimu snippets - 2.m4v" muted loop playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/a70aaf1750a3.webp" data-media-managed="external"></video><noscript data-media-fallback><video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 2.m4v" muted loop playsinline preload="none" controls></video></noscript>
+                    <video class="nijimu-thumb-clip" data-media-src="assets/nijimu/nijimu snippets - 4.mov" muted loop playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/a48539e6bb98.webp" data-media-managed="external"></video><noscript data-media-fallback><video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 4.mov" muted loop playsinline preload="none" controls></video></noscript>
                 </div>
             </div>
         </div>
@@ -138,47 +140,50 @@
             <button type="button" class="nijimu-certificate" aria-label="View Core77 Design Awards certificate">
                 <span class="nijimu-certificate__caption" aria-hidden="true">Core77 Award Certificate</span>
                 <span class="nijimu-certificate__frame">
-                    <img src="assets/honoree-certificate.png" alt="Core77 Design Awards 2026 Student Winner certificate for nijimu">
+                    <img data-media-src="assets/honoree-certificate.png" alt="Core77 Design Awards 2026 Student Winner certificate for nijimu" width="2242" height="1578" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/honoree-certificate.png" alt="Core77 Design Awards 2026 Student Winner certificate for nijimu"></noscript>
                 </span>
             </button>
         </div>
         <div class="placeholder-caption"></div>
         <div class="project-pics nijimu-project-pics">
             <div class="captioned-item">
-                <img src="assets/nijimu/slide 05.png" alt="How might we design an interactive archive that transforms memory into tangible experience: imprint, distill, and sculpt">
+                <img data-media-src="assets/nijimu/slide 05.png" alt="How might we design an interactive archive that transforms memory into tangible experience: imprint, distill, and sculpt" width="2880" height="1620" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/nijimu/slide 05.png" alt="How might we design an interactive archive that transforms memory into tangible experience: imprint, distill, and sculpt"></noscript>
             </div>
             <div class="captioned-item">
-                <video class="video-app-highlights" src="assets/nijimu/nijimu-library(core77).mp4" autoplay loop muted
-                    playsinline></video>
+                <video class="video-app-highlights" data-media-src="assets/nijimu/nijimu-library(core77).mp4" data-media-autoplay loop muted
+                    playsinline width="3764" height="2160" preload="none" data-media-poster="assets/media-posters/2d6a0d02b59a.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/nijimu/nijimu-library(core77).mp4" loop muted
+                    playsinline controls preload="none"></video></noscript>
                 <div class="floating-caption">
                     <p class="floating-caption-detail">Traversing the memory archive</p>
                 </div>
             </div>
             <div class="captioned-item">
-                <video class="video-app-highlights" src="assets/nijimu/(longer flow) nijimu recording &amp; transcribing.mp4" autoplay loop muted
-                    playsinline></video>
+                <video class="video-app-highlights" data-media-src="assets/nijimu/(longer flow) nijimu recording &amp; transcribing.mp4" data-media-autoplay loop muted
+                    playsinline width="1876" height="1080" preload="none" data-media-poster="assets/media-posters/17383a40f8a8.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/nijimu/(longer flow) nijimu recording &amp; transcribing.mp4" loop muted
+                    playsinline controls preload="none"></video></noscript>
                 <div class="floating-caption">
                     <p class="floating-caption-detail">Transcribing memory into words</p>
                 </div>
             </div>
             <div class="captioned-item">
-                <img src="assets/nijimu/slide 08.png" alt="Sculpt your memory with your hands: weight, warmth, and distance">
+                <img data-media-src="assets/nijimu/slide 08.png" alt="Sculpt your memory with your hands: weight, warmth, and distance" width="2880" height="1484" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/nijimu/slide 08.png" alt="Sculpt your memory with your hands: weight, warmth, and distance"></noscript>
             </div>
             <div class="captioned-item">
-                <video class="video-app-highlights" src="assets/nijimu/nijimu (core77).mp4" autoplay loop muted
-                    playsinline></video>
+                <video class="video-app-highlights" data-media-src="assets/nijimu/nijimu (core77).mp4" data-media-autoplay loop muted
+                    playsinline width="3764" height="2160" preload="none" data-media-poster="assets/media-posters/ac140f09b243.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/nijimu/nijimu (core77).mp4" loop muted
+                    playsinline controls preload="none"></video></noscript>
                 <div class="floating-caption">
                     <p class="floating-caption-detail">Sculpting memory artifacts as living three-dimensional form: real-time hand gesture tracking</p>
                 </div>
             </div>
             <div class="captioned-item">
-                <img src="assets/nijimu/slide 09.png" alt="Sculpt feature: pinch gesture controls the artifact's weight">
+                <img data-media-src="assets/nijimu/slide 09.png" alt="Sculpt feature: pinch gesture controls the artifact's weight" width="2880" height="1484" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/nijimu/slide 09.png" alt="Sculpt feature: pinch gesture controls the artifact's weight"></noscript>
             </div>
             <div class="captioned-item">
-                <img src="assets/nijimu/slide 10.png" alt="Sculpt feature: raising or lowering the palm shifts the artifact's color">
+                <img data-media-src="assets/nijimu/slide 10.png" alt="Sculpt feature: raising or lowering the palm shifts the artifact's color" width="2880" height="1484" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/nijimu/slide 10.png" alt="Sculpt feature: raising or lowering the palm shifts the artifact's color"></noscript>
             </div>
             <div class="captioned-item">
-                <img src="assets/nijimu/slide 11.png" alt="Sculpt feature: distance between palms modulates the artifact's texture">
+                <img data-media-src="assets/nijimu/slide 11.png" alt="Sculpt feature: distance between palms modulates the artifact's texture" width="2880" height="1484" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/nijimu/slide 11.png" alt="Sculpt feature: distance between palms modulates the artifact's texture"></noscript>
             </div>
         </div>
     </main>
@@ -196,10 +201,12 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script type="module" src="project-scroll.js?v=gsap-1"></script>
-    <script type="module" src="nijimu-thumbnail.js?v=v2-dark-1"></script>
+    <script src="media-config.js?v=1"></script>
+    <script src="media-loader.js?v=1"></script>
+    <script type="module" src="project-scroll.js?v=media-1"></script>
+    <script type="module" src="nijimu-thumbnail.js?v=media-1"></script>
     <script src="script.js?v=optional-details-1"></script>
-    <script src="playground-layout.js?v=9"></script>
+    <script src="playground-layout.js?v=media-1"></script>
 </body>
 
 </html>

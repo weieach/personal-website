@@ -62,7 +62,9 @@
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=motion-2"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
-    <script type="module" src="tag-shapes.js?v=14"></script>
+    <script type="module" src="tag-shapes.js?v=17"></script>
+    <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
+    <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
 
 <body class="dark-mode">
@@ -115,10 +117,10 @@
         <div class="placeholder-caption"></div>
         <div class="project-pics">
             <div class="captioned-item ">
-                <img src="assets/archive/nightingale/nightingale(boderless).png" alt="Keyframes">
+                <img data-media-src="assets/archive/nightingale/nightingale(boderless).png" alt="Keyframes" width="1998" height="1581" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/archive/nightingale/nightingale(boderless).png" alt="Keyframes"></noscript>
             </div>
             <div class="captioned-item ">
-                <img src="assets/archive/nightingale/nightingale-userflow.png" alt="Keyframes">
+                <img data-media-src="assets/archive/nightingale/nightingale-userflow.png" alt="Keyframes" width="2812" height="1625" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/archive/nightingale/nightingale-userflow.png" alt="Keyframes"></noscript>
                 <p>Full user flow</p>
             </div>
         </div>
@@ -137,9 +139,11 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script type="module" src="project-scroll.js?v=gsap-1"></script>
+    <script src="media-config.js?v=1"></script>
+    <script src="media-loader.js?v=1"></script>
+    <script type="module" src="project-scroll.js?v=media-1"></script>
     <script src="script.js?v=optional-details-1"></script>
-    <script src="playground-layout.js?v=9"></script>
+    <script src="playground-layout.js?v=media-1"></script>
 </body>
 
 </html>

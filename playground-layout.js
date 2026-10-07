@@ -67,8 +67,8 @@
 
   function watchMedia(media, tile, stage) {
     const update = () => {
-      const width = media.naturalWidth || media.videoWidth;
-      const height = media.naturalHeight || media.videoHeight;
+      const width = media.naturalWidth || media.videoWidth || Number(media.getAttribute('width'));
+      const height = media.naturalHeight || media.videoHeight || Number(media.getAttribute('height'));
       if (!width || !height) return;
       tile.classList.toggle('playground-tile--portrait', height > width);
       matchBackground(media, stage, tile);
@@ -85,9 +85,10 @@
     }
     update();
     // Reparenting media into its grid stage can interrupt native autoplay.
-    if (media.tagName === 'VIDEO' && media.autoplay) {
+    if (media.tagName === 'VIDEO' && (media.autoplay || media.hasAttribute('data-media-autoplay'))) {
       const thumbnail = Boolean(media.closest('.page-thumbnail'));
       if (thumbnail) media.controls = false;
+      if (window.SiteMedia) { window.SiteMedia.refresh(); return; }
       media.play().catch(() => {
         if (!thumbnail) media.controls = true;
       });
@@ -135,7 +136,8 @@
       const picture = document.createElement('picture');
       const source = document.createElement('source');
       source.media = '(width < 960px)';
-      source.srcset = mobile.getAttribute('src');
+      source.dataset.mediaSrcset = mobile.dataset.mediaSrc || mobile.getAttribute('src');
+      if (desktop.src) source.srcset = window.SiteMedia?.url(source.dataset.mediaSrcset) || source.dataset.mediaSrcset;
       desktop.classList.remove('hurricane-thumb-desktop');
       picture.append(source, desktop);
       mobile.remove();
@@ -151,4 +153,5 @@
     demoRow.querySelectorAll('.tldr-demo-item').forEach(makeTiles);
   }
   main.querySelectorAll('.project-pics .captioned-item:not(.playground-group), :scope > .work-wu-poster').forEach(makeTiles);
+  window.SiteMedia?.refresh();
 })();

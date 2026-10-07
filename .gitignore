@@ -14,3 +14,9 @@ instructions/
 
 # local Cursor rules
 .cursor/
+
+# Local media upload plans and credentials
+.media-upload-manifest.json
+.env
+.env.*
+__pycache__/

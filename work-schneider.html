@@ -61,7 +61,9 @@
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=motion-2"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
-    <script type="module" src="tag-shapes.js?v=14"></script>
+    <script type="module" src="tag-shapes.js?v=17"></script>
+    <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
+    <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
 
 <body class="dark-mode">
@@ -97,7 +99,7 @@
             <a href="work.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
         </div>
         <div class="img-casestudy-cover img-casestudy-cover-schneider">
-            <img src="assets/schneider/agent-homepage.png" alt="Schneider Electric AI+Power agent homepage">
+            <img data-media-src="assets/schneider/agent-homepage.png" alt="Schneider Electric AI+Power agent homepage" width="3456" height="1922" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/agent-homepage.png" alt="Schneider Electric AI+Power agent homepage"></noscript>
         </div>
         <div class="project-caption">
             <section class="section-case-study" data-toc-scroll="top">
@@ -162,7 +164,7 @@
                 <div class="product-highlight-entries">
                     <div class="product-highlight-entry">
                         <div class="captioned-item">
-                            <img src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar">
+                            <img data-media-src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar"></noscript>
                         </div>
                         <div>
                             <p>My first iteration took a dashboard mindset: the factory as a network of nodes featuring
@@ -173,7 +175,7 @@
                     </div>
                     <div class="product-highlight-entry">
                         <div class="captioned-item">
-                            <img src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log">
+                            <img data-media-src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log" width="1728" height="992" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log"></noscript>
                         </div>
                         <div>
                             <p>In a second iteration, I added a task queue, giving real-time visual confirmation and
@@ -183,7 +185,7 @@
                     </div>
                     <div class="product-highlight-entry">
                         <div class="captioned-item">
-                            <img src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log">
+                            <img data-media-src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log" width="1728" height="1117" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log"></noscript>
                         </div>
                         <div>
                             <p>I added a knowledge graph view over the node map, documenting the potential causes of
@@ -194,7 +196,7 @@
                     </div>
                     <div class="product-highlight-entry">
                         <div class="captioned-item">
-                            <img src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score">
+                            <img data-media-src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score" width="1728" height="1117" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score"></noscript>
                         </div>
                         <div>
                             <p>I implemented the equipment node tree in radial distribution to optimize space. Raw
@@ -204,7 +206,7 @@
                     </div>
                     <div class="product-highlight-entry">
                         <div class="captioned-item">
-                            <img src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat">
+                            <img data-media-src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat"></noscript>
                         </div>
                         <div>
                             <p>A major pivot came when me and my leader decided that a task-first interface was the right
@@ -231,8 +233,9 @@
                 <div class="product-highlight-entries">
                     <div class="product-highlight-entry">
                         <div class="captioned-item">
-                            <video class="video-app-highlights" src="assets/schneider/pgpt pt1 edit.mp4" autoplay loop muted
-                                playsinline controls></video>
+                            <video class="video-app-highlights" data-media-src="assets/schneider/pgpt pt1 edit.mp4" data-media-autoplay loop muted
+                                playsinline controls width="3172" height="1586" preload="none" data-media-poster="assets/media-posters/8d01c2f46370.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/pgpt pt1 edit.mp4" loop muted
+                                playsinline controls></video></noscript>
                         </div>
                         <div>
                             <p>Flow 1: Creating an agent</p>
@@ -240,8 +243,9 @@
                     </div>
                     <div class="product-highlight-entry">
                         <div class="captioned-item video-inset-border">
-                            <video class="video-app-highlights" src="assets/schneider/pgpt pt2 edit new.mp4" autoplay loop muted
-                                playsinline controls></video>
+                            <video class="video-app-highlights" data-media-src="assets/schneider/pgpt pt2 edit new.mp4" data-media-autoplay loop muted
+                                playsinline controls width="3172" height="1586" preload="none" data-media-poster="assets/media-posters/9c75d94ae7a9.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/pgpt pt2 edit new.mp4" loop muted
+                                playsinline controls></video></noscript>
                         </div>
                         <div>
                             <p>Flow 2: Scheduling and running an inspection task</p>
@@ -249,8 +253,9 @@
                     </div>
                     <div class="product-highlight-entry">
                         <div class="captioned-item video-inset-border">
-                            <video class="video-app-highlights" src="assets/schneider/pgpt pt3 edit.mp4" autoplay loop muted
-                                playsinline controls></video>
+                            <video class="video-app-highlights" data-media-src="assets/schneider/pgpt pt3 edit.mp4" data-media-autoplay loop muted
+                                playsinline controls width="3172" height="1586" preload="none" data-media-poster="assets/media-posters/d9d32af7cf62.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/pgpt pt3 edit.mp4" loop muted
+                                playsinline controls></video></noscript>
                         </div>
                         <div>
                             <p>Flow 3: Encountering a triggered alert</p>
@@ -258,16 +263,16 @@
                     </div>
                     <div class="walkthrough-image-grid">
                         <div class="captioned-item">
-                            <img src="assets/schneider/final-1.png" alt="Scenario picker for creating a maintenance agent: predictive maintenance, daily operations, or alarm convergence">
+                            <img data-media-src="assets/schneider/final-1.png" alt="Scenario picker for creating a maintenance agent: predictive maintenance, daily operations, or alarm convergence" width="3167" height="1580" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-1.png" alt="Scenario picker for creating a maintenance agent: predictive maintenance, daily operations, or alarm convergence"></noscript>
                         </div>
                         <div class="captioned-item">
-                            <img src="assets/schneider/final-2.png" alt="Task panel home with schedule, status counters, task records, and the PowerGPT agent chat">
+                            <img data-media-src="assets/schneider/final-2.png" alt="Task panel home with schedule, status counters, task records, and the PowerGPT agent chat" width="3165" height="1583" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-2.png" alt="Task panel home with schedule, status counters, task records, and the PowerGPT agent chat"></noscript>
                         </div>
                         <div class="captioned-item">
-                            <img src="assets/schneider/final-3.png" alt="Knowledge graph view of busbar fault factors beside the agent dialogue and alert records">
+                            <img data-media-src="assets/schneider/final-3.png" alt="Knowledge graph view of busbar fault factors beside the agent dialogue and alert records" width="3165" height="1583" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-3.png" alt="Knowledge graph view of busbar fault factors beside the agent dialogue and alert records"></noscript>
                         </div>
                         <div class="captioned-item">
-                            <img src="assets/schneider/final-4.png" alt="3D factory simulation with robot call controls, highlighted cabinets, and short-circuit precursor diagnosis in chat">
+                            <img data-media-src="assets/schneider/final-4.png" alt="3D factory simulation with robot call controls, highlighted cabinets, and short-circuit precursor diagnosis in chat" width="3167" height="1592" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-4.png" alt="3D factory simulation with robot call controls, highlighted cabinets, and short-circuit precursor diagnosis in chat"></noscript>
                         </div>
                     </div>
                 </div>
@@ -285,18 +290,19 @@
                     prototype to production.</p>
                 <div class="product-highlight-entries">
                     <div class="captioned-item">
-                        <video class="video-app-highlights" src="assets/schneider/robot edit.mp4" autoplay loop muted
-                            playsinline controls></video>
+                        <video class="video-app-highlights" data-media-src="assets/schneider/robot edit.mp4" data-media-autoplay loop muted
+                            playsinline controls width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/020fe8e69abf.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/robot edit.mp4" loop muted
+                            playsinline controls></video></noscript>
                     </div>
                     <div class="outcome-media-row">
                         <div class="captioned-item">
-                            <img src="assets/schneider/outcome-2.jpg" alt="Group watching a live demo of the digital ecosystem and robotic inspection setup">
+                            <img data-media-src="assets/schneider/outcome-2.jpg" alt="Group watching a live demo of the digital ecosystem and robotic inspection setup" width="2880" height="2160" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/outcome-2.jpg" alt="Group watching a live demo of the digital ecosystem and robotic inspection setup"></noscript>
                             <div class="floating-caption">
                                 <p class="floating-caption-details">Live demo at Schneider Beijing Campus, June 24th</p>
                             </div>
                         </div>
                         <div class="captioned-item">
-                            <img src="assets/schneider/waic.jpg" alt="AI + Power showcased at the WAIC conference in Shanghai">
+                            <img data-media-src="assets/schneider/waic.jpg" alt="AI + Power showcased at the WAIC conference in Shanghai" width="1440" height="1920" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/waic.jpg" alt="AI + Power showcased at the WAIC conference in Shanghai"></noscript>
                             <div class="floating-caption">
                                 <p class="floating-caption-details">WAIC conference, Shanghai, July 17th</p>
                             </div>
@@ -321,7 +327,9 @@
                 class="contact-entry icon-linkedin" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a>
         </div>
     </footer>
-    <script type="module" src="project-scroll.js?v=gsap-1"></script>
+    <script src="media-config.js?v=1"></script>
+    <script src="media-loader.js?v=1"></script>
+    <script type="module" src="project-scroll.js?v=media-1"></script>
     <script src="script.js?v=optional-details-1"></script>
 </body>
 
