@@ -21,12 +21,10 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- google font -->
+    <!-- Local typography and icon fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="fonts.css">
     <link rel="icon" href="assets/favicon.png">
     <!-- icons -->
     <link rel="stylesheet" type="text/css"
@@ -38,15 +36,15 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu">
     <!-- stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=v2-logo-zh-1">
 
-    <link rel="stylesheet" href="style-project.css">
+    <link rel="stylesheet" href="style-project.css?v=v2-dark-1">
     <link rel="stylesheet" href="responsive.css">
-    <title>Nicole Wei: TL;DR (2025)</title>
+    <title>Nicole Wei: Park Theme Pictogram Design (2026)</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Nicole Wei">
-    <meta property="og:title" content="Nicole Wei: TL;DR (2025)">
+    <meta property="og:title" content="Nicole Wei: Park Theme Pictogram Design (2026)">
     <meta property="og:description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta property="og:url" content="https://www.ncwei.com/work-pictogram.html">
     <meta property="og:image" content="https://www.ncwei.com/assets/og-image.jpg">
@@ -55,33 +53,41 @@
     <meta property="og:image:height" content="667">
     <meta property="og:image:alt" content="Nicole Wei — portfolio">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Nicole Wei: TL;DR (2025)">
+    <meta name="twitter:title" content="Nicole Wei: Park Theme Pictogram Design (2026)">
     <meta name="twitter:description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta name="twitter:image" content="https://www.ncwei.com/assets/og-image.jpg">
+    <link rel="stylesheet" href="theme.css?v=8">
+    <link rel="stylesheet" href="playground-layout.css?v=13">
+    <link rel="stylesheet" href="site-motion.css?v=1">
+    <script defer src="assets/vendor/gsap/gsap.min.js"></script>
+    <script type="module" src="site-scroll.js?v=motion-2"></script>
+    <link rel="stylesheet" href="tag-shapes.css?v=3">
+    <script type="module" src="tag-shapes.js?v=14"></script>
 </head>
 
 <body class="dark-mode">
     <header>
         <nav>
-            <a href="index.html" class="logo">
+            <a href="work.html" class="logo">
                 <img src="assets/favicon.png" alt="bird-logo">
-                <p>Nicole Wei</p>
+                <p>Nicole Wei&nbsp;&nbsp;<span class="logo-zh">魏逸晨</span></p>
             </a>
             <ul>
-                <li><a href="index.html">Projects</a></li>
-                <li><a href="intern.html">Case Studies</a></li>
-                <!-- <li><a href="playground.html">Playground</a></li> -->
-                <li><a href="about.html">About</a></li>
+                <li><a href="work.html?collection=work" data-collection-nav="work">Work</a></li>
+                <li><a href="work.html?collection=playground" data-collection-nav="playground">Playground</a></li>
+                <li><a href="archive.html">Archive</a></li>
+                <li><a href="work.html#about" data-about-link>About</a></li>
             </ul>
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg non-cs-pg pictogram-main-projectpg page-with-thumbnail">
+    <main class="main-projectpg playground-project non-cs-pg pictogram-main-projectpg page-with-thumbnail">
         <div class="sidebar no-display">
             <ul>
-                <li><a href="index.html">Projects</a></li>
-                <li><a href="intern.html">Case Studies</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="work.html?collection=work" data-collection-nav="work">Work</a></li>
+                <li><a href="work.html?collection=playground" data-collection-nav="playground">Playground</a></li>
+                <li><a href="archive.html">Archive</a></li>
+                <li><a href="work.html#about" data-about-link>About</a></li>
             </ul>
         </div>
         <div class="page-thumbnail">
@@ -89,8 +95,8 @@
         </div>
         <div class="project-caption">
             <h1>Park theme pictogram design</h1>
-            <!-- <h2 class="project-subtitle">Branding &amp; Identity, 3D, Motion</h2> -->
-            <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
+            <!-- <h2 class="project-subtitle">Branding &amp; Identity, 3D, Motion graphics</h2> -->
+            <a href="work.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
             <p>A set of four pictograms, each representing a different outdoor park activity (chilling, picnicking, horseback riding, and frisbee playing), designed to function both statically and in motion. Each symbol was 3D-modeled in Blender and rendered with flat graphic shading to balance visual clarity with a playful personality. </p>
             <ul>
                 <li>
@@ -153,8 +159,9 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script type="module" src="project-scroll.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="project-scroll.js?v=gsap-1"></script>
+    <script src="script.js?v=optional-details-1"></script>
+    <script src="playground-layout.js?v=9"></script>
 </body>
 
 </html>

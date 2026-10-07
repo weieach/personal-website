@@ -1,0 +1,28 @@
+.about-drawer {
+  position: relative;
+  height: max(24vh, 180px);
+  overflow: hidden;
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-anchor: none;
+}
+/* Keep the original About layout; only its entrance is animated. */
+.about-drawer .about-avatar { transform-origin: center; }
+.about-drawer__line { overflow: hidden; }
+.about-drawer:not(.is-open) .about-avatar { transform: scale(.72); opacity: .5; }
+.about-drawer:not(.is-open) .about-drawer__copy,
+.about-drawer:not(.is-open) .about-drawer__line p { opacity: 0; }
+html { scroll-behavior: auto; }
+@media (max-width: 959px) {
+  .about-drawer .main-aboutpg {
+    flex: none;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-top: calc(var(--nav-height) + 1.5rem);
+    margin-bottom: 1.25rem;
+    padding-top: 0;
+    padding-inline: var(--space-page);
+    max-width: none;
+  }
+}

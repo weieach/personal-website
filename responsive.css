@@ -114,26 +114,22 @@
     gap: calc(var(--space) * 0.6); /* title → category caption */
   }
 
-  /* Taller Wu thumb on mobile (more height at full-bleed width) */
   .card-wu .card-thumbnail {
-    aspect-ratio: 0.95;
+    aspect-ratio: 1 / 1;
   }
 
   .card-wu .img-wu-poster {
-    width: auto;
-    max-width: 70%;
-    max-height: 88%;
-    height: auto;
-    scale: 1;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    height: 100%;
+    scale: 0.8;
+    object-fit: contain;
   }
 
   /* Listing thumbs (460px–959px): pre-adjustment ARs */
   .card-booklets .card-thumbnail {
     aspect-ratio: 1353 / 954;
-  }
-
-  .card-tldr .card-thumbnail {
-    aspect-ratio: 1.4;
   }
 
   .card-nijimu .card-thumbnail {
@@ -179,8 +175,8 @@
     height: 100%;
     max-width: none;
     margin: 0;
-    scale: 0.9;
-    object-fit: cover;
+    scale: none;
+    object-fit: contain;
     object-position: center;
   }
 
@@ -220,7 +216,7 @@
   nav ul {
     position: static;
     width: auto;
-    gap: 5.8vw;
+    gap: 2.5rem;
   }
 
   /* About: drop the flippable postcard — content + bird only */
@@ -315,13 +311,9 @@
     gap: calc(var(--space) * 10);
   }
 
-  /* Superfast: mobile web intro + hide secondary web mockup */
+  /* Superfast: mobile web intro */
   .sf-mobile-blurb {
     display: block;
-  }
-
-  .sf-web-mockup-item {
-    display: none;
   }
 
   .main-projectpg .captioned-item {
@@ -576,7 +568,9 @@
     aspect-ratio: 1.45;
   }
 
-  .card-fs .video-fs {
+  .card-fs .video-fs,
+  .card-schneider .card-thumbnail .thumb-img,
+  .card-mitwerk .card-thumbnail .thumb-img {
     width: 100%;
     scale: 0.92;
     margin-inline: 0;
@@ -584,8 +578,7 @@
   }
 
   .card-superfast .card-thumbnail {
-    aspect-ratio: 1.55;
-    background-image: none;
+    aspect-ratio: 3146 / 2160;
   }
 
   .card-superfast .video-superfast {
@@ -594,11 +587,12 @@
     width: 100%;
     height: 100%;
     max-width: none;
-    scale: none;
+    scale: 0.85;
     margin: 0;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     outline: none;
+    border-radius: 0.8rem;
   }
 
   .card-gvd .card-thumbnail video {
@@ -621,9 +615,7 @@
 @media (width < 460px) {
   /* Narrow-phone listing ARs (recent adjustments) */
   .card-fs .card-thumbnail,
-  .card-superfast .card-thumbnail,
   .card-dance .card-thumbnail,
-  .card-tldr .card-thumbnail,
   .card-nijimu .card-thumbnail {
     aspect-ratio: 1;
   }
@@ -638,13 +630,13 @@
   }
 
   .card-superfast .card-thumbnail {
-    background-image: none;
+    aspect-ratio: 3146 / 2160;
     overflow: hidden;
   }
 
   .card-superfast .video-superfast {
     object-fit: contain;
-    scale: 1.3;
+    scale: 0.85;
   }
 
   .card-tldr .card-thumbnail {
@@ -653,7 +645,7 @@
 
   .card-elastic .card-thumbnail,
   .elastic-thumbnail {
-    aspect-ratio: 12 / 16;
+    aspect-ratio: 213 / 180;
     background-image: none;
   }
 
@@ -669,14 +661,6 @@
     object-position: center;
   }
 
-  .card-elastic .video-elastic--desktop {
-    display: none;
-  }
-
-  .card-elastic .video-elastic--mobile {
-    display: block;
-  }
-
   .card-elastic .card-thumbnail video,
   .elastic-thumbnail .video-elastic {
     position: absolute;
@@ -685,7 +669,7 @@
     height: 100%;
     max-width: none;
     margin: 0;
-    scale: 0.95;
+    scale: 1;
     object-fit: contain;
     object-position: center;
   }

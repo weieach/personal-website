@@ -1,13 +1,15 @@
 *{
     box-sizing: border-box;
     margin: 0;
-    font-family: "Geist";
-    color: #121212;
+    font-family: "Neurial Grotesk", sans-serif;
+    color: inherit;
 }
 
 /* Shared spacing unit for listing / project-display layout.
    Gaps & paddings below use 0.5× increments of --space. */
 :root{
+    --page-inline-space: 1.714286rem; /* 24px at the 14px root size */
+    font-size: 14px;
     --space: 1vw;
     --space-gap-x: calc(var(--space) * 1.5);       /* horizontal gap between cards */
     --space-gap-y: calc(var(--space) * 2);       /* min vertical gap between cards */
@@ -32,7 +34,8 @@ html.lenis {
 }
 
 header{
-    background-color: #F6F6F6;
+    background-color: transparent;
+    mix-blend-mode: difference;
     z-index: 300;
     position: fixed;
     top: 0;
@@ -41,13 +44,14 @@ header{
 
 nav {
     display: flex;
-    padding-top: 1rem;
-    padding-inline: var(--space-nav);
+    padding-top: 16px;
+    padding-inline: var(--page-inline-space);
     padding-bottom: calc(var(--space) * 1);
     align-items: center;
+    justify-content: space-between;
     position: relative;
     
-    background-color: #F6F6F6;
+    background-color: transparent;
     /* background-color: aqua; */
     
     
@@ -58,8 +62,27 @@ nav ul a{
     transition: font-weight 300ms ease-in-out;
 }
 
+nav [data-collection-nav][aria-current="page"] {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
 body{
     background-color: #F6F6F6;
+}
+
+/* Archive is short: keep the body in the band under the fixed nav and pin the footer to the bottom. */
+body:has([data-project-collection="archive"]){
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: var(--nav-height);
+    min-height: calc(100vh - var(--nav-height));
+    min-height: calc(100dvh - var(--nav-height));
+}
+
+body:has([data-project-collection="archive"]) main{
+    margin-top: 0;
 }
 
 .about-body{
@@ -135,7 +158,7 @@ footer{
     gap: 0.4rem;
     margin: 0;
     padding: 0;
-    font: 400 0.88rem/1.3 "Geist", system-ui, sans-serif;
+    font: 400 0.88rem/1.3 "Neurial Grotesk", system-ui, sans-serif;
     color: rgba(18, 18, 18, 0.5);
     white-space: nowrap;
     opacity: 0;
@@ -285,12 +308,16 @@ footer .icons.icons--animate .icon-linkedin i{
 
 .logo{
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     z-index: 200;
     display: flex;
     align-items: center;
     gap: 0;
     transition: scale 300ms ease;
+}
+
+.logo-zh{
+    font-weight: 400;
 }
 
 .logo img{
@@ -299,6 +326,7 @@ footer .icons.icons--animate .icon-linkedin i{
     opacity: 0;
     overflow: hidden;
     object-fit: contain;
+    filter: brightness(1.2);
     flex-shrink: 0;
     margin-right: 0;
     transition:
@@ -323,13 +351,21 @@ nav ul {
     margin-bottom: 0;
     padding: 0;
     display: flex;
-    gap: 4.2rem;
-    position: absolute;
-    width: 94vw;
+    gap: 2.5rem;
+    position: static;
+    width: auto;
     /* background-color: aqua; */
     z-index: 10;
     justify-content: center;
-    background-color: #F6F6F6;
+    background-color: transparent;
+}
+
+/* White header content inverts against the page beneath the fixed header. */
+header *,
+.dark-mode header * {
+    color: #fff;
+    background-color: transparent;
+    mix-blend-mode: difference;
 }
 
 ul li{
@@ -402,7 +438,7 @@ body.is-nav-open .btn-burger{
     border-radius: 2rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
     white-space: nowrap;
-    transition: border-color 200ms ease;
+    transition: box-shadow 200ms ease;
 }
 
 .btn-project-details.disabled-link{
@@ -420,14 +456,16 @@ body.is-nav-open .btn-burger{
 .btn-visit-site:focus-visible,
 .cards a.btn-visit-site:hover{
     font-weight: 500;
-    border-color: #121212;
+    border-color: transparent;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0);
 }
 
 .btn-project-details.disabled-link:hover,
 .btn-project-details.disabled-link:focus-visible,
 .cards a.btn-project-details.disabled-link:hover{
     font-weight: 500;
-    border-color: #121212;
+    border-color: transparent;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0);
 }
 
 .btn-visit-site__label{
@@ -508,8 +546,118 @@ body.is-nav-open .btn-burger{
     width: 100%;
     column-gap: var(--space-gap-x);
     row-gap: var(--space-gap-y);
-    padding-inline: var(--space-page);
+    padding-inline: var(--page-inline-space);
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+main > [data-project-grid] {
+    margin-top: 25vh;
+}
+
+.project-filters:not([hidden]) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 25vh;
+    padding: 0 var(--page-inline-space) 16px;
+}
+
+main:has(.project-filters:not([hidden])) > .cards {
+    margin-top: 0;
+}
+
+.project-filter {
+    appearance: none;
+    font: inherit;
+    line-height: 1.25;
+    padding: 8px 12px;
+    border: 1px solid #c8c8c8;
+    border-radius: 999px;
+    background: transparent;
+    color: #121212;
+    cursor: pointer;
+}
+
+.project-filter:hover {
+    border-color: #121212;
+}
+
+.project-filter[aria-pressed="true"] {
+    background: #121212;
+    border-color: #121212;
+    color: #f6f6f6;
+}
+
+.project-filter:focus-visible {
+    outline: 2px solid #121212;
+    outline-offset: 3px;
+}
+
+.project-filter--all {
+    position: relative;
+    flex: 0 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.project-filter__label {
+    display: block;
+    text-align: left;
+}
+
+.project-filter__particles {
+    position: absolute;
+    inset: 0 auto auto 0;
+    pointer-events: none;
+}
+
+[data-project-grid] .work-caption,
+[data-project-grid] > .card[hidden] {
+    display: none;
+}
+
+[data-project-grid] > .card .card-thumbnail {
+    margin-bottom: 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+[data-project-grid] > .card .card-text {
+    margin-top: 8px;
+}
+
+.project-filter-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+@media (width >= 960px) {
+    .cards {
+        gap: 16px;
+    }
+
+    [data-project-collection="archive"].cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    [data-project-grid].is-masonry {
+        grid-auto-rows: 1px;
+        grid-auto-flow: row dense;
+        row-gap: 0;
+    }
+
+    [data-project-grid].is-masonry > .card {
+        align-self: start;
+    }
+}
+
+[data-project-grid]:not(.is-masonry) {
+    row-gap: var(--page-inline-space);
 }
 
 /* Listing entrance: start below final Y from first paint (no late JS jump) */
@@ -582,7 +730,8 @@ body.is-nav-open .btn-burger{
 .cards-single-column .btn-visit-site:hover,
 .cards-single-column .btn-visit-site:focus-visible{
     opacity: 1;
-    border-color: #121212;
+    border-color: transparent;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0);
 }
 
 
@@ -607,7 +756,7 @@ body.is-nav-open .btn-burger{
     display: flex;
     flex-direction: column;
     gap: 0.25vw;
-    text-transform: uppercase;
+    text-transform: none;
     
 }
 
@@ -637,15 +786,39 @@ body.is-nav-open .btn-burger{
 }
 
 .work-caption{
-    font-family: "Geist Mono";
+    font-family: "Neurial Grotesk", sans-serif;
     font-size: 0.875rem;
-    text-transform: uppercase;
+    text-transform: none;
     font-weight: 300;
 }
 
 .bold{
     font-weight: 600;
 
+}
+
+[data-project-grid] .work-title .bold {
+    font-weight: 400;
+}
+
+[data-project-grid] .work-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    width: 100%;
+}
+
+[data-project-grid] .project-title-label {
+    min-width: 0;
+    text-align: left;
+}
+
+[data-project-grid] .project-year {
+    flex-shrink: 0;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    font-weight: 400;
+    white-space: nowrap;
 }
 
 
@@ -703,13 +876,9 @@ video{
 .video-elastic{
     object-fit: contain;
     width: 100%;
-    scale: 0.95;
+    scale: 1;
 }
 
-/* Mobile seq thumb: only under 960px (src also gated in index.html) */
-.video-elastic--mobile{
-    display: none;
-}
 
 .video-mm{
     object-fit: contain;
@@ -722,13 +891,13 @@ video{
 }
 
 .card-superfast .card-thumbnail{
-    background-color: black;
-    margin-bottom: var(--space-caption);
-    background-image: url("assets/superfast/superfast-print-bookcover.png");
-    background-size: 57%;
+    background-color: #3a4d63;
+    background-image: url("assets/gradient%20%2823%29.png");
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    aspect-ratio: 631/387;
+    margin-bottom: var(--space-caption);
+    aspect-ratio: 3146 / 2160;
     justify-content: center;
     align-items: center;
 }
@@ -738,12 +907,11 @@ video{
 }
 
 .video-superfast{
-    scale: 0.98;
+    scale: 0.85;
     width: 100%;
     height: auto;
     flex-shrink: 0;
-    outline: 0.5vw solid black;
-    outline-offset: -0.5vw;
+    border-radius: 0.8rem;
 }
 
 .card-videssay .card-thumbnail{
@@ -759,39 +927,96 @@ video{
 }
 
 .card-wu .card-thumbnail{
-    background-image: url("assets/wu/wu\ blurred\ bg\ 1.png");
-    background-size: contain;
+    background-image: url("assets/wu/wu blurred bg 1.png");
     background-size: 200%;
     background-position-y: 12%;
-    /* background-blend-mode: color-dodge; */
-    aspect-ratio: 27/21.5;
+    aspect-ratio: 1 / 1;
 }
 
 
 .img-wu-poster{
-    width: 62%;
-    height: auto;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    scale: 0.8;
+    object-fit: contain;
+    object-position: center;
+}
+
+.card-neurial .card-thumbnail{
+    aspect-ratio: 2164 / 2160;
+    background-color: #1e1e1e;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-neurial .card-thumbnail::before{
+    content: "";
+    position: absolute;
+    inset: -12%;
+    background-image: url("assets/kinetic-type-reel/thumbnail-bg-v2.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(22px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.card-neurial .card-thumbnail video{
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: auto;
     scale: 0.9;
     object-fit: contain;
-    align-self: center;
+    border-radius: clamp(1rem, 3.5vw, 2rem);
+}
+
+.card-jobtracker .card-thumbnail{
+    aspect-ratio: 1356 / 958;
+    background-color: #1e1e1e;
+}
+
+.card-superformula .card-thumbnail{
+    aspect-ratio: 3246 / 2040;
+    background-color: #E5DAFD;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-superformula .card-thumbnail img{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    scale: 0.8;
+    object-fit: contain;
+    object-position: center;
+}
+
+.card-jobtracker .card-thumbnail img{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    scale: none;
+    object-fit: cover;
 }
 
 .card-pictogram .card-thumbnail{
     background-color: #3E5ED9;
-    aspect-ratio: 800/620;
-    background-image: url("assets/pictogram/pictogram-static-thumb-grid.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: bottom;
+    aspect-ratio: 1 / 1;
     justify-content: center;
     align-items: center;
 }
 
 .card-pictogram video,
 .card-pictogram canvas.pictogram-visual{
-    scale: 0.78;
-    width: 90%;
-    height: auto;
+    scale: none;
+    width: 100%;
+    height: 100%;
     flex-shrink: 0;
      /* aspect-ratio: 800/490; */
     object-fit: contain;
@@ -815,7 +1040,7 @@ video.pictogram-source{
 
 .card-booklets .card-thumbnail{
     aspect-ratio: 1353 / 954;
-    outline: 2px solid #F5F5F5;
+    outline: none;
     overflow: hidden;
 }
 
@@ -830,12 +1055,141 @@ video.pictogram-source{
     margin-inline: 0;
 }
 
+.card-archive .card-thumbnail{
+    aspect-ratio: auto;
+    height: auto;
+    display: block;
+    background-color: #161616;
+}
+
+.card-archive .card-thumbnail img{
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    max-width: none;
+    margin-inline: 0;
+}
+
+.card-archive .archive-sequence{
+    aspect-ratio: 4 / 3;
+    position: relative;
+}
+
+.card-archive .archive-sequence--horse{
+    aspect-ratio: 1492 / 1800;
+}
+
+.card-archive .card-thumbnail--square{
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.card-archive .card-thumbnail--square img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-archive .card-thumbnail--three-two{
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+}
+
+.card-archive .card-thumbnail--three-two img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-archive .card-thumbnail--top-half{
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.card-archive .card-thumbnail--top-half img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.card-archive .archive-sequence img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+}
+
+.card-archive .archive-sequence img:first-child{
+    opacity: 1;
+}
+
+.card-archive .archive-sequence.archive-sequence--fill-height img{
+    inset: 0 auto auto 50%;
+    width: auto;
+    height: 100%;
+    max-width: none;
+    transform: translateX(-50%);
+    object-fit: fill;
+}
+
+.card-archive .archive-sequence.archive-sequence--horse img:nth-child(2){
+    inset: 50% 0 auto 0;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    transform: translateY(-50%);
+    object-fit: fill;
+}
+
+.card-mitwerk .card-thumbnail{
+    background-color: #000000;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-mitwerk .card-thumbnail .thumb-img{
+    width: 88%;
+    height: auto;
+    margin: 0 6%;
+    object-fit: contain;
+    object-position: center;
+    scale: 0.88;
+    border-radius: 0.8rem;
+}
+
 .card-tldr .card-thumbnail{
     background-color: #000000;
-    /* aspect-ratio: 10/6; */
-    aspect-ratio: 800/490;
+    aspect-ratio: 2164 / 2160;
     justify-content: center;
     align-items: center;
+}
+
+.card-tldr .card-thumbnail::before{
+    content: "";
+    position: absolute;
+    inset: -12%;
+    background-image: url("assets/tldr/thumbnail-bg.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(36px);
+    z-index: 0;
+    pointer-events: none;
 }
 
 .card-tldr .card-thumbnail picture{
@@ -856,6 +1210,27 @@ video.pictogram-source{
     object-fit: contain;
 }
 
+.card-tldr {
+    min-width: 0;
+}
+
+.card-tldr .card-thumbnail video{
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    translate: -50% -50%;
+    scale: 0.85;
+    object-fit: contain;
+    object-position: center;
+    border-radius: clamp(1rem, 3.5vw, 2rem);
+}
+
 .card-dephy .card-thumbnail{
     background-image: url("assets/dephy/node_3\ 1.png");
     background-size: contain;
@@ -863,46 +1238,62 @@ video.pictogram-source{
 }
 
 .card-gvd .card-thumbnail{
-    /* background-image: url("assets/gvd/gvd-thumb.png"); */
-    background-color: #531957;
+    aspect-ratio: 1710 / 1080;
+    background-color: #000;
     background-size: cover;
     background-position: center;
-    border: 1.5px solid #531957;
 }
 
 .card-gvd .card-thumbnail video{
+    position: absolute;
+    inset: 0;
     width: 100%;
-    scale: 0.82;
-    border-radius: 1.4rem;
+    height: 100%;
+    margin: 0;
+    scale: none;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+/* The visit-site link is nested in the project link, so the parser wraps only
+   the absolute video in an <a>. Hover scale on that <a> makes it the video's
+   containing block and the frame flashes. Hover must not transform it. */
+.cards .card-gvd .card-thumbnail > a:hover,
+.cards .card-gvd .card-thumbnail > a:focus-visible,
+.cards-single-column .card-gvd .card-thumbnail > a:hover,
+.cards-single-column .card-gvd .card-thumbnail > a:focus-visible{
+    scale: none;
 }
 
 .card-schneider .card-thumbnail{
     background-color: #53c66c;
     align-items: center;
     justify-content: center;
-    gap: clamp(0.6rem, 2.2%, 1.25rem);
-    padding: 5% 4%;
 }
 
 .card-schneider .card-thumbnail .thumb-img{
-    flex: 1 1 0;
-    min-width: 0;
-    width: 100%;
+    width: 88%;
     height: auto;
     max-width: none;
-    max-height: 100%;
-    margin: 0;
-    scale: none;
+    max-height: none;
+    margin: 0 6%;
+    scale: 0.88;
     object-fit: contain;
     object-position: center;
+    border-radius: 0.8rem;
 }
 
-.card-schneider .card-thumbnail .schneider-thumb-phone{
-    height: 54%;
-    width: auto;
-    flex: 0 0 auto;
+.card-adventurer .card-thumbnail{
+    aspect-ratio: 2164 / 2160;
+}
+
+.card-adventurer .card-thumbnail video{
+    width: 100%;
+    height: 100%;
+    max-width: none;
     margin: 0;
-    object-fit: contain;
+    scale: none;
+    object-fit: cover;
 }
 
 .card-nijimu .card-thumbnail{
@@ -1374,9 +1765,8 @@ video.pictogram-source{
 }
 
 .elastic-thumbnail{
-    aspect-ratio: 27/21;
-    background-image: url("assets/elasticmind/elastic-staticthumb.png");
-    background-size: contain;
+    aspect-ratio: 213 / 180;
+    background: #161616;
 }
 
 /* hover state */
@@ -1436,9 +1826,9 @@ nav ul a:hover{
 
 
 /* dark mode */
-.dark-mode, .dark-mode nav, .dark-mode nav ul, .dark-mode h1, .dark-mode p{
-    color: #f2f2f2;
-    background-color: #171717;
+.dark-mode{
+    color: var(--color-text);
+    background-color: var(--color-bg);
 }
 
 .dark-mode i, .dark-mode a{
@@ -1489,7 +1879,7 @@ nav ul a:hover{
     border-radius: 4px;
     background-color: #e4e4e4;
     color: #666;
-    font-family: "Geist Mono", monospace;
+    font-family: "Neurial Grotesk", sans-serif;
     font-size: 0.75rem;
     font-weight: 400;
     text-transform: uppercase;
@@ -1627,17 +2017,8 @@ body.is-loading header{
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: max-content;
+  width: 7rem;
   margin-top: -1rem;
-}
-
-.page-loader__name{
-  margin: 0;
-  font: 600 0.95rem/1 "Geist", system-ui, sans-serif;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  animation: page-loader-fade-pulse 1.6s ease-in-out infinite;
 }
 
 .page-loader__bar{
@@ -1672,9 +2053,9 @@ body.is-loading header{
   width: min(30rem, calc(100% - (var(--space-page) * 2)));
   max-width: calc(100% - (var(--space-page) * 2));
   text-align: center;
-  font: 400 0.875rem/1.45 "Geist", system-ui, sans-serif;
+  font: 400 0.875rem/1.45 "Neurial Grotesk", system-ui, sans-serif;
   letter-spacing: 0.01em;
-  color: rgba(18, 18, 18, 0.5);
+  color: var(--color-text);
   text-wrap: balance;
   transition: opacity 280ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1684,12 +2065,15 @@ body.is-loading header{
   display: block;
   overflow: hidden;
   max-width: 100%;
+  perspective: 700px;
 }
 
 .page-loader__tip-text{
   display: block;
-  color: rgba(18, 18, 18, 0.5);
-  will-change: transform, opacity;
+  color: var(--color-text);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
   text-wrap: balance;
 }
 
@@ -1727,11 +2111,6 @@ body.is-loading header{
   to { transform: scale(1); }
 }
 
-@keyframes page-loader-fade-pulse{
-  0%, 100% { opacity: 0.45; }
-  50% { opacity: 1; }
-}
-
 @keyframes page-loader-bar{
   0% { transform: translateX(-120%); }
   100% { transform: translateX(280%); }
@@ -1743,14 +2122,12 @@ body.is-loading header{
   }
   .page-loader__inner,
   .page-loader__fallback,
-  .page-loader__name,
   .page-loader__bar-fill,
   .page-loader__tip{
     animation: none !important;
     transition: none;
   }
   .page-loader__fallback{ transform: none; }
-  .page-loader__name{ opacity: 1; }
   .page-loader__bar-fill{
     width: 100%;
     transform: none;

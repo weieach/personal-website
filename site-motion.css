@@ -1,0 +1,11 @@
+/* Prevent the first/last child's margins from escaping the transformed content. */
+#smooth-content { display: flow-root; width: 100%; }
+html:has(#smooth-wrapper) { scroll-behavior: auto; }
+.page-loader { transition: none; overflow: hidden; }
+.page-loader__paper { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.page-loader.page-loader--paper-ready { background: transparent; }
+.page-loader__inner { position: relative; z-index: 1; }
+.page-loader__tip { z-index: 1; }
+.page-loader--exiting .page-loader__inner { transition: none; }
+.page-loader--exiting .page-loader__mark { pointer-events: none; transform-origin: 50% 50%; }
+.page-loader--exiting .page-loader__bar-fill { animation-play-state: paused; }

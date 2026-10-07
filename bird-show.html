@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bird</title>
+    <link rel="stylesheet" href="fonts.css">
     <style>
         * {
+            font-family: "Neurial Grotesk", sans-serif;
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -99,8 +101,12 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="theme.css?v=8">
+    <link rel="stylesheet" href="site-motion.css?v=1">
+    <script defer src="assets/vendor/gsap/gsap.min.js"></script>
+    <script type="module" src="site-scroll.js?v=motion-2"></script>
 </head>
-<body>
+<body class="dark-mode">
     <div class="bird-show-wrap">
         <canvas id="bird-show-canvas" role="button" tabindex="0" aria-label="Chirp the bird"></canvas>
     </div>
@@ -113,6 +119,6 @@
       }
     }
     </script>
-    <script type="module" src="loader-3d.js"></script>
+    <script type="module" src="loader-3d.js?v=paper-1"></script>
 </body>
 </html>

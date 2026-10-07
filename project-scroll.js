@@ -1,4 +1,3 @@
-import Lenis from "https://cdn.jsdelivr.net/npm/lenis@1.3.25/+esm";
 import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@12.42.2/+esm";
 
 const REVEAL = {
@@ -11,7 +10,6 @@ const STAGGER_CAP = 3;
 /** Pause after hero/caption paint before the first staggered reveal */
 const AFTER_STATIC_S = 0.12;
 
-let lenis = null;
 
 const main = document.querySelector(".main-projectpg");
 if (main) {
@@ -22,30 +20,10 @@ if (main) {
   // Initial opacity/scale lives in CSS so blocks never paint fully then snap.
   const blocks = collectRevealBlocks(main);
 
-  // Lenis fights touch scrolling; keep native scroll on coarse pointers
-  const preferNativeScroll = window.matchMedia("(pointer: coarse)").matches;
-
   if (reduceMotion) {
     // Drop the CSS start pose (same as listing-scroll)
     blocks.forEach((el) => el.classList.add("scroll-reveal-block--done"));
   } else {
-    if (!preferNativeScroll) {
-      lenis = new Lenis({
-        duration: 1.05,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        touchMultiplier: 1.1,
-      });
-
-      const raf = (time) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      };
-      requestAnimationFrame(raf);
-
-      attachScrollSnap(main, lenis);
-    }
-
     if (blocks.length) {
       requestAnimationFrame(() => {
         const { above, below } = splitByViewport(blocks);
@@ -89,7 +67,7 @@ if (main) {
           window.setTimeout(() => showBlocks(pending), 12000);
         };
 
-        if (document.readyState === "complete") {
+        if (main.matches('.playground-project') || document.readyState === "complete") {
           armBelow();
         } else {
           window.addEventListener("load", armBelow, { once: true });
@@ -99,7 +77,7 @@ if (main) {
   }
 }
 
-// In-page hash links (e.g. .thumbnail-tooltip) ? Lenis disables native anchors
+// Route in-page links through the shared smooth scrolling controller.
 document.addEventListener("click", (e) => {
   const link = e.target.closest?.('a[href^="#"]');
   if (!link) return;
@@ -125,56 +103,9 @@ function scrollBehavior() {
   return window.matchMedia("(pointer: coarse)").matches ? "auto" : "smooth";
 }
 
-/** Lenis owns the scroll, so CSS scroll-snap can't be used — register its Snap addon.
- *  Coarse pointers keep native scroll, and snap via CSS instead.
- *  Snap is landscape-only (width >= height), matching the full-bleed CSS stages. */
-function attachScrollSnap(main, lenisInstance) {
-  const targets = main.querySelectorAll("[data-scroll-snap]");
-  if (!targets.length) return;
-
-  const landscapeMq = window.matchMedia("(min-aspect-ratio: 1/1)");
-
-  import("https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis-snap.mjs")
-    .then(({ default: Snap }) => {
-      const snap = new Snap(lenisInstance, {
-        type: "proximity",
-        duration: 0.9,
-        // evaluate after Lenis has coasted to a stop, and only pull from nearby,
-        // so a deliberate scroll can still leave the clip behind
-        debounce: 520,
-        distanceThreshold: "32%",
-      });
-      // Snap to the video itself so center-align tracks the clip, not a 100vh frame
-      targets.forEach((el) => {
-        const snapTarget = el.querySelector("video") || el;
-        snap.addElement(snapTarget, { align: ["center"], ignoreTransform: true });
-        snapTarget.addEventListener("loadedmetadata", () => {
-          if (landscapeMq.matches) snap.resize();
-        });
-      });
-
-      const syncSnap = () => {
-        if (landscapeMq.matches) {
-          snap.start();
-          snap.resize();
-        } else {
-          snap.stop();
-        }
-      };
-
-      syncSnap();
-      landscapeMq.addEventListener("change", syncSnap);
-      window.addEventListener("resize", syncSnap);
-    })
-    .catch(() => {});
-}
-
 function scrollToTarget(target, offset = 0) {
-  if (lenis) {
-    lenis.scrollTo(target, {
-      offset,
-      duration: 1.2,
-    });
+  if (window.SiteScroll) {
+    window.SiteScroll.scrollTo(target, offset);
     return;
   }
 
@@ -300,6 +231,7 @@ function setupCaseStudyToc() {
   };
 
   window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("site-scroll:update", schedule);
   window.addEventListener("resize", schedule);
   update();
 
@@ -401,8 +333,8 @@ function setupLineSidebarProximity(sidebar, list, elements, getActiveIndex) {
 }
 
 function scrollToTop() {
-  if (lenis) {
-    lenis.scrollTo(0, { duration: 1.2 });
+  if (window.SiteScroll) {
+    window.SiteScroll.scrollTo(0);
     return;
   }
 
@@ -442,7 +374,6 @@ function setupWalkthroughLightbox() {
     overlay.classList.toggle("image-lightbox--poster", poster);
     overlay.classList.add("is-open");
     document.body.classList.add("is-lightbox-open");
-    lenis?.stop();
   };
 
   const close = () => {
@@ -451,7 +382,6 @@ function setupWalkthroughLightbox() {
     overlay.classList.remove("image-lightbox--certificate");
     overlay.classList.remove("image-lightbox--poster");
     document.body.classList.remove("is-lightbox-open");
-    lenis?.start();
   };
 
   grid?.addEventListener("click", (e) => {
@@ -706,7 +636,10 @@ function collectRevealBlocks(main) {
     .querySelectorAll(".project-caption > section")
     .forEach((section) => blocks.push(section));
 
-  main.querySelectorAll(".project-pics > *").forEach((el) => {
+  const mediaBlocks = main.matches('.playground-project')
+    ? '.project-pics .playground-tile, .nijimu-experimental__heading'
+    : '.project-pics > *';
+  main.querySelectorAll(mediaBlocks).forEach((el) => {
     if (el.classList.contains("placeholder-caption")) return;
     blocks.push(el);
   });

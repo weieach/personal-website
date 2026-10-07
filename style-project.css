@@ -88,7 +88,7 @@ main.pg-with-thumbnail {
   text-decoration: none;
   left: 0;
   color: #ffffff;
-  font-family: "Geist Mono";
+  font-family: "Neurial Grotesk", sans-serif;
   top: 28px;
   opacity: 0;
   transform: scale(0.85);
@@ -105,7 +105,7 @@ main.pg-with-thumbnail {
   display: inline-block;
   opacity: 0;
   color: #ffffff;
-  font-family: "Geist Mono";
+  font-family: "Neurial Grotesk", sans-serif;
 }
 
 .thumbnail-tooltip__text i{
@@ -498,7 +498,7 @@ main.pg-with-thumbnail {
 }
 
 .dark-mode .captioned-item:has(.fs-movie-demo)::before {
-  background: #171717;
+  background: var(--color-bg);
 }
 
 .captioned-item {
@@ -532,7 +532,7 @@ main.pg-with-thumbnail {
 }
 
 .floating-caption-title{
-  font-family: "Geist Mono";
+  font-family: "Neurial Grotesk", sans-serif;
   text-transform: uppercase;
   font-weight: 400;
 }
@@ -583,7 +583,7 @@ h3 {
   color: #d57888;
   /* color: #3189c4; */
   font-weight: 400;
-  font-family: "Geist Mono";
+  font-family: "Neurial Grotesk", sans-serif;
 }
 
 h2 {
@@ -659,7 +659,7 @@ h3 {
   height: auto;
   display: block;
   object-fit: contain;
-  background-color: #171717;
+  background-color: var(--color-bg);
 }
 
 @media (min-aspect-ratio: 1/1) {
@@ -714,7 +714,7 @@ h3 {
 }
 
 html:has(.nijimu-page.dark-mode) {
-  background-color: #171717;
+  background-color: var(--color-bg);
 }
 
 /* Nijimu light-mode accent; dark mode stays a single neutral */
@@ -782,7 +782,7 @@ html:has(.nijimu-page.dark-mode) {
 }
 
 .project-caption a {
-  /* font-family: "Geist Mono"; */
+  /* font-family: "Neurial Grotesk", sans-serif; */
   /* text-transform: uppercase; */
 }
 
@@ -861,7 +861,7 @@ html:has(.nijimu-page.dark-mode) {
 }
 
 .project-caption ul li p:not(.list-case-study li p) {
-  font-family: "Geist", sans-serif;
+  font-family: "Neurial Grotesk", sans-serif;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -887,40 +887,12 @@ html:has(.nijimu-page.dark-mode) {
     /* color: #d33939; */
     /* color: rgb(0, 165, 55); */
       /* color: #db6579; */
-    font-family: "Geist";
+    font-family: "Neurial Grotesk", sans-serif;
     
 }
 
 .scroll-anchor::before{
     content: "#";
-}
-
-.dark-mode-lighter, .dark-mode-lighter nav, .dark-mode-lighter nav ul, .dark-mode-lighter p, .dark-mode-lighter h1, .dark-mode-lighter h2, .dark-mode-lighter h3{
-  background-color: #171717;
-}
-
-/* TL;DR: pure black page chrome (vs default dark-mode #171717) */
-.dark-mode.tldr-project,
-.dark-mode.tldr-project nav,
-.dark-mode.tldr-project nav ul,
-.dark-mode.tldr-project h1,
-.dark-mode.tldr-project p,
-.dark-mode.tldr-project .sidebar,
-.dark-mode.tldr-project .sidebar a{
-  background-color: #000000;
-}
-
-/* Superfast: slightly lifted dark chrome */
-.dark-mode.superfast-project,
-.dark-mode.superfast-project nav,
-.dark-mode.superfast-project nav ul,
-.dark-mode.superfast-project h1,
-.dark-mode.superfast-project h2,
-.dark-mode.superfast-project h3,
-.dark-mode.superfast-project p,
-.dark-mode.superfast-project .sidebar,
-.dark-mode.superfast-project .sidebar a{
-  background-color: #1C1C1C;
 }
 
 /* `*` sets #121212 on every node; caption `p { color: inherit }` then
@@ -1044,7 +1016,7 @@ h2{
   margin-bottom: var(--project-subtitle-to-body-gap, 2.25rem);
   color: rgb(88, 88, 88);
   font-weight: 400;
-  font-family: "Geist Mono", monospace;
+  font-family: "Neurial Grotesk", sans-serif;
   text-transform: uppercase;
 }
 
@@ -1195,7 +1167,7 @@ h2{
 }
 
 .section-product-highlights .captioned-item > h4{
-  font-family: "Geist Mono";
+  font-family: "Neurial Grotesk", sans-serif;
   font-weight: 400;
   font-size: 0.9rem;
   color: inherit;
@@ -1263,7 +1235,7 @@ h2{
   border-radius: 0;
   background: none;
   color: inherit;
-  font-family: "Geist Mono";
+  font-family: "Neurial Grotesk", sans-serif;
   font-weight: 400;
   font-size: 0.9rem;
   opacity: 0.6;
@@ -1493,7 +1465,7 @@ main.main-projectpg.case-study-project{
   max-width: 120ch;
 }
 
-/* Resolve once against body-copy font so mono headings and Geist body share the same measure.
+/* Resolve once against body-copy font so headings and Neurial Grotesk body share the same measure.
    Plain 80ch on each tag differs because ch uses that element's own font. */
 @property --schneider-prose-max {
   syntax: "<length>";
@@ -1503,7 +1475,7 @@ main.main-projectpg.case-study-project{
 
 .main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .case-study-header,
 .main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption{
-  font-family: "Geist", sans-serif;
+  font-family: "Neurial Grotesk", sans-serif;
   font-size: 0.92rem;
   --schneider-prose-max: 90ch;
 }
@@ -1566,7 +1538,7 @@ main.main-projectpg.case-study-project{
 
 .case-study-header h2{
   text-transform: none;
-  font-family: "Geist";
+  font-family: "Neurial Grotesk", sans-serif;
 }
 
 .case-study-project section{
@@ -1647,7 +1619,7 @@ main.main-projectpg.case-study-project{
 .list-case-study-info-awards .entry-content ul li{
   display: list-item;
   gap: 0;
-  font-family: "Geist", sans-serif;
+  font-family: "Neurial Grotesk", sans-serif;
   list-style: disc;
 }
 
@@ -1656,7 +1628,7 @@ main.main-projectpg.case-study-project{
   /* +1vw beyond the longest label's fit-content (included in column max-content) */
   padding-right: calc(3vw + 20px);
   box-sizing: content-box;
-  font-family: "geist mono";
+  font-family: "Neurial Grotesk", sans-serif;
   color: #4E7E44;
 }
 
@@ -1671,7 +1643,7 @@ main.main-projectpg.case-study-project{
 }
 
 .list-case-study-info .entry-content{
-  font-family: "Geist", sans-serif;
+  font-family: "Neurial Grotesk", sans-serif;
 }
 
 /* Schneider / GVD: one info entry per row */
@@ -1798,8 +1770,9 @@ main.main-projectpg.case-study-project{
 
 .img-casestudy-cover-gvd video{
   width: 100%;
-  scale: 0.82;
-  border-radius: 1.4rem;
+  height: auto;
+  scale: none;
+  border-radius: 0;
   object-fit: contain;
 }
 
@@ -1845,7 +1818,7 @@ main.main-projectpg.case-study-project{
 }
 
 .gvd-redesign-screen span{
-  font-family: "Geist Mono", monospace;
+  font-family: "Neurial Grotesk", sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -1954,7 +1927,7 @@ main.main-projectpg.case-study-project{
 }
 
 .outcome-media-row .floating-caption-details{
-  font-family: "Geist Mono";
+  font-family: "Neurial Grotesk", sans-serif;
   margin: 0;
 }
 
@@ -2029,7 +2002,7 @@ main.main-projectpg.case-study-project{
   border: 1px solid #55565A;
   border-radius: 999px;
   background-color: #F6F6F6;
-  font-family: "Geist Mono";
+  font-family: "Neurial Grotesk", sans-serif;
   font-size: 0.7rem;
   color: #55565A;
   margin-top: 0.1em;
@@ -2317,7 +2290,7 @@ main.main-projectpg.case-study-toc-enabled{
   position: relative;
   display: inline-flex;
   align-items: baseline;
-  font-family: "Geist Mono";
+  font-family: "Neurial Grotesk", sans-serif;
   font-size: var(--font-size);
   line-height: 1.35;
   letter-spacing: 0.03em;
