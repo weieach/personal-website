@@ -75,6 +75,64 @@ if (drawer) {
     syncNav();
   });
   const enterHash = () => { if (location.hash === '#about') open({ fromLink: true }); else syncNav(); };
+  // Same moment About's entrance starts: slide the Archive tab in and let it expand.
+  const archiveSeen = () => {
+    try { return sessionStorage.getItem('ncwei:about-visited') === '1'; } catch { return false; }
+  };
+  let archiveRevealed = archiveSeen();
+  function revealArchiveNav() {
+    if (archiveRevealed || archiveSeen()) { archiveRevealed = true; return; }
+    if (document.fonts && document.fonts.status !== 'loaded') {
+      document.fonts.ready.then(revealArchiveNav);
+      return;
+    }
+    archiveRevealed = true;
+    try { sessionStorage.setItem('ncwei:about-visited', '1'); } catch {}
+    const items = [...document.querySelectorAll('header nav li, .sidebar li')]
+      .filter(li => li.querySelector(':scope > a[href="archive.html"]'))
+      .filter(li => getComputedStyle(li.parentElement).display !== 'none');
+    const finish = () => {
+      items.forEach(li => {
+        li.style.cssText = '';
+        li.querySelector('a')?.style.removeProperty('transform');
+      });
+      document.documentElement.classList.remove('archive-locked', 'archive-unlocking');
+    };
+    if (reduced.matches || !items.length) { finish(); return; }
+    const specs = items.map(li => {
+      const sidebar = Boolean(li.closest('.sidebar'));
+      li.style.cssText = 'position:absolute;visibility:hidden;width:max-content;height:auto;max-width:none;min-width:0;flex:none;margin:0;overflow:visible;';
+      const size = sidebar ? li.offsetHeight : li.offsetWidth;
+      li.style.cssText = '';
+      return { li, sidebar, size, link: li.querySelector('a') };
+    }).filter(spec => spec.size > 0);
+    if (!specs.length) { finish(); return; }
+    document.documentElement.classList.add('archive-unlocking');
+    const gap = parseFloat(getComputedStyle(specs[0].li.parentElement).columnGap) || 0;
+    const neg = -gap / 2;
+    const ease = [.22, 1, .36, 1];
+    const motions = [];
+    specs.forEach(({ li, sidebar, size, link }) => {
+      li.style.overflow = 'hidden';
+      li.style.visibility = 'visible';
+      li.style.pointerEvents = 'none';
+      li.style.flex = '0 0 auto';
+      li.style.minWidth = '0';
+      if (sidebar) {
+        li.style.height = '0px';
+        motions.push(animate(li, { height: [0, size] }, { duration: .75, ease }));
+        if (link) motions.push(animate(link, { y: ['110%', '0%'] }, { duration: .65, delay: .08, ease }));
+      } else {
+        li.style.width = '0px';
+        li.style.marginLeft = `${neg}px`;
+        li.style.marginRight = `${neg}px`;
+        motions.push(animate(li, { width: [0, size], marginLeft: [neg, 0], marginRight: [neg, 0] }, { duration: .75, ease }));
+        if (link) motions.push(animate(link, { x: ['-100%', '0%'] }, { duration: .65, delay: .06, ease }));
+      }
+    });
+    Promise.all(motions).then(finish, finish);
+  }
+  window.addEventListener('about-drawer:open', revealArchiveNav);
   window.addEventListener('page-loader:hidden', enterHash);
   window.addEventListener('site-scroll:ready', enterHash);
   window.addEventListener('hashchange', enterHash);

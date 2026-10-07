@@ -216,7 +216,7 @@
   nav ul {
     position: static;
     width: auto;
-    gap: 2.5rem;
+    gap: var(--nav-link-gap);
   }
 
   /* About: drop the flippable postcard — content + bird only */
@@ -562,6 +562,14 @@
   .cards-single-column .thumbnail-cta,
   .cards-single-column .btn-visit-site {
     display: none;
+  }
+
+  .cards .thumbnail-cta:has(.btn-sound),
+  .cards-single-column .thumbnail-cta:has(.btn-sound) {
+    display: flex;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
   }
 
   .card-fs .card-thumbnail {

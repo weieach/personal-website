@@ -6,6 +6,7 @@
 (function (global) {
   const WARM_KEY = "ncwei:hub-warm";
   const ABOUT_FLIP_KEY = "ncwei:about-flipped";
+  const ABOUT_VISITED_KEY = "ncwei:about-visited";
   const HUBS = new Set(["work.html", "archive.html", "about.html"]);
 
   function pageId() {
@@ -64,18 +65,42 @@
     return HUBS.has(pageId());
   }
 
+  function hasVisitedAbout() {
+    try {
+      return sessionStorage.getItem(ABOUT_VISITED_KEY) === "1";
+    } catch {
+      return false;
+    }
+  }
+
+  function markAboutVisited() {
+    try {
+      sessionStorage.setItem(ABOUT_VISITED_KEY, "1");
+    } catch {
+      /* private mode / quota */
+    }
+  }
+
   // Before first paint: unlock warm revisits (paired with html.hub-warm CSS).
   // Skip on hard refresh so a deliberate reload still gets the intro.
   if (isWarm() && !isReload()) {
     document.documentElement.classList.add("hub-warm");
   }
 
+  // Archive stays out of the nav until About's entrance has run in this tab.
+  if (!hasVisitedAbout()) {
+    document.documentElement.classList.add("archive-locked");
+  }
+
   global.NCWeiHub = {
     WARM_KEY,
     ABOUT_FLIP_KEY,
+    ABOUT_VISITED_KEY,
     pageId,
     isWarm,
     markWarm,
+    hasVisitedAbout,
+    markAboutVisited,
     isHub,
     isReload,
   };

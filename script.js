@@ -1,3 +1,13 @@
+// Archive nav stays collapsed until About's entrance has run in this tab.
+(() => {
+  try {
+    if (sessionStorage.getItem("ncwei:about-visited") === "1") return;
+  } catch {
+    return;
+  }
+  document.documentElement.classList.add("archive-locked");
+})();
+
 const btnMenu = document.querySelector(".btn-burger");
 const sidebar = document.querySelector(".sidebar");
 const header = document.querySelector("header");
@@ -383,7 +393,8 @@ document.addEventListener("click", (e) => {
     if (hasDetails && !href) return;
 
     const visitBtn = thumb.querySelector(":scope > .btn-visit-site");
-    if (!hasDetails && !visitBtn) return;
+    const soundBtn = thumb.querySelector(":scope > .btn-sound");
+    if (!hasDetails && !visitBtn && !soundBtn) return;
 
     if (visitBtn) {
       const favicon = visitBtn.querySelector(".icon-visit-site");
@@ -420,7 +431,10 @@ document.addEventListener("click", (e) => {
       thumb.appendChild(group);
     }
 
-    if (!hasDetails) return;
+    if (!hasDetails) {
+      if (soundBtn) group.appendChild(soundBtn);
+      return;
+    }
 
     const detailsBtn = document.createElement("a");
     detailsBtn.className = "btn-visit-site btn-project-details";
@@ -436,6 +450,71 @@ document.addEventListener("click", (e) => {
     }
 
     group.appendChild(detailsBtn);
+    if (soundBtn) group.appendChild(soundBtn);
+  });
+})();
+
+// Soundtrack chips: muted until the speaker button is pressed.
+(() => {
+  const mutedIcon = "ph ph-speaker-simple-slash";
+  const unmutedIcon = "ph-fill ph-speaker-simple-high";
+
+  const isAudible = (video) => !video.muted && video.volume > 0;
+
+  const paint = (button, video) => {
+    const on = isAudible(video);
+    button.setAttribute("aria-pressed", on ? "true" : "false");
+    button.setAttribute("aria-label", on ? "Mute" : "Unmute");
+    const icon = button.querySelector("i");
+    if (icon) icon.className = on ? unmutedIcon : mutedIcon;
+  };
+
+  const players = [];
+
+  const muteOthers = (active) => {
+    players.forEach(({ button, video }) => {
+      if (video === active || !isAudible(video)) return;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.setAttribute("muted", "");
+      paint(button, video);
+    });
+  };
+
+  document.querySelectorAll(".btn-sound").forEach((button) => {
+    const video = button.closest(".card, .captioned-item")?.querySelector("video.allows-sound");
+    if (!video) return;
+
+    players.push({ button, video });
+    video.muted = true;
+    video.defaultMuted = true;
+    const sync = () => paint(button, video);
+    sync();
+    video.addEventListener("volumechange", () => {
+      // volumechange can run before muted/volume settle, so read them after.
+      queueMicrotask(() => {
+        if (isAudible(video)) muteOthers(video);
+        sync();
+      });
+    });
+
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const on = !isAudible(video);
+      if (on) muteOthers(video);
+      video.muted = !on;
+      video.defaultMuted = !on;
+      if (on) {
+        video.volume = 1;
+        video.removeAttribute("muted");
+        const playback = video.play();
+        if (playback) playback.catch(() => {});
+      } else {
+        video.setAttribute("muted", "");
+      }
+      sync();
+    });
   });
 })();
 

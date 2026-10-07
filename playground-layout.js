@@ -113,15 +113,17 @@
       stage.className = 'playground-media';
       const media = root.matches('picture') ? root.querySelector('img') : root;
       const mirror = media.nextElementSibling?.matches('canvas.pictogram-visual') ? media.nextElementSibling : null;
+      const chipRow = root.parentElement?.querySelector(':scope > .thumbnail-cta');
       stage.append(root);
       if (mirror) stage.append(mirror);
+      if (chipRow) stage.append(chipRow);
       tile.prepend(stage);
       watchMedia(media, tile, stage);
       previous = tile;
     });
     // Remove obsolete scroll/view wrappers after their media has been moved.
     [...container.children].forEach((el) => {
-      if (!el.matches('.playground-media, .floating-caption, .floating-caption-wrap, .thumbnail-tooltip')) el.remove();
+      if (!el.matches('.playground-media, .floating-caption, .floating-caption-wrap, .thumbnail-tooltip, .thumbnail-cta')) el.remove();
     });
   }
 

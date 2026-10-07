@@ -143,6 +143,14 @@ main.playground-project .playground-media {
   background: #161616;
 }
 
+main.playground-project .playground-media > .thumbnail-cta,
+main.playground-project .playground-media:hover > .thumbnail-cta,
+main.playground-project .playground-media:focus-within > .thumbnail-cta {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
 main.playground-project .playground-media > :is(img, video, canvas, picture),
 main.playground-project .playground-media > picture > img {
   display: block;

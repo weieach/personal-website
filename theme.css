@@ -116,12 +116,15 @@ body > header .logo p {
 .dark-mode .btn-visit-site,
 .dark-mode .btn-visit-site *,
 .dark-mode .btn-project-details,
-.dark-mode .btn-project-details * {
+.dark-mode .btn-project-details *,
+.dark-mode .btn-sound,
+.dark-mode .btn-sound * {
   color: var(--color-text);
 }
 
 .btn-visit-site,
-.cards-single-column .btn-visit-site {
+.cards-single-column .btn-visit-site,
+.btn-sound {
   background-color: var(--color-surface-muted);
 }
 
@@ -148,7 +151,8 @@ body > header .logo p {
   scale: 1;
 }
 
-.cards a.btn-visit-site:focus-visible {
+.cards a.btn-visit-site:focus-visible,
+.btn-sound:focus-visible {
   outline: 2px solid var(--color-text-muted);
   outline-offset: 2px;
 }
