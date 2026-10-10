@@ -587,6 +587,11 @@
     border-radius: 0;
   }
 
+  .card-mitwerk .card-thumbnail .mitwerk-vr {
+    width: 100%;
+    scale: 1;
+  }
+
   .card-superfast .card-thumbnail {
     aspect-ratio: 3146 / 2160;
   }

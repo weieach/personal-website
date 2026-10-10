@@ -1296,14 +1296,32 @@ video.pictogram-source{
     justify-content: center;
 }
 
+.card-mitwerk .card-thumbnail img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    margin: 0;
+}
+
 .card-mitwerk .card-thumbnail .thumb-img{
     width: 88%;
     height: auto;
-    margin: 0 6%;
     object-fit: contain;
     object-position: center;
     scale: 0.88;
     border-radius: 0.8rem;
+}
+
+.card-mitwerk .card-thumbnail .mitwerk-vr{
+    width: 100%;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
+    object-position: center;
+    scale: 1;
+    border-radius: 0;
+    opacity: 0;
 }
 
 .card-tldr .card-thumbnail{
@@ -1436,6 +1454,20 @@ video.pictogram-source{
     align-items: center;
 }
 
+/* Keep the video link sized and untransformed; CTAs are sibling links. */
+.card-nijimu .nijimu-thumbnail-link{
+    position: absolute;
+    inset: 0;
+    display: block;
+    scale: none;
+}
+
+.card-nijimu .nijimu-thumbnail-link:hover,
+.card-nijimu .nijimu-thumbnail-link:focus-visible{
+    scale: none;
+    opacity: 1;
+}
+
 .card-nijimu .card-thumbnail video{
     position: absolute;
     inset: 0;
@@ -1444,7 +1476,7 @@ video.pictogram-source{
     max-width: none;
     margin: 0;
     object-fit: contain;
-    scale: 1;
+    scale: none;
 }
 
 .card-dino .card-thumbnail{
