@@ -165,14 +165,18 @@
       return match ? Number(match[1]) : 1;
     };
     const resolve = (path) => window.SiteMedia?.url(path) || path;
-    let warmed = false;
-    const warm = () => {
-      if (warmed) return;
-      warmed = true;
-      for (let n = 1; n <= spreadCount; n += 1) {
-        const probe = new Image();
-        probe.src = resolve(spreadPath(n));
-      }
+    const cache = new Map();
+    const ensure = (url) => {
+      let record = cache.get(url);
+      if (record) return record;
+      const probe = new Image();
+      record = { loaded: false, failed: false };
+      cache.set(url, record);
+      probe.onload = () => { record.loaded = true; };
+      probe.onerror = () => { record.failed = true; };
+      probe.src = url;
+      if (probe.complete && probe.naturalWidth) record.loaded = true;
+      return record;
     };
     spreadCycle.querySelectorAll('.playground-media').forEach((stage) => {
       const img = stage.querySelector('img');
@@ -181,24 +185,62 @@
       const originalAlt = img.alt;
       let index = spreadNumber(original);
       let timer = 0;
+      let session = 0;
+      let painted = '';
+      const holdPrevious = () => {
+        const current = (img.naturalWidth && (img.currentSrc || img.src)) || painted;
+        if (!current) return;
+        if (img.offsetWidth) img.style.width = `${img.offsetWidth}px`;
+        img.style.backgroundImage = `url("${current}")`;
+      };
+      img.addEventListener('load', () => {
+        if (img.naturalWidth) painted = img.currentSrc || img.src;
+        const clearHold = () => {
+          if (!img.naturalWidth) return;
+          img.style.backgroundImage = '';
+          img.style.width = '';
+        };
+        if (img.decode) img.decode().then(() => requestAnimationFrame(clearHold)).catch(() => requestAnimationFrame(clearHold));
+        else requestAnimationFrame(clearHold);
+      });
       const show = (n) => {
-        const path = spreadPath(n);
-        img.dataset.mediaSrc = path;
+        const url = resolve(spreadPath(n));
+        const record = ensure(url);
+        if (!record.loaded) return false;
+        holdPrevious();
+        img.dataset.mediaSrc = spreadPath(n);
         img.alt = `Scanned book spread ${n}`;
-        img.src = resolve(path);
+        if (img.src !== url) img.src = url;
+        return true;
       };
       stage.addEventListener('pointerenter', () => {
         if (timer) return;
-        warm();
+        const active = ++session;
+        for (let n = 1; n <= spreadCount; n += 1) ensure(resolve(spreadPath(n)));
         timer = window.setInterval(() => {
-          index = index % spreadCount + 1;
-          show(index);
+          if (active !== session) return;
+          const next = index % spreadCount + 1;
+          ensure(resolve(spreadPath(next % spreadCount + 1)));
+          const record = ensure(resolve(spreadPath(next)));
+          if (record.failed) {
+            index = next;
+            return;
+          }
+          if (!show(next)) return;
+          index = next;
         }, 500);
       });
       stage.addEventListener('pointerleave', () => {
+        session += 1;
         window.clearInterval(timer);
         timer = 0;
         index = spreadNumber(original);
+        if (spreadNumber(img.currentSrc || img.src) === spreadNumber(original)) {
+          img.dataset.mediaSrc = original;
+          img.alt = originalAlt;
+          return;
+        }
+        holdPrevious();
         img.dataset.mediaSrc = original;
         img.alt = originalAlt;
         img.src = resolve(original);

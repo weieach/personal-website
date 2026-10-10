@@ -299,6 +299,23 @@ main.playground-project.mitwerk-project .playground-media:has(> img) {
   background: #f3f3f3;
 }
 
+body.nijimu-page .project-pics .playground-media {
+  background-color: #161616;
+  background-image: none;
+}
+
+body.nijimu-page .project-pics .playground-media:has(> img.nijimu-modes) {
+  background-color: #0E0B0B;
+}
+
+body.nijimu-page .playground-media > img.nijimu-modes {
+  scale: 0.8;
+}
+
+body.nijimu-page .project-pics .playground-media:has(> video) {
+  background-color: #000;
+}
+
 body.superfast-project {
   background: #161616;
 }
@@ -346,6 +363,12 @@ body.superfast-project .playground-media-pair .playground-media {
 body.superfast-project .sf-spread-cycle .playground-media {
   background-color: #000;
   background-image: none;
+}
+
+body.superfast-project .sf-spread-cycle .playground-media > img {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 body.superfast-project .playground-tile.no-display {

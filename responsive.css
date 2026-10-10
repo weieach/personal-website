@@ -133,7 +133,7 @@
   }
 
   .card-nijimu .card-thumbnail {
-    aspect-ratio: 1.35; /* slightly less tall than sibling thumbs */
+    aspect-ratio: 3764 / 2160;
   }
 
   .card-pictogram .card-thumbnail {
@@ -151,7 +151,7 @@
     max-width: none;
     margin: 0;
     scale: none;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
   }
 
@@ -625,9 +625,12 @@
 @media (width < 460px) {
   /* Narrow-phone listing ARs (recent adjustments) */
   .card-fs .card-thumbnail,
-  .card-dance .card-thumbnail,
-  .card-nijimu .card-thumbnail {
+  .card-dance .card-thumbnail {
     aspect-ratio: 1;
+  }
+
+  .card-nijimu .card-thumbnail {
+    aspect-ratio: 3764 / 2160;
   }
 
   .card-booklets .card-thumbnail {
