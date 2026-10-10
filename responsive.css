@@ -565,7 +565,9 @@
   }
 
   .cards .thumbnail-cta:has(.btn-sound),
-  .cards-single-column .thumbnail-cta:has(.btn-sound) {
+  .cards-single-column .thumbnail-cta:has(.btn-sound),
+  .cards .thumbnail-cta:has(.btn-project-status),
+  .cards-single-column .thumbnail-cta:has(.btn-project-status) {
     display: flex;
     opacity: 1;
     transform: none;
@@ -721,6 +723,11 @@
 
   .btn-project-details {
     display: none;
+  }
+
+  .cards .btn-project-status,
+  .cards-single-column .btn-project-status {
+    display: inline-flex;
   }
 
   .btn-visit-site {

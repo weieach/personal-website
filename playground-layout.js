@@ -154,6 +154,57 @@
     demoRow.classList.add('playground-group');
     demoRow.querySelectorAll('.tldr-demo-item').forEach(makeTiles);
   }
-  main.querySelectorAll('.project-pics .captioned-item:not(.playground-group), :scope > .work-wu-poster').forEach(makeTiles);
+  main.querySelectorAll('.project-pics .captioned-item:not(.playground-group):not(.sf-spreads-item), :scope > .work-wu-poster').forEach(makeTiles);
+
+  const spreadCycle = main.querySelector('.sf-spread-cycle');
+  if (spreadCycle && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const spreadCount = 15;
+    const spreadPath = (n) => `assets/superfast/scanned%20spreads/${n}.png`;
+    const spreadNumber = (src) => {
+      const match = decodeURIComponent(src || '').match(/(\d+)\.png$/);
+      return match ? Number(match[1]) : 1;
+    };
+    const resolve = (path) => window.SiteMedia?.url(path) || path;
+    let warmed = false;
+    const warm = () => {
+      if (warmed) return;
+      warmed = true;
+      for (let n = 1; n <= spreadCount; n += 1) {
+        const probe = new Image();
+        probe.src = resolve(spreadPath(n));
+      }
+    };
+    spreadCycle.querySelectorAll('.playground-media').forEach((stage) => {
+      const img = stage.querySelector('img');
+      if (!img) return;
+      const original = img.dataset.mediaSrc;
+      const originalAlt = img.alt;
+      let index = spreadNumber(original);
+      let timer = 0;
+      const show = (n) => {
+        const path = spreadPath(n);
+        img.dataset.mediaSrc = path;
+        img.alt = `Scanned book spread ${n}`;
+        img.src = resolve(path);
+      };
+      stage.addEventListener('pointerenter', () => {
+        if (timer) return;
+        warm();
+        timer = window.setInterval(() => {
+          index = index % spreadCount + 1;
+          show(index);
+        }, 500);
+      });
+      stage.addEventListener('pointerleave', () => {
+        window.clearInterval(timer);
+        timer = 0;
+        index = spreadNumber(original);
+        img.dataset.mediaSrc = original;
+        img.alt = originalAlt;
+        img.src = resolve(original);
+      });
+    });
+  }
+
   window.SiteMedia?.refresh();
 })();

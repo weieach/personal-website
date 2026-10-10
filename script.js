@@ -131,7 +131,7 @@ window.visualViewport?.addEventListener("scroll", syncSidebarViewport);
 window.addEventListener("resize", syncSidebarViewport);
 
 // --------------------------
-// Disabled-link toaster
+// Project status and unavailable-link toasts
 // --------------------------
 const DISABLED_LINK_TOAST_MESSAGE =
   "This project isn't fully available yet. Please come back later.";
@@ -159,7 +159,7 @@ function ensureToastStyles() {
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
       background: var(--color-surface-muted);
-      color: #fff;
+      color: var(--color-text, #121212);
       box-shadow: 0 12px 40px rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -239,6 +239,15 @@ function showToast(message, { durationMs = 3200 } = {}) {
 }
 
 document.addEventListener("click", (e) => {
+  const statusButton = e.target.closest?.(".btn-project-status");
+  if (statusButton) {
+    e.preventDefault();
+    const card = statusButton.closest(".card");
+    const title = (card?.querySelector(".work-title .bold") ||
+      card?.querySelector(".project-title-label, .work-title"))?.textContent.trim();
+    showToast(`${title || "This project"} is in development. Project details are coming soon.`);
+    return;
+  }
   const link = e.target.closest?.(".disabled-link");
   if (!link) return;
 
@@ -357,7 +366,8 @@ document.addEventListener("click", (e) => {
 // --------------------------
 // Thumbnail CTAs: projects without detail pages only offer an optional Visit site link.
 // Cards that already have "Visit site" keep it (left) with details on the right.
-// Other cards with no CTA get details only. Hidden below 500px via CSS.
+// Other cards with no CTA get details only. In-development cards get a status
+// button instead; unlike details links, status buttons remain visible on phones.
 // --------------------------
 (() => {
   const cards = document.querySelectorAll(
@@ -367,7 +377,8 @@ document.addEventListener("click", (e) => {
   cards.forEach((card) => {
     const archived = card.dataset.collection?.toLowerCase() === "archive" ||
       Boolean(card.closest('[data-project-collection="archive"]'));
-    const hasDetails = !archived && card.dataset.projectDetails !== "false";
+    const inDevelopment = !archived && card.dataset.projectStatus === "in-development";
+    const hasDetails = !archived && !inDevelopment && card.dataset.projectDetails !== "false";
     if (!hasDetails) {
       card.querySelectorAll(".btn-project-details").forEach(link => link.remove());
       // Strip project-page links even when a card without details is copied
@@ -394,7 +405,7 @@ document.addEventListener("click", (e) => {
 
     const visitBtn = thumb.querySelector(":scope > .btn-visit-site");
     const soundBtn = thumb.querySelector(":scope > .btn-sound");
-    if (!hasDetails && !visitBtn && !soundBtn) return;
+    if (!hasDetails && !inDevelopment && !visitBtn && !soundBtn) return;
 
     if (visitBtn) {
       const favicon = visitBtn.querySelector(".icon-visit-site");
@@ -429,6 +440,15 @@ document.addEventListener("click", (e) => {
       group.appendChild(visitBtn);
     } else {
       thumb.appendChild(group);
+    }
+
+    if (inDevelopment) {
+      const statusBtn = document.createElement("button");
+      statusBtn.type = "button";
+      statusBtn.className = "btn-visit-site btn-project-details btn-project-status";
+      statusBtn.innerHTML =
+        '<span class="btn-visit-site__label">In development</span><span class="project-status-loader" aria-hidden="true"><span></span><span></span><span></span></span>';
+      group.appendChild(statusBtn);
     }
 
     if (!hasDetails) {

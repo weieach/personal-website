@@ -137,6 +137,11 @@ body > header .logo p {
   color: var(--color-text-muted);
 }
 
+.btn-project-status .btn-visit-site__label,
+.dark-mode .btn-project-status .btn-visit-site__label {
+  color: var(--color-text-muted);
+}
+
 .cards a.btn-visit-site,
 .cards-single-column a.btn-visit-site {
   transition: box-shadow 200ms ease;

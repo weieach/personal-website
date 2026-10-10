@@ -238,6 +238,30 @@ main.playground-project .playground-media > canvas.pictogram-visual {
   scale: 0.7;
 }
 
+main.elastic-main-projectpg .page-thumbnail-elastic-mind .playground-media > video {
+  /* Same painted height as the 3D poster and teaser at scale 0.8. */
+  scale: calc(0.8 * (56.25cqw - 8px - 0.92rem * 1.28) / 56.25cqw);
+}
+
+main.elastic-main-projectpg .playground-media > img.elastic-poster {
+  scale: 0.9;
+}
+
+main.elastic-main-projectpg .playground-media-pair .playground-media > video {
+  scale: 0.8;
+}
+
+main.elastic-main-projectpg #el-item-4 .playground-media > video {
+  scale: 1;
+  object-fit: cover;
+  object-position: left center;
+}
+
+main.elastic-main-projectpg .playground-media > img.elastic-mockup {
+  object-fit: cover;
+  scale: 1;
+}
+
 main.playground-project.fs-project .playground-media:has(> video) {
   background: #E08494;
 }
@@ -266,8 +290,136 @@ main.playground-project.tldr-project .playground-media:has(> video) {
   background: #000;
 }
 
+main.elastic-main-projectpg .page-thumbnail-elastic-mind,
+main.elastic-main-projectpg .playground-media {
+  background-color: #000;
+}
+
 main.playground-project.mitwerk-project .playground-media:has(> img) {
   background: #f3f3f3;
+}
+
+body.superfast-project {
+  background: #161616;
+}
+
+body.superfast-project .playground-media {
+  background-color: #161616;
+  background-image: none;
+}
+
+body.superfast-project .playground-media:has(> video) {
+  background-color: #3a4d63;
+  background-image: url("assets/gradient%20%2823%29.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.superfast-project .page-thumbnail .playground-media {
+  background-color: #3a4d63;
+  background-image: url("assets/gradient%20%2823%29.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.superfast-project .page-thumbnail .playground-media > video {
+  scale: 0.85;
+  border-radius: 0.8rem;
+}
+
+body.superfast-project .playground-media:has(> img.sf-bookcover) {
+  background-color: #000;
+}
+
+body.superfast-project .playground-media > img.sf-bookcover {
+  scale: 0.8;
+}
+
+body.superfast-project .playground-media-pair .playground-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.superfast-project .sf-spread-cycle .playground-media {
+  background-color: #000;
+  background-image: none;
+}
+
+body.superfast-project .playground-tile.no-display {
+  display: none;
+}
+
+body.superfast-project .playground-media > video.sf-spread-feature {
+  scale: 0.85;
+  object-fit: contain;
+}
+
+body.superfast-project .playground-media-pair:has(video) .playground-media {
+  background-image: url("assets/superfast/gradient%20%2827%29.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.superfast-project .playground-media-pair:has(video) .playground-media > video {
+  scale: 0.9;
+  object-fit: contain;
+}
+
+body.superfast-project .playground-media-pair .playground-media > img {
+  /* Painted height matches the Elastic Mind 3D poster. */
+  position: relative;
+  inset: auto;
+  flex: none;
+  height: calc(0.8 * (56.25cqw - 8px - 0.92rem * 1.28));
+  width: auto;
+  max-width: none;
+  max-height: none;
+  scale: 0.8;
+}
+
+body.superfast-project .sf-spreads-item {
+  grid-column: 1 / -1;
+  height: auto;
+  background: #161616;
+}
+
+body.superfast-project .sf-spreads {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  background: #161616;
+}
+
+body.superfast-project .sf-spreads-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+body.superfast-project .sf-spreads-row img {
+  flex: 1 1 calc((100% - 64px) / 5);
+  width: calc((100% - 64px) / 5);
+  max-width: calc((100% - 64px) / 5);
+  height: auto;
+  margin: 0;
+  object-fit: contain;
+  background: #161616;
+}
+
+@media (width < 960px) {
+  body.superfast-project .sf-spreads-row img {
+    flex-basis: calc((100% - 16px) / 2);
+    width: calc((100% - 16px) / 2);
+    max-width: calc((100% - 16px) / 2);
+  }
 }
 
 .playground-project #el-item-4 { max-width: none; }

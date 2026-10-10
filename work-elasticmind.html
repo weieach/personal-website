@@ -58,7 +58,7 @@
     <meta name="twitter:description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta name="twitter:image" content="https://www.ncwei.com/assets/og-image.jpg">
     <link rel="stylesheet" href="theme.css?v=sound-1">
-    <link rel="stylesheet" href="playground-layout.css?v=sound-1">
+    <link rel="stylesheet" href="playground-layout.css?v=elastic-scale-4">
     <link rel="stylesheet" href="site-motion.css?v=1">
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=native-1"></script>
@@ -93,7 +93,7 @@
                 <li><a href="work.html#about" data-about-link>About</a></li>
             </ul>
         </div>
-        <div class="page-thumbnail page-thumbnail-elastic-mind">
+        <div class="page-thumbnail page-thumbnail-elastic-mind" data-media-bg="#000000">
             <video data-media-src="assets/elasticmind/(10.4)%20elastic-mind-thumb.mp4" data-media-autoplay muted loop playsinline width="2556" height="2160" preload="none" data-media-poster="assets/media-posters/9b95846c348d.webp"></video><noscript data-media-fallback><video src="assets/elasticmind/(10.4)%20elastic-mind-thumb.mp4" muted loop playsinline controls preload="none"></video></noscript>
             <a href="#elastic-h1" class="thumbnail-tooltip">
                 <span class="thumbnail-tooltip__text">(Scroll down to learn more <i class="ph-bold ph-arrow-down"></i>)</span>
@@ -149,25 +149,15 @@
         </div>
         <div class="placeholder-caption"></div>
         <div class="project-pics">
-            <div class="captioned-item playground-tile--fullwidth" id="el-item-1">
+            <div class="captioned-item playground-tile--fullwidth" id="el-item-1" data-media-bg="#000000">
                 <img data-media-src="assets/elasticmind/elastic-poster-effect.png" class="elastic-poster" alt="Design and the Elastic Mind exhibition poster" role="button" tabindex="0" aria-label="View poster full screen" width="1807" height="2558" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/elasticmind/elastic-poster-effect.png" class="elastic-poster" alt="Design and the Elastic Mind exhibition poster" role="button" tabindex="0" aria-label="View poster full screen"></noscript>
                 <div class="floating-caption">
-                    <p class="floating-caption-title">poster design</p>
-                    <p class="floating-caption-detail">A1 (23.4 x 33.1 inch)</p>
+                    <p class="floating-caption-title">2d poster (A1 size)</p>
                 </div>
-            </div>
-
-            <div class="captioned-item">
-                <img data-media-src="assets/elasticmind/elastic mind-poster stand.png" alt="" width="2528" height="1696" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/elasticmind/elastic mind-poster stand.png" alt=""></noscript>
-                <div class="floating-caption">
-                    <p class="floating-caption-title">poster design</p>
-                    <p class="floating-caption-detail">Mockup</p>
-                </div>
-
             </div>
 
             <div class="playground-media-pair">
-            <div class="captioned-item" id="el-item-3">
+            <div class="captioned-item" id="el-item-3" data-media-bg="#000000">
                 <video data-media-src="assets/elasticmind/elastic-3d-poster.mp4" data-media-autoplay muted playsinline loop width="2828" height="4000" preload="none" data-media-poster="assets/media-posters/c8bc6dc07536.webp"></video><noscript data-media-fallback><video src="assets/elasticmind/elastic-3d-poster.mp4" muted playsinline loop controls preload="none"></video></noscript>
                 <div class="floating-caption">
                     <!-- <p class="floating-caption-title">motion graphic</p> -->
@@ -175,8 +165,8 @@
                 </div>
             </div>
 
-            <div class="captioned-item" id="el-item-2">
-                <video class="allows-sound" data-media-src="assets/elasticmind/elastic-mind-seq.mp4" data-media-autoplay muted controls playsinline loop width="1080" height="1920" preload="none" data-media-poster="assets/media-posters/5936b39478dc.webp"></video><noscript data-media-fallback><video class="allows-sound" src="assets/elasticmind/elastic-mind-seq.mp4" muted controls playsinline loop></video></noscript>
+            <div class="captioned-item" id="el-item-2" data-media-bg="#000000">
+                <video class="allows-sound" data-media-src="assets/elasticmind/elastic-mind-seq.mp4" data-media-autoplay muted playsinline loop width="1080" height="1920" preload="none" data-media-poster="assets/media-posters/5936b39478dc.webp"></video><noscript data-media-fallback><video class="allows-sound" src="assets/elasticmind/elastic-mind-seq.mp4" muted controls playsinline loop></video></noscript>
                 <div class="thumbnail-cta">
                     <button type="button" class="btn-sound" aria-pressed="false" aria-label="Unmute">
                         <i class="ph ph-speaker-simple-slash" aria-hidden="true"></i>
@@ -192,11 +182,18 @@
 
             </div>
 
-            <div class="captioned-item" id="el-item-4">
-                <video data-media-src="assets/elasticmind/ar-recorded.mp4" data-media-autoplay controls loop muted playsinline width="3174" height="1590" preload="none" data-media-poster="assets/media-posters/b896ad45bc00.webp"></video><noscript data-media-fallback><video src="assets/elasticmind/ar-recorded.mp4" controls loop muted playsinline></video></noscript>
+            <div class="captioned-item" data-media-bg="#000000">
+                <img class="elastic-mockup" data-media-src="assets/elasticmind/elastic mind-poster stand.png" alt="" width="2528" height="1696" loading="lazy" decoding="async"><noscript data-media-fallback><img class="elastic-mockup" src="assets/elasticmind/elastic mind-poster stand.png" alt=""></noscript>
+                <div class="floating-caption">
+                    <p class="floating-caption-title">mockup</p>
+                </div>
+            </div>
+
+            <div class="captioned-item" id="el-item-4" data-media-bg="#000000">
+                <video data-media-src="assets/elasticmind/ar-recorded.mp4" data-media-autoplay loop muted playsinline width="3174" height="1590" preload="none" data-media-poster="assets/media-posters/b896ad45bc00.webp"></video><noscript data-media-fallback><video src="assets/elasticmind/ar-recorded.mp4" controls loop muted playsinline></video></noscript>
                 <div class="floating-caption">
                     <!-- <p class="floating-caption-title">motion graphics</p> -->
-                    <p class="floating-caption-detail">AR version of 3D poster</p>
+                    <p class="floating-caption-title">AR version of 3D poster</p>
                 </div>
             </div>
 
