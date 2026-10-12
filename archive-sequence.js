@@ -22,11 +22,16 @@
     show(0);
     if (reduceMotion) return;
 
-    const timeline = gsap.timeline({ repeat: -1 });
-    timeline.call(() => {
-      index = (index + 1) % frames.length;
-      show(index);
-    }, null, frameDuration);
+    // The flip sits inside the loop. A callback placed on the end itself
+    // is skipped when the playhead wraps back to the start.
+    const timeline = gsap.timeline({
+      repeat: -1,
+      onRepeat: () => {
+        index = (index + 1) % frames.length;
+        show(index);
+      }
+    });
+    timeline.to({}, { duration: frameDuration });
 
     const sync = () => {
       if (root.closest(".card")?.hidden) timeline.pause();
