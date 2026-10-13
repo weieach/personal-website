@@ -1365,19 +1365,16 @@ video.pictogram-source{
     justify-content: center;
 }
 
-.card-mitwerk-vr .card-thumbnail img{
+.card-mitwerk-vr .card-thumbnail video{
     position: absolute;
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
+    inset: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     max-width: none;
     margin: 0;
     object-fit: contain;
     object-position: center;
-    rotate: -4.52deg;
-    scale: 1.18;
+    scale: none;
     border-radius: 0;
 }
 
