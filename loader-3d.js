@@ -181,6 +181,7 @@ function mountBird(canvas, { onReady, shouldDispose, jumpOnClick = false } = {})
   let chirping = false;
   let spinElapsed = 0;
   let tiltX = 0;
+  let readyPending = false;
   const clock = new THREE.Clock();
 
   canvas.style.cursor = "pointer";
@@ -299,6 +300,15 @@ function mountBird(canvas, { onReady, shouldDispose, jumpOnClick = false } = {})
     }
 
     renderer.render(scene, camera);
+
+    // Reveal only after a frame with the bird has been drawn and presented,
+    // so the canvas never shows up as an empty (white) box first.
+    if (readyPending) {
+      readyPending = false;
+      requestAnimationFrame(() => {
+        if (!disposed) onReady?.(true);
+      });
+    }
   }
 
   resize();
@@ -316,7 +326,7 @@ function mountBird(canvas, { onReady, shouldDispose, jumpOnClick = false } = {})
       });
       pivot.add(model);
       fitModel(model);
-      onReady?.(true);
+      readyPending = true;
     })
     .catch((err) => {
       console.error("Failed to load Bird.glb", err);

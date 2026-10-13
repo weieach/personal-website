@@ -22,8 +22,13 @@
     --space-main-top: var(--nav-height); /* clear fixed header exactly */
     --color-bg: #F6F6F6;
     --color-surface-muted: #E4E4E4; /* soft gray chip / secondary surface */
-    --radius-desktop-screen: 0.8rem; /* floating desktop screens in a thumbnail */
-    --radius-mobile-screen: clamp(1rem, 3.5vw, 2rem); /* floating phone screens in a thumbnail */
+    /* Corner radii as a share of the grid thumbnail's width (cqi), tuned at a
+       1270px viewport where a Work thumbnail is 603px wide */
+    --radius-thumbnail: 1.393cqi; /* every grid thumbnail frame (8.4px at 1270) */
+    --radius-desktop-screen: 1.857cqi; /* floating desktop screens, before their scale (11.2px at 1270) */
+    /* Gap above and below floating screens in a grid thumbnail, as a share of
+       the thumbnail's width (unitless so thumbnail aspect ratios can use it) */
+    --thumb-screen-margin-block: 0.0803;
 }
 
 /* Lenis smooth scroll (listing + shared) */
@@ -747,21 +752,24 @@ main:has(.project-filters:not([hidden])) > .cards {
     display: none;
 }
 
+/* Cards and thumbnails are size containers so corner radii (cqi) follow the
+   thumbnail's width: a card resolves its thumbnail's radius, a thumbnail its screens'. */
+[data-project-grid] > .card,
+[data-project-grid] > .card .card-thumbnail {
+    container-type: inline-size;
+}
+
 [data-project-grid] > .card .card-thumbnail {
     margin-bottom: 0;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-thumbnail);
     overflow: hidden;
 }
 
-/* project-grid.js marks a thumbnail when its screens sit clear of the frame */
+/* project-grid.js marks a thumbnail when its desktop-form screens sit clear of the frame */
 @media (width >= 960px) {
     [data-project-grid] > .card .card-thumbnail.is-inset-desktop :is(img, video):not(.icon-visit-site, .pictogram-source) {
         border-radius: var(--radius-desktop-screen);
     }
-}
-
-[data-project-grid] > .card .card-thumbnail.is-inset-mobile :is(img, video):not(.icon-visit-site, .pictogram-source) {
-    border-radius: var(--radius-mobile-screen);
 }
 
 [data-project-grid] > .card .card-text {
@@ -984,8 +992,10 @@ video{
     background-repeat: no-repeat;
     background-position: center;
     /* height: 500px; */
-    aspect-ratio: 792/490;
-    
+    /* Floating desktop screen (see .card-superformula); screen is 631 / 438 */
+    aspect-ratio: 1 / calc(0.85 * 438 / 631 + 2 * var(--thumb-screen-margin-block));
+    justify-content: center;
+    align-items: center;
 }
 
 .card-dance .card-thumbnail{
@@ -1001,13 +1011,13 @@ video{
 .video-fs{
     /* justify-self: center; */
     aspect-ratio: 631/438;
-    width: 88%;
-    scale: 0.88;
+    width: 100%;
+    flex-shrink: 0;
+    scale: 0.85;
     border-radius: var(--radius-desktop-screen);
     /* position: absolute;
     left: 10%;
     top: 10%; */
-    margin-inline: 6%;
     /* margin-inline: auto; */
     /* background-color: antiquewhite; */
     /* height: ; */
@@ -1039,7 +1049,19 @@ video{
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: var(--space-caption);
-    aspect-ratio: 3146 / 2160;
+    /* Floating desktop screen (see .card-superformula) */
+    aspect-ratio: 1 / calc(0.85 * 2160 / 3146 + 2 * var(--thumb-screen-margin-block));
+    justify-content: center;
+    align-items: center;
+}
+
+/* The nested visit-site link makes the parser wrap the screen in its own <a>;
+   span the thumbnail so the screen's width doesn't depend on media loading. */
+.card-fs .card-thumbnail > a:not(.btn-visit-site),
+.card-superfast .card-thumbnail > a:not(.btn-visit-site){
+    display: flex;
+    width: 100%;
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
 }
@@ -1090,6 +1112,8 @@ video{
 
 .card-neurial .card-thumbnail{
     aspect-ratio: 2164 / 2160;
+    /* Floating phone screen fills the height between the shared gaps */
+    padding-block: calc(var(--thumb-screen-margin-block) * 100%);
     background-color: #1e1e1e;
     justify-content: center;
     align-items: center;
@@ -1115,9 +1139,10 @@ video{
     z-index: 1;
     height: 100%;
     width: auto;
-    scale: 0.9;
+    scale: none;
     object-fit: contain;
-    border-radius: var(--radius-mobile-screen);
+    /* Share of the thumbnail's width (28px at a 1270px viewport) */
+    border-radius: 4.643cqi;
 }
 
 .card-jobtracker .card-thumbnail{
@@ -1125,8 +1150,12 @@ video{
     background-color: #1e1e1e;
 }
 
+/* Reference for floating desktop screens in grid thumbnails: the screen is 85%
+   of the thumbnail's width (width 100%, scale 0.85) with
+   --thumb-screen-margin-block above and below it. Each keeps its screen's own
+   ratio and sizes the thumbnail from it. */
 .card-superformula .card-thumbnail{
-    aspect-ratio: 3246 / 2040;
+    aspect-ratio: 1 / calc(0.85 * 1080 / 1962 + 2 * var(--thumb-screen-margin-block));
     background-color: #f3c6d8;
     background-image: url("assets/gradient (26).png");
     background-size: 210%;
@@ -1307,6 +1336,8 @@ video.pictogram-source{
 
 .card-mitwerk .card-thumbnail{
     background-color: #000000;
+    /* Floating desktop screen (see .card-superformula) */
+    aspect-ratio: 1 / calc(0.85 * 1920 / 3452 + 2 * var(--thumb-screen-margin-block));
     align-items: center;
     justify-content: center;
 }
@@ -1320,11 +1351,11 @@ video.pictogram-source{
 }
 
 .card-mitwerk .card-thumbnail .thumb-img{
-    width: 88%;
+    width: 100%;
     height: auto;
     object-fit: contain;
     object-position: center;
-    scale: 0.88;
+    scale: 0.85;
     border-radius: var(--radius-desktop-screen);
 }
 
@@ -1353,6 +1384,8 @@ video.pictogram-source{
 .card-tldr .card-thumbnail{
     background-color: #000000;
     aspect-ratio: 2164 / 2160;
+    /* Floating phone screen fills the height between the shared gaps */
+    padding-block: calc(var(--thumb-screen-margin-block) * 100%);
     justify-content: center;
     align-items: center;
     container-type: inline-size;
@@ -1395,20 +1428,18 @@ video.pictogram-source{
 }
 
 .card-tldr .card-thumbnail video{
-    position: absolute;
+    position: relative;
     z-index: 1;
-    top: 50%;
-    left: 50%;
     width: auto;
     height: 100%;
     max-width: none;
     max-height: none;
     margin: 0;
-    translate: -50% -50%;
-    scale: 0.85;
+    scale: none;
     object-fit: contain;
     object-position: center;
-    border-radius: var(--radius-mobile-screen);
+    /* Share of the thumbnail's width (28px at a 1270px viewport) */
+    border-radius: 4.643cqi;
 }
 
 .card-dephy .card-thumbnail{
@@ -1447,17 +1478,19 @@ video.pictogram-source{
 
 .card-schneider .card-thumbnail{
     background-color: #53c66c;
+    /* Floating desktop screen (see .card-superformula) */
+    aspect-ratio: 1 / calc(0.85 * 1922 / 3456 + 2 * var(--thumb-screen-margin-block));
     align-items: center;
     justify-content: center;
 }
 
 .card-schneider .card-thumbnail .thumb-img{
-    width: 88%;
+    width: 100%;
     height: auto;
     max-width: none;
     max-height: none;
-    margin: 0 6%;
-    scale: 0.88;
+    margin: 0;
+    scale: 0.85;
     object-fit: contain;
     object-position: center;
     border-radius: var(--radius-desktop-screen);

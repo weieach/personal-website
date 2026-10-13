@@ -15,29 +15,21 @@
     return { width, height };
   }
 
-  // Taller than 2:3, so phone frames qualify and posters do not.
-  const phoneRatio = 1.5;
-
-  function contentMedia(thumb) {
+  function desktopScreens(thumb) {
     return [...thumb.querySelectorAll("img, video")].filter((el) => {
       if (el.closest(".thumbnail-cta, .btn-visit-site, .btn-sound, .btn-project-status")) return false;
       if (el.classList.contains("pictogram-source")) return false;
-      return true;
-    });
-  }
-
-  function screensOf(thumb, kind) {
-    return contentMedia(thumb).filter((el) => {
       const { width, height } = frameSize(el);
-      if (kind === "desktop") return width > height;
-      return height >= width * phoneRatio;
+      return width > height;
     });
   }
 
-  function floatsInFrame(thumb, screens) {
-    if (thumb.offsetParent === null) return false;
+  function floatsInFrame(thumb) {
+    if (!desktop.matches || thumb.offsetParent === null) return false;
     const bounds = thumb.getBoundingClientRect();
-    if (bounds.width < 1 || bounds.height < 1 || !screens.length) return false;
+    if (bounds.width < 1 || bounds.height < 1) return false;
+    const screens = desktopScreens(thumb);
+    if (!screens.length) return false;
     const threshold = Math.min(bounds.width, bounds.height) * insetRatio;
     return screens.every((el) => {
       const box = el.getBoundingClientRect();
@@ -66,9 +58,7 @@
     cards.forEach((card, index) => {
       if (card.style.gridRowEnd !== spans[index]) card.style.gridRowEnd = spans[index];
       const thumb = card.querySelector(".card-thumbnail");
-      if (!thumb) return;
-      thumb.classList.toggle("is-inset-desktop", desktop.matches && floatsInFrame(thumb, screensOf(thumb, "desktop")));
-      thumb.classList.toggle("is-inset-mobile", floatsInFrame(thumb, screensOf(thumb, "mobile")));
+      if (thumb) thumb.classList.toggle("is-inset-desktop", floatsInFrame(thumb));
     });
   }
 
