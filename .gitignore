@@ -20,3 +20,6 @@ instructions/
 .env
 .env.*
 __pycache__/
+
+# debug-mode draft project order (tools/dev-server.py)
+.dev-order.json

@@ -687,7 +687,7 @@ main > [data-project-grid] {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 25vh;
+    margin-top: 30vh;
     padding: 0 var(--page-inline-space) 16px;
 }
 
