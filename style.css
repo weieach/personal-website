@@ -22,6 +22,8 @@
     --space-main-top: var(--nav-height); /* clear fixed header exactly */
     --color-bg: #F6F6F6;
     --color-surface-muted: #E4E4E4; /* soft gray chip / secondary surface */
+    --radius-desktop-screen: 0.8rem; /* floating desktop screens in a thumbnail */
+    --radius-mobile-screen: clamp(1rem, 3.5vw, 2rem); /* floating phone screens in a thumbnail */
 }
 
 /* Lenis smooth scroll (listing + shared) */
@@ -751,6 +753,17 @@ main:has(.project-filters:not([hidden])) > .cards {
     overflow: hidden;
 }
 
+/* project-grid.js marks a thumbnail when its screens sit clear of the frame */
+@media (width >= 960px) {
+    [data-project-grid] > .card .card-thumbnail.is-inset-desktop :is(img, video):not(.icon-visit-site, .pictogram-source) {
+        border-radius: var(--radius-desktop-screen);
+    }
+}
+
+[data-project-grid] > .card .card-thumbnail.is-inset-mobile :is(img, video):not(.icon-visit-site, .pictogram-source) {
+    border-radius: var(--radius-mobile-screen);
+}
+
 [data-project-grid] > .card .card-text {
     margin-top: 8px;
 }
@@ -990,7 +1003,7 @@ video{
     aspect-ratio: 631/438;
     width: 88%;
     scale: 0.88;
-    border-radius: 0.8rem;
+    border-radius: var(--radius-desktop-screen);
     /* position: absolute;
     left: 10%;
     top: 10%; */
@@ -1040,7 +1053,7 @@ video{
     width: 100%;
     height: auto;
     flex-shrink: 0;
-    border-radius: 0.8rem;
+    border-radius: var(--radius-desktop-screen);
 }
 
 .card-videssay .card-thumbnail{
@@ -1104,7 +1117,7 @@ video{
     width: auto;
     scale: 0.9;
     object-fit: contain;
-    border-radius: clamp(1rem, 3.5vw, 2rem);
+    border-radius: var(--radius-mobile-screen);
 }
 
 .card-jobtracker .card-thumbnail{
@@ -1130,7 +1143,7 @@ video{
     scale: 0.85;
     object-fit: contain;
     object-position: center;
-    border-radius: 0.75rem;
+    border-radius: var(--radius-desktop-screen);
 }
 
 .card-jobtracker .card-thumbnail img{
@@ -1312,7 +1325,7 @@ video.pictogram-source{
     object-fit: contain;
     object-position: center;
     scale: 0.88;
-    border-radius: 0.8rem;
+    border-radius: var(--radius-desktop-screen);
 }
 
 .card-mitwerk-vr .card-thumbnail{
@@ -1395,7 +1408,7 @@ video.pictogram-source{
     scale: 0.85;
     object-fit: contain;
     object-position: center;
-    border-radius: clamp(1rem, 3.5vw, 2rem);
+    border-radius: var(--radius-mobile-screen);
 }
 
 .card-dephy .card-thumbnail{
@@ -1447,7 +1460,7 @@ video.pictogram-source{
     scale: 0.88;
     object-fit: contain;
     object-position: center;
-    border-radius: 0.8rem;
+    border-radius: var(--radius-desktop-screen);
 }
 
 .card-adventurer .card-thumbnail{

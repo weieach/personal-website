@@ -608,8 +608,8 @@
     object-fit: contain;
     object-position: center;
     outline: none;
-    border-radius: 0.8rem;
-  }
+    border-radius: var(--radius-desktop-screen);
+}
 
   .card-gvd .card-thumbnail video {
     width: 100%;
