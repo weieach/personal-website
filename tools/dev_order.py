@@ -2,7 +2,7 @@
 """Debug-mode project order (dev-mode.js).
 
 While debug mode is on, tools/dev-server.py stores the order arranged in the
-browser as a draft in .dev-order.json ({"work.html": [card keys, ...]}).
+browser as a draft in .dev-order.json ({"index.html": [card keys, ...]}).
 
     python3 tools/dev_order.py status    # show the draft and the flag
     python3 tools/dev_order.py apply     # write the draft into the HTML, turn debug mode off

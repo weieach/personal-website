@@ -50,7 +50,8 @@ if (drawer) {
     const top = drawer.getBoundingClientRect().top;
     const active = opened && top < innerHeight * .45;
     links.forEach(link => active ? link.setAttribute('aria-current', 'page') : link.removeAttribute('aria-current'));
-    const collection = new URLSearchParams(location.search).get('collection');
+    const collection = document.querySelector('[data-project-grid]')?.dataset.projectCollection ||
+      new URLSearchParams(location.search).get('collection');
     document.querySelectorAll('[data-collection-nav]').forEach(link => {
       if (!active && link.dataset.collectionNav === collection) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');

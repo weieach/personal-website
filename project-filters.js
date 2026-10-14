@@ -43,11 +43,14 @@
 
   const pageCollection = grid.dataset.projectCollection || null;
   // Other listing pages must navigate normally so their assets load separately.
+  const pagePath = (url) => url.pathname.replace(/\/index\.html$/, "/");
   const collectionLinks = [...document.querySelectorAll("[data-collection-nav]")]
-    .filter(link => new URL(link.href).pathname === location.pathname);
+    .filter(link => pagePath(new URL(link.href)) === pagePath(location));
   let collection = null;
   let buttons = [];
   let navigationSequence = 0;
+  const isTransitioning = () => filters.hasAttribute("data-transitioning");
+  const setTransitioning = (active) => filters.toggleAttribute("data-transitioning", active);
   const allGroup = document.createElement("span");
   allGroup.className = "project-filter-group";
   const clearButton = document.createElement("button");
@@ -57,8 +60,9 @@
   clearButton.hidden = true;
   clearButton.addEventListener("click", () => {
     navigationSequence++;
+    setTransitioning(false);
     window.ProjectTagIcons?.cancel();
-    if (pageCollection) { location.assign("work.html"); return; }
+    if (pageCollection) { location.assign("index.html"); return; }
     const url = new URL(location.href);
     url.searchParams.delete("collection");
     history.pushState(null, "", url);
@@ -87,6 +91,7 @@
   allButton.appendChild(allLabel);
   allButton.addEventListener("click", () => {
     navigationSequence++;
+    setTransitioning(false);
     window.ProjectTagIcons?.cancel();
     if (!pageCollection && collection && allButton.getAttribute("aria-pressed") === "true") {
       const url = new URL(location.href);
@@ -124,9 +129,9 @@
     status.textContent = `${count} ${collection ? `${collection} ` : ""}${count === 1 ? "project" : "projects"}${tag ? ` tagged ${tag}` : " shown"}.`;
   }
 
-  function renderCollection(animate = false, pendingIntro = false) {
+  function renderCollection(animate = false, pendingIntro = false, onComplete = () => {}) {
     const requested = new URLSearchParams(location.search).get("collection");
-    collection = pageCollection || (!pendingIntro && ["work", "playground"].includes(requested) ? requested : null);
+    collection = pendingIntro ? null : pageCollection || (["work", "playground"].includes(requested) ? requested : null);
     const scopedCards = cards.filter(inCollection);
     const tagCounts = new Map();
     scopedCards.forEach(({ tags }) => tags.forEach(tag => {
@@ -154,6 +159,7 @@
       button.append(document.createTextNode(tag), countLabel);
       button.addEventListener("click", () => {
         navigationSequence++;
+        setTransitioning(false);
         window.ProjectTagIcons?.cancel();
         selectTag(tag);
       });
@@ -176,12 +182,14 @@
     clearButton.hidden = true;
     clearButton.setAttribute("aria-label", `Clear ${collection || "collection"} filter`);
     const revealClear = () => {
-      if (!collection) return;
-      clearButton.hidden = false;
-      if (animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        clearButton.animate({ opacity: [0, 1], transform: ['scale(.6)', 'scale(1)'] },
-          { duration: 180, easing: 'ease-out' });
+      if (collection) {
+        clearButton.hidden = false;
+        if (animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          clearButton.animate({ opacity: [0, 1], transform: ['scale(.6)', 'scale(1)'] },
+            { duration: 180, easing: 'ease-out' });
+        }
       }
+      onComplete();
     };
     if (window.animateProjectFilterLabel) window.animateProjectFilterLabel(allButton, { suffix, count, onComplete: revealClear }, animate);
     else {
@@ -197,23 +205,31 @@
     link.addEventListener("click", async (event) => {
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
+      // Finish both the icon handoff and label reveal before accepting another tab.
+      if (isTransitioning()) return;
+      setTransitioning(true);
       window.AboutDrawer?.leave();
       const sequence = ++navigationSequence;
-      window.ProjectTagIcons?.cancel();
-      const nextCollection = link.dataset.collectionNav;
-      if (nextCollection !== collection && window.ProjectTagIcons) {
-        const arrived = await window.ProjectTagIcons.transfer(link, allButton, nextCollection);
-        if (!arrived || sequence !== navigationSequence) return;
+      try {
+        window.ProjectTagIcons?.cancel();
+        const nextCollection = link.dataset.collectionNav;
+        if (nextCollection !== collection && window.ProjectTagIcons) {
+          const arrived = await window.ProjectTagIcons.transfer(link, allButton, nextCollection);
+          if (!arrived || sequence !== navigationSequence) return;
+        }
+        const url = new URL(link.href);
+        if (nextCollection === collection) url.searchParams.delete("collection");
+        if (url.href !== location.href) history.pushState(null, "", url);
+        await new Promise(resolve => renderCollection(true, false, resolve));
+      } finally {
+        if (sequence === navigationSequence) setTransitioning(false);
       }
-      const url = new URL(link.href);
-      if (link.dataset.collectionNav === collection) url.searchParams.delete("collection");
-      if (url.href !== location.href) history.pushState(null, "", url);
-      renderCollection(true);
     });
   });
 
   window.addEventListener("popstate", () => {
     navigationSequence++;
+    setTransitioning(false);
     window.ProjectTagIcons?.cancel();
     renderCollection(true);
   });
@@ -222,7 +238,8 @@
     pendingArrival = sessionStorage.getItem('project-shape-arrival');
     sessionStorage.removeItem('project-shape-arrival');
   } catch {}
-  pendingArrival = !pageCollection && pendingArrival === new URLSearchParams(location.search).get('collection') ? pendingArrival : null;
+  pendingArrival = pendingArrival === (pageCollection || new URLSearchParams(location.search).get('collection')) ? pendingArrival : null;
+  setTransitioning(!!pendingArrival);
   renderCollection(false, !!pendingArrival);
   if (pendingArrival) {
     let started = false;
@@ -231,15 +248,21 @@
       started = true;
       const sequence = ++navigationSequence;
       const source = collectionLinks.find(link => link.dataset.collectionNav === pendingArrival && link.closest('header'));
-      const arrived = source && await window.ProjectTagIcons.transfer(source, allButton, pendingArrival);
-      if (sequence === navigationSequence && arrived) renderCollection(true);
+      try {
+        const arrived = source && await window.ProjectTagIcons.transfer(source, allButton, pendingArrival);
+        if (sequence === navigationSequence) {
+          await new Promise(resolve => renderCollection(!!arrived, false, resolve));
+        }
+      } finally {
+        if (sequence === navigationSequence) setTransitioning(false);
+      }
     };
     window.addEventListener('tag-shapes:ready', arrive, { once: true });
     window.addEventListener('page-loader:hidden', arrive, { once: true });
     arrive();
     window.addEventListener('load', () => {
-      if (!started && !window.ProjectTagIcons) { started = true; renderCollection(false); }
+      if (!started && !window.ProjectTagIcons) { started = true; setTransitioning(false); renderCollection(false); }
     }, { once: true });
-    setTimeout(() => { if (!started) { started = true; renderCollection(false); } }, 23000);
+    setTimeout(() => { if (!started) { started = true; setTransitioning(false); renderCollection(false); } }, 23000);
   }
 })();

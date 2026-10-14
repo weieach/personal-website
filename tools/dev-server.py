@@ -5,7 +5,7 @@ Serves the website folder like any static server, and keeps the project order
 arranged in debug mode as a draft in .dev-order.json so it survives refreshes
 and a coding agent can apply it (tools/dev_order.py apply). Localhost only.
 
-    python3 tools/dev-server.py            # http://localhost:8000/work.html (allowed by the media CORS rules)
+    python3 tools/dev-server.py            # http://localhost:8000/index.html (allowed by the media CORS rules)
     python3 tools/dev-server.py 8001
 """
 
@@ -65,7 +65,7 @@ class Handler(SimpleHTTPRequestHandler):
 def main():
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
     server = ThreadingHTTPServer(("127.0.0.1", port), partial(Handler, directory=str(dev_order.ROOT)))
-    print(f"Serving {dev_order.ROOT} at http://localhost:{port}/work.html", flush=True)
+    print(f"Serving {dev_order.ROOT} at http://localhost:{port}/index.html", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

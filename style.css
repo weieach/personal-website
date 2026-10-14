@@ -1112,8 +1112,6 @@ video{
 
 .card-neurial .card-thumbnail{
     aspect-ratio: 2164 / 2160;
-    /* Floating phone screen fills the height between the shared gaps */
-    padding-block: calc(var(--thumb-screen-margin-block) * 100%);
     background-color: #1e1e1e;
     justify-content: center;
     align-items: center;
@@ -1137,12 +1135,17 @@ video{
 .card-neurial .card-thumbnail video{
     position: relative;
     z-index: 1;
-    height: 100%;
+    /* Thumbnail height (2160 / 2164 of its width) minus the shared gaps;
+       sized from cqw because Safari/Firefox don't resolve a percentage
+       height inside this aspect-ratio box */
+    height: calc((2160 / 2164 - 2 * var(--thumb-screen-margin-block)) * 100cqw);
     width: auto;
     scale: none;
     object-fit: contain;
     /* Share of the thumbnail's width (28px at a 1270px viewport) */
     border-radius: 4.643cqi;
+    /* Safari doesn't clip this layered video to its border-radius */
+    clip-path: inset(0 round 4.643cqi);
 }
 
 .card-jobtracker .card-thumbnail{
@@ -1381,8 +1384,6 @@ video.pictogram-source{
 .card-tldr .card-thumbnail{
     background-color: #000000;
     aspect-ratio: 2164 / 2160;
-    /* Floating phone screen fills the height between the shared gaps */
-    padding-block: calc(var(--thumb-screen-margin-block) * 100%);
     justify-content: center;
     align-items: center;
     container-type: inline-size;
@@ -1428,7 +1429,10 @@ video.pictogram-source{
     position: relative;
     z-index: 1;
     width: auto;
-    height: 100%;
+    /* Thumbnail height (2160 / 2164 of its width) minus the shared gaps;
+       sized from cqw because Safari/Firefox don't resolve a percentage
+       height inside this aspect-ratio box */
+    height: calc((2160 / 2164 - 2 * var(--thumb-screen-margin-block)) * 100cqw);
     max-width: none;
     max-height: none;
     margin: 0;
@@ -1437,6 +1441,8 @@ video.pictogram-source{
     object-position: center;
     /* Share of the thumbnail's width (28px at a 1270px viewport) */
     border-radius: 4.643cqi;
+    /* Safari doesn't clip this layered video to its border-radius */
+    clip-path: inset(0 round 4.643cqi);
 }
 
 .card-dephy .card-thumbnail{

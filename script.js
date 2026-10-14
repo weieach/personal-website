@@ -539,7 +539,7 @@ document.addEventListener("click", (e) => {
 })();
 
 // --------------------------
-// Fullscreen page loader (playground.html / work.html)
+// Fullscreen page loader (playground.html / index.html)
 // Waits for page load + 3D logo, then holds briefly so the
 // rotation is visible. Safety timeout prevents a stuck overlay.
 // Same-session revisits skip the cold start (see hub-session.js).

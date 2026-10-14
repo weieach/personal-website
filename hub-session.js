@@ -7,11 +7,11 @@
   const WARM_KEY = "ncwei:hub-warm";
   const ABOUT_FLIP_KEY = "ncwei:about-flipped";
   const ABOUT_VISITED_KEY = "ncwei:about-visited";
-  const HUBS = new Set(["work.html", "archive.html", "about.html"]);
+  const HUBS = new Set(["index.html", "archive.html", "about.html"]);
 
   function pageId() {
-    const file = location.pathname.split("/").pop() || "work.html";
-    if (!file || file === "/") return "work.html";
+    const file = location.pathname.split("/").pop() || "index.html";
+    if (!file || file === "/") return "index.html";
     return file;
   }
 
