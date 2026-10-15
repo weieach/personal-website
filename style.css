@@ -164,6 +164,26 @@ main:has(.projects-cta){
     overflow: visible;
 }
 
+/* Last screen of the scroll: center the about block on the full viewport.
+   The footer stays pinned to the bottom and is left out of that centering. */
+@media (width >= 960px){
+    .about-body{
+        position: relative;
+    }
+
+    .main-aboutpg{
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding-top: 0;
+    }
+
+    .about-body > :last-child{
+        position: absolute;
+        inset-inline: 0;
+        bottom: 0;
+    }
+}
+
 
 
 

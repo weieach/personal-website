@@ -121,17 +121,22 @@ function draw(now) {
     if (state.suppressed || state.amount < .005 || flight?.source === host || (flight && host === flight.target)) return;
     const rect = state.slot.getBoundingClientRect();
     if (rect.bottom < 0 || rect.top > innerHeight || !rect.width) return;
-    paint(host.dataset.shapeKey, rect.left + rect.width / 2, rect.top + rect.height / 2, (persistent ? 23 : 27) * state.amount * state.reveal, state.turn, state.amount, 0, state.scrollX);
+    state.lastPaint = {
+      key: host.dataset.shapeKey, x: rect.left + rect.width / 2, y: rect.top + rect.height / 2,
+      size: (persistent ? 23 : 27) * state.amount * state.reveal,
+      rotation: state.turn, opacity: state.amount, pitch: state.scrollX,
+    };
+    const pose = state.lastPaint;
+    paint(pose.key, pose.x, pose.y, pose.size, pose.rotation, pose.opacity, 0, pose.pitch);
   });
   if (flight) {
     const outgoing = flight.outgoing;
-    const slot = states.get(flight.target).slot.getBoundingClientRect();
     const tag = flight.target.getBoundingClientRect();
     // Keep this mask in place throughout the approach, including before impact.
     ink.save(); ink.beginPath();
-    ink.rect(tag.left, tag.top, tag.width, Math.max(0, slot.bottom - tag.top));
+    ink.rect(tag.left, tag.top, tag.width, outgoing.maskBottom);
     ink.clip();
-    paint(outgoing.key, slot.left + slot.width / 2, slot.top + slot.height / 2 + outgoing.drop,
+    paint(outgoing.key, tag.left + outgoing.x, tag.top + outgoing.y + outgoing.drop,
       outgoing.size, outgoing.rotation, outgoing.opacity, outgoing.roll, outgoing.pitch);
     ink.restore();
     paint(flight.key, flight.x, flight.y, flight.size, flight.rotation, 1, flight.roll);
@@ -178,10 +183,17 @@ async function transfer(source, target, key) {
   const landing = Math.max(to.left + 65, Math.min(x - 20, innerWidth - 36));
   return new Promise(resolve => {
     const previous = states.get(target);
+    const slot = previous.slot.getBoundingClientRect();
+    const pose = previous.lastPaint?.key === target.dataset.shapeKey ? previous.lastPaint : null;
     const outgoing = {
-      key: target.dataset.shapeKey, rotation: previous.turn, pitch: previous.scrollX,
-      size: 23 * previous.reveal,
-      opacity: target.matches('.has-collection-shape, [aria-pressed="true"]') ? 1 : previous.amount,
+      key: target.dataset.shapeKey, rotation: pose?.rotation ?? previous.turn, pitch: pose?.pitch ?? previous.scrollX,
+      size: pose?.size ?? 23 * previous.reveal,
+      opacity: pose?.opacity ?? (target.matches('.has-collection-shape, [aria-pressed="true"]') ? 1 : previous.amount),
+      // Freeze the displayed pose relative to the tag, not its changing icon slot.
+      // Scrolling still carries the whole tag, but only impact can displace this icon.
+      x: (pose?.x ?? slot.left + slot.width / 2) - to.left,
+      y: (pose?.y ?? slot.top + slot.height / 2) - to.top,
+      maskBottom: Math.max(0, slot.bottom - to.top),
       drop: 0, roll: 0,
     };
     flight = { source, target, key, x, y: from.top + from.height / 2, size: 30, rotation: states.get(source).turn, roll: 0, outgoing, resolve };
