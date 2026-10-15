@@ -1110,6 +1110,34 @@ video{
     object-position: center;
 }
 
+/* Floating phone screens (Neurial Grotesk, TL;DR). The wrapper fills the
+   thumbnail's height (2160 / 2164 of its width) minus the shared gaps; sized
+   from cqw because Safari/Firefox don't resolve a percentage height inside
+   these aspect-ratio boxes. The wrapper rounds the screen: Safari ignores
+   border-radius and clip-path on a playing video's own layer, but clips it
+   inside a masked, overflow-hidden parent. */
+[data-project-grid] .thumb-phone-screen{
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    height: calc((2160 / 2164 - 2 * var(--thumb-screen-margin-block)) * 100cqw);
+    overflow: hidden;
+    isolation: isolate;
+    -webkit-mask-image: linear-gradient(#000, #000);
+    mask-image: linear-gradient(#000, #000);
+}
+
+[data-project-grid] .thumb-phone-screen video{
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    scale: none;
+    object-fit: cover;
+    border-radius: 0;
+}
+
 .card-neurial .card-thumbnail{
     aspect-ratio: 2164 / 2160;
     background-color: #1e1e1e;
@@ -1132,20 +1160,10 @@ video{
     pointer-events: none;
 }
 
-.card-neurial .card-thumbnail video{
-    position: relative;
-    z-index: 1;
-    /* Thumbnail height (2160 / 2164 of its width) minus the shared gaps;
-       sized from cqw because Safari/Firefox don't resolve a percentage
-       height inside this aspect-ratio box */
-    height: calc((2160 / 2164 - 2 * var(--thumb-screen-margin-block)) * 100cqw);
-    width: auto;
-    scale: none;
-    object-fit: contain;
+.card-neurial .thumb-phone-screen{
+    aspect-ratio: 1080 / 1920;
     /* Share of the thumbnail's width (28px at a 1270px viewport) */
     border-radius: 4.643cqi;
-    /* Safari doesn't clip this layered video to its border-radius */
-    clip-path: inset(0 round 4.643cqi);
 }
 
 .card-jobtracker .card-thumbnail{
@@ -1425,24 +1443,10 @@ video.pictogram-source{
     min-width: 0;
 }
 
-.card-tldr .card-thumbnail video{
-    position: relative;
-    z-index: 1;
-    width: auto;
-    /* Thumbnail height (2160 / 2164 of its width) minus the shared gaps;
-       sized from cqw because Safari/Firefox don't resolve a percentage
-       height inside this aspect-ratio box */
-    height: calc((2160 / 2164 - 2 * var(--thumb-screen-margin-block)) * 100cqw);
-    max-width: none;
-    max-height: none;
-    margin: 0;
-    scale: none;
-    object-fit: contain;
-    object-position: center;
+.card-tldr .thumb-phone-screen{
+    aspect-ratio: 988 / 2160;
     /* Share of the thumbnail's width (28px at a 1270px viewport) */
     border-radius: 4.643cqi;
-    /* Safari doesn't clip this layered video to its border-radius */
-    clip-path: inset(0 round 4.643cqi);
 }
 
 .card-dephy .card-thumbnail{

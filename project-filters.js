@@ -234,13 +234,22 @@
     renderCollection(true);
   });
   let pendingArrival;
+  let previousShape;
   try {
     pendingArrival = sessionStorage.getItem('project-shape-arrival');
+    previousShape = sessionStorage.getItem('project-shape-departure');
     sessionStorage.removeItem('project-shape-arrival');
+    sessionStorage.removeItem('project-shape-departure');
   } catch {}
   pendingArrival = pendingArrival === (pageCollection || new URLSearchParams(location.search).get('collection')) ? pendingArrival : null;
   setTransitioning(!!pendingArrival);
   renderCollection(false, !!pendingArrival);
+  if (pendingArrival && ['All Projects', 'work', 'playground', 'archive'].includes(previousShape)) {
+    allButton.dataset.collectionShape = previousShape;
+    allButton.dataset.shapeKey = previousShape;
+    allButton.classList.add('has-collection-shape');
+    window.ProjectTagIcons?.setCollection(allButton, previousShape);
+  }
   if (pendingArrival) {
     let started = false;
     const arrive = async () => {

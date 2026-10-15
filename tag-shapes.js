@@ -123,7 +123,19 @@ function draw(now) {
     if (rect.bottom < 0 || rect.top > innerHeight || !rect.width) return;
     paint(host.dataset.shapeKey, rect.left + rect.width / 2, rect.top + rect.height / 2, (persistent ? 23 : 27) * state.amount * state.reveal, state.turn, state.amount, 0, state.scrollX);
   });
-  if (flight) paint(flight.key, flight.x, flight.y, flight.size, flight.rotation, 1, flight.roll);
+  if (flight) {
+    const outgoing = flight.outgoing;
+    const slot = states.get(flight.target).slot.getBoundingClientRect();
+    const tag = flight.target.getBoundingClientRect();
+    // Keep this mask in place throughout the approach, including before impact.
+    ink.save(); ink.beginPath();
+    ink.rect(tag.left, tag.top, tag.width, Math.max(0, slot.bottom - tag.top));
+    ink.clip();
+    paint(outgoing.key, slot.left + slot.width / 2, slot.top + slot.height / 2 + outgoing.drop,
+      outgoing.size, outgoing.rotation, outgoing.opacity, outgoing.roll, outgoing.pitch);
+    ink.restore();
+    paint(flight.key, flight.x, flight.y, flight.size, flight.rotation, 1, flight.roll);
+  }
   if (moving) wake();
 }
 function sync() {
@@ -165,7 +177,14 @@ async function transfer(source, target, key) {
   const x = from.width ? from.left + from.width / 2 : source.getBoundingClientRect().left - 12;
   const landing = Math.max(to.left + 65, Math.min(x - 20, innerWidth - 36));
   return new Promise(resolve => {
-    flight = { source, target, key, x, y: from.top + from.height / 2, size: 30, rotation: states.get(source).turn, roll: 0, resolve };
+    const previous = states.get(target);
+    const outgoing = {
+      key: target.dataset.shapeKey, rotation: previous.turn, pitch: previous.scrollX,
+      size: 23 * previous.reveal,
+      opacity: target.matches('.has-collection-shape, [aria-pressed="true"]') ? 1 : previous.amount,
+      drop: 0, roll: 0,
+    };
+    flight = { source, target, key, x, y: from.top + from.height / 2, size: 30, rotation: states.get(source).turn, roll: 0, outgoing, resolve };
     const item = flight;
     source.classList.add('is-shape-departing');
     const endX = to.left + 23, endY = to.top + to.height / 2;
@@ -179,44 +198,34 @@ async function transfer(source, target, key) {
       dock.amount = 1;
       dock.turn = item.rotation;
       dock.scrollX = dock.scrollTarget = 0;
-      dock.reveal = repeated ? 0 : 1;
-      if (repeated) dock.revealTween = gsap.to(dock, { reveal: 1, duration: .5, ease: 'power2.out', onUpdate: wake });
+      dock.reveal = 1;
       resolve(true); wake();
     }});
     if (repeated) {
       item.size = 27;
-      // Resolve after the nav icon disappears; the filter's label animation and
-      // the docked icon's growth then begin together.
-      item.timeline.to(item, { size: 0, duration: .24, ease: 'power2.in' });
+      // Preserve the return-visit shrink and docked reveal, keeping the old icon
+      // available to knock out when the new one becomes visible in the slot.
+      item.timeline.to(item, { size: 0, duration: .24, ease: 'power2.in' })
+        .set(item, { x: endX, y: endY })
+        .to(item, { size: 23, duration: .5, ease: 'power2.out' });
+      item.timeline.addLabel('impact', .24 + .5 * (1 - Math.cbrt(1 - 14 / 23)));
     } else {
-      // Wind up against the travel direction, then accelerate into the fall.
-      // Each rebound loses height and airtime while horizontal travel slows.
+      // Positive roll is counter-clockwise in screen space. Keep it increasing
+      // through the fall, bounce, travel and final shrink without reversing.
       const turns = Math.max(Math.PI * 2, (landing - endX) / 18);
       const finalRoll = Math.ceil((3 + turns) / (Math.PI * 2)) * Math.PI * 2;
-      const floorY = to.top - 13;
-      const direction = Math.sign(endX - landing) || -1;
-      const bounceHeight = Math.min(46, Math.max(20, (floorY - item.y) * .2));
-      item.timeline
-        .to(item, {
-          x: Math.max(17, Math.min(innerWidth - 17, x - direction * 7)),
-          y: Math.max(17, item.y - 9), roll: -.18,
-          duration: .18, ease: 'power2.out',
-        })
-        .to(item, { x: landing, y: floorY, roll: .9, duration: .5, ease: 'power2.in' })
-        .addLabel('rebounds')
-        .to(item, { x: endX + direction * 7, roll: finalRoll - .4, duration: .84, ease: 'power2.out' }, 'rebounds');
-      let bounceTime = 0;
-      for (const [height, airtime] of [[bounceHeight, .2], [bounceHeight * .42, .13], [bounceHeight * .15, .09]]) {
-        item.timeline
-          .to(item, { y: floorY - height, duration: airtime, ease: 'power1.out' }, `rebounds+=${bounceTime}`)
-          .to(item, { y: floorY, duration: airtime, ease: 'power1.in' }, `rebounds+=${bounceTime + airtime}`);
-        bounceTime += airtime * 2;
-      }
-      // Slightly pass the docking point, then settle without a hard stop.
-      item.timeline
-        .to(item, { x: endX - direction * 2, y: endY + 3, size: 22, roll: finalRoll - .15, duration: .16, ease: 'power2.in' })
-        .to(item, { x: endX, y: endY, size: 23, roll: finalRoll, duration: .2, ease: 'power2.out' });
+      item.timeline.to(item, { x: landing, y: to.top - 13, roll: .9, duration: .48, ease: 'power2.in' })
+        .to(item, { y: to.top - 66, roll: 1.5, duration: .22, ease: 'power2.out' })
+        .to(item, { y: to.top - 13, roll: 2.1, duration: .24, ease: 'power2.in' })
+        .to(item, { x: endX, roll: finalRoll - .55, duration: .72, ease: 'power2.out' })
+        .to(item, { y: endY, roll: finalRoll - .2, duration: .18, ease: 'power2.in' })
+        .to(item, { size: 23, roll: finalRoll, duration: .18, ease: 'power2.out' });
+      // Contact happens during the existing final descent. Leave every incoming
+      // keyframe intact and time only the old icon's departure to this point.
+      const descent = endY - (to.top - 13);
+      item.timeline.addLabel('impact', .48 + .22 + .24 + .72 + .18 * Math.cbrt((descent - 13) / descent));
     }
+    item.timeline.to(outgoing, { drop: 40, roll: .3, duration: .24, ease: 'power1.in' }, 'impact');
     wake();
   });
 }
@@ -256,6 +265,9 @@ document.querySelectorAll('[data-collection-nav]').forEach(link => {
       event.preventDefault();
       return;
     }
-    try { sessionStorage.setItem('project-shape-arrival', link.dataset.collectionNav); } catch {}
+    try {
+      sessionStorage.setItem('project-shape-arrival', link.dataset.collectionNav);
+      sessionStorage.setItem('project-shape-departure', document.querySelector('.project-filter--all')?.dataset.shapeKey || 'All Projects');
+    } catch {}
   });
 });
