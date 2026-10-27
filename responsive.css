@@ -580,7 +580,7 @@
 
   .card-fs .video-fs,
   .card-schneider .card-thumbnail .thumb-img,
-  .card-mitwerk .card-thumbnail .thumb-img {
+  .card-verso .card-thumbnail .thumb-img {
     width: 100%;
     scale: 0.92;
     margin-inline: 0;

@@ -295,7 +295,7 @@ main.elastic-main-projectpg .playground-media {
   background-color: #000;
 }
 
-main.playground-project.mitwerk-project .playground-media:has(> img) {
+main.playground-project.verso-project .playground-media:has(> img) {
   background: #f3f3f3;
 }
 
