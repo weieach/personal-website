@@ -549,7 +549,7 @@ document.addEventListener("click", (e) => {
   if (!loader) return;
 
   const hub = window.NCWeiHub;
-  // Trust the early hub-session flag (false on hard refresh even if previously warm)
+  // Trust the early hub-session flag (set on any revisit in this tab, reloads included)
   const skipColdStart = document.documentElement.classList.contains("hub-warm");
 
   if (skipColdStart) {

@@ -1,7 +1,7 @@
 /**
  * Hub pages (work / about): remember warm visits in this tab
  * so revisits skip the cold-start loader and entrance choreography.
- * Hard refresh still gets a full cold start.
+ * Reloads count as revisits too; a new tab gets a full cold start.
  */
 (function (global) {
   const WARM_KEY = "ncwei:hub-warm";
@@ -81,9 +81,9 @@
     }
   }
 
-  // Before first paint: unlock warm revisits (paired with html.hub-warm CSS).
-  // Skip on hard refresh so a deliberate reload still gets the intro.
-  if (isWarm() && !isReload()) {
+  // Before first paint: unlock warm revisits (paired with html.hub-warm CSS),
+  // reloads included.
+  if (isWarm()) {
     document.documentElement.classList.add("hub-warm");
   }
 
