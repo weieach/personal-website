@@ -5,13 +5,17 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
 // a and b default to 1 when a shape omits them.
 const shapes = {
   'All Projects': { color: '#c5b5f7', a: [12, 4.1, 7.7, 9.9, .9, 1], b: [1, 3.1, 2.1, 2.1, 1, 1.05] },
-  work: { color: '#83b8ff', a: [4, 9, 9, 9], b: [4, 9, 9, 9] },
+  work: { color: '#83b8ff', a: [8, 1, 9.2, 8.5, 1.5, 1.3], b: [4, 10, 10, 10, 1, 1] },
   playground: { color: '#f797be', a: [12, 2.3, 1.8, .3], b: [10, 1, 7, 12] },
-  archive: { color: '#e6c17b', a: [4, 18, 18, 18], b: [4, 5, 5, 5], scale: [1, .7, .7] },
+  archive: { color: '#e6c17b', a: [12, 6.9, 0.3, 0.3, 1, 1], b: [3.1, 0.6, 6, 6, 1, 1], tilt: 0.35 },
   '3D': { color: '#b497ff', a: [4, 1, 1, 1], b: [4, 1, 1, 1] },
   Book: { color: '#e6b675', a: [4, 16, 16, 16], b: [4, 16, 16, 16], scale: [1, 1.15, .42] },
   'Branding & Identity': { color: '#ff9475', a: [9, 7.3, .4, .4, 1, 1], b: [2, 2.3, 6.2, 14.7, 1, 1.1] },
   'Creative Coding': { color: '#9ddd83', a: [10, .6, 1.3, 1.4, 1.25, 1], b: [12, .2, 4.5, .5, .95, 1.1] },
+  Drawing: { color: '#e7a98a', a: [10, 0.8, 5.7, 0.6, 1, 1], b: [0, 3.3, 4.4, 4.2, 1, 0.75] },
+  Exhibition: { color: '#8fd0c8', a: [7.5, 2.4, 8.8, 5.7, 1.25, 1.1], b: [4, 3.3, 9.9, 3.9, 1, 1.2] },
+  Illustration: { color: '#c9b4f6', a: [6.5, 1.5, 5.2, 2.8, 1.1, 1.2], b: [4, 0.8, 1.1, 1.5, 0.85, 1.15] },
+  Painting: { color: '#f2b4c8', a: [7.3, 3.1, 3.6, 1.9, 1.3, 1], b: [0.5, 0.7, 11, 5.3, 1.3, 1.15] },
   'Motion Graphics': { color: '#73d9d1', a: [6, 1, 7, 8, 1, 1], b: [4, 10, 10, 10, 1, 1] },
   Poster: { color: '#f0d573', a: [12, .5, 1.2, 1.2, 1, 1], b: [1, .3, 1, .3, 1, 1] },
   'UI / UX': { color: '#86cadf', a: [4, 4, 4, 4], b: [4, 4, 4, 4], scale: [1, 1, .55] },
@@ -85,7 +89,7 @@ function paint(key, x, y, size, rotation, opacity = 1, roll = 0, pitch = 0) {
   }
   if (cached.rotation === null || Math.abs(cached.rotation - rotation) > .008 || Math.abs(cached.pitch - pitch) > .008) {
     const mesh = makeMesh(key);
-    mesh.rotation.set(1.05 + pitch, .55 + rotation, -.16);
+    mesh.rotation.set((shapes[key]?.tilt ?? 1.05) + pitch, .55 + rotation, -.16);
     scene.add(mesh); renderer.render(scene, camera); scene.remove(mesh);
     cached.context.clearRect(0, 0, 112, 112);
     cached.context.drawImage(renderer.domElement, 0, 0);

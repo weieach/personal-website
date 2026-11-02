@@ -509,59 +509,53 @@ body.is-nav-open .btn-burger{
 .btn-project-status{
     cursor: pointer;
     line-height: inherit;
+    /* The loader has no text, so its baseline is its bottom edge: this sits
+       the shapes on the label's baseline. */
+    align-items: baseline;
 }
 
 .btn-project-status .btn-visit-site__label{
     font-style: italic;
 }
 
-/* Staggered opposing passes avoid a shared resting row inside the icon mask. */
+/* Three still blocks; a highlight passes across them left to right. */
 .project-status-loader{
     position: relative;
     display: inline-block;
-    flex: 0 0 1em;
-    width: 1em;
-    height: 1em;
+    flex: 0 0 1.32em;
+    width: 1.32em;
+    height: 0.7em;
     overflow: hidden;
     contain: paint;
 }
 
+/* Each face is 0.286em wide and leans about 20° (0.254em across 0.7em). */
 .project-status-loader > span{
     position: absolute;
-    top: 0.25em;
-    left: 0.04em;
-    width: 0.28em;
-    height: 0.5em;
+    top: 0;
+    left: 0.02em;
+    width: 0.54em;
+    height: 100%;
     background: var(--color-text-muted, #6f6f6f);
-    clip-path: polygon(28% 0, 100% 0, 72% 100%, 0 100%);
-    animation: project-status-loading 1.8s linear infinite;
-}
-
-.project-status-loader > span:nth-child(2){
-    left: 0.36em;
-    /* Its shorter hidden interval fits inside the first block's hidden interval. */
-    animation-name: project-status-loading-middle;
-    animation-direction: reverse;
-    animation-delay: -0.04s;
-}
-
-.project-status-loader > span:nth-child(3){
-    left: 0.68em;
+    clip-path: polygon(47% 0, 100% 0, 53% 100%, 0 100%);
+    animation: project-status-pulse 1.2s ease-in-out infinite;
+    /* Negative delays start mid-cycle, so the first frame is already a wave. */
     animation-delay: -0.8s;
 }
 
-@keyframes project-status-loading{
-    0% { transform: translateY(1em); }
-    18% { transform: translateY(0.22em); }
-    82% { transform: translateY(-0.22em); }
-    100% { transform: translateY(-1em); }
+.project-status-loader > span:nth-child(2){
+    left: 0.4em;
+    animation-delay: -0.4s;
 }
 
-@keyframes project-status-loading-middle{
-    0% { transform: translateY(1em); }
-    8% { transform: translateY(0.22em); }
-    92% { transform: translateY(-0.22em); }
-    100% { transform: translateY(-1em); }
+.project-status-loader > span:nth-child(3){
+    left: 0.78em;
+    animation-delay: 0s;
+}
+
+@keyframes project-status-pulse{
+    0%, 66%, 100% { opacity: 0.3; }
+    33% { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce){
