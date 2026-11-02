@@ -100,11 +100,74 @@
     if (!state.manualPaused && (auto || state.resume)) play(video);
   }
 
+  // Thumbnails keep a loading shimmer (style.css) until what they show has
+  // loaded: their lead media and any CSS backgrounds, so a background can't
+  // paint ahead of the image in front of it.
+  const thumbs = new Map([...document.querySelectorAll(".card .card-thumbnail")].map(thumb => [thumb, {
+    backgrounds: false, ready: false, timer: 0,
+  }]));
+  const preloads = new Map();
+  const loadedUrls = new Set();
+
+  function preload(src) {
+    if (!preloads.has(src)) {
+      preloads.set(src, new Promise(resolve => {
+        const img = new Image();
+        img.src = src;
+        img.decode().then(resolve, resolve);
+      }).then(() => { loadedUrls.add(src); }));
+    }
+    return preloads.get(src);
+  }
+
+  function backgroundUrls(element) {
+    return [getComputedStyle(element), getComputedStyle(element, "::before")].flatMap(style =>
+      [...style.backgroundImage.matchAll(/url\((["']?)(.+?)\1\)/g)].map(match => match[2]));
+  }
+
+  function lead(thumb) {
+    // The first media CSS shows; an archive sequence starts on its first frame.
+    return [...thumb.querySelectorAll("img[data-media-src], video[data-media-src]")].find(element =>
+      element.classList.contains("pictogram-source") || getComputedStyle(element).display !== "none");
+  }
+
+  function shown(element) {
+    const state = states.get(element);
+    if (state.failed) return true;
+    if (element.tagName === "IMG") return state.loaded && element.complete && element.naturalWidth > 0;
+    if (element.readyState >= 2) return true;
+    // Pictogram paints frames to a canvas, so its hidden video's poster never shows.
+    return !element.classList.contains("pictogram-source") && loadedUrls.has(element.poster);
+  }
+
+  function reveal(thumb) {
+    const state = thumbs.get(thumb);
+    if (state.ready) return;
+    state.ready = true;
+    clearTimeout(state.timer);
+    thumb.dataset.thumbState = "ready";
+    setTimeout(() => { thumb.dataset.thumbState = "done"; }, 1000);
+  }
+
+  function settle(thumb) {
+    const state = thumbs.get(thumb);
+    if (!state || state.ready || !state.backgrounds) return;
+    const element = lead(thumb);
+    if (!element || shown(element)) return reveal(thumb);
+    // A video without a poster may never decode a frame (e.g. reduced motion
+    // skips playback); don't leave it shimmering indefinitely.
+    if (element.tagName === "VIDEO" && states.get(element).loaded && !state.timer) {
+      state.timer = setTimeout(() => reveal(thumb), 12000);
+    }
+  }
+
   function prepare(element) {
     if (element.tagName === "IMG") return loadImage(element);
     if (element.dataset.mediaPoster && !element.poster) {
       // Keep tiny posters local: they remain available during a CDN outage.
       element.poster = element.dataset.mediaPoster;
+      const thumb = element.closest(".card-thumbnail");
+      preload(element.poster).then(() => settle(thumb));
     }
     if (element.dataset.mediaManaged !== "external") loadVideo(element);
     if (reducedMotion.matches && element.hasAttribute("data-media-autoplay")) element.controls = true;
@@ -153,7 +216,20 @@
       });
       element.addEventListener("ended", () => { state.resume = false; state.manualPaused = true; });
     }
+    // Registered after the error handler above, so a final failure is already recorded.
+    const thumb = element.closest(".card-thumbnail");
+    if (thumbs.has(thumb)) {
+      ["load", "loadeddata", "error"].forEach(type => element.addEventListener(type, () => settle(thumb)));
+    }
     observer?.observe(box(element));
+  });
+
+  thumbs.forEach((state, thumb) => {
+    thumb.dataset.thumbState = "loading";
+    Promise.all(backgroundUrls(thumb).map(preload)).then(() => {
+      state.backgrounds = true;
+      settle(thumb);
+    });
   });
 
   window.SiteMedia = {

@@ -579,12 +579,19 @@
   }
 
   .card-fs .video-fs,
-  .card-schneider .card-thumbnail .thumb-img,
-  .card-verso .card-thumbnail .thumb-img {
+  .card-schneider .card-thumbnail .thumb-img {
     width: 100%;
     scale: 0.92;
     margin-inline: 0;
     border-radius: 0;
+  }
+
+  .card-verso .card-thumbnail .thumb-img {
+    width: 100%;
+    margin-inline: 0;
+    border-radius: 0;
+    transform: scale(0.92);
+    scale: none;
   }
 
   .card-superfast .card-thumbnail {

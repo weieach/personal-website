@@ -1383,21 +1383,19 @@ video.pictogram-source{
     justify-content: center;
 }
 
-.card-verso .card-thumbnail img{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
-    margin: 0;
-}
-
 .card-verso .card-thumbnail .thumb-img{
     width: 100%;
     height: auto;
+    max-width: none;
+    max-height: none;
+    margin: 0;
     object-fit: contain;
     object-position: center;
-    scale: 0.85;
+    /* transform, not the scale property: Safari drops scale when translate or filter is also set, so the image paints at full width */
+    transform: scale(0.85);
+    scale: none;
     border-radius: var(--radius-desktop-screen);
+    filter: brightness(1.15);
 }
 
 .card-mitwerk-vr .card-thumbnail{
@@ -2076,6 +2074,72 @@ video.pictogram-source{
     }
 }
 
+/* Thumbnail loading state: a dark gray flowing gradient covers the frame, its
+   CSS backgrounds and media until media-loader.js marks the thumbnail ready.
+   The gradient then fades while its backdrop blur eases off, so the thumbnail
+   unblurs into view. Default-on with scripting so backgrounds never paint
+   first; "done" removes the layer once the reveal has finished. */
+@property --thumb-loader-alpha {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 1;
+}
+
+@media (scripting: enabled) {
+    .card .card-thumbnail:not([data-thumb-state="done"])::after {
+        content: "";
+        position: absolute;
+        /* Past the clip edge, so antialiased corners can't show the background */
+        inset: -1px;
+        /* Above screens and canvases, below dev controls (140) and CTAs (150) */
+        z-index: 100;
+        border-radius: inherit;
+        pointer-events: none;
+        background-image: linear-gradient(
+            110deg,
+            rgb(38 38 38 / var(--thumb-loader-alpha)) 30%,
+            rgb(64 64 64 / var(--thumb-loader-alpha)) 50%,
+            rgb(38 38 38 / var(--thumb-loader-alpha)) 70%
+        );
+        background-size: 300% 100%;
+        -webkit-backdrop-filter: blur(24px);
+        backdrop-filter: blur(24px);
+        animation: thumb-loader-flow 1.6s linear infinite;
+    }
+
+    .card .card-thumbnail[data-thumb-state="ready"]::after {
+        --thumb-loader-alpha: 0;
+        -webkit-backdrop-filter: blur(0px);
+        backdrop-filter: blur(0px);
+        visibility: hidden;
+        transition:
+            --thumb-loader-alpha 450ms ease,
+            -webkit-backdrop-filter 900ms cubic-bezier(0.22, 1, 0.36, 1),
+            backdrop-filter 900ms cubic-bezier(0.22, 1, 0.36, 1),
+            visibility 0s linear 900ms;
+    }
+}
+
+@keyframes thumb-loader-flow {
+    from { background-position: 100% 0; }
+    to { background-position: 0% 0; }
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: reduce) {
+    .card .card-thumbnail:not([data-thumb-state="done"])::after {
+        animation: none;
+        background-position: 50% 0;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .card .card-thumbnail[data-thumb-state="ready"]::after {
+        transition:
+            --thumb-loader-alpha 200ms ease,
+            visibility 0s linear 200ms;
+    }
+}
+
 nav ul a:hover{
     font-weight: 600;
 }
@@ -2391,5 +2455,111 @@ body.is-loading header{
   .page-loader__bar-fill{
     width: 100%;
     transform: none;
+  }
+}
+
+/* Thumbnail lightbox (thumbnail-lightbox.js): cards without a project page open
+   their thumbnail media in a fullscreen blurred overlay. */
+[data-project-grid] .card-thumbnail.is-lightbox-trigger{
+  cursor: zoom-in;
+}
+
+[data-project-grid] .card-thumbnail.is-lightbox-trigger:focus-visible{
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+html.dev-mode [data-project-grid] .card-thumbnail.is-lightbox-trigger{
+  cursor: inherit;
+}
+
+html.is-thumb-lightbox-open{
+  overflow: hidden;
+}
+
+.thumb-lightbox{
+  --frame-width: min(var(--media-width), 92vw, calc(88vh * (var(--media-ratio))));
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(22 22 22 / 0.45);
+  -webkit-backdrop-filter: blur(24px) saturate(1.15);
+  backdrop-filter: blur(24px) saturate(1.15);
+  opacity: 0;
+  transition: opacity 280ms ease;
+  cursor: zoom-out;
+}
+
+@supports (height: 1dvh){
+  .thumb-lightbox{
+    --frame-width: min(var(--media-width), 92vw, calc(88dvh * (var(--media-ratio))));
+  }
+}
+
+.thumb-lightbox[hidden]{
+  display: none;
+}
+
+.thumb-lightbox.is-open{
+  opacity: 1;
+}
+
+.thumb-lightbox__frame{
+  width: var(--frame-width);
+  aspect-ratio: var(--media-ratio);
+  overflow: hidden;
+  /* Safari leaves a playing video's corners square without a mask. */
+  isolation: isolate;
+  -webkit-mask-image: linear-gradient(#000, #000);
+  mask-image: linear-gradient(#000, #000);
+  /* The thumbnail's radius as a share of its width (thumbnail-lightbox.js). */
+  border-radius: calc(var(--frame-width) * var(--radius-ratio, 0));
+  box-shadow: 0 18px 56px rgb(0 0 0 / 0.3);
+  transform-origin: center;
+}
+
+.thumb-lightbox__media{
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  /* Undo the global video scale so the media fills the rounded frame. */
+  scale: none;
+  border-radius: 0;
+  object-fit: contain;
+}
+
+.thumb-lightbox__close{
+  position: absolute;
+  top: calc(var(--nav-height, 4rem) / 2);
+  right: var(--space-nav, 1.5rem);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+
+.thumb-lightbox__close:hover{
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .thumb-lightbox{
+    transition: none;
   }
 }
