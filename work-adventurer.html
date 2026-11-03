@@ -39,8 +39,8 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=archive-nav-1">
 
-    <link rel="stylesheet" href="style-project.css?v=v2-dark-1">
-    <link rel="stylesheet" href="responsive.css?v=nav-2">
+    <link rel="stylesheet" href="style-project.css?v=cs-grid-21">
+    <link rel="stylesheet" href="responsive.css?v=cs-grid-1">
     <title>Nicole Wei: Adventurer's Scroll (2024)</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta property="og:type" content="website">
@@ -85,7 +85,7 @@
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg case-study-project case-study-toc-enabled">
+    <main class="main-projectpg case-study-project cs-grid">
         <div class="sidebar no-display">
             <ul>
                 <li><a href="index.html?collection=work" data-collection-nav="work">Work</a></li>
@@ -95,16 +95,15 @@
             </ul>
         </div>
 
+        <div class="img-casestudy-cover img-casestudy-cover-adventurer">
+            <img data-media-src="assets/adventurer/adventurer-thumb.png" alt="" width="2648" height="1496" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/adventurer-thumb.png" alt=""></noscript>
+        </div>
+
         <div class="case-study-header">
             <h1>Adventurer's Scroll</h1>
-            <h2>A gamified productivity app that builds intrinsic motivation and transforms studying into an endless
-                personalized adventure.</h2>
-            <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
-        </div>
-        <img class="img-casestudy-cover" data-media-src="assets/adventurer/adventurer-thumb.png" alt="" width="2648" height="1496" loading="lazy" decoding="async"><noscript data-media-fallback><img class="img-casestudy-cover" src="assets/adventurer/adventurer-thumb.png" alt=""></noscript>
-        <div class="project-caption">
-            <section class="section-case-study" data-toc-scroll="top">
-                <h3 class="no-display">Overview</h3>
+            <div class="cs-section-body">
+                <h2>A gamified productivity app that builds intrinsic motivation and transforms studying into an endless
+                    personalized adventure.</h2>
                 <ul class="list-case-study list-case-study-info">
                     <li>
                         <p class="entry-header">Role</p>
@@ -123,99 +122,111 @@
                         <p class="entry-content">Figma, Procreate</p>
                     </li>
                 </ul>
-            </section>
+            </div>
+            <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
+        </div>
+
+        <div class="project-caption">
             <section>
                 <h3>Problem</h3>
-                <ul class="list-case-study list-case-study-problems">
-                    <li>
-                        <h4>Students are often driven by external pressure rather than curiosity to learn. </h4>
-                        <p>Middle school students often learn under parental pressure, grading systems, and standardized
-                            benchmarks, leading to compliance as opposed to curiosity. </p>
-                    </li>
-                    <li>
-                        <h4>High anxiety → lower sense of agency.</h4>
-                        <p>Middle school students often learn under parental pressure, grading systems, and standardized
-                            benchmarks, leading to compliance as opposed to curiosity. </p>
-                    </li>
-                    <li>
-                        <h4>Major productivity tools rely on discipline over engagement. </h4>
-                        <p>Most tools (Notion, Todoist, etc.) are designed for adults, relying on discipline over
-                            engagement. Their lack of imagination and reward loops misaligns with how Gen Z actually
-                            engages with the world, which is through storytelling, games, and social connections. </p>
-                    </li>
-                </ul>
+                <div class="cs-section-body">
+                    <ul class="list-case-study list-case-study-problems">
+                        <li>
+                            <h4>Students are often driven by external pressure rather than curiosity to learn. </h4>
+                            <p>Middle school students often learn under parental pressure, grading systems, and standardized
+                                benchmarks, leading to compliance as opposed to curiosity. </p>
+                        </li>
+                        <li>
+                            <h4>High anxiety → lower sense of agency.</h4>
+                            <p>Middle school students often learn under parental pressure, grading systems, and standardized
+                                benchmarks, leading to compliance as opposed to curiosity. </p>
+                        </li>
+                        <li>
+                            <h4>Major productivity tools rely on discipline over engagement. </h4>
+                            <p>Most tools (Notion, Todoist, etc.) are designed for adults, relying on discipline over
+                                engagement. Their lack of imagination and reward loops misaligns with how Gen Z actually
+                                engages with the world, which is through storytelling, games, and social connections. </p>
+                        </li>
+                    </ul>
+                </div>
             </section>
             <section>
                 <h3>Research question</h3>
-                <p>What if studying felt like progressing through a story instead of completing tasks?</p>
+                <div class="cs-section-body">
+                    <p>What if studying felt like progressing through a story instead of completing tasks?</p>
+                </div>
             </section>
             <section class="section-product-highlights">
 
                 <h3>Product highlights</h3>
-                <div class="product-highlight-entries">
-                    <div class="product-highlight-entry">
-                        <div>
-                            <h4>Focus session + story progression loop</h4>
+                <div class="cs-section-body">
+                    <div class="product-highlight-entries">
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>Focus session + story progression loop</h4>
 
-                            <p>The user begins by setting up a checklist of tasks which they would execute in a
-                                Pomodoro-style focus session. With each task complete, they unlock a new segment of
-                                their story and are prompted to make a choice that determines how the narrative unfolds.
+                                <p>The user begins by setting up a checklist of tasks which they would execute in a
+                                    Pomodoro-style focus session. With each task complete, they unlock a new segment of
+                                    their story and are prompted to make a choice that determines how the narrative unfolds.
+                                    </p>
+                            </div>
+                            <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-focus(v2).mp4" data-media-autoplay loop muted
+                                playsinline width="2164" height="2160" preload="none" data-media-poster="assets/media-posters/3d55121807c3.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-focus(v2).mp4" loop muted
+                                playsinline controls preload="none"></video></noscript>
+
+                        </div>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>AI-based branching narrative system</h4>
+
+                                <p>The story itself is dynamically generated through AI, adapting to the choices users make. By continuously prompting the question “What happens next?”, the experience builds
+                                    anticipation and encourages sustained engagement, allowing students to feel a sense of
+                                    accomplishment in real time.
                                 </p>
+                            </div>
+                            <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-narrative.mp4" data-media-autoplay loop muted
+                                playsinline width="2156" height="2160" preload="none" data-media-poster="assets/media-posters/b664ec14c1ea.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-narrative.mp4" loop muted
+                                playsinline controls preload="none"></video></noscript>
+
                         </div>
-                        <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-focus(v2).mp4" data-media-autoplay loop muted
-                            playsinline width="2164" height="2160" preload="none" data-media-poster="assets/media-posters/3d55121807c3.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-focus(v2).mp4" loop muted
-                            playsinline controls preload="none"></video></noscript>
 
-                    </div>
-                    <div class="product-highlight-entry">
-                        <div>
-                            <h4>AI-based branching narrative system</h4>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>Reward economy</h4>
 
-                            <p>The story itself is dynamically generated through AI, adapting to the choices users make. By continuously prompting the question “What happens next?”, the experience builds
-                                anticipation and encourages sustained engagement, allowing students to feel a sense of
-                                accomplishment in real time.
-                            </p>
+                                <p>Users can earn coins through completed focus sessions, which can be exchanged for additional “script slots” and
+                                    educational audio content.
+                                </p>
+                            </div>
+                            <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-store.mp4" data-media-autoplay loop muted
+                                playsinline width="2156" height="2160" preload="none" data-media-poster="assets/media-posters/64728289822a.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-store.mp4" loop muted
+                                playsinline controls preload="none"></video></noscript>
+
                         </div>
-                        <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-narrative.mp4" data-media-autoplay loop muted
-                            playsinline width="2156" height="2160" preload="none" data-media-poster="assets/media-posters/b664ec14c1ea.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-narrative.mp4" loop muted
-                            playsinline controls preload="none"></video></noscript>
 
-                    </div>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>Build momentum through peer-supported micro groups.</h4>
 
-                    <div class="product-highlight-entry">
-                        <div>
-                            <h4>Reward economy</h4>
+                                <p>To introduce a social dimension without creating pressure, students can form small groups
+                                    of up to four people, where they work toward shared weekly goals and unlock collective
+                                    rewards.
+                                </p>
+                            </div>
+                            <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-clan.mp4" data-media-autoplay loop muted
+                                playsinline width="2156" height="2160" preload="none" data-media-poster="assets/media-posters/172107f1ff3f.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-clan.mp4" loop muted
+                                playsinline controls preload="none"></video></noscript>
 
-                            <p>Users can earn coins through completed focus sessions, which can be exchanged for additional “script slots” and
-                                educational audio content.
-                            </p>
                         </div>
-                        <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-store.mp4" data-media-autoplay loop muted
-                            playsinline width="2156" height="2160" preload="none" data-media-poster="assets/media-posters/64728289822a.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-store.mp4" loop muted
-                            playsinline controls preload="none"></video></noscript>
-
-                    </div>
-
-                    <div class="product-highlight-entry">
-                        <div>
-                            <h4>Build momentum through peer-supported micro groups.</h4>
-
-                            <p>To introduce a social dimension without creating pressure, students can form small groups
-                                of up to four people, where they work toward shared weekly goals and unlock collective
-                                rewards.
-                            </p>
-                        </div>
-                        <video class="video-app-highlights" data-media-src="assets/adventurer/adventurer-clan.mp4" data-media-autoplay loop muted
-                            playsinline width="2156" height="2160" preload="none" data-media-poster="assets/media-posters/172107f1ff3f.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/adventurer/adventurer-clan.mp4" loop muted
-                            playsinline controls preload="none"></video></noscript>
-
                     </div>
                 </div>
             </section>
             <section class="section-ui-design">
                 <h3>UI design</h3>
-                <img data-media-src="assets/adventurer/adventurer full ui (web).png" class="img-mockup" alt="hi-fi UI" width="2087" height="1745" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/adventurer full ui (web).png" class="img-mockup" alt="hi-fi UI"></noscript>
-                <img data-media-src="assets/adventurer/adventurer-mockup.png" class="img-mockup" alt="hi-fi UI" width="1986" height="1280" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/adventurer-mockup.png" class="img-mockup" alt="hi-fi UI"></noscript>
+                <div class="cs-section-body">
+                    <img data-media-src="assets/adventurer/adventurer full ui (web).png" class="img-mockup" alt="hi-fi UI" width="2087" height="1745" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/adventurer full ui (web).png" class="img-mockup" alt="hi-fi UI"></noscript>
+                    <img data-media-src="assets/adventurer/adventurer-mockup.png" class="img-mockup" alt="hi-fi UI" width="1986" height="1280" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/adventurer-mockup.png" class="img-mockup" alt="hi-fi UI"></noscript>
+                </div>
             </section>
             <!-- <section class="section-mockup">
                 <h3>Mockup</h3>
@@ -223,8 +234,10 @@
             </section> -->
             <section class="section-design-system">
                 <h3>Design system</h3>
-                <div class="wrapper-design-system">
-                <img data-media-src="assets/adventurer/design system.png" alt="Keyframes" width="1999" height="2688" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/design system.png" alt="Keyframes"></noscript>
+                <div class="cs-section-body">
+                    <div class="wrapper-design-system">
+                    <img data-media-src="assets/adventurer/design system.png" alt="Keyframes" width="1999" height="2688" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/design system.png" alt="Keyframes"></noscript>
+                    </div>
                 </div>
             </section>
             <div class="placeholder-caption"></div>
@@ -311,7 +324,7 @@
     </section>
     <script src="media-config.js?v=1"></script>
     <script src="media-loader.js?v=1"></script>
-    <script type="module" src="project-scroll.js?v=media-1"></script>
+    <script type="module" src="project-scroll.js?v=cover-first-1"></script>
     <script src="script.js?v=optional-details-1"></script>
 </body>
 

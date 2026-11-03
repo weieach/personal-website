@@ -288,8 +288,7 @@
   }
 
   /* Case study: fill the padded column on small screens; keep back in-flow */
-  .case-study-project .case-study-header,
-  .case-study-project .img-casestudy-cover{
+  .case-study-project .case-study-header{
     width: 100%;
     max-width: 100%;
   }
@@ -441,15 +440,11 @@
     border-bottom: none;
   }
 
-  /* Match .project-caption's inline padding (main already has 5%) */
+  /* Match .project-caption's inline padding (main already has 5%).
+     With the main flex gap, header→caption spacing equals the section gap. */
   .main-projectpg.case-study-project .case-study-header{
     padding-inline: 5%;
-    margin-bottom: calc(var(--space) * 4);
-  }
-
-  /* Cancel main flex gap so header→cover spacing equals section gap */
-  .main-projectpg.case-study-project .case-study-header + .img-casestudy-cover{
-    margin-top: calc(var(--space) * -2);
+    margin-bottom: calc(var(--space) * 2);
   }
 
   .case-study-project section{
@@ -471,12 +466,8 @@
   }
 }
 
-/* Mid widths: match desktop case-study spacing/padding; hide back button */
+/* Mid widths: match desktop case-study spacing/padding */
 @media (width < 1350px) and (width >= 960px) {
-  .case-study-project .case-study-header .btn-back{
-    display: none;
-  }
-
   .main-projectpg.case-study-project{
     padding-inline: 0;
   }
@@ -485,10 +476,6 @@
   .main-projectpg.case-study-project .case-study-header{
     padding-inline: 0;
     margin-bottom: 0;
-  }
-
-  .main-projectpg.case-study-project .case-study-header + .img-casestudy-cover{
-    margin-top: 0;
   }
 
   /* Schneider body is 120ch; without a gutter it goes edge-to-edge in this range */

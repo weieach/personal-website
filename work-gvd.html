@@ -39,8 +39,8 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=archive-nav-1">
 
-    <link rel="stylesheet" href="style-project.css?v=gvd-v3-1">
-    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="style-project.css?v=cs-grid-21">
+    <link rel="stylesheet" href="responsive.css?v=cs-grid-1">
     <title>Nicole Wei: Gender Violence Database (2026)</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta property="og:type" content="website">
@@ -83,7 +83,7 @@
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg case-study-project gvd-project case-study-toc-enabled">
+    <main class="main-projectpg case-study-project gvd-project cs-grid">
         <div class="sidebar no-display">
             <ul>
                 <li><a href="index.html?collection=work" data-collection-nav="work">Work</a></li>
@@ -93,17 +93,14 @@
             </ul>
         </div>
 
-        <div class="case-study-header">
-            <h1>Gender Violence Database</h1>
-            <h2>A research database redesigned to clarify content structure and make gender-violence scholarship easier to find and use.</h2>
-            <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
-        </div>
         <div class="img-casestudy-cover img-casestudy-cover-gvd">
             <video data-media-src="assets/gvd/gvd-v3.mp4" data-media-autoplay loop muted playsinline width="3420" height="2160" preload="none" data-media-poster="assets/media-posters/75ccbd2f3e0b.webp"></video><noscript data-media-fallback><video src="assets/gvd/gvd-v3.mp4" loop muted playsinline controls preload="none"></video></noscript>
         </div>
-        <div class="project-caption">
-            <section class="section-case-study" data-toc-scroll="top">
-                <h3 class="no-display">Overview</h3>
+
+        <div class="case-study-header">
+            <h1>Gender Violence Database</h1>
+            <div class="cs-section-body">
+                <h2>A research database redesigned to clarify content structure and make gender-violence scholarship easier to find and use.</h2>
                 <ul class="list-case-study list-case-study-info">
                     <li>
                         <p class="entry-header">Role</p>
@@ -122,89 +119,97 @@
                         <p class="entry-content">HTML, CSS, JavaScript, Vue</p>
                     </li>
                 </ul>
-            </section>
+            </div>
+            <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
+        </div>
+
+        <div class="project-caption">
             <section class="section-problem">
                 <h3>Context &amp; problem</h3>
-                <p>As the UI/UX designer and front-end developer, I led the redesign of the Gender Violence Database’s
-                    interface and visual identity. The database is a public research resource on gender-based violence,
-                    but its existing structure made the collection difficult to navigate, browse, and search.</p>
-                <p>I designed and built the new interface in HTML, CSS, and vanilla JavaScript, then collaborated with
-                    engineers to integrate it into the existing Vue codebase for launch. The redesign focused on two
-                    core problems:</p>
-                <ul class="list-case-study list-case-study-problems">
-                    <li>
-                        <h4>Research was difficult to discover</h4>
-                        <p>The database contained extensive scholarship, but its hierarchy, navigation, and search
-                            experience did not clearly expose how the collection was organized. Users often needed to
-                            already know what they were looking for, limiting browsing and discovery.</p>
-                    </li>
-                    <li>
-                        <h4>The visual system lacked clarity</h4>
-                        <p>Weak hierarchy and limited visual distinction made dense pages difficult to scan and created
-                            inconsistencies across views. The redesign needed a clearer system that could organize
-                            complex research while maintaining the credibility of an academic resource.</p>
-                    </li>
-                </ul>
+                <div class="cs-section-body">
+                    <p>As the UI/UX designer and front-end developer, I led the redesign of the Gender Violence Database’s
+                        interface and visual identity. The database is a public research resource on gender-based violence,
+                        but its existing structure made the collection difficult to navigate, browse, and search.</p>
+                    <p>I designed and built the new interface in HTML, CSS, and vanilla JavaScript, then collaborated with
+                        engineers to integrate it into the existing Vue codebase for launch. The redesign focused on two
+                        core problems:</p>
+                    <ul class="list-case-study list-case-study-problems">
+                        <li>
+                            <h4>Research was difficult to discover</h4>
+                            <p>The database contained extensive scholarship, but its hierarchy, navigation, and search
+                                experience did not clearly expose how the collection was organized. Users often needed to
+                                already know what they were looking for, limiting browsing and discovery.</p>
+                        </li>
+                        <li>
+                            <h4>The visual system lacked clarity</h4>
+                            <p>Weak hierarchy and limited visual distinction made dense pages difficult to scan and created
+                                inconsistencies across views. The redesign needed a clearer system that could organize
+                                complex research while maintaining the credibility of an academic resource.</p>
+                        </li>
+                    </ul>
+                </div>
             </section>
             <section class="section-redesign-highlights">
                 <h3>Redesign highlights</h3>
-                <div class="gvd-redesign-pairs">
-                    <figure class="gvd-redesign-pair">
-                        <h4>Homepage</h4>
-                        <figcaption>The homepage shifts from a static title treatment to a search-first entry point, with a clearer identity and wayfinding.</figcaption>
-                        <div class="gvd-redesign-screens">
-                            <div class="gvd-redesign-screen">
-                                <img data-media-src="assets/gvd/redesign highlights screens/homepage-new.png" alt="Redesigned Gender Violence Database homepage" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/homepage-new.png" alt="Redesigned Gender Violence Database homepage"></noscript>
-                                <span>After</span>
+                <div class="cs-section-body">
+                    <div class="gvd-redesign-pairs">
+                        <figure class="gvd-redesign-pair">
+                            <h4>Homepage</h4>
+                            <figcaption>The homepage shifts from a static title treatment to a search-first entry point, with a clearer identity and wayfinding.</figcaption>
+                            <div class="gvd-redesign-screens">
+                                <div class="gvd-redesign-screen">
+                                    <img data-media-src="assets/gvd/redesign highlights screens/homepage-new.png" alt="Redesigned Gender Violence Database homepage" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/homepage-new.png" alt="Redesigned Gender Violence Database homepage"></noscript>
+                                    <span>After</span>
+                                </div>
+                                <div class="gvd-redesign-screen">
+                                    <img data-media-src="assets/gvd/redesign highlights screens/homepage-old.png" alt="Previous Gender Violence Database homepage" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/homepage-old.png" alt="Previous Gender Violence Database homepage"></noscript>
+                                    <span>Before</span>
+                                </div>
                             </div>
-                            <div class="gvd-redesign-screen">
-                                <img data-media-src="assets/gvd/redesign highlights screens/homepage-old.png" alt="Previous Gender Violence Database homepage" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/homepage-old.png" alt="Previous Gender Violence Database homepage"></noscript>
-                                <span>Before</span>
+                        </figure>
+                        <figure class="gvd-redesign-pair">
+                            <h4>Browse</h4>
+                            <figcaption>Browse and search move from a dense text list to scannable result cards, with tag filters, journal browsing, and more readable metadata.</figcaption>
+                            <div class="gvd-redesign-screens">
+                                <div class="gvd-redesign-screen">
+                                    <img data-media-src="assets/gvd/redesign highlights screens/search-new.png" alt="Redesigned Gender Violence Database browse and search results" width="1728" height="995" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/search-new.png" alt="Redesigned Gender Violence Database browse and search results"></noscript>
+                                    <span>After</span>
+                                </div>
+                                <div class="gvd-redesign-screen">
+                                    <img data-media-src="assets/gvd/redesign highlights screens/search-old.png" alt="Previous Gender Violence Database search results" width="1728" height="995" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/search-old.png" alt="Previous Gender Violence Database search results"></noscript>
+                                    <span>Before</span>
+                                </div>
                             </div>
-                        </div>
-                    </figure>
-                    <figure class="gvd-redesign-pair">
-                        <h4>Browse</h4>
-                        <figcaption>Browse and search move from a dense text list to scannable result cards, with tag filters, journal browsing, and more readable metadata.</figcaption>
-                        <div class="gvd-redesign-screens">
-                            <div class="gvd-redesign-screen">
-                                <img data-media-src="assets/gvd/redesign highlights screens/search-new.png" alt="Redesigned Gender Violence Database browse and search results" width="1728" height="995" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/search-new.png" alt="Redesigned Gender Violence Database browse and search results"></noscript>
-                                <span>After</span>
+                        </figure>
+                        <figure class="gvd-redesign-pair">
+                            <h4>Glossary</h4>
+                            <figcaption>The glossary becomes a browsable schema: a category index on the left, nested definitions on the right.</figcaption>
+                            <div class="gvd-redesign-screens">
+                                <div class="gvd-redesign-screen">
+                                    <img data-media-src="assets/gvd/redesign highlights screens/glossary-new.png" alt="Redesigned Gender Violence Database glossary" width="1728" height="994" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/glossary-new.png" alt="Redesigned Gender Violence Database glossary"></noscript>
+                                    <span>After</span>
+                                </div>
+                                <div class="gvd-redesign-screen">
+                                    <img data-media-src="assets/gvd/redesign highlights screens/glossary-old.png" alt="Previous Gender Violence Database glossary" width="1728" height="994" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/glossary-old.png" alt="Previous Gender Violence Database glossary"></noscript>
+                                    <span>Before</span>
+                                </div>
                             </div>
-                            <div class="gvd-redesign-screen">
-                                <img data-media-src="assets/gvd/redesign highlights screens/search-old.png" alt="Previous Gender Violence Database search results" width="1728" height="995" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/search-old.png" alt="Previous Gender Violence Database search results"></noscript>
-                                <span>Before</span>
+                        </figure>
+                        <figure class="gvd-redesign-pair">
+                            <h4>Support &amp; Resources</h4>
+                            <figcaption>Crisis resources are recast as Support &amp; Resources — carded entries with clearer hierarchy for scanning under stress.</figcaption>
+                            <div class="gvd-redesign-screens">
+                                <div class="gvd-redesign-screen">
+                                    <img data-media-src="assets/gvd/redesign highlights screens/help-new.png" alt="Redesigned Gender Violence Database support and resources page" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/help-new.png" alt="Redesigned Gender Violence Database support and resources page"></noscript>
+                                    <span>After</span>
+                                </div>
+                                <div class="gvd-redesign-screen">
+                                    <img data-media-src="assets/gvd/redesign highlights screens/help-old.png" alt="Previous Gender Violence Database help page" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/help-old.png" alt="Previous Gender Violence Database help page"></noscript>
+                                    <span>Before</span>
+                                </div>
                             </div>
-                        </div>
-                    </figure>
-                    <figure class="gvd-redesign-pair">
-                        <h4>Glossary</h4>
-                        <figcaption>The glossary becomes a browsable schema: a category index on the left, nested definitions on the right.</figcaption>
-                        <div class="gvd-redesign-screens">
-                            <div class="gvd-redesign-screen">
-                                <img data-media-src="assets/gvd/redesign highlights screens/glossary-new.png" alt="Redesigned Gender Violence Database glossary" width="1728" height="994" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/glossary-new.png" alt="Redesigned Gender Violence Database glossary"></noscript>
-                                <span>After</span>
-                            </div>
-                            <div class="gvd-redesign-screen">
-                                <img data-media-src="assets/gvd/redesign highlights screens/glossary-old.png" alt="Previous Gender Violence Database glossary" width="1728" height="994" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/glossary-old.png" alt="Previous Gender Violence Database glossary"></noscript>
-                                <span>Before</span>
-                            </div>
-                        </div>
-                    </figure>
-                    <figure class="gvd-redesign-pair">
-                        <h4>Support &amp; Resources</h4>
-                        <figcaption>Crisis resources are recast as Support &amp; Resources — carded entries with clearer hierarchy for scanning under stress.</figcaption>
-                        <div class="gvd-redesign-screens">
-                            <div class="gvd-redesign-screen">
-                                <img data-media-src="assets/gvd/redesign highlights screens/help-new.png" alt="Redesigned Gender Violence Database support and resources page" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/help-new.png" alt="Redesigned Gender Violence Database support and resources page"></noscript>
-                                <span>After</span>
-                            </div>
-                            <div class="gvd-redesign-screen">
-                                <img data-media-src="assets/gvd/redesign highlights screens/help-old.png" alt="Previous Gender Violence Database help page" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/gvd/redesign highlights screens/help-old.png" alt="Previous Gender Violence Database help page"></noscript>
-                                <span>Before</span>
-                            </div>
-                        </div>
-                    </figure>
+                        </figure>
+                    </div>
                 </div>
             </section>
         </div>
@@ -226,7 +231,7 @@
     </footer>
     <script src="media-config.js?v=1"></script>
     <script src="media-loader.js?v=1"></script>
-    <script type="module" src="project-scroll.js?v=media-1"></script>
+    <script type="module" src="project-scroll.js?v=cover-first-1"></script>
     <script src="script.js?v=optional-details-1"></script>
 </body>
 

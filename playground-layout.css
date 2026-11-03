@@ -239,16 +239,25 @@ main.playground-project .playground-media > canvas.pictogram-visual {
 }
 
 main.elastic-main-projectpg .page-thumbnail-elastic-mind .playground-media > video {
-  /* Same painted height as the 3D poster and teaser at scale 0.8. */
-  scale: calc(0.8 * (56.25cqw - 8px - 0.92rem * 1.28) / 56.25cqw);
+  /* Same vertical inset as the motion teaser at scale 0.8. */
+  scale: calc(1 - 0.2 * (56.25cqw - 8px - 0.92rem * 1.28) / 56.25cqw);
 }
 
 main.elastic-main-projectpg .playground-media > img.elastic-poster {
   scale: 0.9;
 }
 
-main.elastic-main-projectpg .playground-media-pair .playground-media > video {
+main.elastic-main-projectpg #el-item-2 .playground-media > video {
   scale: 0.8;
+}
+
+main.elastic-main-projectpg #el-item-4 {
+  display: none;
+}
+
+main.elastic-main-projectpg #el-item-3 .playground-media > video {
+  scale: 1;
+  object-fit: contain;
 }
 
 main.elastic-main-projectpg #el-item-4 .playground-media > video {

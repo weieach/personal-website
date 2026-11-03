@@ -632,11 +632,8 @@ function splitByViewport(blocks) {
 function collectRevealBlocks(main) {
   const blocks = [];
 
-  // Skip .page-thumbnail and .project-caption ? they show immediately.
-  // Case-study sections inside the caption still stagger in.
-  const cover = main.querySelector(":scope > .img-casestudy-cover");
-  if (cover) blocks.push(cover);
-
+  // Skip .page-thumbnail, .img-casestudy-cover and .project-caption ? they
+  // show immediately. Case-study sections inside the caption still stagger in.
   main
     .querySelectorAll(".project-caption > section")
     .forEach((section) => blocks.push(section));

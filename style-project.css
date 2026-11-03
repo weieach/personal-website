@@ -20,7 +20,6 @@ html.lenis {
 
 /* Project entrance: start hidden from first paint (no late-JS opacity flash).
    Matches listing-scroll’s CSS start pose pattern. Thumbnail + caption stay put. */
-.main-projectpg > .img-casestudy-cover:not(.scroll-reveal-block--done),
 .main-projectpg .project-caption > section:not(.scroll-reveal-block--done),
 .main-projectpg .project-pics > *:not(.scroll-reveal-block--done):not(.placeholder-caption) {
   opacity: 0;
@@ -28,7 +27,6 @@ html.lenis {
 }
 
 @media (prefers-reduced-motion: reduce), (scripting: none) {
-  .main-projectpg > .img-casestudy-cover:not(.scroll-reveal-block--done),
   .main-projectpg .project-caption > section:not(.scroll-reveal-block--done),
   .main-projectpg .project-pics > *:not(.scroll-reveal-block--done):not(.placeholder-caption) {
     opacity: 1;
@@ -910,8 +908,14 @@ html:has(.nijimu-page.dark-mode) {
 }
 
 .dark-mode .list-case-study-info .entry-header, 
-.dark-mode .case-study-project h3{
-  color: #8A8FE5;
+.dark-mode .case-study-project h3,
+.dark-mode .case-study-project .case-study-header > .cs-section-body > h2{
+  color: var(--cs-accent, #8A8FE5);
+}
+
+/* Dino's theme color. */
+.main-projectpg.case-study-project.dino-project{
+  --cs-accent: #A9A0FF;
 }
 
 /* Default body images fill the text column; breakout images override below
@@ -925,13 +929,6 @@ html:has(.nijimu-page.dark-mode) {
   font-weight: 400;
 }
 
-.dark-mode .list-case-study-problems li{
-  border-left: 3px solid #8A8FE5;
-}
-
-.dark-mode .main-projectpg.gvd-project .list-case-study-problems li{
-  border-left-color: var(--gvd-primary);
-}
 
 
 
@@ -1220,6 +1217,22 @@ h2{
   opacity: 0.6;
 }
 
+.dino-project .dino-screens-featured figure,
+.dino-project .dino-screens-gallery figure{
+  gap: 0;
+}
+
+.dino-project .dino-screens-featured .floating-caption,
+.dino-project .dino-screens-gallery .floating-caption{
+  margin-top: 30px;
+}
+
+.dino-project .dino-screens-featured .floating-caption p,
+.dino-project .dino-screens-gallery .floating-caption p{
+  color: #fff;
+  opacity: 1;
+}
+
 .captioned-item > .btn-see-all{
   width: 100%;
 }
@@ -1290,6 +1303,29 @@ h2{
   color: inherit;
 }
 
+main.dino-project .btn-see-all{
+  opacity: 1;
+}
+
+main.dino-project .btn-see-all__label{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--cs-body-color);
+  opacity: 1;
+}
+
+main.dino-project .btn-see-all::before,
+main.dino-project .btn-see-all::after{
+  background-color: #444;
+  opacity: 1;
+}
+
+main.dino-project .btn-see-all i{
+  color: var(--cs-body-color);
+  opacity: 1;
+}
+
 .img-dino-early-logos{
   max-width: 630px;
   width: 70%;
@@ -1300,7 +1336,7 @@ h2{
   /* width: 80%; */
 }
 
-.section-dino-branding div{
+.section-dino-branding div:not(.cs-section-body){
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -1339,8 +1375,28 @@ h2{
   max-width: 50%;
 }
 
+.section-dino-results .outcome-tweet-row .captioned-item.outcome-poster-pair{
+  max-width: none;
+}
+
+.section-dino-results .outcome-poster-pair__images{
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  background-color: #161616;
+}
+
+.section-dino-results .outcome-poster-pair__images img{
+  flex: 1 1 0;
+  width: calc(50% - 8px);
+  min-width: 0;
+  height: auto;
+}
+
 .section-dino-results .outcome-media-row .captioned-item.outcome-photo{
-  max-width: 85%;
+  max-width: none;
 }
 
 .section-dino-results .outcome-media-row .captioned-item p{
@@ -1369,6 +1425,10 @@ h2{
 @media (width < 700px){
   .section-dino-results .outcome-media-row .captioned-item{
     max-width: none;
+  }
+
+  .section-dino-results .outcome-poster-pair__images{
+    flex-direction: column;
   }
 }
 
@@ -1443,11 +1503,17 @@ h2{
 }
 
 /* case study */
+html:has(main.case-study-project),
+body:has(main.case-study-project){
+  background-color: #000;
+}
+
 main.main-projectpg.case-study-project{
   flex-direction: column;
   gap: calc(var(--space) * 2);
   padding-inline: 0%;
-  margin-top: calc(var(--space-main-top) *2);
+  /* The cover sits under the nav like the Playground page thumbnail. */
+  margin-top: var(--nav-height);
 }
 
 .main-projectpg.case-study-project .project-caption{
@@ -1503,7 +1569,7 @@ main.main-projectpg.case-study-project{
   font-size: 0.92rem;
 }
 
-.nijimu-project .project-caption a + .ph-arrow-up-right{
+.nijimu-project :is(.project-caption, .case-study-header) a + .ph-arrow-up-right{
   font-size: 0.85em;
   margin-left: 0.15em;
   vertical-align: middle;
@@ -1632,7 +1698,8 @@ main.main-projectpg.case-study-project{
   color: #4E7E44;
 }
 
-.list-case-study-info .entry-header, h3{
+.list-case-study-info .entry-header, h3,
+.case-study-header > .cs-section-body > h2{
   color: #4E7E44;
   font-size: 0.9rem;
   margin-bottom: 1.3rem;
@@ -1692,8 +1759,10 @@ main.main-projectpg.case-study-project{
 
 .list-case-study-problems li{
   flex-direction: column;
-  padding-left: 1.5rem;
-  border-left: 3px solid #4E7E44;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(153, 153, 153, 0.12);
+  border-radius: 0.5rem;
+  background-color: rgba(153, 153, 153, 0.12);
 }
 
 .main-projectpg.case-study-project.gvd-project{
@@ -1702,13 +1771,11 @@ main.main-projectpg.case-study-project{
 }
 
 .main-projectpg.case-study-project.gvd-project .list-case-study-info .entry-header,
-.main-projectpg.case-study-project.gvd-project h3{
+.main-projectpg.case-study-project.gvd-project h3,
+.main-projectpg.case-study-project.gvd-project .case-study-header > .cs-section-body > h2{
   color: var(--gvd-primary);
 }
 
-.main-projectpg.case-study-project.gvd-project .list-case-study-problems li{
-  border-left-color: var(--gvd-primary);
-}
 
 
 
@@ -1734,46 +1801,282 @@ main.main-projectpg.case-study-project{
   opacity: 0.6;
 }
 
-.img-casestudy-cover{
-  width: 90%;
-  margin-inline: auto;
+/* Leads the page like the Playground page thumbnail: a full-width 16:9 stage
+   inset by the page gutter, with the media contained on its own color. */
+.main-projectpg.case-study-project > .img-casestudy-cover{
+  position: relative;
+  width: calc(100vw - 2 * var(--page-inline-space));
+  max-width: none;
+  aspect-ratio: 16 / 9;
+  margin-inline: calc(50% - 50vw + var(--page-inline-space));
+  /* With main's gap, the header starts where the Playground caption does
+     (16px grid gap + 1rem caption margin). */
+  margin-bottom: calc(16px + 1rem - var(--space) * 2);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: #161616;
 }
 
-.img-casestudy-cover video{
-  width: 100%;
+.main-projectpg.case-study-project > .img-casestudy-cover > :is(img, video){
   display: block;
-}
-
-.img-casestudy-cover-schneider{
-  background-color: #53c66c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.img-casestudy-cover-schneider img{
+  position: absolute;
+  inset: 0;
   width: 100%;
-  scale: 0.82;
-  object-fit: contain;
-  object-position: top center;
-}
-
-.img-casestudy-cover-gvd{
-  background-color: #531957;
-  border: 1.5px solid #531957;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.img-casestudy-cover-gvd video{
-  width: 100%;
-  height: auto;
-  scale: none;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
   border-radius: 0;
   object-fit: contain;
+  scale: none;
+}
+
+/* Dino and Adventurer covers are already 16:9 artwork. */
+.main-projectpg.case-study-project > :is(.img-casestudy-cover-dino, .img-casestudy-cover-adventurer) > img{
+  object-fit: cover;
+}
+
+.main-projectpg.case-study-project > .img-casestudy-cover-nijimu{
+  background-color: #ececec;
+}
+
+.main-projectpg.case-study-project > .img-casestudy-cover-schneider{
+  background-color: #53c66c;
+}
+
+.main-projectpg.case-study-project > .img-casestudy-cover-schneider > img{
+  scale: 0.82;
+}
+
+.main-projectpg.case-study-project > .img-casestudy-cover-gvd{
+  background-color: #531957;
+}
+
+/* Case-study grid (opt in with .cs-grid on main). Five columns inset like
+   Playground pages: the cover spans the row, and everything else stacks in
+   the center three columns (heading, then its .cs-section-body). Header,
+   caption and sections are subgrids so every row shares the same column lines. */
+main.main-projectpg.case-study-project.cs-grid{
+  --cs-row-gap: 80px;
+  /* Every text size below is multiplied by this; 15/14 above 960px. */
+  --cs-text-scale: 1;
+  --cs-body-color: #E6E6E6;
+  /* Lighter than the landing page's muted #666. */
+  --cs-caption-color: #8C8C8C;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 30px;
+  row-gap: var(--cs-row-gap);
+  width: auto;
+  max-width: none;
+  margin: var(--nav-height) var(--page-inline-space) 64px;
+  padding: 0;
+}
+
+main.main-projectpg.case-study-project.cs-grid > .img-casestudy-cover{
+  grid-column: 1 / -1;
+  width: auto;
+  margin: 0;
+}
+
+main.main-projectpg.case-study-project.cs-grid > :is(.case-study-header, .project-caption),
+main.main-projectpg.case-study-project.cs-grid > .project-caption > section{
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  /* normal = inherit the grid's 30px (.case-study-header sets gap: 0). */
+  column-gap: normal;
+  align-items: start;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+main.main-projectpg.case-study-project.cs-grid > .project-caption{
+  row-gap: var(--cs-row-gap);
+}
+
+main.main-projectpg.case-study-project.cs-grid > .case-study-header,
+main.main-projectpg.case-study-project.cs-grid > .project-caption > section{
+  row-gap: 1.3rem;
+}
+
+main.main-projectpg.case-study-project.cs-grid > .case-study-header > :is(h1, .cs-section-body),
+main.main-projectpg.case-study-project.cs-grid > .project-caption > section > *{
+  grid-column: 2 / 5;
+  min-width: 0;
+  margin: 0;
+}
+
+/* Section headings, info labels and the subtitle (above the info rows)
+   share one label style. */
+main.main-projectpg.case-study-project.cs-grid :is(h3, .list-case-study-info .entry-header, .case-study-header > .cs-section-body > h2){
+  font-family: "Neurial Grotesk", sans-serif;
+  font-size: calc(1rem * var(--cs-text-scale));
+  font-weight: 400;
+  text-transform: none;
+}
+
+/* Spacing inside a section body comes only from its 40px gap: the
+   children's own margins are zeroed. */
+main.main-projectpg.case-study-project.cs-grid .cs-section-body{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+main.main-projectpg.case-study-project.cs-grid .cs-section-body > *{
+  margin: 0;
+}
+
+/* The left two columns are too narrow for paired entries: one per row. */
+main.main-projectpg.case-study-project.cs-grid .list-case-study-info{
+  grid-template-columns: max-content 1fr;
+  margin: 0;
+}
+
+/* On the 5-column grid the list spans columns 2–4: labels take column 2 and
+   values start on column 3 (one column plus the 30px gutter in). */
+@media (width >= 960px){
+  main.main-projectpg.case-study-project.cs-grid .list-case-study-info{
+    grid-template-columns: calc((100% - 60px) / 3 + 30px) minmax(0, 1fr);
+  }
+
+  main.main-projectpg.case-study-project.cs-grid .list-case-study-info .entry-header{
+    padding-right: 30px;
+  }
+}
+
+main.main-projectpg.case-study-project.cs-grid .list-case-study-info > li{
+  grid-column: 1 / -1;
+  padding-inline: 0;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.2);
+}
+
+main.main-projectpg.case-study-project.cs-grid .list-case-study-info > li:first-child{
+  padding-top: 0;
+}
+
+main.main-projectpg.case-study-project.cs-grid .list-case-study-info > li:last-child{
+  border-bottom: none;
+}
+
+main.main-projectpg.case-study-project.cs-grid.dino-project .list-case-study-info > li{
+  border-bottom-color: #444;
+}
+
+/* The columns set the measure: drop Schneider/GVD's centered 90ch prose. */
+main.main-projectpg.case-study-project.cs-grid:is(.schneider-project, .gvd-project) :is(.project-caption section > :is(h3, h4), .project-caption .product-highlight-entry p, .project-caption .list-case-study, .project-caption .gvd-redesign-pairs){
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* Breakout images stay inside the content columns. */
+main.main-projectpg.case-study-project.cs-grid :is(.wrapper-design-system, .img-mockup, .img-case-study-body, .section-ui-design img){
+  width: 100%;
+  max-width: 100%;
+  left: 0;
+}
+
+/* Design-system body text: everything that isn't a heading, label or caption
+   matches the info-list values (14px, regular, full opacity) in a slightly
+   grayer white. Labels and media captions keep their own styles. */
+main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-caption) :is(p:not(.entry-header, .floating-caption-details), li){
+  font-size: calc(14px * var(--cs-text-scale));
+  font-weight: 400;
+  line-height: normal;
+  color: var(--cs-body-color);
+  opacity: 1;
+}
+
+main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-caption) :is(p, li) a{
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Captions match the landing page's card captions (Neurial Grotesk, regular,
+   normal line height) at 12.75px, in a lighter gray. Media captions stay centered,
+   20px under the media, and the caption box fits its text. */
+main.main-projectpg.case-study-project.cs-grid :is(.floating-caption p, .floating-caption p *, figcaption){
+  font-family: "Neurial Grotesk", sans-serif;
+  font-size: calc(12.75px * var(--cs-text-scale));
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--cs-caption-color);
+  opacity: 1;
+}
+
+main.main-projectpg.case-study-project.cs-grid .floating-caption{
+  display: block;
+  height: auto;
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+main.main-projectpg.case-study-project.cs-grid .floating-caption p{
+  text-align: center;
+}
+
+main.main-projectpg.case-study-project.cs-grid .floating-caption p{
+  margin: 0;
+}
+
+main.main-projectpg.case-study-project.cs-grid :is(.captioned-item, figure):has(> .floating-caption){
+  row-gap: 0;
+}
+
+main.main-projectpg.case-study-project.cs-grid :has(+ .floating-caption){
+  margin-bottom: 0;
+}
+
+/* Remaining text on the page follows the same scale. */
+main.main-projectpg.case-study-project.cs-grid > .case-study-header > h1{
+  font-size: calc(1.75rem * var(--cs-text-scale));
+}
+
+main.main-projectpg.case-study-project.cs-grid .project-caption h4,
+main.main-projectpg.case-study-project.cs-grid.dino-project .btn-see-all__label{
+  font-size: calc(14px * var(--cs-text-scale));
+}
+
+main.main-projectpg.case-study-project.cs-grid .gvd-redesign-screen span{
+  font-size: calc(0.7rem * var(--cs-text-scale));
+}
+
+/* Above 960px, all case-study text runs slightly larger (14px → 15px). */
+@media (width >= 960px){
+  main.main-projectpg.case-study-project.cs-grid{
+    --cs-text-scale: calc(15 / 14);
+  }
+}
+
+/* Stacked media, product-highlight items and list entries sit 40px apart. */
+main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries, .dino-screens-featured, .outcome-media-row, .outcome-tweet-row, .gvd-redesign-screens, .walkthrough-image-grid, .list-case-study:not(.list-case-study-info)){
+  row-gap: 40px;
+}
+
+/* Product-highlight frames and every image or image frame spanning the
+   content columns share the Results images' 8px corners. */
+main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries :is(img, video), .cs-section-body > :is(img, video), .gvd-redesign-screen img, .wrapper-design-system, .outcome-poster-pair__images){
+  border-radius: 8px;
+}
+
+main.main-projectpg.case-study-project.cs-grid.dino-project .list-case-study-problems{
+  row-gap: 12px;
+}
+
+@media (width < 960px){
+  main.main-projectpg.case-study-project.cs-grid{
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  main.main-projectpg.case-study-project.cs-grid > .case-study-header > :is(h1, .cs-section-body),
+  main.main-projectpg.case-study-project.cs-grid > .project-caption > section > *{
+    grid-column: 1 / -1;
+  }
 }
 
 .gvd-redesign-pairs{
@@ -2194,6 +2497,10 @@ body.is-lightbox-open{
 
 .btn-back i{
   color: #6f6f6f;
+}
+
+.case-study-project .btn-back{
+  display: none;
 }
 
 /* Fixed section rail: left-aligned with the logo text (--space-nav),
