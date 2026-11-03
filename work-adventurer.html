@@ -25,7 +25,8 @@
     <!-- Local typography and icon fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="fonts.css?v=roboto-2">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap">
     <link rel="icon" href="assets/favicon.png">
     <!-- icons -->
     <link rel="stylesheet" type="text/css"
@@ -39,7 +40,7 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=archive-nav-1">
 
-    <link rel="stylesheet" href="style-project.css?v=cs-grid-21">
+    <link rel="stylesheet" href="style-project.css?v=cs-grid-35">
     <link rel="stylesheet" href="responsive.css?v=cs-grid-1">
     <title>Nicole Wei: Adventurer's Scroll (2024)</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
@@ -63,8 +64,6 @@
     <script type="module" src="site-scroll.js?v=native-1"></script>
     <link rel="stylesheet" href="tag-shapes.css?v=3">
     <script type="module" src="tag-shapes.js?v=archive-tags-1"></script>
-    <link rel="stylesheet" href="about-drawer.css?v=3">
-    <script type="module" src="about-drawer.js?v=collection-sequence-1"></script>
     <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
     <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
 </head>
@@ -80,18 +79,18 @@
                 <li><a href="index.html?collection=work" data-collection-nav="work">Work</a></li>
                 <li><a href="index.html?collection=playground" data-collection-nav="playground">Playground</a></li>
                 <li><a href="archive.html" data-collection-nav="archive">Archive</a></li>
-                <li><a href="#about" data-about-link>About</a></li>
+                <li><a href="index.html#about" data-about-link>About</a></li>
             </ul>
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg case-study-project cs-grid">
+    <main class="main-projectpg case-study-project adventurer-project cs-grid">
         <div class="sidebar no-display">
             <ul>
                 <li><a href="index.html?collection=work" data-collection-nav="work">Work</a></li>
                 <li><a href="index.html?collection=playground" data-collection-nav="playground">Playground</a></li>
                 <li><a href="archive.html" data-collection-nav="archive">Archive</a></li>
-                <li><a href="#about" data-about-link>About</a></li>
+                <li><a href="index.html#about" data-about-link>About</a></li>
             </ul>
         </div>
 
@@ -224,7 +223,9 @@
             <section class="section-ui-design">
                 <h3>UI design</h3>
                 <div class="cs-section-body">
+                    <div class="img-mockup-frame">
                     <img data-media-src="assets/adventurer/adventurer full ui (web).png" class="img-mockup" alt="hi-fi UI" width="2087" height="1745" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/adventurer full ui (web).png" class="img-mockup" alt="hi-fi UI"></noscript>
+                    </div>
                     <img data-media-src="assets/adventurer/adventurer-mockup.png" class="img-mockup" alt="hi-fi UI" width="1986" height="1280" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/adventurer/adventurer-mockup.png" class="img-mockup" alt="hi-fi UI"></noscript>
                 </div>
             </section>
@@ -262,50 +263,7 @@
             </div> -->
         </div>
     </main>
-    <section id="about" class="about-drawer" aria-label="About Nicole Wei">
-        <div id="about-drawer-content" class="about-body about-drawer__inside">
-            <div class="main-aboutpg">
-                <div class="postcard is-flipped is-static" id="about-postcard">
-                    <div class="postcard__inner">
-                        <div class="postcard__back">
-                            <div class="content-about">
-                        <div class="about-avatar">
-                            <div class="about-bird-wrap">
-                                <canvas id="about-bird-canvas" class="about-bird" role="button" tabindex="0" aria-label="Make the bird jump"></canvas>
-                                <span class="about-bird-hover-star" aria-hidden="true">✶</span>
-                            </div>
-                            <picture>
-                                <source type="image/webp"
-                                    data-media-srcset="assets/about/avatar-750.webp 750w, assets/about/avatar-1125.webp 1125w"
-                                    sizes="(max-width: 959px) min(375px, 100vw), 300px">
-                                <img data-media-src="assets/about/avatar-750.jpg" class="img-avatar" alt="Nicole Wei"
-                                    width="750" height="1000" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/about/avatar-750.jpg" class="img-avatar" alt="Nicole Wei"
-                                    width="750" height="1000" loading="lazy" decoding="async"></noscript>
-                            </picture>
-                        </div>
-                        <div class="text-about">
-                            <h1 class="no-display">About Me</h1>
-                            <div class="about-drawer__copy">
-                            <p>
-                                Nicole is a creative technologist and product designer always pushing the boundaries of design disciplines. She is studying Communication Design with an HCI minor at Washington University in St. Louis. She codes and prototypes interactive products, pairing a deep appreciation for design language with a product mindset in everything she built.
-                            </p>
-                            <p>Feel free to reach out if you have any inquiries!</p>
-                            </div>
-                            <div class="contact-info">
-                                <div class="about-drawer__line"><p><i class="ph ph-envelope-simple"></i>Email: <a href="mailto:wei.yichen@wustl.edu" target="_blank"
-                                        class="contact-entry">weiyichen2004@gmail.com</a></p></div>
-                                <div class="about-drawer__line"><p><i class="ph ph-device-mobile"></i>Mobile: <a href="tel:3147881409"
-                                        class="contact-entry">+1(314)788-1409</a></p></div>
-                                <div class="about-drawer__line"><p><i class="ph ph-file-text"></i><a href="assets/Nicole-bilingual-resume(8.18).pdf">Resume 简历</a></p></div>
-                            </div>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <hr>
+    <hr>
     <footer>
         <p>&copy; 2026 Nicole Wei</p>
         <div class="icons">
@@ -319,9 +277,6 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-            </div>
-        </div>
-    </section>
     <script src="media-config.js?v=1"></script>
     <script src="media-loader.js?v=1"></script>
     <script type="module" src="project-scroll.js?v=cover-first-1"></script>

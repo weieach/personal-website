@@ -374,6 +374,11 @@ footer .icons.icons--animate .icon-linkedin i{
     transition: scale 300ms ease;
 }
 
+/* The name is a <p>, so project pages' paragraph size must not resize it. */
+.logo p{
+    font-size: inherit;
+}
+
 .logo-zh{
     font-weight: 400;
 }
@@ -522,8 +527,8 @@ body.is-nav-open .btn-burger{
 .project-status-loader{
     position: relative;
     display: inline-block;
-    flex: 0 0 1.32em;
-    width: 1.32em;
+    flex: 0 0 1.4em;
+    width: 1.4em;
     height: 0.7em;
     overflow: hidden;
     contain: paint;
@@ -544,12 +549,12 @@ body.is-nav-open .btn-burger{
 }
 
 .project-status-loader > span:nth-child(2){
-    left: 0.4em;
+    left: 0.44em;
     animation-delay: -0.4s;
 }
 
 .project-status-loader > span:nth-child(3){
-    left: 0.78em;
+    left: 0.86em;
     animation-delay: 0s;
 }
 

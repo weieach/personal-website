@@ -918,6 +918,11 @@ html:has(.nijimu-page.dark-mode) {
   --cs-accent: #A9A0FF;
 }
 
+/* Adventurer's theme color. */
+.main-projectpg.case-study-project.adventurer-project{
+  --cs-accent: #7BA871;
+}
+
 /* Default body images fill the text column; breakout images override below
    with higher/equal specificity so width: 130–140% actually wins. */
 .case-study-project section img{
@@ -1164,7 +1169,7 @@ h2{
 }
 
 .section-product-highlights .captioned-item > h4{
-  font-family: "Neurial Grotesk", sans-serif;
+  font-family: "Geist", sans-serif;
   font-weight: 400;
   font-size: 0.9rem;
   color: inherit;
@@ -1509,6 +1514,7 @@ body:has(main.case-study-project){
 }
 
 main.main-projectpg.case-study-project{
+  font-family: "Geist", sans-serif;
   flex-direction: column;
   gap: calc(var(--space) * 2);
   padding-inline: 0%;
@@ -1531,7 +1537,7 @@ main.main-projectpg.case-study-project{
   max-width: 120ch;
 }
 
-/* Resolve once against body-copy font so headings and Neurial Grotesk body share the same measure.
+/* Resolve once against body-copy font so headings and Geist body share the same measure.
    Plain 80ch on each tag differs because ch uses that element's own font. */
 @property --schneider-prose-max {
   syntax: "<length>";
@@ -1541,7 +1547,7 @@ main.main-projectpg.case-study-project{
 
 .main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .case-study-header,
 .main-projectpg.case-study-project:is(.schneider-project, .gvd-project) .project-caption{
-  font-family: "Neurial Grotesk", sans-serif;
+  font-family: "Geist", sans-serif;
   font-size: 0.92rem;
   --schneider-prose-max: 90ch;
 }
@@ -1604,7 +1610,7 @@ main.main-projectpg.case-study-project{
 
 .case-study-header h2{
   text-transform: none;
-  font-family: "Neurial Grotesk", sans-serif;
+  font-family: "Geist", sans-serif;
 }
 
 .case-study-project section{
@@ -1685,7 +1691,7 @@ main.main-projectpg.case-study-project{
 .list-case-study-info-awards .entry-content ul li{
   display: list-item;
   gap: 0;
-  font-family: "Neurial Grotesk", sans-serif;
+  font-family: "Geist", sans-serif;
   list-style: disc;
 }
 
@@ -1694,7 +1700,7 @@ main.main-projectpg.case-study-project{
   /* +1vw beyond the longest label's fit-content (included in column max-content) */
   padding-right: calc(3vw + 20px);
   box-sizing: content-box;
-  font-family: "Neurial Grotesk", sans-serif;
+  font-family: "Geist", sans-serif;
   color: #4E7E44;
 }
 
@@ -1710,7 +1716,7 @@ main.main-projectpg.case-study-project{
 }
 
 .list-case-study-info .entry-content{
-  font-family: "Neurial Grotesk", sans-serif;
+  font-family: "Geist", sans-serif;
 }
 
 /* Schneider / GVD: one info entry per row */
@@ -1751,7 +1757,7 @@ main.main-projectpg.case-study-project{
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 14px;
   /* max-width: 60ch; */
   margin-bottom: 2.5rem;
   margin-inline: auto;
@@ -1909,10 +1915,9 @@ main.main-projectpg.case-study-project.cs-grid > .project-caption > section > *{
   margin: 0;
 }
 
-/* Section headings, info labels and the subtitle (above the info rows)
-   share one label style. */
-main.main-projectpg.case-study-project.cs-grid :is(h3, .list-case-study-info .entry-header, .case-study-header > .cs-section-body > h2){
-  font-family: "Neurial Grotesk", sans-serif;
+/* Section headings and info labels share one label style. */
+main.main-projectpg.case-study-project.cs-grid :is(h3, .list-case-study-info .entry-header){
+  font-family: "Geist", sans-serif;
   font-size: calc(1rem * var(--cs-text-scale));
   font-weight: 400;
   text-transform: none;
@@ -1921,13 +1926,19 @@ main.main-projectpg.case-study-project.cs-grid :is(h3, .list-case-study-info .en
 /* Spacing inside a section body comes only from its 40px gap: the
    children's own margins are zeroed. */
 main.main-projectpg.case-study-project.cs-grid .cs-section-body{
+  --cs-body-gap: 40px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: var(--cs-body-gap);
 }
 
 main.main-projectpg.case-study-project.cs-grid .cs-section-body > *{
   margin: 0;
+}
+
+/* Back-to-back paragraphs read as one passage: 14px apart, not the full gap. */
+main.main-projectpg.case-study-project.cs-grid .cs-section-body > p + p{
+  margin-top: calc(14px - var(--cs-body-gap));
 }
 
 /* The left two columns are too narrow for paired entries: one per row. */
@@ -1973,16 +1984,34 @@ main.main-projectpg.case-study-project.cs-grid:is(.schneider-project, .gvd-proje
 }
 
 /* Breakout images stay inside the content columns. */
-main.main-projectpg.case-study-project.cs-grid :is(.wrapper-design-system, .img-mockup, .img-case-study-body, .section-ui-design img){
+main.main-projectpg.case-study-project.cs-grid :is(.wrapper-design-system, .img-mockup, .img-mockup-frame, .img-case-study-body, .section-ui-design img){
   width: 100%;
   max-width: 100%;
   left: 0;
 }
 
+/* The UI sheet has a transparent margin (50px on the sides, 40px above and below).
+   Shift it so the phones sit flush with the frame. */
+main.main-projectpg.case-study-project.cs-grid .img-mockup-frame{
+  aspect-ratio: 1987 / 1665;
+  overflow: hidden;
+}
+
+main.main-projectpg.case-study-project.cs-grid .img-mockup-frame > .img-mockup{
+  display: block;
+  width: calc(100% * 2087 / 1987);
+  max-width: none;
+  height: auto;
+  margin-left: calc(100% * -50 / 1987);
+  margin-top: calc(100% * -40 / 1987);
+  border-radius: 0;
+}
+
 /* Design-system body text: everything that isn't a heading, label or caption
-   matches the info-list values (14px, regular, full opacity) in a slightly
+   matches the info-list values (14px Geist, regular, full opacity) in a slightly
    grayer white. Labels and media captions keep their own styles. */
 main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-caption) :is(p:not(.entry-header, .floating-caption-details), li){
+  font-family: "Geist", sans-serif;
   font-size: calc(14px * var(--cs-text-scale));
   font-weight: 400;
   line-height: normal;
@@ -1990,16 +2019,39 @@ main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-
   opacity: 1;
 }
 
+/* Paragraphs following an h4 (problem cards, highlight entries) sit at 60%,
+   with 20px below them except in problem cards. */
+main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-caption) h4 ~ p:not(.entry-header, .floating-caption-details){
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-caption) .list-case-study-problems h4 ~ p:not(.entry-header, .floating-caption-details){
+  margin-bottom: 0;
+}
+
+/* The subtitle reads like a product-highlight paragraph: body text at 60%. */
+main.main-projectpg.case-study-project.cs-grid .case-study-header > .cs-section-body > h2{
+  font-family: "Geist", sans-serif;
+  font-size: calc(14px * var(--cs-text-scale));
+  font-weight: 400;
+  line-height: normal;
+  text-transform: none;
+  color: var(--cs-body-color);
+  opacity: 0.6;
+}
+
 main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-caption) :is(p, li) a{
+  font-family: "Geist", sans-serif;
   font-size: inherit;
   color: inherit;
 }
 
-/* Captions match the landing page's card captions (Neurial Grotesk, regular,
+/* Captions match the landing page's card captions (Geist, regular,
    normal line height) at 12.75px, in a lighter gray. Media captions stay centered,
    20px under the media, and the caption box fits its text. */
 main.main-projectpg.case-study-project.cs-grid :is(.floating-caption p, .floating-caption p *, figcaption){
-  font-family: "Neurial Grotesk", sans-serif;
+  font-family: "Geist", sans-serif;
   font-size: calc(12.75px * var(--cs-text-scale));
   font-weight: 400;
   line-height: normal;
@@ -2034,12 +2086,20 @@ main.main-projectpg.case-study-project.cs-grid :has(+ .floating-caption){
 
 /* Remaining text on the page follows the same scale. */
 main.main-projectpg.case-study-project.cs-grid > .case-study-header > h1{
+  font-family: "Geist", sans-serif;
   font-size: calc(1.75rem * var(--cs-text-scale));
 }
 
 main.main-projectpg.case-study-project.cs-grid .project-caption h4,
 main.main-projectpg.case-study-project.cs-grid.dino-project .btn-see-all__label{
+  font-family: "Geist", sans-serif;
   font-size: calc(14px * var(--cs-text-scale));
+}
+
+/* h4s run a step above body text, at regular weight. */
+main.main-projectpg.case-study-project.cs-grid .project-caption h4{
+  font-size: calc(15px * var(--cs-text-scale));
+  font-weight: 400;
 }
 
 main.main-projectpg.case-study-project.cs-grid .gvd-redesign-screen span{
@@ -2060,12 +2120,13 @@ main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries, .
 
 /* Product-highlight frames and every image or image frame spanning the
    content columns share the Results images' 8px corners. */
-main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries :is(img, video), .cs-section-body > :is(img, video), .gvd-redesign-screen img, .wrapper-design-system, .outcome-poster-pair__images){
+main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries :is(img, video), .cs-section-body > :is(img, video), .gvd-redesign-screen img, .wrapper-design-system, .img-mockup-frame, .outcome-poster-pair__images){
   border-radius: 8px;
 }
 
-main.main-projectpg.case-study-project.cs-grid.dino-project .list-case-study-problems{
-  row-gap: 12px;
+/* Problem cards always sit 14px apart (beats the 40px list rule above). */
+main.main-projectpg.case-study-project.cs-grid .list-case-study.list-case-study-problems{
+  row-gap: 14px;
 }
 
 @media (width < 960px){
@@ -2121,7 +2182,7 @@ main.main-projectpg.case-study-project.cs-grid.dino-project .list-case-study-pro
 }
 
 .gvd-redesign-screen span{
-  font-family: "Neurial Grotesk", sans-serif;
+  font-family: "Geist", sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -2458,6 +2519,7 @@ body.is-lightbox-open{
 }
 
 .section-design-system img{
+  display: block;
   width: 100%;
 }
 
@@ -2681,8 +2743,8 @@ main.main-projectpg.case-study-toc-enabled{
   width: 130%;
   position: relative;
   left: -15%;
-  height: 80vh;
-  overflow-y: scroll;
+  height: auto;
+  overflow: visible;
   background-color: #FEFCFA;
   /* border: 1px solid #e5e5e5; */
   border-radius: 1rem;
