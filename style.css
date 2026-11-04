@@ -938,6 +938,11 @@ main:has(.project-filters:not([hidden])) > .cards {
     gap: 1rem;
 }
 
+/* Project titles run 12% larger than the card text around them. */
+.work-title{
+    font-size: 1.12em;
+}
+
 .cards-single-column .work-title{
     text-align: left;
     font-weight: 400;
@@ -1550,7 +1555,9 @@ video.pictogram-source{
     height: 100%;
     max-width: none;
     margin: 0;
-    scale: none;
+    /* Same crop as the case-study focus frame, so the phone matches. */
+    scale: 1.18;
+    transform-origin: center;
     object-fit: cover;
 }
 

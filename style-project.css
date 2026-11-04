@@ -1856,6 +1856,8 @@ main.main-projectpg.case-study-project{
 
 .main-projectpg.case-study-project > .img-casestudy-cover-gvd{
   background-color: #531957;
+  /* The recording is 3420×2160, so the stage height follows the video. */
+  aspect-ratio: 3420 / 2160;
 }
 
 /* Case-study grid (opt in with .cs-grid on main). Five columns inset like
@@ -2019,6 +2021,17 @@ main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-
   opacity: 1;
 }
 
+/* Dino marked copy: unmarked words use the subtitle's 60% gray.
+   Marked phrases stay body color and stay regular weight. */
+main.main-projectpg.case-study-project.cs-grid.dino-project .project-caption .dino-marked{
+  color: color-mix(in srgb, var(--cs-body-color) 60%, transparent);
+}
+
+main.main-projectpg.case-study-project.cs-grid.dino-project .project-caption .dino-marked span{
+  color: var(--cs-body-color);
+  font-weight: 400;
+}
+
 /* Paragraphs following an h4 (problem cards, highlight entries) sit at 60%,
    with 20px below them except in problem cards. */
 main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-caption) h4 ~ p:not(.entry-header, .floating-caption-details){
@@ -2102,10 +2115,6 @@ main.main-projectpg.case-study-project.cs-grid .project-caption h4{
   font-weight: 400;
 }
 
-main.main-projectpg.case-study-project.cs-grid .gvd-redesign-screen span{
-  font-size: calc(0.7rem * var(--cs-text-scale));
-}
-
 /* Above 960px, all case-study text runs slightly larger (14px → 15px). */
 @media (width >= 960px){
   main.main-projectpg.case-study-project.cs-grid{
@@ -2120,7 +2129,7 @@ main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries, .
 
 /* Product-highlight frames and every image or image frame spanning the
    content columns share the Results images' 8px corners. */
-main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries :is(img, video), .cs-section-body > :is(img, video), .gvd-redesign-screen img, .wrapper-design-system, .img-mockup-frame, .outcome-poster-pair__images){
+main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries :is(img, video), .cs-section-body > :is(img, video), .gvd-redesign-screen img, .wrapper-design-system, .img-mockup-frame, .outcome-poster-pair__images, .adventurer-focus-frame){
   border-radius: 8px;
 }
 
@@ -2178,20 +2187,7 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study.list-case-study-
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.7rem;
-}
-
-.gvd-redesign-screen span{
-  font-family: "Geist", sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #55565A;
-  text-align: center;
-}
-
-.gvd-redesign-screen:first-child span{
-  color: var(--gvd-label);
+  gap: 0;
 }
 
 .gvd-redesign-screen img{
@@ -2216,14 +2212,6 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study.list-case-study-
   color: #f2f2f2;
 }
 
-.dark-mode .gvd-redesign-screen span{
-  color: #9a9a9a;
-}
-
-.dark-mode .gvd-redesign-screen:first-child span{
-  color: var(--gvd-label);
-}
-
 .dark-mode .gvd-redesign-screen img{
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.55), 0 8px 28px rgba(0, 0, 0, 0.35);
 }
@@ -2242,6 +2230,18 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study.list-case-study-
   width: 100%;
   scale: 1;
   border-radius: 0px;
+}
+
+/* Focus v3 has more gray around the phone than the other highlights.
+   Scale the picture inside the same grid box so the device matches. */
+.adventurer-focus-frame{
+  width: 100%;
+  overflow: hidden;
+}
+
+.adventurer-focus-frame > .video-app-highlights{
+  scale: 1.18;
+  transform-origin: center;
 }
 
 .video-inset-border{

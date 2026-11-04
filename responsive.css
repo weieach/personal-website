@@ -77,7 +77,7 @@
   /* Archive titles: slightly smaller, no italics */
   .cards .work-title,
   .cards-single-column .work-title {
-    font-size: 0.875rem;
+    font-size: calc(0.875rem * 1.12);
   }
 
   .cards .work-title i,
