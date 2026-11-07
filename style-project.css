@@ -1772,8 +1772,9 @@ main.main-projectpg.case-study-project{
 }
 
 .main-projectpg.case-study-project.gvd-project{
-  --gvd-primary: #A875A6;
-  --gvd-label: #BD96BB;
+  --cs-accent: #DDD5EB;
+  --gvd-primary: #DDD5EB;
+  --gvd-label: #DDD5EB;
 }
 
 .main-projectpg.case-study-project.gvd-project .list-case-study-info .entry-header,
@@ -2136,6 +2137,20 @@ main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries :i
 /* Problem cards always sit 14px apart (beats the 40px list rule above). */
 main.main-projectpg.case-study-project.cs-grid .list-case-study.list-case-study-problems{
   row-gap: 14px;
+  counter-reset: cs-problem;
+}
+
+/* Each problem card's heading starts with its number (01, 02…) in Geist Mono,
+   in the page's theme color. */
+main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li{
+  counter-increment: cs-problem;
+}
+
+main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > h4::before{
+  content: counter(cs-problem, decimal-leading-zero);
+  margin-right: 8px;
+  font-family: "Geist Mono", monospace;
+  color: var(--cs-accent, #8A8FE5);
 }
 
 @media (width < 960px){
@@ -2214,6 +2229,116 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study.list-case-study-
 
 .dark-mode .gvd-redesign-screen img{
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.55), 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Before/after stack: both versions share one spot at the same size, with the
+   shown one in front. The tabs below swap them: the incoming screen lifts,
+   crosses in front halfway through, then settles back into place, fading
+   from 30% to full opacity on the way. */
+.gvd-compare{
+  --compare-duration: 560ms;
+  display: grid;
+}
+
+.gvd-compare > .gvd-redesign-screen{
+  grid-area: 1 / 1;
+  display: block;
+  z-index: 1;
+  transition: z-index 0s linear calc(var(--compare-duration) * 0.45);
+}
+
+.gvd-redesign-pair[data-compare-state="after"] [data-compare-version="before"],
+.gvd-redesign-pair[data-compare-state="before"] [data-compare-version="after"]{
+  z-index: 0;
+}
+
+.gvd-compare > .gvd-redesign-screen.is-raising{
+  animation:
+    gvd-compare-raise var(--compare-duration) cubic-bezier(0.22, 1, 0.36, 1),
+    gvd-compare-fade var(--compare-duration) ease;
+}
+
+@keyframes gvd-compare-raise{
+  0%, 100%{
+    transform: none;
+  }
+  45%{
+    transform: translateY(-8%);
+  }
+}
+
+/* The incoming screen fades up from 30% as it comes forward. */
+@keyframes gvd-compare-fade{
+  from{
+    opacity: 0.3;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+/* Segmented After/Before tabs 20px under the stack, aligned to the left edge
+   of the content column. The selected tab's highlight runs flush to the
+   group's edges. */
+.gvd-compare-switch{
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  align-self: flex-start;
+  margin-top: calc(20px - 0.85rem);
+  border-radius: 999px;
+  background-color: rgba(153, 153, 153, 0.12);
+}
+
+.gvd-compare-switch::before{
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 50%;
+  border-radius: 999px;
+  background-color: rgba(153, 153, 153, 0.22);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gvd-redesign-pair[data-compare-state="before"] .gvd-compare-switch::before{
+  transform: translateX(100%);
+}
+
+.gvd-compare-switch button{
+  position: relative;
+  z-index: 1;
+  padding: 4px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font-family: "Geist", sans-serif;
+  font-size: calc(12.75px * var(--cs-text-scale, 1));
+  font-weight: 400;
+  line-height: normal;
+  color: var(--cs-caption-color, #8C8C8C);
+  cursor: pointer;
+  transition: color 300ms ease;
+}
+
+.gvd-compare-switch button[aria-pressed="true"]{
+  color: var(--cs-body-color, #E6E6E6);
+}
+
+.gvd-compare-switch button:focus-visible{
+  outline: 1px solid var(--cs-body-color, #E6E6E6);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .gvd-compare > .gvd-redesign-screen,
+  .gvd-compare-switch::before,
+  .gvd-compare-switch button{
+    transition: none;
+  }
+
+  .gvd-compare > .gvd-redesign-screen.is-raising{
+    animation: none;
+  }
 }
 
 .case-study-project .img-case-study-body{

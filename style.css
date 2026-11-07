@@ -604,6 +604,12 @@ body.is-nav-open .btn-burger{
     flex-shrink: 0;
 }
 
+/* Verso's mark is taller than wide: fit it to the square icons' height. */
+.card-verso .icon-visit-site{
+    width: auto;
+    height: 1.1rem;
+}
+
 .btn-visit-site .ph-bold{
     color: #121212;
 }
@@ -1403,7 +1409,7 @@ video.pictogram-source{
 .card-verso .card-thumbnail{
     background-color: #000000;
     /* Floating desktop screen (see .card-superformula) */
-    aspect-ratio: 1 / calc(0.85 * 992 / 1728 + 2 * var(--thumb-screen-margin-block));
+    aspect-ratio: 1 / calc(0.85 * 804 / 1280 + 2 * var(--thumb-screen-margin-block));
     align-items: center;
     justify-content: center;
 }

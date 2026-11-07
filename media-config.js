@@ -171,6 +171,21 @@ window.SiteMediaConfig = {
     "assets/wherewhatwhere/personalessay(smaller).mp4": "media/09bd14cfa83661c644e6/personalessay(smaller).mp4",
     "assets/wherewhatwhere/videssay-thumbnail.png": "media/80dae9cf99e448297b25/videssay-thumbnail.png",
     "assets/wu/wu mockup v2.png": "media/0608b717ec34420bb7c2/wu mockup v2.png",
-    "assets/wu/wu-mockup-folded-cropped.png": "media/487ea84f8586d3ba1166/wu-mockup-folded-cropped.png"
+    "assets/wu/wu-mockup-folded-cropped.png": "media/487ea84f8586d3ba1166/wu-mockup-folded-cropped.png",
+    "assets/verso/case-study/capture.mp4": "media/016749d1835207ea81f0/capture.mp4",
+    "assets/verso/case-study/chat-history.mp4": "media/12f1fed0351dd84c4492/chat-history.mp4",
+    "assets/verso/case-study/conversation.mp4": "media/766af1bdab71db53ce0e/conversation.mp4",
+    "assets/verso/case-study/idea-thread.mp4": "media/10b736419622da6cbbbd/idea-thread.mp4",
+    "assets/verso/case-study/milestone.mp4": "media/baf5d5fd09ece7cf71cf/milestone.mp4",
+    "assets/verso/case-study/prompt-version.mp4": "media/5cc0094f9d58edb451af/prompt-version.mp4",
+    "assets/verso/case-study/prototype-replay.mp4": "media/b7db62c1ad8f5c3e6519/prototype-replay.mp4",
+    "assets/verso/case-study/reveal.mp4": "media/3f29ad39b017551acdfe/reveal.mp4",
+    "assets/verso/case-study/screen-playback.mp4": "media/0bc60fcdc58bf250edf9/screen-playback.mp4",
+    "assets/verso/case-study/thumbnail-three-views-v2.mp4": "media/ebe25691b870eeb2100c/thumbnail-three-views-v2.mp4",
+    "assets/verso/case-study/to-do-drawers.mp4": "media/fcd0b7398c7c08f065f4/to-do-drawers.mp4",
+    "assets/verso/case-study/version-blocks.mp4": "media/a722475ff054d0edc3e4/version-blocks.mp4",
+    "assets/verso/case-study/version-cards.mp4": "media/cfdf00c852ab2f15c460/version-cards.mp4",
+    "assets/verso/case-study/vr-review.mp4": "media/1344b54fed9f874fdd35/vr-review.mp4",
+    "assets/verso/case-study/vr-versions.mp4": "media/0520e69ae61a287badf2/vr-versions.mp4"
   }
 };
