@@ -944,6 +944,11 @@ main:has(.project-filters:not([hidden])) > .cards {
     gap: 1rem;
 }
 
+/* A card marked data-lead-in="<collection>" leads that collection's grid
+   (project-filters.js adds .is-collection-lead). Debug mode shows the saved
+   HTML order instead (dev-mode.css). */
+.cards > .card.is-collection-lead{ order: -1; }
+
 /* Project titles run 12% larger than the card text around them. */
 .work-title{
     font-size: 1.12em;

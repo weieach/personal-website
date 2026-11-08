@@ -36,6 +36,8 @@
         .filter(Boolean)
         .map((tag) => aliases.get(tag.toLowerCase()) || tag.replace(/\b\w/g, (letter) => letter.toUpperCase()))
         .filter((tag) => tag !== "Graphic Design"));
+      // Exposed for debug mode (dev-mode.js), which lists them on the thumbnail.
+      card.dataset.tags = [...tags].join("|");
       return { card, tags, collection: card.dataset.collection?.toLowerCase() };
     });
 
@@ -130,9 +132,22 @@
   }
 
   function renderCollection(animate = false, pendingIntro = false, onComplete = () => {}) {
-    const requested = new URLSearchParams(location.search).get("collection");
-    collection = pendingIntro ? null : pageCollection || (["work", "playground"].includes(requested) ? requested : null);
+    let requested = new URLSearchParams(location.search).get("collection");
+    // Old links from before Work was renamed Product: switch the URL over too,
+    // since other scripts (about-drawer.js) read the collection from it.
+    if (requested === "work") {
+      requested = "product";
+      const url = new URL(location.href);
+      url.searchParams.set("collection", "product");
+      history.replaceState(history.state, "", url);
+    }
+    collection = pendingIntro ? null : pageCollection || (["product", "playground"].includes(requested) ? requested : null);
     const scopedCards = cards.filter(inCollection);
+    // A card with data-lead-in="<collection>" moves to the front (CSS order)
+    // while that collection is shown; the HTML order stays the saved order.
+    cards.forEach(({ card }) => {
+      card.classList.toggle("is-collection-lead", !!collection && card.dataset.leadIn === collection);
+    });
     const tagCounts = new Map();
     scopedCards.forEach(({ tags }) => tags.forEach(tag => {
       tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
@@ -244,7 +259,7 @@
   pendingArrival = pendingArrival === (pageCollection || new URLSearchParams(location.search).get('collection')) ? pendingArrival : null;
   setTransitioning(!!pendingArrival);
   renderCollection(false, !!pendingArrival);
-  if (pendingArrival && ['All Projects', 'work', 'playground', 'archive'].includes(previousShape)) {
+  if (pendingArrival && ['All Projects', 'product', 'playground', 'archive'].includes(previousShape)) {
     allButton.dataset.collectionShape = previousShape;
     allButton.dataset.shapeKey = previousShape;
     allButton.classList.add('has-collection-shape');

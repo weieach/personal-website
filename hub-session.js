@@ -1,5 +1,5 @@
 /**
- * Hub pages (work / about): remember warm visits in this tab
+ * Hub pages (product / about): remember warm visits in this tab
  * so revisits skip the cold-start loader and entrance choreography.
  * Reloads count as revisits too; a new tab gets a full cold start.
  */

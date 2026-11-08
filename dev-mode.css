@@ -82,6 +82,39 @@ html.dev-mode .dev-order-btn i {
     transform: none;
 }
 
+/* Each card's tags, stacked in the thumbnail's top-left corner (the visit-site
+   chip sits top-right). Always shown; hidden while a card is dragged. */
+.dev-card-tags {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 145;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    pointer-events: none;
+}
+
+.dev-card-tags li {
+    margin: 0;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: normal;
+    color: #121212;
+    background-color: #F6F6F6;
+    border-radius: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+html.dev-mode .is-dev-dragging .dev-card-tags {
+    opacity: 0;
+}
+
 /* "Debug mode" label in the top margin, just above the tag group. */
 html.dev-mode .project-filters {
     position: relative;
@@ -111,4 +144,9 @@ header nav .dev-leave-btn {
     border: 1px solid #fff;
     border-radius: 2rem;
     cursor: pointer;
+}
+
+/* Show the saved order while arranging: no collection lead-in reordering. */
+html.dev-mode [data-project-grid] > .card.is-collection-lead {
+    order: 0;
 }

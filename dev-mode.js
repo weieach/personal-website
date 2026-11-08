@@ -202,6 +202,20 @@ const DEV_MODE = false;
       controls.appendChild(button);
     });
     thumb.appendChild(controls);
+
+    // The project's tags (as the tag filters read them), stacked on the thumbnail.
+    const tags = (card.dataset.tags || "").split("|").filter(Boolean);
+    if (tags.length) {
+      const list = document.createElement("ul");
+      list.className = "dev-card-tags";
+      list.setAttribute("aria-label", "Tags");
+      tags.forEach((tag) => {
+        const item = document.createElement("li");
+        item.textContent = tag;
+        list.appendChild(item);
+      });
+      thumb.appendChild(list);
+    }
   });
   syncArrows();
   window.addEventListener("project-filters:selected", syncArrows);

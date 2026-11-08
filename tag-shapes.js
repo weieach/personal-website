@@ -5,7 +5,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
 // a and b default to 1 when a shape omits them.
 const shapes = {
   'All Projects': { color: '#c5b5f7', a: [12, 4.1, 7.7, 9.9, .9, 1], b: [1, 3.1, 2.1, 2.1, 1, 1.05] },
-  work: { color: '#83b8ff', a: [8, 1, 9.2, 8.5, 1.5, 1.3], b: [4, 10, 10, 10, 1, 1] },
+  product: { color: '#83b8ff', a: [8, 1, 9.2, 8.5, 1.5, 1.3], b: [4, 10, 10, 10, 1, 1] },
   playground: { color: '#f797be', a: [12, 2.3, 1.8, .3], b: [10, 1, 7, 12] },
   archive: { color: '#e6c17b', a: [12, 6.9, 0.3, 0.3, 1, 1], b: [3.1, 0.6, 6, 6, 1, 1], tilt: 0.35 },
   '3D': { color: '#b497ff', a: [4, 1, 1, 1], b: [4, 1, 1, 1] },
@@ -271,7 +271,7 @@ if (all) setCollection(all, all.dataset.collectionShape || null);
 scrollShapes();
 
 window.dispatchEvent(new CustomEvent('tag-shapes:ready'));
-// Carry the icon handoff across pages, including Work ↔ Archive navigation.
+// Carry the icon handoff across pages, including Product ↔ Archive navigation.
 const pagePath = url => url.pathname.replace(/\/index\.html$/, '/');
 document.querySelectorAll('[data-collection-nav]').forEach(link => {
   if (pagePath(new URL(link.href)) === pagePath(location)) return;
