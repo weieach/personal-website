@@ -40,7 +40,7 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=archive-nav-1">
 
-    <link rel="stylesheet" href="style-project.css?v=cs-grid-46">
+    <link rel="stylesheet" href="style-project.css?v=favicon-3">
     <link rel="stylesheet" href="responsive.css?v=cs-grid-1">
     <title>Nicole Wei: Dino (2023)</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
@@ -66,6 +66,35 @@
     <script type="module" src="tag-shapes.js?v=archive-tags-1"></script>
     <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
     <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
+    <style>
+        html:has(.dino-project) { --color-bg: #000000; }
+        html:has(main.dino-project), body:has(main.dino-project) { background-color: #000000; }
+        .dino-project .section-product-highlights .item-dino-recorded { width: 100%; }
+        .dino-project .dino-media-frame {
+            --dino-screen-scale: 0.875;
+            --dino-inset-block: 0.06765;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            aspect-ratio: 1 / calc(var(--dino-screen-scale) * var(--dino-media-ratio) + 2 * var(--dino-inset-block));
+            background: #0C0C0C;
+            border-radius: 8px;
+            overflow: hidden;
+            container-type: inline-size;
+        }
+        .dino-project .dino-media-frame > :is(img, video),
+        .dino-project .dino-media-frame > noscript > :is(img, video) {
+            display: block;
+            width: calc(100% * var(--dino-screen-scale));
+            height: auto;
+            max-width: none;
+            margin: 0;
+            border-radius: 8px;
+            box-shadow: none;
+        }
+        .dino-project .dino-media-frame > noscript { display: contents; }
+    </style>
 </head>
 
 <body class="dark-mode">
@@ -94,31 +123,33 @@
             </ul>
         </div>
 
-        <div class="img-casestudy-cover img-casestudy-cover-dino">
-            <img data-media-src="assets/dino/dino-thumb.png" alt="" width="2920" height="1648" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-thumb.png" alt=""></noscript>
-        </div>
-
-        <div class="case-study-header">
-            <h1>Dino: Web UI Design</h1>
-            <div class="cs-section-body">
-                <h2>A Web3-native event platform that help hosts create engaging, branded experiences and foster meaningful
-                    connections among attendees.</h2>
-                <ul class="list-case-study list-case-study-info">
-                    <li>
-                        <p class="entry-header">Role</p>
-                        <p class="entry-content">Visual &amp; product designer</p>
-                    </li>
-                    <li>
-                        <p class="entry-header">Timeline</p>
-                        <p class="entry-content">January - December 2023</p>
-                    </li>
-                    <li>
-                        <p class="entry-header">Tools</p>
-                        <p class="entry-content">Figma</p>
-                    </li>
-                </ul>
+        <div class="case-study-intro">
+            <div class="img-casestudy-cover img-casestudy-cover-dino">
+                <img data-media-src="assets/dino/dino-thumb.png" alt="" width="2920" height="1648" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-thumb.png" alt=""></noscript>
             </div>
-            <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
+
+            <div class="case-study-header">
+                <h1>Dino: Web UI Design</h1>
+                <div class="cs-section-body">
+                    <h2>A Web3-native event platform that help hosts create engaging, branded experiences and foster meaningful
+                        connections among attendees.</h2>
+                    <ul class="list-case-study list-case-study-info">
+                        <li>
+                            <p class="entry-header">Role</p>
+                            <p class="entry-content">Visual &amp; product designer</p>
+                        </li>
+                        <li>
+                            <p class="entry-header">Timeline</p>
+                            <p class="entry-content">January - December 2023</p>
+                        </li>
+                        <li>
+                            <p class="entry-header">Tools</p>
+                            <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/figma.svg?v=color-1" width="16" height="16" alt="">Figma</span></p>
+                        </li>
+                    </ul>
+                </div>
+                <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
+            </div>
         </div>
 
         <div class="project-caption">
@@ -178,17 +209,21 @@
                 <div class="cs-section-body">
                     <div class="product-highlight-entries">
                         <div class="captioned-item item-dino-recorded">
-                            <video data-media-src="assets/dino/dino landing page.mov" class="dino-landing-demo" data-media-autoplay loop
-                                muted width="3184" height="1778" preload="none" data-media-poster="assets/media-posters/8c40d1a8168d.webp"></video><noscript data-media-fallback><video src="assets/dino/dino landing page.mov" class="dino-landing-demo" loop controls
-                                muted></video></noscript>
+                            <div class="dino-media-frame" style="--dino-media-ratio: 1778 / 3184;">
+                                <video data-media-src="assets/dino/dino landing page.mov" class="dino-landing-demo" data-media-autoplay loop
+                                    muted width="3184" height="1778" preload="none" data-media-poster="assets/media-posters/8c40d1a8168d.webp"></video><noscript data-media-fallback><video src="assets/dino/dino landing page.mov" class="dino-landing-demo" loop controls
+                                    muted></video></noscript>
+                            </div>
                             <div class="floating-caption">
                                 <p class="floating-caption-details">Landing page</p>
                             </div>
                         </div>
                         <div class="captioned-item no-display">
-                            <video data-media-src="assets/dino/dino create event.mov" class="dino-event-demo" data-media-autoplay loop
-                                muted width="2424" height="1756" preload="none" data-media-poster="assets/media-posters/71c226f855e5.webp"></video><noscript data-media-fallback><video src="assets/dino/dino create event.mov" class="dino-event-demo" loop controls
-                                muted></video></noscript>
+                            <div class="dino-media-frame" style="--dino-media-ratio: 1756 / 2424;">
+                                <video data-media-src="assets/dino/dino create event.mov" class="dino-event-demo" data-media-autoplay loop
+                                    muted width="2424" height="1756" preload="none" data-media-poster="assets/media-posters/71c226f855e5.webp"></video><noscript data-media-fallback><video src="assets/dino/dino create event.mov" class="dino-event-demo" loop controls
+                                    muted></video></noscript>
+                            </div>
                             <div class="floating-caption">
                                 <p class="floating-caption-details">Feature demo: Creating an event on the website</p>
                             </div>
@@ -196,25 +231,33 @@
                         <div class="captioned-item">
                             <div class="dino-screens-featured">
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/event page.png" alt="Dino explore homepage with featured events" width="1800" height="1304" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/event page.png" alt="Dino explore homepage with featured events"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 1304 / 1800;">
+                                        <img data-media-src="assets/dino/dino-screens/event page.png" alt="Dino explore homepage with featured events" width="1800" height="1304" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/event page.png" alt="Dino explore homepage with featured events"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Explore homepage</p>
                                     </div>
                                 </figure>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/event page-1.png" alt="Dino public event page" width="1800" height="1304" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/event page-1.png" alt="Dino public event page"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 1304 / 1800;">
+                                        <img data-media-src="assets/dino/dino-screens/event page-1.png" alt="Dino public event page" width="1800" height="1304" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/event page-1.png" alt="Dino public event page"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Public event page</p>
                                     </div>
                                 </figure>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/Screenshot 2024-09-15 at 06.43.48 1.png" alt="Dino create event form" width="1800" height="1302" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Screenshot 2024-09-15 at 06.43.48 1.png" alt="Dino create event form"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 1302 / 1800;">
+                                        <img data-media-src="assets/dino/dino-screens/Screenshot 2024-09-15 at 06.43.48 1.png" alt="Dino create event form" width="1800" height="1302" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Screenshot 2024-09-15 at 06.43.48 1.png" alt="Dino create event form"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Create event</p>
                                     </div>
                                 </figure>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/Frame 2092667.png" alt="Dino registration and ticket setup" width="1800" height="1281" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Frame 2092667.png" alt="Dino registration and ticket setup"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 1281 / 1800;">
+                                        <img data-media-src="assets/dino/dino-screens/Frame 2092667.png" alt="Dino registration and ticket setup" width="1800" height="1281" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Frame 2092667.png" alt="Dino registration and ticket setup"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Registration &amp; tickets</p>
                                     </div>
@@ -229,43 +272,57 @@
                             </button>
                             <div class="dino-screens-gallery" id="dino-screens-more" hidden>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/Frame 2092666.png" alt="Dino event overview dashboard" width="1800" height="1302" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Frame 2092666.png" alt="Dino event overview dashboard"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 1302 / 1800;">
+                                        <img data-media-src="assets/dino/dino-screens/Frame 2092666.png" alt="Dino event overview dashboard" width="1800" height="1302" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Frame 2092666.png" alt="Dino event overview dashboard"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Event overview</p>
                                     </div>
                                 </figure>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/Frame 2092664.png" alt="Dino profile page with digital footprint" width="1800" height="1304" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Frame 2092664.png" alt="Dino profile page with digital footprint"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 1304 / 1800;">
+                                        <img data-media-src="assets/dino/dino-screens/Frame 2092664.png" alt="Dino profile page with digital footprint" width="1800" height="1304" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Frame 2092664.png" alt="Dino profile page with digital footprint"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Profile &amp; digital footprint</p>
                                     </div>
                                 </figure>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/Frame 2092674.png" alt="Dino reminder email composer" width="1800" height="1283" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Frame 2092674.png" alt="Dino reminder email composer"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 1283 / 1800;">
+                                        <img data-media-src="assets/dino/dino-screens/Frame 2092674.png" alt="Dino reminder email composer" width="1800" height="1283" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Frame 2092674.png" alt="Dino reminder email composer"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Reminder email</p>
                                     </div>
                                 </figure>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/Screenshot 2024-09-15 at 04.02.28.png" alt="Dino guests empty state" width="1800" height="1277" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Screenshot 2024-09-15 at 04.02.28.png" alt="Dino guests empty state"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 1277 / 1800;">
+                                        <img data-media-src="assets/dino/dino-screens/Screenshot 2024-09-15 at 04.02.28.png" alt="Dino guests empty state" width="1800" height="1277" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/Screenshot 2024-09-15 at 04.02.28.png" alt="Dino guests empty state"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Guests empty state</p>
                                     </div>
                                 </figure>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/email.png" alt="Dino registration and scheduled emails" width="932" height="640" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/email.png" alt="Dino registration and scheduled emails"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 640 / 932;">
+                                        <img data-media-src="assets/dino/dino-screens/email.png" alt="Dino registration and scheduled emails" width="932" height="640" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/email.png" alt="Dino registration and scheduled emails"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Email templates</p>
                                     </div>
                                 </figure>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/event page signup.png" alt="Dino event registration checkout" width="900" height="640" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/event page signup.png" alt="Dino event registration checkout"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 640 / 900;">
+                                        <img data-media-src="assets/dino/dino-screens/event page signup.png" alt="Dino event registration checkout" width="900" height="640" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/event page signup.png" alt="Dino event registration checkout"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Registration checkout</p>
                                     </div>
                                 </figure>
                                 <figure>
-                                    <img data-media-src="assets/dino/dino-screens/💻⭐️  Manage Event - Guests (requires approval).png" alt="Dino guest list with approval workflow" width="1800" height="1302" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/💻⭐️  Manage Event - Guests (requires approval).png" alt="Dino guest list with approval workflow"></noscript>
+                                    <div class="dino-media-frame" style="--dino-media-ratio: 1302 / 1800;">
+                                        <img data-media-src="assets/dino/dino-screens/💻⭐️  Manage Event - Guests (requires approval).png" alt="Dino guest list with approval workflow" width="1800" height="1302" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/dino/dino-screens/💻⭐️  Manage Event - Guests (requires approval).png" alt="Dino guest list with approval workflow"></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Guest approvals</p>
                                     </div>

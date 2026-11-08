@@ -784,14 +784,14 @@ html:has(.nijimu-page.dark-mode) {
   /* text-transform: uppercase; */
 }
 
-.project-caption ul:not(.list-case-study) a:has(.ph-globe) {
+.project-caption ul:not(.list-case-study) a:has(.ph-globe, .link-favicon) {
   display: inline-flex;
   align-items: center;
   gap: 0.35em;
   text-decoration: none;
 }
 
-.project-caption ul:not(.list-case-study) a:has(.ph-globe) span {
+.project-caption ul:not(.list-case-study) a:has(.ph-globe, .link-favicon) span {
   text-decoration: underline;
   color: inherit; /* avoid `*` #121212 sticking on dark pages */
 }
@@ -800,6 +800,20 @@ html:has(.nijimu-page.dark-mode) {
   font-size: 1.15em;
   line-height: 1;
   text-decoration: none;
+}
+
+/* A Website row shows the site's own favicon in place of the globe, at the
+   globe's size (non-square marks keep their proportions). */
+.project-caption ul:not(.list-case-study) a .link-favicon,
+.main-projectpg.case-study-project .list-case-study-info a > .link-favicon {
+  display: inline-block;
+  width: auto;
+  height: 1.15em;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
 }
 
 .project-caption ul:not(.list-case-study) a .ph-arrow-up-right {
@@ -1575,10 +1589,40 @@ main.main-projectpg.case-study-project{
   font-size: 0.92rem;
 }
 
-.nijimu-project :is(.project-caption, .case-study-header) a + .ph-arrow-up-right{
+/* External links in a case study's text get a small arrow icon after them. */
+.main-projectpg.case-study-project :is(.project-caption, .case-study-header) a + .ph-arrow-up-right{
   font-size: 0.85em;
   margin-left: 0.15em;
   vertical-align: middle;
+}
+
+/* Links in case-study metadata also lead with a globe, like the Website and
+   Awards links on Playground pages (nijimu): only the text is underlined. */
+/* Baseline alignment keeps the link's text on the line's baseline (so the
+   arrow after it lines up); only the icon is centered on the text. */
+.main-projectpg.case-study-project .list-case-study-info a:has(> .ph-globe, > .link-favicon){
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  text-decoration: none;
+}
+
+.main-projectpg.case-study-project .list-case-study-info a > :is(.ph-globe, .link-favicon){
+  align-self: center;
+}
+
+.main-projectpg.case-study-project .list-case-study-info a > .ph-globe{
+  font-size: 1.15em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.main-projectpg.case-study-project .list-case-study-info a:has(> .ph-globe, > .link-favicon) > span{
+  /* The global * rule would otherwise give the span its own font. */
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--cs-caption-color, #8c8c8c);
+  color: inherit;
 }
 
 /* Same centered column as .project-caption; back floats outside via .btn-back */
@@ -1772,9 +1816,9 @@ main.main-projectpg.case-study-project{
 }
 
 .main-projectpg.case-study-project.gvd-project{
-  --cs-accent: #DDD5EB;
-  --gvd-primary: #DDD5EB;
-  --gvd-label: #DDD5EB;
+  --cs-accent: #DCD0F0;
+  --gvd-primary: #DCD0F0;
+  --gvd-label: #DCD0F0;
 }
 
 .main-projectpg.case-study-project.gvd-project .list-case-study-info .entry-header,
@@ -1810,7 +1854,7 @@ main.main-projectpg.case-study-project{
 
 /* Leads the page like the Playground page thumbnail: a full-width 16:9 stage
    inset by the page gutter, with the media contained on its own color. */
-.main-projectpg.case-study-project > .img-casestudy-cover{
+.main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover{
   position: relative;
   width: calc(100vw - 2 * var(--page-inline-space));
   max-width: none;
@@ -1824,7 +1868,7 @@ main.main-projectpg.case-study-project{
   background-color: #161616;
 }
 
-.main-projectpg.case-study-project > .img-casestudy-cover > :is(img, video){
+.main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover > :is(img, video){
   display: block;
   position: absolute;
   inset: 0;
@@ -1839,23 +1883,23 @@ main.main-projectpg.case-study-project{
 }
 
 /* Dino and Adventurer covers are already 16:9 artwork. */
-.main-projectpg.case-study-project > :is(.img-casestudy-cover-dino, .img-casestudy-cover-adventurer) > img{
+.main-projectpg.case-study-project > .case-study-intro > :is(.img-casestudy-cover-dino, .img-casestudy-cover-adventurer) > img{
   object-fit: cover;
 }
 
-.main-projectpg.case-study-project > .img-casestudy-cover-nijimu{
+.main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-nijimu{
   background-color: #ececec;
 }
 
-.main-projectpg.case-study-project > .img-casestudy-cover-schneider{
+.main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-schneider{
   background-color: #53c66c;
 }
 
-.main-projectpg.case-study-project > .img-casestudy-cover-schneider > img{
+.main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-schneider > img{
   scale: 0.82;
 }
 
-.main-projectpg.case-study-project > .img-casestudy-cover-gvd{
+.main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-gvd{
   background-color: #531957;
   /* The recording is 3420×2160, so the stage height follows the video. */
   aspect-ratio: 3420 / 2160;
@@ -1867,14 +1911,20 @@ main.main-projectpg.case-study-project{
    caption and sections are subgrids so every row shares the same column lines. */
 main.main-projectpg.case-study-project.cs-grid{
   --cs-row-gap: 80px;
+  /* Gap inside the header and each section (heading → body). */
+  --cs-block-gap: 1.3rem;
+  /* Gap between items in a .cs-section-body; the intro (cover → header) uses it too. */
+  --cs-body-gap: 40px;
   /* Every text size below is multiplied by this; 15/14 above 960px. */
   --cs-text-scale: 1;
   --cs-body-color: #E6E6E6;
   /* Lighter than the landing page's muted #666. */
   --cs-caption-color: #8C8C8C;
+  /* Gutter between the 5 columns; matches the page's inline margin from 960px up. */
+  --cs-col-gap: 30px;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  column-gap: 30px;
+  column-gap: var(--cs-col-gap);
   row-gap: var(--cs-row-gap);
   width: auto;
   max-width: none;
@@ -1882,18 +1932,32 @@ main.main-projectpg.case-study-project.cs-grid{
   padding: 0;
 }
 
-main.main-projectpg.case-study-project.cs-grid > .img-casestudy-cover{
+/* The cover and header are grouped in .case-study-intro: a column subgrid
+   whose children sit apart by the section-body gap (--cs-body-gap). */
+main.main-projectpg.case-study-project.cs-grid > .case-study-intro{
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  column-gap: normal;
+  row-gap: var(--cs-body-gap);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+main.main-projectpg.case-study-project.cs-grid > .case-study-intro > .img-casestudy-cover{
   grid-column: 1 / -1;
   width: auto;
   margin: 0;
 }
 
-main.main-projectpg.case-study-project.cs-grid > :is(.case-study-header, .project-caption),
+main.main-projectpg.case-study-project.cs-grid > .case-study-intro > .case-study-header,
+main.main-projectpg.case-study-project.cs-grid > .project-caption,
 main.main-projectpg.case-study-project.cs-grid > .project-caption > section{
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: subgrid;
-  /* normal = inherit the grid's 30px (.case-study-header sets gap: 0). */
+  /* normal = inherit the grid's column gap (.case-study-header sets gap: 0). */
   column-gap: normal;
   align-items: start;
   width: auto;
@@ -1906,12 +1970,12 @@ main.main-projectpg.case-study-project.cs-grid > .project-caption{
   row-gap: var(--cs-row-gap);
 }
 
-main.main-projectpg.case-study-project.cs-grid > .case-study-header,
+main.main-projectpg.case-study-project.cs-grid > .case-study-intro > .case-study-header,
 main.main-projectpg.case-study-project.cs-grid > .project-caption > section{
-  row-gap: 1.3rem;
+  row-gap: var(--cs-block-gap);
 }
 
-main.main-projectpg.case-study-project.cs-grid > .case-study-header > :is(h1, .cs-section-body),
+main.main-projectpg.case-study-project.cs-grid > .case-study-intro > .case-study-header > :is(h1, .cs-section-body),
 main.main-projectpg.case-study-project.cs-grid > .project-caption > section > *{
   grid-column: 2 / 5;
   min-width: 0;
@@ -1929,7 +1993,6 @@ main.main-projectpg.case-study-project.cs-grid :is(h3, .list-case-study-info .en
 /* Spacing inside a section body comes only from its 40px gap: the
    children's own margins are zeroed. */
 main.main-projectpg.case-study-project.cs-grid .cs-section-body{
-  --cs-body-gap: 40px;
   display: flex;
   flex-direction: column;
   gap: var(--cs-body-gap);
@@ -1951,14 +2014,14 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-info{
 }
 
 /* On the 5-column grid the list spans columns 2–4: labels take column 2 and
-   values start on column 3 (one column plus the 30px gutter in). */
+   values start on column 3 (one column plus the gutter in). */
 @media (width >= 960px){
   main.main-projectpg.case-study-project.cs-grid .list-case-study-info{
-    grid-template-columns: calc((100% - 60px) / 3 + 30px) minmax(0, 1fr);
+    grid-template-columns: calc((100% - 2 * var(--cs-col-gap)) / 3 + var(--cs-col-gap)) minmax(0, 1fr);
   }
 
   main.main-projectpg.case-study-project.cs-grid .list-case-study-info .entry-header{
-    padding-right: 30px;
+    padding-right: var(--cs-col-gap);
   }
 }
 
@@ -2075,6 +2138,14 @@ main.main-projectpg.case-study-project.cs-grid :is(.floating-caption p, .floatin
   opacity: 1;
 }
 
+/* GVD redesign highlights: the caption under each h4 matches the problem
+   cards' body text (body size and color at 60%), not the caption style. */
+main.main-projectpg.case-study-project.cs-grid .gvd-redesign-pair figcaption{
+  font-size: calc(14px * var(--cs-text-scale));
+  color: var(--cs-body-color);
+  opacity: 0.6;
+}
+
 main.main-projectpg.case-study-project.cs-grid .floating-caption{
   display: block;
   height: auto;
@@ -2099,7 +2170,7 @@ main.main-projectpg.case-study-project.cs-grid :has(+ .floating-caption){
 }
 
 /* Remaining text on the page follows the same scale. */
-main.main-projectpg.case-study-project.cs-grid > .case-study-header > h1{
+main.main-projectpg.case-study-project.cs-grid > .case-study-intro > .case-study-header > h1{
   font-family: "Geist", sans-serif;
   font-size: calc(1.75rem * var(--cs-text-scale));
 }
@@ -2116,10 +2187,20 @@ main.main-projectpg.case-study-project.cs-grid .project-caption h4{
   font-weight: 400;
 }
 
-/* Above 960px, all case-study text runs slightly larger (14px → 15px). */
+/* Above 960px, all case-study text runs slightly larger (14px → 15px),
+   the column gutter matches the page's inline margin, and the columns
+   split 4.5 : 7 : 7 : 7 : 4.5 (each center column is 7/30 of the space
+   after gutters; the outer two share the rest). Each center column is capped at --cs-center-col-max;
+   past the cap the outer two columns absorb the extra width equally. */
 @media (width >= 960px){
   main.main-projectpg.case-study-project.cs-grid{
     --cs-text-scale: calc(15 / 14);
+    --cs-col-gap: var(--page-inline-space);
+    --cs-center-col-max: 360px;
+    grid-template-columns:
+      minmax(0, 1fr)
+      repeat(3, min(calc((100% - 4 * var(--cs-col-gap)) * 7 / 30), var(--cs-center-col-max)))
+      minmax(0, 1fr);
   }
 }
 
@@ -2158,7 +2239,7 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > 
     grid-template-columns: minmax(0, 1fr);
   }
 
-  main.main-projectpg.case-study-project.cs-grid > .case-study-header > :is(h1, .cs-section-body),
+  main.main-projectpg.case-study-project.cs-grid > .case-study-intro > .case-study-header > :is(h1, .cs-section-body),
   main.main-projectpg.case-study-project.cs-grid > .project-caption > section > *{
     grid-column: 1 / -1;
   }
@@ -2167,7 +2248,7 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > 
 .gvd-redesign-pairs{
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 35px;
   width: 100%;
   margin-top: 1.5rem;
 }
@@ -2180,10 +2261,12 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > 
   min-width: 0;
 }
 
+/* Spacing inside a highlight is set explicitly per element (no flex gap):
+   h4 → caption 6px, caption baseline → screen 27px, screen → tabs 12px. */
 .gvd-redesign-pair{
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0;
   margin: 0;
 }
 
@@ -2218,8 +2301,10 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > 
   opacity: 0.6;
   width: 100%;
   max-width: none;
-  margin-top: -0.45rem;
-  margin-bottom: 0.75rem;
+  margin: 6px 0 var(--gvd-caption-space, 27px);
+  /* The box ends at the text baseline, so the margin below is the whole
+     visible gap (no descender room hiding under the text). */
+  text-box: trim-end cap alphabetic;
 }
 
 .dark-mode .gvd-redesign-pair h4,
@@ -2229,6 +2314,68 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > 
 
 .dark-mode .gvd-redesign-screen img{
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.55), 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* GVD logo redesign: the old logo, then the new one with its wordmark, each
+   centered in a frame the same shape as the redesign screenshots and filled
+   with the logo file's own background (the old mark is on white, the new
+   file on #FAF8FA). The frame carries the corners and shadow; a media
+   caption sits under each. */
+main.main-projectpg.case-study-project.cs-grid .gvd-logo-frame{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1728 / 994;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #FAF8FA;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.04), 0 8px 18px rgba(0, 0, 0, 0.03);
+}
+
+.dark-mode main.main-projectpg.case-study-project.cs-grid .gvd-logo-frame{
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.55), 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+main.main-projectpg.case-study-project.cs-grid .gvd-logo-frame img{
+  display: block;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+main.main-projectpg.case-study-project.cs-grid .gvd-logo-frame--old{
+  background-color: #FFFFFF;
+}
+
+/* Logo section spacing matches the redesign highlights: the intro sentence
+   sits the caption gap (baseline → frame, 27px) above the logos, and the two
+   logos are 35px apart like the highlight figures. */
+main.main-projectpg.case-study-project.cs-grid .section-logo-redesign > .cs-section-body{
+  gap: 0;
+}
+
+main.main-projectpg.case-study-project.cs-grid .section-logo-redesign > .cs-section-body > p{
+  margin-bottom: var(--gvd-caption-space, 27px);
+  text-box: trim-end cap alphabetic;
+}
+
+.gvd-logo-items{
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+/* The old mark fills about two-thirds of its frame's height. */
+main.main-projectpg.case-study-project.cs-grid .gvd-logo-frame--old img{
+  width: auto;
+  height: 66%;
+}
+
+main.main-projectpg.case-study-project.cs-grid .gvd-logo-frame--lockup img{
+  width: 72%;
+  height: auto;
 }
 
 /* Before/after stack: both versions share one spot at the same size, with the
@@ -2244,12 +2391,21 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > 
   grid-area: 1 / 1;
   display: block;
   z-index: 1;
-  transition: z-index 0s linear calc(var(--compare-duration) * 0.45);
+  transition:
+    z-index 0s linear calc(var(--compare-duration) * 0.45),
+    opacity 240ms ease;
 }
 
 .gvd-redesign-pair[data-compare-state="after"] [data-compare-version="before"],
 .gvd-redesign-pair[data-compare-state="before"] [data-compare-version="after"]{
   z-index: 0;
+}
+
+/* Hovering the unselected tab drops the front card to 10% so the
+   other version shows through before you commit to switching. */
+.gvd-redesign-pair[data-compare-state="after"]:has([data-compare-target="before"]:hover) [data-compare-version="after"],
+.gvd-redesign-pair[data-compare-state="before"]:has([data-compare-target="after"]:hover) [data-compare-version="before"]{
+  opacity: 0.1;
 }
 
 .gvd-compare > .gvd-redesign-screen.is-raising{
@@ -2277,15 +2433,16 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > 
   }
 }
 
-/* Segmented After/Before tabs 20px under the stack, aligned to the left edge
+/* Segmented After/Before tabs right under the stack (just the figure gap), aligned to the left edge
    of the content column. The selected tab's highlight runs flush to the
    group's edges. */
 .gvd-compare-switch{
+  margin-top: 12px;
   position: relative;
+  z-index: 2; /* above the cards (z 0-1) so their shadow falls behind the pill */
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
   align-self: flex-start;
-  margin-top: calc(20px - 0.85rem);
   border-radius: 999px;
   background-color: rgba(153, 153, 153, 0.12);
 }
@@ -2296,7 +2453,7 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > 
   inset: 0 auto 0 0;
   width: 50%;
   border-radius: 999px;
-  background-color: rgba(153, 153, 153, 0.22);
+  background-color: #FFFFFF;
   transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -2321,7 +2478,7 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-problems > li > 
 }
 
 .gvd-compare-switch button[aria-pressed="true"]{
-  color: var(--cs-body-color, #E6E6E6);
+  color: #000000;
 }
 
 .gvd-compare-switch button:focus-visible{
@@ -2874,4 +3031,33 @@ main.main-projectpg.case-study-toc-enabled{
   /* border: 1px solid #e5e5e5; */
   border-radius: 1rem;
   padding-inline: 2rem;
+}
+
+/* Inline tool names and logos in case-study metadata. */
+.case-study-project .list-case-study-info .metadata-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 0.4em;
+}
+.case-study-project .list-case-study-info .metadata-tool ~ .metadata-tool {
+  margin-inline-start: 0.5em;
+}
+
+.case-study-project .list-case-study-info .metadata-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  white-space: nowrap;
+}
+.case-study-project .list-case-study-info .metadata-tool-icon {
+  display: inline-block;
+  flex: 0 0 1em;
+  width: 1em;
+  height: 1em;
+  max-width: none;
+  margin: 0;
+  object-fit: contain;
+  transform: none;
+  scale: none;
 }

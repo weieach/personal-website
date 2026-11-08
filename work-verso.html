@@ -35,12 +35,14 @@
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu">
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=archive-nav-1">
 
-    <link rel="stylesheet" href="style-project.css?v=cs-grid-46">
+    <link rel="stylesheet" href="style-project.css?v=metadata-underline-4">
     <link rel="stylesheet" href="responsive.css?v=cs-grid-1">
     <title>Nicole Wei: Verso (2026)</title>
     <meta name="description" content="How Nicole Wei designed Verso, a visual record of the decisions behind an AI-assisted prototype.">
@@ -67,6 +69,8 @@
     <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
     <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
     <style>
+        html:has(.verso-project) { --color-bg: #000000; }
+        html:has(main.case-study-project.verso-project), body:has(main.case-study-project.verso-project) { background-color: var(--color-bg); }
         .case-study-project.verso-project { --cs-accent: #d8b7aa; }
         .verso-project .captioned-item > :is(img, video) {
             display: block;
@@ -74,12 +78,64 @@
             height: auto;
             border-radius: 8px;
         }
+        .verso-project .verso-research-quote {
+            border-inline-start: 2px solid var(--cs-accent);
+            padding: 4px 0 4px 20px;
+        }
+        .verso-project .verso-research-quote p {
+            margin: 0;
+            font-style: italic;
+        }
+        main.main-projectpg.case-study-project.cs-grid .project-caption .cs-section-body > .verso-reflection-list {
+            margin-top: calc(14px - var(--cs-body-gap));
+        }
+        .verso-project .verso-media-frame {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            aspect-ratio: 1 / calc(0.85 * var(--verso-media-ratio) + 2 * var(--thumb-screen-margin-block));
+            background: #101010;
+            border-radius: 8px;
+            overflow: hidden;
+            container-type: inline-size;
+        }
+        .verso-project .verso-media-frame > :is(img, video),
+        .verso-project .verso-media-frame > noscript > video {
+            display: block;
+            width: 85%;
+            height: auto;
+            max-width: none;
+            margin: 0;
+            border-radius: calc(var(--radius-desktop-screen) * 0.85);
+            box-shadow: 0 0 16cqw rgb(0 0 0 / 95%), 0 0 6cqw rgb(0 0 0 / 85%);
+        }
+        .verso-project .verso-media-frame > noscript { display: contents; }
+        .verso-project .verso-iteration-number {
+            margin-right: 8px;
+            font-family: "Geist Mono", monospace;
+            font-size: inherit;
+            font-weight: inherit;
+            color: var(--cs-accent);
+        }
         .verso-project .video-app-highlights { height: auto; }
-        main.main-projectpg.case-study-project.cs-grid .project-caption section .cs-section-body > p.verso-problem-statement {
+        .verso-project .verso-backend-video { filter: brightness(1.2); }
+        .verso-project .list-case-study-info .entry-secondary {
+            display: block;
+            margin-top: 6px;
+            opacity: 0.6;
+        }
+        main.main-projectpg.case-study-project.cs-grid .project-caption section .cs-section-body > p.verso-problem-statement,
+        main.main-projectpg.case-study-project.cs-grid .project-caption section .cs-section-body > .verso-research-quote > p:first-child {
             font-family: "Geist", sans-serif;
             font-size: calc(20px * var(--cs-text-scale));
             font-weight: 500;
             line-height: 1.35;
+        }
+        main.main-projectpg.case-study-project.cs-grid .project-caption .verso-research-quote > .verso-quote-attribution {
+            margin-top: 10px;
+            font-style: normal;
+            opacity: 0.6;
         }
         .verso-project .verso-process-shift {
             display: flex;
@@ -89,10 +145,10 @@
         }
         .verso-project .verso-phrase-chip {
             display: inline-block;
-            padding: 6px 12px;
+            padding: 5px 14px;
             border-radius: 999px;
-            background: #fff;
-            color: #111;
+            background: rgb(255 255 255 / 12%);
+            color: #fff;
         }
     </style>
 </head>
@@ -123,61 +179,72 @@
             </ul>
         </div>
 
-        <div class="img-casestudy-cover">
-            <video width="1600" height="900" aria-label="Verso’s gallery of design versions beside the conversation that produced them" data-media-src="assets/verso/case-study/reveal.mp4" data-media-poster="assets/verso/case-study/reveal.webp" poster="assets/verso/case-study/reveal.webp" data-media-autoplay muted loop playsinline preload="none"></video>
-            <noscript data-media-fallback><video width="1600" height="900" aria-label="Verso’s gallery of design versions beside the conversation that produced them" src="assets/verso/case-study/reveal.mp4" poster="assets/verso/case-study/reveal.webp" muted loop playsinline controls preload="none"></video></noscript>
-        </div>
-        <div class="case-study-header">
-            <h1>Verso</h1>
-            <div class="cs-section-body">
-                <h2>A visual history of the decisions behind an AI-assisted design.</h2>
-                <ul class="list-case-study list-case-study-info">
-                    <li>
-                        <p class="entry-header">Role</p>
-                        <p class="entry-content">Lead product designer and team lead</p>
-                    </li>
-                    <li>
-                        <p class="entry-header">Team</p>
-                        <p class="entry-content">Echo Zhou and Mavis Zhang joined for research, usability testing, high-fidelity design and the hackathon submission.</p>
-                    </li>
-                    <li>
-                        <p class="entry-header">Timeline</p>
-                        <p class="entry-content">September–October 2026 · Three weeks in class and one hackathon weekend</p>
-                    </li>
-                    <li>
-                        <p class="entry-header">Tools</p>
-                        <p class="entry-content">Figma, Codex, Claude Code and Cursor</p>
-                    </li>
-                </ul>
-                <p>A finished prototype shows where a design landed. The chat still holds every prompt, but finding the one that changed the design means retracing the whole conversation. I built a mid-fidelity prototype to keep those moments visible, then led a three-person team through the high-fidelity web demo.</p>
+        <div class="case-study-intro">
+            <div class="img-casestudy-cover">
+                <video width="1600" height="900" aria-label="Verso’s gallery of design versions beside the conversation that produced them" data-media-src="assets/verso/case-study/reveal.mp4" data-media-poster="assets/verso/case-study/reveal.webp" poster="assets/verso/case-study/reveal.webp" data-media-autoplay muted loop playsinline preload="none"></video>
+                <noscript data-media-fallback><video width="1600" height="900" aria-label="Verso’s gallery of design versions beside the conversation that produced them" src="assets/verso/case-study/reveal.mp4" poster="assets/verso/case-study/reveal.webp" muted loop playsinline controls preload="none"></video></noscript>
             </div>
-            <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
+            <div class="case-study-header">
+                <h1>Verso</h1>
+                <div class="cs-section-body">
+                    <h2>A visual history of the decisions behind an AI-assisted design.</h2>
+                    <ul class="list-case-study list-case-study-info">
+                        <li>
+                            <p class="entry-header">Role</p>
+                            <p class="entry-content">Lead product designer</p>
+                        </li>
+                        <li>
+                            <p class="entry-header">Team</p>
+                            <p class="entry-content">Echo Zhou, Mavis Zhang, Waiting Wong<span class="entry-secondary">UX research, usability testing and iteration, high-fidelity feature and component design, hackathon video submission</span></p>
+                        </li>
+                        <li>
+                            <p class="entry-header">Timeline</p>
+                            <p class="entry-content">September–October 2026<span class="entry-secondary">1 month (3 weeks in class and 1 hackathon weekend)</span></p>
+                        </li>
+                        <li>
+                            <p class="entry-header">Tools</p>
+                            <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/figma.svg?v=color-1" width="16" height="16" alt="">Figma</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/openai.svg?v=white-1" width="16" height="16" alt="">Codex</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/claude.svg?v=color-1" width="16" height="16" alt="">Claude Code</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/cursor.svg?v=color-1" width="16" height="16" alt="">Cursor</span></p>
+                        </li>
+                        <li>
+                            <p class="entry-header">Website</p>
+                            <p class="entry-content"><a href="https://verso-prototype.vercel.app/" target="_blank" rel="noopener noreferrer"><img class="link-favicon" src="assets/verso/vero logo (no text).svg" alt="" aria-hidden="true"><span>verso-prototype.vercel.app</span></a><i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></p>
+                        </li>
+                    </ul>
+                    <p>I independently built a mid-fidelity prototype for this project, then led a four-people team to take it to high fidelity during a hackathon. Across both phases, I handled end-to-end product and UI design, the design system, UX research, prototype vibe coding, and AI branding animation. Our final deliverables included a view-only functional web prototype (plus a VR edition) populated with local demo data, along with a 7-minute presentation video.</p>
+                </div>
+                <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
+            </div>
         </div>
 
         <div class="project-caption">
             <section>
-                <h3>Problem</h3>
+                <h3>Problem Space</h3>
                 <div class="cs-section-body">
-                    <p>We interviewed five people who used AI to code creative work, including design engineers, product designers and creative technologists. They described three difficulties with retracing their process.</p>
+                    <p>In a traditional workflow, designers can easily trace how they arrived at a final result through sketches, iterations, and versioned Figma files. With vibe coding, most of that decision-making happens inside a conversation with AI. By the end of a project, designers are often left with only two things: a working product and a massive chat history—making it difficult to revisit the specific prompts and turning points that shaped the design.</p>
+                    <p>To understand how this plays out in practice, we interviewed five creative vibe coders—including product designers, design engineers, and creative technologists. While all five reported higher productivity, they described the workflow as a cycle of constant patching and stitching with little structural oversight, surfacing three main pain points:</p>
                     <ul class="list-case-study list-case-study-problems">
                         <li>
-                            <h4>The decision gets buried in the conversation</h4>
-                            <p>Several rounds of prompting could pass in quick succession. By the end of a session, it was hard to recall which change had moved the design forward.</p>
+                            <h4>Past commits are hard to revisit</h4>
+                            <p>Reviewing an earlier design state requires restoring and running a previous build locally.</p>
                         </li>
                         <li>
-                            <h4>An earlier version takes work to see</h4>
-                            <p>To compare a previous design with the current one, a designer had to find the commit, restore it and run it.</p>
+                            <h4>Rapid prompting and auto-piloting create a gap in memory</h4>
+                            <p>Designers often prompt for hours on autopilot, making it difficult to recall which inputs actually shaped the outcome.</p>
                         </li>
                         <li>
-                            <h4>Taking screenshots interrupts the work</h4>
-                            <p>Interviewees kept their own visual records. Each screenshot meant pausing in the middle of the change they wanted to remember.</p>
+                            <h4>Documenting the prompt-by-prompt process takes extra work</h4>
+                            <p>Keeping a visual record requires manually taking screenshots along the way, which breaks creative flow.</p>
                         </li>
                     </ul>
+                    <blockquote class="verso-research-quote">
+                        <p>“Sometimes you may sit at your desk prompting all day, and by the end you don’t really remember what you did.”</p>
+                        <p class="verso-quote-attribution">— Interviewee #2</p>
+                    </blockquote>
                     <div class="captioned-item">
                         <video width="1100" height="618" aria-label="A designer scrolling through an extended coding conversation" data-media-src="assets/verso/case-study/chat-history.mp4" data-media-poster="assets/verso/case-study/chat-history.webp" poster="assets/verso/case-study/chat-history.webp" data-media-autoplay muted loop playsinline preload="none"></video>
                         <noscript data-media-fallback><video width="1100" height="618" aria-label="A designer scrolling through an extended coding conversation" src="assets/verso/case-study/chat-history.mp4" poster="assets/verso/case-study/chat-history.webp" muted loop playsinline controls preload="none"></video></noscript>
                         <div class="floating-caption">
-                            <p class="floating-caption-details">The chat keeps the prompts in order. Seeing what the interface looked like at each point takes more work.</p>
+                            <p class="floating-caption-details">It's hard to revisit a past decision through a thick stack of prompts.</p>
                         </div>
                     </div>
                 </div>
@@ -202,22 +269,28 @@
                             </div>
                             <div class="cs-section-body">
                                 <figure class="captioned-item">
-                                    <video class="video-app-highlights" width="1280" height="804" aria-label="Version block visualization" poster="assets/verso/case-study/version-blocks.webp" muted loop playsinline preload="none" data-media-src="assets/verso/case-study/version-blocks.mp4" data-media-poster="assets/verso/case-study/version-blocks.webp" data-media-autoplay></video>
-                                    <noscript data-media-fallback><video class="video-app-highlights" width="1280" height="804" aria-label="Version block visualization" poster="assets/verso/case-study/version-blocks.webp" muted loop playsinline preload="none" src="assets/verso/case-study/version-blocks.mp4" controls></video></noscript>
+                                    <div class="verso-media-frame" style="--verso-media-ratio: 804 / 1280;">
+                                        <video class="video-app-highlights" width="1280" height="804" aria-label="Version block visualization" poster="assets/verso/case-study/version-blocks.webp" muted loop playsinline preload="none" data-media-src="assets/verso/case-study/version-blocks.mp4" data-media-poster="assets/verso/case-study/version-blocks.webp" data-media-autoplay></video>
+                                        <noscript data-media-fallback><video class="video-app-highlights" width="1280" height="804" aria-label="Version block visualization" poster="assets/verso/case-study/version-blocks.webp" muted loop playsinline preload="none" src="assets/verso/case-study/version-blocks.mp4" controls></video></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Version block visualization</p>
                                     </div>
                                 </figure>
                                 <figure class="captioned-item">
-                                    <video class="video-app-highlights" width="1280" height="804" aria-label="Screen capture playback" poster="assets/verso/case-study/screen-playback.webp" muted loop playsinline preload="none" data-media-src="assets/verso/case-study/screen-playback.mp4" data-media-poster="assets/verso/case-study/screen-playback.webp" data-media-autoplay></video>
-                                    <noscript data-media-fallback><video class="video-app-highlights" width="1280" height="804" aria-label="Screen capture playback" poster="assets/verso/case-study/screen-playback.webp" muted loop playsinline preload="none" src="assets/verso/case-study/screen-playback.mp4" controls></video></noscript>
+                                    <div class="verso-media-frame" style="--verso-media-ratio: 804 / 1280;">
+                                        <video class="video-app-highlights" width="1280" height="804" aria-label="Screen capture playback" poster="assets/verso/case-study/screen-playback.webp" muted loop playsinline preload="none" data-media-src="assets/verso/case-study/screen-playback.mp4" data-media-poster="assets/verso/case-study/screen-playback.webp" data-media-autoplay></video>
+                                        <noscript data-media-fallback><video class="video-app-highlights" width="1280" height="804" aria-label="Screen capture playback" poster="assets/verso/case-study/screen-playback.webp" muted loop playsinline preload="none" src="assets/verso/case-study/screen-playback.mp4" controls></video></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Screen capture playback</p>
                                     </div>
                                 </figure>
                                 <figure class="captioned-item">
-                                    <video class="video-app-highlights" width="1280" height="804" aria-label="Prototype replay based on git commits" poster="assets/verso/case-study/prototype-replay.webp" muted loop playsinline preload="none" data-media-src="assets/verso/case-study/prototype-replay.mp4" data-media-poster="assets/verso/case-study/prototype-replay.webp" data-media-autoplay></video>
-                                    <noscript data-media-fallback><video class="video-app-highlights" width="1280" height="804" aria-label="Prototype replay based on git commits" poster="assets/verso/case-study/prototype-replay.webp" muted loop playsinline preload="none" src="assets/verso/case-study/prototype-replay.mp4" controls></video></noscript>
+                                    <div class="verso-media-frame" style="--verso-media-ratio: 804 / 1280;">
+                                        <video class="video-app-highlights" width="1280" height="804" aria-label="Prototype replay based on git commits" poster="assets/verso/case-study/prototype-replay.webp" muted loop playsinline preload="none" data-media-src="assets/verso/case-study/prototype-replay.mp4" data-media-poster="assets/verso/case-study/prototype-replay.webp" data-media-autoplay></video>
+                                        <noscript data-media-fallback><video class="video-app-highlights" width="1280" height="804" aria-label="Prototype replay based on git commits" poster="assets/verso/case-study/prototype-replay.webp" muted loop playsinline preload="none" src="assets/verso/case-study/prototype-replay.mp4" controls></video></noscript>
+                                    </div>
                                     <div class="floating-caption">
                                         <p class="floating-caption-details">Prototype replay based on git commits</p>
                                     </div>
@@ -229,16 +302,20 @@
                                 <h4>Choose which changes become milestones</h4>
                                 <p>A reminder appears in the chat when enough time or change has accumulated. The designer can open the card, choose a version and describe why it matters. This leaves a small amount of writing in the workflow and gives the designer control over which decisions belong in the story.</p>
                             </div>
-                            <video class="video-app-highlights" width="1440" height="904" aria-label="A designer opens a reminder in chat and records a milestone" data-media-src="assets/verso/case-study/milestone.mp4" data-media-poster="assets/verso/case-study/milestone.webp" poster="assets/verso/case-study/milestone.webp" data-media-autoplay muted loop playsinline preload="none"></video>
-                            <noscript data-media-fallback><video class="video-app-highlights" width="1440" height="904" aria-label="A designer opens a reminder in chat and records a milestone" src="assets/verso/case-study/milestone.mp4" poster="assets/verso/case-study/milestone.webp" muted loop playsinline controls preload="none"></video></noscript>
+                            <div class="verso-media-frame" style="--verso-media-ratio: 904 / 1440;">
+                                <video class="video-app-highlights" width="1440" height="904" aria-label="A designer opens a reminder in chat and records a milestone" data-media-src="assets/verso/case-study/milestone.mp4" data-media-poster="assets/verso/case-study/milestone.webp" poster="assets/verso/case-study/milestone.webp" data-media-autoplay muted loop playsinline preload="none"></video>
+                                <noscript data-media-fallback><video class="video-app-highlights" width="1440" height="904" aria-label="A designer opens a reminder in chat and records a milestone" src="assets/verso/case-study/milestone.mp4" poster="assets/verso/case-study/milestone.webp" muted loop playsinline controls preload="none"></video></noscript>
+                            </div>
                         </div>
                         <div class="product-highlight-entry">
                             <div>
                                 <h4>Replay the idea thread</h4>
                                 <p>Each milestone links an explanation to a point in playback. Following the thread brings the relevant frames back into view, so a designer can show someone else the sequence of decisions behind the result.</p>
                             </div>
-                            <video class="video-app-highlights" width="1440" height="904" aria-label="Milestones alongside playback of the corresponding design versions" data-media-src="assets/verso/case-study/idea-thread.mp4" data-media-poster="assets/verso/case-study/idea-thread.webp" poster="assets/verso/case-study/idea-thread.webp" data-media-autoplay muted loop playsinline preload="none"></video>
-                            <noscript data-media-fallback><video class="video-app-highlights" width="1440" height="904" aria-label="Milestones alongside playback of the corresponding design versions" src="assets/verso/case-study/idea-thread.mp4" poster="assets/verso/case-study/idea-thread.webp" muted loop playsinline controls preload="none"></video></noscript>
+                            <div class="verso-media-frame" style="--verso-media-ratio: 904 / 1440;">
+                                <video class="video-app-highlights" width="1440" height="904" aria-label="Milestones alongside playback of the corresponding design versions" data-media-src="assets/verso/case-study/idea-thread.mp4" data-media-poster="assets/verso/case-study/idea-thread.webp" poster="assets/verso/case-study/idea-thread.webp" data-media-autoplay muted loop playsinline preload="none"></video>
+                                <noscript data-media-fallback><video class="video-app-highlights" width="1440" height="904" aria-label="Milestones alongside playback of the corresponding design versions" src="assets/verso/case-study/idea-thread.mp4" poster="assets/verso/case-study/idea-thread.webp" muted loop playsinline controls preload="none"></video></noscript>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -246,6 +323,7 @@
             <section>
                 <h3>Version capture mechanic</h3>
                 <div class="cs-section-body">
+                    <p>The capture mechanism saves a local frame after an agent prompt. A Git push groups those frames into a version. The saved commit also gives the prototype a point it can rebuild and replay.</p>
                     <figure class="captioned-item">
                         <video class="video-app-highlights" width="1200" height="676" aria-label="prompt → version → milestone" poster="assets/verso/case-study/prompt-version.webp" muted loop playsinline preload="none" data-media-src="assets/verso/case-study/prompt-version.mp4" data-media-poster="assets/verso/case-study/prompt-version.webp" data-media-autoplay></video>
                         <noscript data-media-fallback><video class="video-app-highlights" width="1200" height="676" aria-label="prompt → version → milestone" poster="assets/verso/case-study/prompt-version.webp" muted loop playsinline preload="none" src="assets/verso/case-study/prompt-version.mp4" controls></video></noscript>
@@ -253,14 +331,13 @@
                             <p class="floating-caption-details">prompt → version → milestone</p>
                         </div>
                     </figure>
-                        <div class="product-highlight-entry">
-                            <div>
-                                <h4>Capture a frame with each prompt</h4>
-                                <p>The capture mechanism saves a local frame after an agent prompt. A Git push groups those frames into a version. The saved commit also gives the prototype a point it can rebuild and replay.</p>
-                            </div>
-                            <video class="video-app-highlights" width="1200" height="692" aria-label="Diagram showing prompts captured as frames, then grouped into versions by Git push" data-media-src="assets/verso/case-study/capture.mp4" data-media-poster="assets/verso/case-study/capture.webp" poster="assets/verso/case-study/capture.webp" data-media-autoplay muted loop playsinline preload="none"></video>
-                            <noscript data-media-fallback><video class="video-app-highlights" width="1200" height="692" aria-label="Diagram showing prompts captured as frames, then grouped into versions by Git push" src="assets/verso/case-study/capture.mp4" poster="assets/verso/case-study/capture.webp" muted loop playsinline controls preload="none"></video></noscript>
+                    <figure class="captioned-item">
+                    <video class="video-app-highlights verso-backend-video" width="1200" height="692" aria-label="Diagram showing prompts captured as frames, then grouped into versions by Git push" data-media-src="assets/verso/case-study/capture.mp4" data-media-poster="assets/verso/case-study/capture.webp" poster="assets/verso/case-study/capture.webp" data-media-autoplay muted loop playsinline preload="none"></video>
+                    <noscript data-media-fallback><video class="video-app-highlights verso-backend-video" width="1200" height="692" aria-label="Diagram showing prompts captured as frames, then grouped into versions by Git push" src="assets/verso/case-study/capture.mp4" poster="assets/verso/case-study/capture.webp" muted loop playsinline controls preload="none"></video></noscript>
+                        <div class="floating-caption">
+                            <p class="floating-caption-details">Back-end mechanic</p>
                         </div>
+                    </figure>
                 </div>
             </section>
             <section>
@@ -284,25 +361,29 @@
                     <div class="product-highlight-entries">
                         <div class="product-highlight-entry">
                             <div>
-                                <h4>From managing tasks to recording decisions</h4>
-                                <p>My first prototype was a Kanban board for assigning agent tests and tracking feedback in Figma. Early feedback showed how much the board was trying to cover. A person still had to judge whether an agent’s work met the brief. I narrowed the project to a task designers already did for themselves. They needed a record of what changed and why.</p>
+                                <h4><span class="verso-iteration-number">01</span> Pivoted from project management to documentation</h4>
+                                <p>Verso began as a kanban tool for automated agent testing and Figma feedback. Early feedback showed the scope was too broad, and agents still couldn’t verify work as reliably as people.</p>
                             </div>
                             <div class="captioned-item">
-                                <img src="assets/verso/case-study/kanban.webp" alt="Early MitWerk prototype with tasks arranged in Kanban columns" width="1582" height="942" loading="lazy" decoding="async">
+                                <div class="verso-media-frame" style="--verso-media-ratio: 942 / 1582;">
+                                    <img src="assets/verso/case-study/kanban.webp" alt="Early MitWerk prototype with tasks arranged in Kanban columns" width="1582" height="942" loading="lazy" decoding="async">
+                                </div>
                                 <div class="floating-caption">
-                                    <p class="floating-caption-details">The early MitWerk board organized the work around tasks and their status.</p>
+                                    <p class="floating-caption-details">An earlier iteration organizing the work around tasks and their status.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="product-highlight-entry">
                             <div>
-                                <h4>From a version tree to an idea thread</h4>
-                                <p>I initially drew each Git branch as a path through the design. In usability tests, designers described even their detours as part of one unfolding idea. Automated pushes made poor landmarks, too. We kept the version history for inspection and gave designers a separate thread for the milestones they chose to document.</p>
+                                <h4><span class="verso-iteration-number">02</span> From “version stream” to “idea thread”</h4>
+                                <p>The version stream showed commit history to reflect vibe coding’s branching nature. But usability tests showed designers actually see process as linear: all trials eventually converge, and since pushes can be automated, commits don’t reflect their actual process. The idea thread shows milestones instead of every commit, focusing on decisions users choose to document, with a potential trade-off of convenience.</p>
                             </div>
                             <div class="captioned-item">
-                                <img src="assets/verso/case-study/version-stream.webp" alt="Early gallery beside a multicolored branching version history" width="1582" height="882" loading="lazy" decoding="async">
+                                <div class="verso-media-frame" style="--verso-media-ratio: 882 / 1582;">
+                                    <img src="assets/verso/case-study/version-stream.webp" alt="Early gallery beside a multicolored branching version history" width="1582" height="882" loading="lazy" decoding="async">
+                                </div>
                                 <div class="floating-caption">
-                                    <p class="floating-caption-details">The first version stream gave every branch a place in the history.</p>
+                                    <p class="floating-caption-details">The Version Stream (right) visualizes Git history as an interactive decision tree.</p>
                                 </div>
                             </div>
                         </div>
@@ -330,29 +411,31 @@
                 </div>
             </section>
             <section>
-                <h3>Key learning: How using AI shaped my outcome</h3>
+                <h3>Outcome &amp; reflection</h3>
                 <div class="cs-section-body">
-                    <ul class="list-case-study list-case-study-problems">
+                    <p>Our goal was to deliver a functional prototype that demonstrated Verso’s full feature set and visualization interactions as a standalone app. By wiring live version capture into my own workflow while building Verso, I was able to evaluate the tool in real time—using it to navigate my development timeline and pull visual artifacts directly into our hackathon presentation and this case study. While the prototype validated the core interaction model, scaling Verso into a full production app with an integrated AI chat panel would require dedicated backend engineering; our current build relies on Vercel’s free storage tier and is already reaching maximum capacity.</p>
+                    <p>We ultimately submitted the project to the SVSD Virtual Hackathon alongside 300+ competing teams. While we were not selected as finalists, producing our 7-minute submission video—which blended screen-recorded product walkthroughs with live-action cinematography—pushed us to articulate our iterative process clearly and strengthened our visual storytelling skills.</p>
+                    <figure class="captioned-item">
+                        <img src="assets/verso/production%20plan.png" width="15092" height="7168" alt="Verso video production plan with storyboard, script, and shot planning for the SVSD hackathon submission" loading="lazy" decoding="async">
+                        <figcaption class="floating-caption">
+                            <p class="floating-caption-details">Production plan for video submission to SVSD hackathon</p>
+                        </figcaption>
+                    </figure>
+                    <p>Meanwhile, building this prototype with AI reshaped my design process in three ways:</p>
+                    <ul class="list-case-study list-case-study-problems verso-reflection-list">
                         <li>
-                            <h4>Define conditional rules &amp; systems, instead of manually tweaking every detail</h4>
+                            <h4>Designing rules and systems</h4>
+                            <p>Instead of manually tweaking individual screens, working with AI shifted my focus toward defining conditional logic, component rules, and system-level constraints.</p>
                         </li>
                         <li>
                             <h4>Stress testing at scale</h4>
-                            <p>A functional prototype gave me an opportunity to test how the visualization system performed with growing volumes of data, revealing where information density can compromised legibility, which couldn’t be evaluated in static Figma prototypes.</p>
+                            <p>A functional prototype gave me the opportunity to test how the visualization system handled growing volumes of data, revealing where information density compromised legibility—something static Figma prototypes couldn't capture.</p>
                         </li>
                         <li>
                             <h4>More room for experimentation</h4>
                             <p>AI helped fill in implementation details and complete secondary interactions, allowing me to explore less-prescriptive design directions.</p>
                         </li>
                     </ul>
-                </div>
-            </section>
-            <section>
-                <h3>Outcome &amp; reflection</h3>
-                <div class="cs-section-body">
-                    <p>We finished a functional web prototype with local demo data and a VR exploration. Building the web version let me test the gallery with a growing history. As the blocks accumulated, individual changes got harder to read. That experience shaped when to show the full history and when to show only selected milestones.</p>
-                    <p>My biggest shift was learning to design the rules behind the view. I could change how every version was grouped or displayed, then replay the same history to see whether the rule held up.</p>
-                    <p><a href="https://verso-prototype.vercel.app/" target="_blank" rel="noopener noreferrer">Explore the web prototype ↗</a></p>
                 </div>
             </section>
         </div>

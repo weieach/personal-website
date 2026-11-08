@@ -1426,7 +1426,7 @@ video.pictogram-source{
     transform: scale(0.85);
     scale: none;
     border-radius: var(--radius-desktop-screen);
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .card-mitwerk-vr .card-thumbnail{
