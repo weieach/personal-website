@@ -2143,6 +2143,7 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-info > li:first-
 
 main.main-projectpg.case-study-project.cs-grid .list-case-study-info > li:last-child{
   border-bottom: none;
+  padding-bottom: 0;
 }
 
 main.main-projectpg.case-study-project.cs-grid.dino-project .list-case-study-info > li{
