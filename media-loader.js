@@ -59,7 +59,10 @@
     if (!state || (state.loaded && !fallback)) return;
     state.loaded = true;
     state.fallback = fallback;
-    video.crossOrigin = "anonymous"; // Required for Pictogram's frame renderer on R2.
+    // Ordinary videos can play cross-origin without CORS; canvas-rendered videos
+    // keep anonymous CORS so their frames remain readable.
+    if (video.dataset.mediaCrossorigin === "none") video.removeAttribute("crossorigin");
+    else video.crossOrigin = "anonymous";
     video.src = url(video.dataset.mediaSrc, fallback);
     // preload=none leaves full downloads to playback, even after attaching src.
     video.load();

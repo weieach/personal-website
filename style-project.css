@@ -937,6 +937,58 @@ html:has(.nijimu-page.dark-mode) {
   --cs-accent: #7BA871;
 }
 
+/* nijimu's theme color. */
+.main-projectpg.case-study-project.nijimu-project{
+  --cs-accent: #B1B7B7;
+}
+
+/* Schneider's theme color (a lighter take on its cover's #53C66C green). */
+.main-projectpg.case-study-project.schneider-project{
+  --cs-accent: #63DF7E;
+}
+
+/* Schneider's page background is pure black, like Dino's. */
+html:has(main.schneider-project){
+  --color-bg: #000000;
+}
+
+html:has(main.schneider-project),
+body:has(main.schneider-project){
+  background-color: #000000;
+}
+
+/* Schneider's Process & iteration and Full Walkthrough media sit inset on a
+   panel in Dino's proportions (the media fills 87.5% of the panel's width,
+   6.25% each side, with 6.765% of the width above and below), filled with
+   the a slightly darker #181818 than GVD's redesign-highlight insets. */
+main.main-projectpg.case-study-project.schneider-project :is(.section-process, .section-product-walkthrough, .section-product-highlights) .captioned-item{
+  padding: 6.765% 6.25%;
+  background-color: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+main.main-projectpg.case-study-project.schneider-project :is(.section-process, .section-product-walkthrough, .section-product-highlights) .captioned-item > :is(img, video){
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+/* The white hairline that covers these videos' edge now sits on the video
+   itself (an outline paints over the video), not around the whole panel. */
+main.main-projectpg.case-study-project.schneider-project .section-product-walkthrough .video-inset-border::after{
+  content: none;
+}
+
+main.main-projectpg.case-study-project.schneider-project .section-product-walkthrough .video-inset-border > video{
+  outline: 1px solid #fff;
+  outline-offset: -1px;
+}
+
 /* Default body images fill the text column; breakout images override below
    with higher/equal specificity so width: 130–140% actually wins. */
 .case-study-project section img{
@@ -1725,6 +1777,60 @@ main.main-projectpg.case-study-project{
   white-space: nowrap;
 }
 
+/* Secondary lines under a metadata value (Verso's timeline and collaborator
+   notes, nijimu's award placements): own line, 6px below, 60% opacity. The
+   awards column drops its flex gap so these margins set the spacing. */
+.list-case-study-info .entry-secondary{
+  display: block;
+  margin-top: 6px;
+  opacity: 0.6;
+}
+
+/* The global * font rule would give these spans (and the awards' div) the
+   site font; keep them in the case-study body text style. */
+main.main-projectpg.case-study-project.cs-grid .list-case-study-info :is(div.entry-content, .entry-award, .entry-award-title, .entry-award-title > span, .entry-secondary){
+  font-family: "Geist", sans-serif;
+  font-size: calc(14px * var(--cs-text-scale));
+  font-weight: 400;
+  line-height: normal;
+  color: var(--cs-body-color);
+}
+
+/* Each award is a block: its title (or link), then its secondary line.
+   Awards stack 14px apart, like consecutive paragraphs. */
+.list-case-study-info-awards .entry-content:has(> .entry-award){
+  gap: 14px;
+}
+
+.list-case-study-info-awards .entry-award{
+  display: block;
+}
+
+/* Award titles without a link still lead with the awarding body's favicon,
+   laid out like the linked titles. */
+.main-projectpg.case-study-project .list-case-study-info .entry-award-title:has(> .link-favicon){
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3em;
+}
+
+.main-projectpg.case-study-project .list-case-study-info .entry-award-title > .link-favicon{
+  align-self: center;
+  display: inline-block;
+  width: auto;
+  height: 1.15em;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+}
+
+/* Under an award title, the secondary line sits a little closer than usual. */
+.list-case-study-info-awards .entry-award .entry-secondary{
+  margin-top: 3px;
+}
+
 .list-case-study-info-awards .entry-content ul{
   margin: 0;
   padding-left: 1.15rem;
@@ -1882,13 +1988,13 @@ main.main-projectpg.case-study-project{
   scale: none;
 }
 
-/* Dino and Adventurer covers are already 16:9 artwork. */
-.main-projectpg.case-study-project > .case-study-intro > :is(.img-casestudy-cover-dino, .img-casestudy-cover-adventurer) > img{
+/* Dino, Adventurer and nijimu covers are already 16:9 artwork. */
+.main-projectpg.case-study-project > .case-study-intro > :is(.img-casestudy-cover-dino, .img-casestudy-cover-adventurer, .img-casestudy-cover-nijimu) > img{
   object-fit: cover;
 }
 
 .main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-nijimu{
-  background-color: #ececec;
+  background-color: #0b0a0c;
 }
 
 .main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-schneider{
@@ -2085,13 +2191,15 @@ main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-
   opacity: 1;
 }
 
-/* Dino marked copy: unmarked words use the subtitle's 60% gray.
+/* Marked case-study copy: unmarked words use the subtitle's 60% gray.
    Marked phrases stay body color and stay regular weight. */
-main.main-projectpg.case-study-project.cs-grid.dino-project .project-caption .dino-marked{
+main.main-projectpg.case-study-project.cs-grid.dino-project .project-caption .dino-marked,
+main.main-projectpg.case-study-project.cs-grid.schneider-project .project-caption .schneider-marked{
   color: color-mix(in srgb, var(--cs-body-color) 60%, transparent);
 }
 
-main.main-projectpg.case-study-project.cs-grid.dino-project .project-caption .dino-marked span{
+main.main-projectpg.case-study-project.cs-grid.dino-project .project-caption .dino-marked span,
+main.main-projectpg.case-study-project.cs-grid.schneider-project .project-caption .schneider-marked span{
   color: var(--cs-body-color);
   font-weight: 400;
 }
@@ -2207,6 +2315,14 @@ main.main-projectpg.case-study-project.cs-grid .project-caption h4{
 /* Stacked media, product-highlight items and list entries sit 40px apart. */
 main.main-projectpg.case-study-project.cs-grid :is(.product-highlight-entries, .dino-screens-featured, .outcome-media-row, .outcome-tweet-row, .gvd-redesign-screens, .walkthrough-image-grid, .list-case-study:not(.list-case-study-info)){
   row-gap: 40px;
+}
+
+/* Text-led highlight subsections sit 50% farther apart than their media. */
+main.main-projectpg.case-study-project.cs-grid .product-highlight-entries:has(> .product-highlight-entry) {
+  row-gap: calc(var(--cs-body-gap) * 1.5);
+}
+main.main-projectpg.case-study-project.cs-grid .cs-section-body > .nijimu-phase + .nijimu-phase {
+  margin-top: calc(var(--cs-body-gap) * 0.5);
 }
 
 /* Product-highlight frames and every image or image frame spanning the
@@ -3060,4 +3176,11 @@ main.main-projectpg.case-study-toc-enabled{
   object-fit: contain;
   transform: none;
   scale: none;
+}
+
+/* Organization logos share the tools row's icon size and link gap. */
+.main-projectpg.case-study-project .list-case-study-info a > .link-favicon.metadata-company-icon {
+  width: 1em;
+  height: 1em;
+  flex: 0 0 1em;
 }

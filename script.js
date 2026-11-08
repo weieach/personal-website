@@ -572,6 +572,30 @@ document.addEventListener("click", (e) => {
     },
   ];
 
+  // Three different flowers, picked at random on each cold load.
+  const FLOWERS = [
+    "flora-paper-4UTKW-12",
+    "flora-paper-7RFDK-8",
+    "flora-paper-AH3VM-12",
+    "flora-paper-F32M6-10",
+    "flora-paper-FT5FU-7",
+    "flora-paper-G2H7Z-11",
+    "flora-paper-GQLCM-6",
+    "flora-paper-HTYXF-6",
+    "flora-paper-LMRTZ-6",
+    "flora-paper-MBBF7-7",
+    "flora-paper-NZ8Y2-8",
+    "flora-paper-UH4MP-12",
+    "flora-paper-VLGED-9",
+    "flora-paper-WGX52-12",
+    "flora-paper-X6CM8-13",
+  ];
+  const flowerPool = FLOWERS.slice();
+  loader.querySelectorAll(".page-loader__flower").forEach((img) => {
+    const [name] = flowerPool.splice(Math.floor(Math.random() * flowerPool.length), 1);
+    if (name) img.src = `assets/loader-flowers/${name}.png`;
+  });
+
   const tipViewport = loader.querySelector(".page-loader__tip-viewport");
   const tipText = loader.querySelector(".page-loader__tip-text");
   const reduceMotion = window.matchMedia(
@@ -764,4 +788,44 @@ document.addEventListener("click", (e) => {
     { threshold: 0.45, rootMargin: "0px 0px -4% 0px" }
   );
   observer.observe(footer);
+})();
+
+// One random paper flower accompanies the About bird at tablet widths.
+(() => {
+  const wraps = document.querySelectorAll('.about-avatar .about-bird-wrap');
+  if (!wraps.length) return;
+  const tablet = window.matchMedia('(500px <= width < 960px)');
+  const names = [
+    "flora-paper-4UTKW-12",
+    "flora-paper-7RFDK-8",
+    "flora-paper-AH3VM-12",
+    "flora-paper-F32M6-10",
+    "flora-paper-FT5FU-7",
+    "flora-paper-G2H7Z-11",
+    "flora-paper-GQLCM-6",
+    "flora-paper-HTYXF-6",
+    "flora-paper-LMRTZ-6",
+    "flora-paper-MBBF7-7",
+    "flora-paper-NZ8Y2-8",
+    "flora-paper-UH4MP-12",
+    "flora-paper-VLGED-9",
+    "flora-paper-WGX52-12",
+    "flora-paper-X6CM8-13",
+  ];
+  const showFlower = () => {
+    if (!tablet.matches) return;
+    wraps.forEach(wrap => {
+      if (wrap.querySelector('.about-tablet-flower')) return;
+      const flower = document.createElement('img');
+      flower.className = 'about-tablet-flower';
+      flower.alt = '';
+      flower.setAttribute('aria-hidden', 'true');
+      flower.width = 110;
+      flower.height = 110;
+      flower.src = `assets/loader-flowers/${names[Math.floor(Math.random() * names.length)]}.png`;
+      wrap.append(flower);
+    });
+  };
+  showFlower();
+  tablet.addEventListener('change', showFlower);
 })();

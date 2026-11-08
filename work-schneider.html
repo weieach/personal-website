@@ -40,8 +40,8 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=archive-nav-1">
 
-    <link rel="stylesheet" href="style-project.css?v=favicon-3">
-    <link rel="stylesheet" href="responsive.css?v=cs-grid-1">
+    <link rel="stylesheet" href="style-project.css?v=schneider-outcome-1">
+    <link rel="stylesheet" href="responsive.css?v=about-flower-2">
     <title>Nicole Wei: Schneider Electric AI+Power Platform (2026)</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta property="og:type" content="website">
@@ -66,6 +66,30 @@
     <script type="module" src="tag-shapes.js?v=product-1"></script>
     <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
     <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
+    <style>
+        .schneider-project .section-process--text-first .section-process-intro {
+            max-width: none;
+            margin: 0;
+        }
+        .schneider-project :is(.section-process--text-first, .section-product-walkthrough--text-first) .product-highlight-entry {
+            gap: 20px;
+            align-items: stretch;
+        }
+        .schneider-project .section-product-highlights .walkthrough-image-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 40px;
+        }
+        .schneider-project .schneider-highlight { margin: 0; min-width: 0; }
+        .schneider-project .schneider-highlight > .floating-caption { margin-top: 20px; }
+        main.main-projectpg.case-study-project.cs-grid.schneider-project :is(.section-process--text-first, .section-product-walkthrough--text-first) .product-highlight-entry > div:not(.captioned-item) {
+            display: block;
+            height: auto;
+            min-height: 0;
+            min-width: 0;
+        }
+        main.main-projectpg.case-study-project.cs-grid.schneider-project :is(.section-process--text-first, .section-product-walkthrough--text-first) .product-highlight-entry > div:not(.captioned-item) > h4 { margin: 0; }
+        main.main-projectpg.case-study-project.cs-grid.schneider-project :is(.section-process--text-first, .section-product-walkthrough--text-first) .product-highlight-entry > div:not(.captioned-item) > p { margin: 6px 0 0; text-align: left; }
+    </style>
 </head>
 
 <body class="dark-mode">
@@ -115,11 +139,11 @@
                         </li>
                         <li>
                             <p class="entry-header">Company</p>
-                            <p class="entry-content">Schneider Electric</p>
+                            <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/company-icons/schneider-electric.svg" width="16" height="16" alt="">Schneider Electric</span></p>
                         </li>
                         <li>
                             <p class="entry-header">Tools</p>
-                            <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/cursor.svg?v=color-1" width="16" height="16" alt="">Cursor</span> (Claude Opus 4.8, Fable 5), <span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/figma.svg?v=color-1" width="16" height="16" alt="">Figma</span></p>
+                            <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/openai.svg?v=white-1" width="16" height="16" alt="">Codex</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/claude.svg?v=color-1" width="16" height="16" alt="">Claude Code</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/cursor.svg?v=color-1" width="16" height="16" alt="">Cursor</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/figma.svg?v=color-1" width="16" height="16" alt="">Figma</span></p>
                         </li>
                     </ul>
                 </div>
@@ -162,127 +186,125 @@
                     </ul>
                 </div>
             </section>
-            <section class="section-process">
-                <h3>Process &amp; iteration</h3>
+            <section class="section-process section-process--text-first">
+                <h3>Process &amp; Iteration</h3>
                 <div class="cs-section-body">
-                    <p class="section-process-intro">With no UI design or product spec in place, I tried out a highly
-                        iterative, AI-native process in Cursor, testing different models against each other as their
-                        capabilities kept shifting. Building directly in code meant the prototypes were interactive and
-                        largely self-explanatory, which made cycling through feedback and revision fast.</p>
+                    <p class="section-process-intro">With no UI design or product spec in place, I tried out a highly iterative, AI-native process in Cursor, testing different models against each other as their capabilities kept shifting. Building directly in code meant the prototypes were interactive and largely self-explanatory, which made cycling through feedback and revision fast.</p>
                     <div class="product-highlight-entries">
                         <div class="product-highlight-entry">
+                            <div>
+                                <h4>1. Mapping the factory as a node network</h4>
+                                <p>My first iteration took a dashboard mindset, mapping the factory as a network of nodes representing different types of equipment. The topology is legible at a glance, while clicking on a node to inspect it or talking to the agent below offers more information on the equipment's status.</p>
+                            </div>
                             <div class="captioned-item">
                                 <img data-media-src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar"></noscript>
                             </div>
-                            <div>
-                                <p>My first iteration took a dashboard mindset: the factory as a network of nodes featuring
-                                    different types of equipment. The topology is legible at a glance, while clicking on a
-                                    node to inspect it or talking to the agent below offers more information on the
-                                    equipment's status.</p>
-                            </div>
                         </div>
                         <div class="product-highlight-entry">
+                            <div>
+                                <h4>2. Surfacing agent activity with a task queue</h4>
+                                <p>In a second iteration, I added a task queue, giving real-time visual confirmation and history for the tasks the agent carries out as it multitasks, and docked the chat as a persistent panel instead of click-to-open to keep the agent's updates always in view.</p>
+                            </div>
                             <div class="captioned-item">
                                 <img data-media-src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log" width="1728" height="992" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log"></noscript>
                             </div>
-                            <div>
-                                <p>In a second iteration, I added a task queue, giving real-time visual confirmation and
-                                    history for the tasks the agent carries out as it multitasks, and docked the chat as a
-                                    persistent panel instead of click-to-open to keep the agent's updates always in view.</p>
-                            </div>
                         </div>
                         <div class="product-highlight-entry">
+                            <div>
+                                <h4>3. Visualizing root causes &amp; interactive checklists</h4>
+                                <p>I added a knowledge graph view over the node map, documenting the potential causes of equipment failure. I chose a top-down tree to illustrate cause-and-effect relationships. Agent messages now render as clickable components, such as a checklist that updates itself.</p>
+                            </div>
                             <div class="captioned-item">
                                 <img data-media-src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log" width="1728" height="1117" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log"></noscript>
                             </div>
-                            <div>
-                                <p>I added a knowledge graph view over the node map, documenting the potential causes of
-                                    equipment failure. I chose a top-down tree to illustrate cause and effect relationships.
-                                    Agent messages can render as clickable components, such as a checklist that updates
-                                    itself.</p>
-                            </div>
                         </div>
                         <div class="product-highlight-entry">
+                            <div>
+                                <h4>4. Optimizing space &amp; exposing raw telemetry</h4>
+                                <p>I implemented the equipment node tree in a radial distribution to optimize space. Raw telemetry and the model's confidence score now print in the message dock, so a recommendation can be traced back to the readings behind it.</p>
+                            </div>
                             <div class="captioned-item">
                                 <img data-media-src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score" width="1728" height="1117" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score"></noscript>
                             </div>
-                            <div>
-                                <p>I implemented the equipment node tree in radial distribution to optimize space. Raw
-                                    telemetry and the model's confidence now printed in the message dock, so a recommendation
-                                    can be traced back to the readings behind it.</p>
-                            </div>
                         </div>
                         <div class="product-highlight-entry">
+                            <div>
+                                <h4>5. Shifting from graph-first to a task-first workflow</h4>
+                                <p>A major pivot came when my lead and I decided that a task-first interface was the right structure (as opposed to graph-first or chat-first), since the agent should be able to schedule tasks rather than only run them one-off or execute them immediately. The user gets an at-a-glance view of completed and upcoming tasks, and can update them efficiently.</p>
+                            </div>
                             <div class="captioned-item">
                                 <img data-media-src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat"></noscript>
                             </div>
-                            <div>
-                                <p>A major pivot came when me and my leader decided that a task-first interface was the right
-                                    structure (as opposed to graph-first or chat-first), since the agent should be able to
-                                    schedule tasks rather than only run them one-off or execute them immediately. The user
-                                    gets an at-a-glance view of completed and upcoming tasks, and can update them
-                                    efficiently.</p>
-                            </div>
                         </div>
-                        <!-- <div class="product-highlight-entry">
-                            <div class="captioned-item">
-                                <img src="assets/schneider/Screenshot 2026-06-12 at 15.55.06 1.png" alt="Create-skill screen showing a device matrix of Schneider equipment grouped by power category">
-                            </div>
-                            <div>
-                                <p>Busbar was only the first asset class. The flow was generalised into a device matrix where
-                                    an engineer picks equipment and generates a reusable skill agent, letting the diagnostic
-                                    logic carry across product lines instead of being rebuilt each time.</p>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </section>
-            <section class="section-product-walkthrough">
-                <h3>Full Walkthrough</h3>
+            <section class="section-product-highlights">
+                <h3>Final UI Design</h3>
+                <div class="cs-section-body">
+                    <div class="walkthrough-image-grid">
+                        <figure class="schneider-highlight">
+                            <div class="captioned-item">
+                                <img data-media-src="assets/schneider/final-1.png" alt="Scenario picker for creating a maintenance agent: predictive maintenance, daily operations, or alarm convergence" width="3167" height="1580" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-1.png" alt="Scenario picker for creating a maintenance agent: predictive maintenance, daily operations, or alarm convergence"></noscript>
+                            </div>
+                            <div class="floating-caption"><p class="floating-caption-details">Creating a maintenance agent</p></div>
+                        </figure>
+                        <figure class="schneider-highlight">
+                            <div class="captioned-item">
+                                <img data-media-src="assets/schneider/final-2.png" alt="Task panel home with schedule, status counters, task records, and the PowerGPT agent chat" width="3165" height="1583" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-2.png" alt="Task panel home with schedule, status counters, task records, and the PowerGPT agent chat"></noscript>
+                            </div>
+                            <div class="floating-caption"><p class="floating-caption-details">Task panel and inspection schedule</p></div>
+                        </figure>
+                        <figure class="schneider-highlight">
+                            <div class="captioned-item">
+                                <img data-media-src="assets/schneider/final-3.png" alt="Knowledge graph view of busbar fault factors beside the agent dialogue and alert records" width="3165" height="1583" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-3.png" alt="Knowledge graph view of busbar fault factors beside the agent dialogue and alert records"></noscript>
+                            </div>
+                            <div class="floating-caption"><p class="floating-caption-details">Knowledge graph and alert records</p></div>
+                        </figure>
+                        <figure class="schneider-highlight">
+                            <div class="captioned-item">
+                                <img data-media-src="assets/schneider/final-4.png" alt="3D factory simulation with robot call controls, highlighted cabinets, and short-circuit precursor diagnosis in chat" width="3167" height="1592" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-4.png" alt="3D factory simulation with robot call controls, highlighted cabinets, and short-circuit precursor diagnosis in chat"></noscript>
+                            </div>
+                            <div class="floating-caption"><p class="floating-caption-details">3D factory simulation and robot controls</p></div>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+            <section class="section-product-walkthrough section-product-walkthrough--text-first">
+                <h3>Product walkthrough</h3>
                 <div class="cs-section-body">
                     <div class="product-highlight-entries">
                         <div class="product-highlight-entry">
+                            <div>
+                                <h4>1. Creating an agent</h4>
+                                <p>The setup flow starts with a maintenance scenario, then narrows the agent’s scope to specific equipment. Users can link an existing knowledge graph or create a new one, connecting the agent to the structured knowledge it will use during inspections.</p>
+                            </div>
                             <div class="captioned-item">
                                 <video class="video-app-highlights" data-media-src="assets/schneider/pgpt pt1 edit.mp4" data-media-autoplay loop muted
                                     playsinline width="3172" height="1586" preload="none" data-media-poster="assets/media-posters/8d01c2f46370.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/pgpt pt1 edit.mp4" loop muted
                                     playsinline controls></video></noscript>
                             </div>
-                            <div>
-                                <p>Flow 1: Creating an agent</p>
-                            </div>
                         </div>
                         <div class="product-highlight-entry">
+                            <div>
+                                <h4>2. Scheduling and running an inspection task</h4>
+                                <p>A recurring inspection appears in the weekly schedule and runs as a tracked task. Its results bring equipment readings and analysis into the task details panel, where users can review an issue and request on-site verification when further checks are needed.</p>
+                            </div>
                             <div class="captioned-item video-inset-border">
                                 <video class="video-app-highlights" data-media-src="assets/schneider/pgpt pt2 edit new.mp4" data-media-autoplay loop muted
                                     playsinline width="3172" height="1586" preload="none" data-media-poster="assets/media-posters/9c75d94ae7a9.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/pgpt pt2 edit new.mp4" loop muted
                                     playsinline controls></video></noscript>
                             </div>
-                            <div>
-                                <p>Flow 2: Scheduling and running an inspection task</p>
-                            </div>
                         </div>
                         <div class="product-highlight-entry">
+                            <div>
+                                <h4>3. Responding to a triggered alert</h4>
+                                <p>A triggered alert opens a diagnostic conversation alongside the knowledge graph. The agent presents inspection findings, connects the issue to possible causes, and guides a graded response, with robot controls available in the 3D factory view.</p>
+                            </div>
                             <div class="captioned-item video-inset-border">
                                 <video class="video-app-highlights" data-media-src="assets/schneider/pgpt pt3 edit.mp4" data-media-autoplay loop muted
                                     playsinline width="3172" height="1586" preload="none" data-media-poster="assets/media-posters/d9d32af7cf62.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/pgpt pt3 edit.mp4" loop muted
                                     playsinline controls></video></noscript>
-                            </div>
-                            <div>
-                                <p>Flow 3: Encountering a triggered alert</p>
-                            </div>
-                        </div>
-                        <div class="walkthrough-image-grid">
-                            <div class="captioned-item">
-                                <img data-media-src="assets/schneider/final-1.png" alt="Scenario picker for creating a maintenance agent: predictive maintenance, daily operations, or alarm convergence" width="3167" height="1580" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-1.png" alt="Scenario picker for creating a maintenance agent: predictive maintenance, daily operations, or alarm convergence"></noscript>
-                            </div>
-                            <div class="captioned-item">
-                                <img data-media-src="assets/schneider/final-2.png" alt="Task panel home with schedule, status counters, task records, and the PowerGPT agent chat" width="3165" height="1583" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-2.png" alt="Task panel home with schedule, status counters, task records, and the PowerGPT agent chat"></noscript>
-                            </div>
-                            <div class="captioned-item">
-                                <img data-media-src="assets/schneider/final-3.png" alt="Knowledge graph view of busbar fault factors beside the agent dialogue and alert records" width="3165" height="1583" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-3.png" alt="Knowledge graph view of busbar fault factors beside the agent dialogue and alert records"></noscript>
-                            </div>
-                            <div class="captioned-item">
-                                <img data-media-src="assets/schneider/final-4.png" alt="3D factory simulation with robot call controls, highlighted cabinets, and short-circuit precursor diagnosis in chat" width="3167" height="1592" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/final-4.png" alt="3D factory simulation with robot call controls, highlighted cabinets, and short-circuit precursor diagnosis in chat"></noscript>
                             </div>
                         </div>
                     </div>
@@ -291,15 +313,8 @@
             <section class="section-outcome">
                 <h3>Outcome &amp; impact</h3>
                 <div class="cs-section-body">
-                    <p>AI + Power was presented across nine demos at Schneider Electric's Beijing innovation campus to an
-                        audience of more than 500, including national leadership from Schneider's China teams and
-                        representatives from partner firms. During the demo, the system was wired directly to factory
-                        equipment on the exhibition floor, where it detected a fault, raised an alert, and dispatched a robot
-                        to shut the machine down in real time. The project was later shown at the World Artificial Intelligence Conference (WAIC)
-                        in Shanghai.</p>
-                    <p>The platform has since entered formal development; as a result, my internship was extended from three
-                        months into a full year, where I work alongside engineers and product designers to carry the
-                        prototype to production.</p>
+                    <p class="schneider-marked">AI + Power was presented across <span>nine demos</span> at Schneider Electric's Beijing innovation campus to an <span>audience of more than 500</span>, including national leadership from Schneider's China teams and representatives from partner firms. During the demo, the system was wired directly to factory equipment on the exhibition floor, where it <span>detected a fault, raised an alert, and dispatched a robot to shut the machine down in real time</span>. The project was later shown at the <span>World Artificial Intelligence Conference (WAIC)</span> in Shanghai.</p>
+                    <p class="schneider-marked">The platform has since <span>entered formal development</span>; as a result, <span>my internship was extended from three months into a full year</span>, where I work alongside engineers and product designers to carry the prototype to production.</p>
                     <div class="product-highlight-entries">
                         <div class="captioned-item">
                             <video class="video-app-highlights" data-media-src="assets/schneider/robot edit.mp4" data-media-autoplay loop muted

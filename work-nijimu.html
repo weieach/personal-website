@@ -22,19 +22,20 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- First paint: dark nav on desktop only (mobile uses static thumb, no color switch) -->
     <!-- Local typography and icon fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="fonts.css?v=roboto-2">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400&display=swap">
     <link rel="icon" href="assets/favicon.png">
     <!-- icons -->
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
-    <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
     <link rel="stylesheet"
@@ -42,8 +43,8 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=archive-nav-1">
 
-    <link rel="stylesheet" href="style-project.css?v=favicon-3">
-    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="style-project.css?v=nijimu-awards-3">
+    <link rel="stylesheet" href="responsive.css?v=about-flower-2">
     <title>Nicole Wei: nijimu (2026)</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta property="og:type" content="website">
@@ -61,7 +62,6 @@
     <meta name="twitter:description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta name="twitter:image" content="https://www.ncwei.com/assets/og-image.jpg">
     <link rel="stylesheet" href="theme.css?v=8">
-    <link rel="stylesheet" href="playground-layout.css?v=nijimu-slide5-scale-1">
     <link rel="stylesheet" href="site-motion.css?v=1">
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=native-1"></script>
@@ -69,13 +69,65 @@
     <script type="module" src="tag-shapes.js?v=product-1"></script>
     <style>:where(img[data-media-src], video[data-media-src]) { height: auto; }</style>
     <noscript><style>[data-media-src] { display: none !important; }</style></noscript>
+    <style>
+        main.main-projectpg.case-study-project.cs-grid.nijimu-project .case-study-header > h1 {
+            font-family: "Nanum Myeongjo", serif;
+            font-weight: 400;
+        }
+        main.main-projectpg.case-study-project.cs-grid.nijimu-project .section-concept .cs-section-body > p {
+            font-family: "Nanum Myeongjo", serif;
+            font-size: calc(16px * var(--cs-text-scale));
+            opacity: 0.6;
+        }
+        .nijimu-project .nijimu-phase { gap: 20px; align-items: stretch; }
+        .nijimu-project .nijimu-phase .nijimu-phase-copy {
+            display: block;
+            height: auto;
+            min-height: 0;
+            min-width: 0;
+        }
+        .nijimu-project .nijimu-phase-copy > h4 { margin: 0; }
+        main.main-projectpg.case-study-project.cs-grid.nijimu-project .section-iterations-visual-development .nijimu-phase-copy > p {
+            margin: 10px 0 0;
+            opacity: 0.6;
+        }
+        main.main-projectpg.case-study-project.cs-grid.nijimu-project .section-product-highlights .captioned-item > img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        main.main-projectpg.case-study-project.cs-grid.nijimu-project .section-product-highlights .captioned-item > img.nijimu-single-card {
+            width: 50%;
+            min-width: min(280px, 100%);
+            max-width: 100%;
+            margin-inline: auto;
+        }
+        main.main-projectpg.case-study-project.cs-grid.nijimu-project .section-research-question .cs-section-body {
+            gap: 24px;
+        }
+        main.main-projectpg.case-study-project.cs-grid.nijimu-project .section-research-question .cs-section-body > p.nijimu-research-question {
+            font-family: "Geist", sans-serif;
+            font-size: calc(20px * var(--cs-text-scale));
+            font-weight: 500;
+            line-height: 1.35;
+            opacity: 1;
+        }
+        .nijimu-project .nijimu-hand-gesture {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 
-<body class="nijimu-page dark-mode">
+<body class="dark-mode">
     <header>
         <nav>
             <a href="index.html" class="logo">
-                <img src="assets/favicon.png" alt="">
+                <img src="assets/favicon.png" alt="bird-logo">
                 <p>Nicole Wei&nbsp;&nbsp;<span class="logo-zh">魏逸晨</span></p>
             </a>
             <ul>
@@ -87,7 +139,7 @@
             <button type="button" class="btn-burger"><span class="material-symbols-outlined">menu</span></button>
         </nav>
     </header>
-    <main class="main-projectpg playground-project non-cs-pg pg-with-thumbnail">
+    <main class="main-projectpg case-study-project nijimu-project cs-grid">
         <div class="sidebar no-display">
             <ul>
                 <li><a href="index.html?collection=product" data-collection-nav="product">Product</a></li>
@@ -96,106 +148,195 @@
                 <li><a href="index.html#about" data-about-link>About</a></li>
             </ul>
         </div>
-        <div class="page-thumbnail page-thumbnail-nijimu">
-            <img class="nijimu-thumb-static" data-media-src="assets/nijimu/square%20thumbnail.png" alt="nijimu — An Ambient Interface For Forgetting" width="2200" height="2200" loading="lazy" decoding="async"><noscript data-media-fallback><img class="nijimu-thumb-static" src="assets/nijimu/square%20thumbnail.png" alt="nijimu — An Ambient Interface For Forgetting"></noscript>
-            <div class="nijimu-thumb-stage">
-                <img class="nijimu-thumb-hero" data-media-src="assets/nijimu/nijimu-title_image.jpg" alt="nijimu title image" width="4800" height="1874" loading="lazy" decoding="async"><noscript data-media-fallback><img class="nijimu-thumb-hero" src="assets/nijimu/nijimu-title_image.jpg" alt="nijimu title image"></noscript>
-                <div class="nijimu-thumb-clips" aria-hidden="true">
-                    <video class="nijimu-thumb-clip" data-media-src="assets/nijimu/nijimu snippets - 1.mov" muted loop playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/9dd08bd0c407.webp" data-media-managed="external"></video><noscript data-media-fallback><video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 1.mov" muted loop playsinline preload="none" controls></video></noscript>
-                    <video class="nijimu-thumb-clip" data-media-src="assets/nijimu/nijimu snippets - 2.m4v" muted loop playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/a70aaf1750a3.webp" data-media-managed="external"></video><noscript data-media-fallback><video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 2.m4v" muted loop playsinline preload="none" controls></video></noscript>
-                    <video class="nijimu-thumb-clip" data-media-src="assets/nijimu/nijimu snippets - 4.mov" muted loop playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/a48539e6bb98.webp" data-media-managed="external"></video><noscript data-media-fallback><video class="nijimu-thumb-clip" src="assets/nijimu/nijimu snippets - 4.mov" muted loop playsinline preload="none" controls></video></noscript>
-                </div>
+
+        <div class="case-study-intro">
+            <div class="img-casestudy-cover img-casestudy-cover-nijimu">
+                <img data-media-src="assets/nijimu/nijimu laptop photo.jpg" alt="Hands on a laptop keyboard while nijimu's memory artifacts float on screen" width="3840" height="2160" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/nijimu/nijimu laptop photo.jpg" alt="Hands on a laptop keyboard while nijimu's memory artifacts float on screen"></noscript>
             </div>
-        </div>
-        <div class="nijimu-caption-band">
-            <div class="project-caption">
-                <h1>nijimu 滲む</h1>
-                <h2 class="project-subtitle">UI / UX, Web Dev</h2>
+
+            <div class="case-study-header">
+                <h1>滲む nijimu</h1>
+                <div class="cs-section-body">
+                    <h2>A speculative memory wellness tool that treats past experiences as something that dissolves into who
+                        you are becoming rather than something to archive or forget.</h2>
+                    <ul class="list-case-study list-case-study-info">
+                        <li>
+                            <p class="entry-header">Role</p>
+                            <p class="entry-content">Creative technologist, graphic designer, motion designer</p>
+                        </li>
+                        <li>
+                            <p class="entry-header">Timeline</p>
+                            <p class="entry-content">Feb 2026 - Nov 2026</p>
+                        </li>
+                        <li>
+                            <p class="entry-header">Collaborators</p>
+                            <p class="entry-content">Echo Zhou, Mavis Zhang, Yokis Bai</p>
+                        </li>
+                        <li>
+                            <p class="entry-header">Tools</p>
+                            <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/claude.svg?v=color-1" width="16" height="16" alt="">Claude Code</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/openai.svg?v=white-1" width="16" height="16" alt="">Codex</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/cursor.svg?v=color-1" width="16" height="16" alt="">Cursor</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/figma.svg?v=color-1" width="16" height="16" alt="">Figma Make</span></p>
+                        </li>
+                        <li class="list-case-study-info-awards">
+                            <p class="entry-header">Awards</p>
+                            <div class="entry-content">
+                                <span class="entry-award">
+                                    <span class="entry-award-title"><img class="link-favicon" src="assets/company-icons/communication-arts.png" alt="" aria-hidden="true"><span>Communication Arts 2027 Interactive Annual</span></span>
+                                    <span class="entry-secondary">Award of Excellence (Student Work)</span>
+                                </span>
+                                <span class="entry-award">
+                                    <span class="entry-award-title"><img class="link-favicon" src="assets/company-icons/award360.png" alt="" aria-hidden="true"><span>Award360° 2026</span></span>
+                                    <span class="entry-secondary">Shortlisted Finalist (awaiting final round)</span>
+                                </span>
+                                <span class="entry-award">
+                                    <span class="entry-content-link"><a href="https://designawards.core77.com/Interaction/143407/nijimu-to-seep-into" target="_blank" rel="noopener noreferrer"><img class="link-favicon" src="assets/company-icons/core77.png" alt="" aria-hidden="true"><span>Core77 Design Award</span></a><i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></span>
+                                    <span class="entry-secondary">Interaction Design Track Student 1st Place; Speculative Design Track Student Notable</span>
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="entry-header">Website</p>
+                            <p class="entry-content"><a href="https://nijimu.space" target="_blank" rel="noopener noreferrer"><i class="ph-light ph-globe" aria-hidden="true"></i><span>nijimu.space</span></a><i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></p>
+                        </li>
+                    </ul>
+                </div>
                 <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
-                <p><i>nijimu</i> is a speculative memory wellness tool that treats past experiences as something that dissolves into who you are becoming rather than something to archive or forget.</p>
-                <p>Instead of freezing memory as a static record, the product invites users to let recollection seep, reshape, and reappear as living form—through recording, transcription, and gesture-driven sculpting of memory artifacts.</p>
-                <p>Developed alongside my wonderful teammates, <a href="https://www.isle-of-echo.com/" target="_blank" rel="noopener noreferrer">Echo Zhou</a>, <a href="https://mvsz.me/" target="_blank" rel="noopener noreferrer">Mavis Zhang</a>, and <a href="https://yokis.space/" target="_blank" rel="noopener noreferrer">Yokis Bai</a>.</p>
-                <ul>
-                    <li>
-                        <h3>Duration</h3>
-                        <p>Feb 2026 - Present <br><b>(Currently in phase 2 development)</b></p>
-                    </li>
-                    <li>
-                        <h3>Tools</h3>
-                        <p>Figma, Cursor</p>
-                    </li>
-                    <li>
-                        <h3>Role</h3>
-                        <p>Design engineer, graphic designer</p>
-                    </li>
-                    <li>
-                        <h3>Awards & Recognition</h3>
-                        <p><a href="https://designawards.core77.com/Interaction/143407/nijimu-to-seep-into" target="_blank" rel="noopener noreferrer"><i class="ph-light ph-globe" aria-hidden="true"></i><span>Core77 Design Award</span><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a> <br> Interaction Design Track · Student 1st Place <br> Speculative Design Track · Student Notable</p>
-                    </li>
-                    <li>
-                        <h3>Website</h3>
-                        <p><a href="https://nijimu.space" target="_blank" rel="noopener noreferrer"><img class="link-favicon" src="assets/nijimu/nijimu-favicon.png" alt="" aria-hidden="true"><span>nijimu.space</span><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></a></p>
-                    </li>
-                </ul>
             </div>
-            <button type="button" class="nijimu-certificate" aria-label="View Core77 Design Awards certificate">
-                <span class="nijimu-certificate__caption" aria-hidden="true">Core77 Award Certificate</span>
-                <span class="nijimu-certificate__frame">
-                    <img data-media-src="assets/honoree-certificate.png" alt="Core77 Design Awards 2026 Student Winner certificate for nijimu" width="2242" height="1578" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/honoree-certificate.png" alt="Core77 Design Awards 2026 Student Winner certificate for nijimu"></noscript>
-                </span>
-            </button>
         </div>
-        <div class="placeholder-caption"></div>
-        <div class="project-pics nijimu-project-pics">
-            <div class="captioned-item" data-media-bg="#0E0B0B">
-                <img class="nijimu-modes" data-media-src="assets/nijimu/slide 05 2.png" alt="How might we design an interactive archive that transforms memory into tangible experience: imprint, distill, and sculpt" width="2534" height="982" loading="lazy" decoding="async"><noscript data-media-fallback><img class="nijimu-modes" src="assets/nijimu/slide 05 2.png" alt="How might we design an interactive archive that transforms memory into tangible experience: imprint, distill, and sculpt"></noscript>
-            </div>
-            <div class="captioned-item" data-media-bg="#000000">
-                <video class="video-app-highlights" data-media-src="assets/nijimu/nijimu-library(core77).mp4" data-media-autoplay loop muted
-                    playsinline width="3764" height="2160" preload="none" data-media-poster="assets/media-posters/2d6a0d02b59a.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/nijimu/nijimu-library(core77).mp4" loop muted
-                    playsinline controls preload="none"></video></noscript>
-                <div class="floating-caption">
-                    <p class="floating-caption-title">Traversing the memory archive</p>
+
+        <div class="project-caption">
+            <section class="section-research-question">
+                <h3>Research question</h3>
+                <div class="cs-section-body">
+                    <p class="nijimu-research-question">How might we translate the unspoken textures of memory into a visual language that can be digitally sculpted?</p>
+                    <figure class="captioned-item">
+                        <img class="nijimu-hand-gesture" src="assets/nijimu/case-study/hand-gesture.webp" width="1920" height="1080" alt="A pinching hand gesture in front of nijimu’s memory-sculpting interface" loading="lazy" decoding="async">
+                        <div class="floating-caption"><p class="floating-caption-details">Sculpting a memory artifact through hand gestures</p></div>
+                    </figure>
                 </div>
-            </div>
-            <div class="captioned-item" data-media-bg="#000000">
-                <video class="video-app-highlights" data-media-src="assets/nijimu/(longer flow) nijimu recording &amp; transcribing.mp4" data-media-autoplay loop muted
-                    playsinline width="1876" height="1080" preload="none" data-media-poster="assets/media-posters/17383a40f8a8.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/nijimu/(longer flow) nijimu recording &amp; transcribing.mp4" loop muted
-                    playsinline controls preload="none"></video></noscript>
-                <div class="floating-caption">
-                    <p class="floating-caption-title">Transcribing memory into words</p>
+            </section>
+            <section class="section-concept">
+                <h3>Concept</h3>
+                <div class="cs-section-body">
+                    <p lang="ja">「ゆく河の流れは絶えずして、しかももとの水にあらず。」</p>
+                    <p>The river never ceases to flow, yet the water within it is never the same.</p>
+                    <p>Memory has no form, yet it threads through synesthesia; we often describe a memory as "heavy," "distant," or "faded"—reflecting the immediate textures and sensations it imprints upon our bodies. nijimu (滲む, Japanese for "to blur, bleed, or seep into") is a visual experiment that brings these metaphors to life. Using an interactive web interface, it transforms memories once flattened into camera-roll thumbnails into sculptable, growing crystals powered by MediaPipe hand tracking and real-time rendering.</p>
+                    <p>nijimu is rooted in Richard Shusterman’s somaesthetics: the mind and body are not mere vessels for experience, but a unified ground open to the unknown—inherently capable of receiving, integrating, and letting go of complex experiences.</p>
+                    <p>Visitors speak a memory toward the water’s surface, and a language model interprets its semantic texture across multiple dimensions: solace, intensity, unease, fragmentation, and entanglement. Formless memory is mapped into twelve generative geometries derived from Gielis’s Superformula, though its final shape is sculpted by the body. As both palms slowly open, the memory grows outward from a sphere; the parting and closing of fingertips set its rhythm, like a fragmented ballad. Push your palms away into the distance, and the memory recedes into mist, its silhouette blurring within the archive; sweep your fingers across a spectrum to tint it with the color of what you felt.</p>
+                    <p>Once confirmed, the form rises back to the surface through sunlight refracting down into the water. It is named, filed under a year, and released into a shared field of ripples made of every memory before it. Film development, fabric drape, glass refraction, and atmospheric bloom are all computed in real time through a custom R3F GPU rendering pipeline, carrying the entire journey—from voice recording to naming—in a single continuous take across the same body of water.</p>
+                    <p>Even if forgetting is inevitable, nijimu offers a ritual for it: a way for memories to be faced again, laid to rest, and held in the palm of your hand to be quietly examined.</p>
+                    <img data-media-src="assets/nijimu/slide 05 2.png" alt="How might we design an interactive archive that transforms memory into tangible experience: imprint, distill, and sculpt" width="2534" height="982" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/nijimu/slide 05 2.png" alt="How might we design an interactive archive that transforms memory into tangible experience: imprint, distill, and sculpt"></noscript>
                 </div>
-            </div>
-            <div class="captioned-item" data-media-bg="#000000">
-                <video class="video-app-highlights" data-media-src="assets/nijimu/nijimu (core77).mp4" data-media-autoplay loop muted
-                    playsinline width="3764" height="2160" preload="none" data-media-poster="assets/media-posters/ac140f09b243.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/nijimu/nijimu (core77).mp4" loop muted
-                    playsinline controls preload="none"></video></noscript>
-                <div class="floating-caption">
-                    <p class="floating-caption-title">Sculpting memory artifacts as living three-dimensional form: real-time hand gesture tracking</p>
+            </section>
+            <section class="section-iterations-visual-development">
+                <h3>Iterations &amp; visual development</h3>
+                <div class="cs-section-body">
+                    <div class="product-highlight-entry nijimu-phase">
+                        <div class="nijimu-phase-copy">
+                            <h4>Phase 1: From spoken memory to sculptable artifacts</h4>
+                            <p>The early prototypes explored how a spoken memory could become a tangible artifact. They pair archive navigation and voice transcription with real-time hand tracking, making language, gesture, and form parts of the same memory-making flow.</p>
+                        </div>
+                        <div class="product-highlight-entries">
+                            <div class="captioned-item">
+                                <video class="video-app-highlights" data-media-src="assets/nijimu/nijimu-library(core77).mp4" data-media-autoplay loop muted
+                                    playsinline width="3764" height="2160" preload="none" data-media-poster="assets/media-posters/2d6a0d02b59a.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/nijimu/nijimu-library(core77).mp4" loop muted
+                                    playsinline controls preload="none"></video></noscript>
+                                <div class="floating-caption">
+                                    <p class="floating-caption-details">Traversing the memory archive</p>
+                                </div>
+                            </div>
+                            <div class="captioned-item">
+                                <video class="video-app-highlights" data-media-src="assets/nijimu/(longer flow) nijimu recording &amp; transcribing.mp4" data-media-autoplay loop muted
+                                    playsinline width="1876" height="1080" preload="none" data-media-poster="assets/media-posters/17383a40f8a8.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/nijimu/(longer flow) nijimu recording &amp; transcribing.mp4" loop muted
+                                    playsinline controls preload="none"></video></noscript>
+                                <div class="floating-caption">
+                                    <p class="floating-caption-details">Transcribing memory into words</p>
+                                </div>
+                            </div>
+                            <div class="captioned-item">
+                                <video class="video-app-highlights" data-media-src="assets/nijimu/nijimu (core77).mp4" data-media-autoplay loop muted
+                                    playsinline width="3764" height="2160" preload="none" data-media-poster="assets/media-posters/ac140f09b243.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/nijimu/nijimu (core77).mp4" loop muted
+                                    playsinline controls preload="none"></video></noscript>
+                                <div class="floating-caption">
+                                    <p class="floating-caption-details">Sculpting memory artifacts as living three-dimensional form: real-time hand gesture tracking</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-highlight-entry nijimu-phase">
+                        <div class="nijimu-phase-copy">
+                            <h4>Phase 2: Exploring water, ripples, and memory selection</h4>
+                            <p>These studies moved the archive toward a water-based environment, exploring how ripples, refraction, and soft light could evoke the fluidity of memory. A separate selector explored browsing sculpted artifacts along a timeline, connecting each form to the year of its memory.</p>
+                        </div>
+                        <div class="product-highlight-entries">
+                            <div class="captioned-item">
+                                <video class="video-app-highlights" width="1440" height="884" aria-label="Water surface and ripple shader study" data-media-src="assets/nijimu/case-study/puddle-shader-v1.mp4" data-media-crossorigin="none" data-media-poster="assets/nijimu/case-study/puddle-shader-v1.webp" poster="assets/nijimu/case-study/puddle-shader-v1.webp" data-media-autoplay muted loop playsinline preload="none"></video>
+                                <noscript data-media-fallback><video width="1440" height="884" src="assets/nijimu/case-study/puddle-shader-v1.mp4" poster="assets/nijimu/case-study/puddle-shader-v1.webp" muted loop playsinline controls preload="none"></video></noscript>
+                                <div class="floating-caption"><p class="floating-caption-details">Water surface and ripple shader study</p></div>
+                            </div>
+                            <div class="captioned-item">
+                                <video class="video-app-highlights" width="1440" height="892" aria-label="Memory selector and timeline" data-media-src="assets/nijimu/case-study/memory-selector.mp4" data-media-crossorigin="none" data-media-poster="assets/nijimu/case-study/memory-selector.webp" poster="assets/nijimu/case-study/memory-selector.webp" data-media-autoplay muted loop playsinline preload="none"></video>
+                                <noscript data-media-fallback><video width="1440" height="892" src="assets/nijimu/case-study/memory-selector.mp4" poster="assets/nijimu/case-study/memory-selector.webp" muted loop playsinline controls preload="none"></video></noscript>
+                                <div class="floating-caption"><p class="floating-caption-details">Memory selector and timeline</p></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
+            <section class="section-product-highlights">
+                <h3>Product highlights</h3>
+                <div class="cs-section-body">
+                    <div class="captioned-item">
+                        <video width="3746" height="2160" aria-label="nijimu product overview" data-media-src="assets/nijimu/nijimu 11.7 thumbnail cuts.mp4" data-media-crossorigin="none" data-media-poster="assets/nijimu/case-study/thumbnail-cuts-1b64ab3d.webp" poster="assets/nijimu/case-study/thumbnail-cuts-1b64ab3d.webp" data-media-autoplay muted loop playsinline preload="none"></video>
+                        <noscript data-media-fallback><video width="3746" height="2160" src="assets/nijimu/nijimu 11.7 thumbnail cuts.mp4" poster="assets/nijimu/case-study/thumbnail-cuts-1b64ab3d.webp" muted loop playsinline controls preload="none"></video></noscript>
+                        <div class="floating-caption"><p class="floating-caption-details">nijimu site overview</p></div>
+                    </div>
+                    <figure class="captioned-item">
+                        <img src="assets/nijimu/case-study/product-highlight-02.webp" width="1920" height="1080" alt="nijimu entry screen with soft, blurred colors and an invitation to begin" loading="lazy" decoding="async">
+                        <div class="floating-caption"><p class="floating-caption-details">Landing screen</p></div>
+                    </figure>
+                    <figure class="captioned-item">
+                        <img src="assets/nijimu/case-study/product-highlight-gallery.webp" width="1920" height="1080" alt="A browsable archive of crystalline memory artifacts with a selected story and a timeline" loading="lazy" decoding="async">
+                        <div class="floating-caption"><p class="floating-caption-details">Browsing memory artifacts along a timeline</p></div>
+                    </figure>
+                    <figure class="captioned-item">
+                        <img src="assets/nijimu/case-study/product-highlight-pond-scene.webp" width="1727" height="994" alt="A transcribed memory above nijimu’s reflective pond surface" loading="lazy" decoding="async">
+                        <div class="floating-caption"><p class="floating-caption-details">Recording a memory above the pond</p></div>
+                    </figure>
+                    <figure class="captioned-item">
+                        <img src="assets/nijimu/case-study/product-highlight-04.webp" width="1920" height="1080" alt="Memory distance screen with an open-palm gesture and an artifact among other memories" loading="lazy" decoding="async">
+                        <div class="floating-caption"><p class="floating-caption-details">Placing a memory in the archive through hand gestures</p></div>
+                    </figure>
+                    <figure class="captioned-item">
+                        <img src="assets/nijimu/case-study/product-highlight-color.webp" width="1920" height="1080" alt="Memory color screen with a crystalline artifact and a soft spectrum of colors" loading="lazy" decoding="async">
+                        <div class="floating-caption"><p class="floating-caption-details">Tinting a memory through the color spectrum</p></div>
+                    </figure>
+                    <figure class="captioned-item">
+                        <img src="assets/nijimu/case-study/product-highlight-card-with-background.webp" width="1920" height="1080" alt="A nijimu memory card with a crystalline artifact, a Japanese title, the year 2026, and a written memory" loading="lazy" decoding="async">
+                        <div class="floating-caption"><p class="floating-caption-details">A memory card with its sculpted artifact, title, year, and story</p></div>
+                    </figure>
+                </div>
+            </section>
         </div>
     </main>
     <hr>
     <footer>
         <p>&copy; 2026 Nicole Wei</p>
         <div class="icons">
-                <a href="mailto:wei.yichen@wustl.edu" target="_blank" class="contact-entry" aria-label="Email"><i
-                        class="ph ph-envelope-simple"></i></a>
-                <a href="https://www.instagram.com/nikuowwi/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-instagram" aria-label="Instagram"><i
-                        class="ph-fill ph-instagram-logo"></i></a>
-                <a href="https://x.com/weieach" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x" aria-label="X"><i
-                        class="ph-fill ph-x-logo"></i></a>
-                <a href="https://www.linkedin.com/in/ncwei/" target="_blank" rel="noopener noreferrer" class="contact-entry icon-linkedin" aria-label="LinkedIn"><i
-                        class="ph-fill ph-linkedin-logo"></i></a>
-            </div>
+            <a href="mailto:wei.yichen@wustl.edu" target="_blank" class="contact-entry" aria-label="Email"><i
+                    class="ph ph-envelope-simple"></i></a>
+            <a href="https://www.instagram.com/nikuowwi/" target="_blank" rel="noopener noreferrer"
+                class="contact-entry icon-instagram" aria-label="Instagram"><i
+                    class="ph-fill ph-instagram-logo"></i></a>
+            <a href="https://x.com/weieach" target="_blank" rel="noopener noreferrer" class="contact-entry icon-x"
+                aria-label="X"><i class="ph-fill ph-x-logo"></i></a>
+            <a href="https://www.linkedin.com/in/ncwei/" target="_blank" rel="noopener noreferrer"
+                class="contact-entry icon-linkedin" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a>
+        </div>
     </footer>
-    <script src="media-config.js?v=1"></script>
-    <script src="media-loader.js?v=1"></script>
-    <script type="module" src="project-scroll.js?v=media-1"></script>
-    <script type="module" src="nijimu-thumbnail.js?v=media-1"></script>
+    <script src="media-config.js?v=20261108-thumbnail-cuts-1b64ab3d"></script>
+    <script src="media-loader.js?v=20261108-new-videos"></script>
+    <script type="module" src="project-scroll.js?v=cover-first-1"></script>
     <script src="script.js?v=optional-details-1"></script>
-    <script src="playground-layout.js?v=media-1"></script>
 </body>
 
 </html>

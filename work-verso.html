@@ -42,8 +42,8 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=archive-nav-1">
 
-    <link rel="stylesheet" href="style-project.css?v=metadata-underline-4">
-    <link rel="stylesheet" href="responsive.css?v=cs-grid-1">
+    <link rel="stylesheet" href="style-project.css?v=nijimu-awards-3">
+    <link rel="stylesheet" href="responsive.css?v=about-flower-2">
     <title>Nicole Wei: Verso (2026)</title>
     <meta name="description" content="How Nicole Wei designed Verso, a visual record of the decisions behind an AI-assisted prototype.">
     <meta property="og:type" content="website">
@@ -72,6 +72,31 @@
         html:has(.verso-project) { --color-bg: #000000; }
         html:has(main.case-study-project.verso-project), body:has(main.case-study-project.verso-project) { background-color: var(--color-bg); }
         .case-study-project.verso-project { --cs-accent: #d8b7aa; }
+        .verso-project .img-casestudy-cover::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: rgb(255 255 255 / 5%);
+            pointer-events: none;
+        }
+        .verso-project .verso-reflection-video {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .verso-project .verso-reflection-video > video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* Crop in on the laptop and logo: they only fill the middle of the
+               frame. The origin keeps that content centered at 1.8x. */
+            transform: scale(1.8);
+            transform-origin: 53.5% 39.6%;
+        }
         .verso-project .captioned-item > :is(img, video) {
             display: block;
             width: 100%;
@@ -120,11 +145,6 @@
         }
         .verso-project .video-app-highlights { height: auto; }
         .verso-project .verso-backend-video { filter: brightness(1.2); }
-        .verso-project .list-case-study-info .entry-secondary {
-            display: block;
-            margin-top: 6px;
-            opacity: 0.6;
-        }
         main.main-projectpg.case-study-project.cs-grid .project-caption section .cs-section-body > p.verso-problem-statement,
         main.main-projectpg.case-study-project.cs-grid .project-caption section .cs-section-body > .verso-research-quote > p:first-child {
             font-family: "Geist", sans-serif;
@@ -194,7 +214,7 @@
                             <p class="entry-content">Lead product designer</p>
                         </li>
                         <li>
-                            <p class="entry-header">Team</p>
+                            <p class="entry-header">Collaborators</p>
                             <p class="entry-content">Echo Zhou, Mavis Zhang, Waiting Wong<span class="entry-secondary">UX research, usability testing and iteration, high-fidelity feature and component design, hackathon video submission</span></p>
                         </li>
                         <li>
@@ -203,7 +223,7 @@
                         </li>
                         <li>
                             <p class="entry-header">Tools</p>
-                            <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/figma.svg?v=color-1" width="16" height="16" alt="">Figma</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/openai.svg?v=white-1" width="16" height="16" alt="">Codex</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/claude.svg?v=color-1" width="16" height="16" alt="">Claude Code</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/cursor.svg?v=color-1" width="16" height="16" alt="">Cursor</span></p>
+                            <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/openai.svg?v=white-1" width="16" height="16" alt="">Codex</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/claude.svg?v=color-1" width="16" height="16" alt="">Claude Code</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/cursor.svg?v=color-1" width="16" height="16" alt="">Cursor</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/figma.svg?v=color-1" width="16" height="16" alt="">Figma</span></p>
                         </li>
                         <li>
                             <p class="entry-header">Website</p>
@@ -321,7 +341,7 @@
                 </div>
             </section>
             <section>
-                <h3>Version capture mechanic</h3>
+                <h3>Version snapshot: mechanism</h3>
                 <div class="cs-section-body">
                     <p>The capture mechanism saves a local frame after an agent prompt. A Git push groups those frames into a version. The saved commit also gives the prototype a point it can rebuild and replay.</p>
                     <figure class="captioned-item">
@@ -436,6 +456,10 @@
                             <p>AI helped fill in implementation details and complete secondary interactions, allowing me to explore less-prescriptive design directions.</p>
                         </li>
                     </ul>
+                    <div class="verso-reflection-video">
+                        <video width="1920" height="1080" aria-label="Verso closing animation with logo" data-media-src="assets/verso/(copies)%20videos%20needed%20for%20case%20study/verso%20closing%20w%20logo.mp4" data-media-crossorigin="none" data-media-autoplay muted loop playsinline preload="none"></video>
+                        <noscript data-media-fallback><video width="1920" height="1080" aria-label="Verso closing animation with logo" src="assets/verso/(copies)%20videos%20needed%20for%20case%20study/verso%20closing%20w%20logo.mp4" muted loop playsinline controls preload="none"></video></noscript>
+                    </div>
                 </div>
             </section>
         </div>
@@ -454,8 +478,8 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script src="media-config.js?v=1"></script>
-    <script src="media-loader.js?v=1"></script>
+    <script src="media-config.js?v=20261108-new-videos"></script>
+    <script src="media-loader.js?v=20261108-new-videos"></script>
     <script type="module" src="project-scroll.js?v=cover-first-1"></script>
     <script src="script.js?v=optional-details-1"></script>
 </body>

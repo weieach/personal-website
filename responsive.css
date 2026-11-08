@@ -817,3 +817,46 @@
     display: none;
   }
 }
+
+/* Keep the stacked About portrait and bird at a stable tablet size. */
+@media (500px <= width < 960px) {
+  .postcard__back .about-avatar,
+  .about-avatar {
+    width: 350px;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .about-avatar .about-bird-wrap {
+    width: 175px;
+  }
+}
+
+.about-avatar .about-tablet-flower { display: none; }
+@media (500px <= width < 960px) {
+  .about-avatar .about-bird {
+    position: relative;
+    z-index: 4;
+  }
+
+  .about-avatar .about-tablet-flower {
+    display: block;
+    position: absolute;
+    right: -2.5px;
+    bottom: -48px;
+    width: 110px;
+    height: 110px;
+    max-width: none;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 3;
+    animation: about-tablet-flower-spin 24s linear infinite;
+  }
+}
+
+@keyframes about-tablet-flower-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-avatar .about-tablet-flower { animation: none; }
+}

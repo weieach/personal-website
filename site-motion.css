@@ -8,4 +8,4 @@ html:has(#smooth-wrapper) { scroll-behavior: auto; }
 .page-loader__tip { z-index: 1; }
 .page-loader--exiting .page-loader__inner { transition: none; }
 .page-loader--exiting .page-loader__mark { pointer-events: none; transform-origin: 50% 50%; }
-.page-loader--exiting .page-loader__bar-fill { animation-play-state: paused; }
+.page-loader--exiting .page-loader__flower { animation-play-state: paused; }

@@ -49,14 +49,6 @@ body > header .logo p {
   color: var(--color-text-muted);
 }
 
-.page-loader__bar {
-  background: #444444;
-}
-
-.page-loader__bar-fill {
-  background: var(--color-text);
-}
-
 .project-filter {
   --tag-border: var(--color-interactive-muted);
   color: var(--color-text);

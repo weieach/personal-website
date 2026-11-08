@@ -186,6 +186,10 @@ window.SiteMediaConfig = {
     "assets/verso/case-study/version-blocks.mp4": "media/a722475ff054d0edc3e4/version-blocks.mp4",
     "assets/verso/case-study/version-cards.mp4": "media/cfdf00c852ab2f15c460/version-cards.mp4",
     "assets/verso/case-study/vr-review.mp4": "media/1344b54fed9f874fdd35/vr-review.mp4",
-    "assets/verso/case-study/vr-versions.mp4": "media/0520e69ae61a287badf2/vr-versions.mp4"
+    "assets/verso/case-study/vr-versions.mp4": "media/0520e69ae61a287badf2/vr-versions.mp4",
+    "assets/nijimu/case-study/memory-selector.mp4": "media/e77bf38a2c7c956cf23f/memory-selector.mp4",
+    "assets/nijimu/case-study/puddle-shader-v1.mp4": "media/921eaf116418b74a9389/puddle-shader-v1.mp4",
+    "assets/verso/(copies) videos needed for case study/verso closing w logo.mp4": "media/1eb8e9b13a1a933ad328/verso closing w logo.mp4",
+    "assets/nijimu/nijimu 11.7 thumbnail cuts.mp4": "media/1b64ab3d28f352f76515/nijimu 11.7 thumbnail cuts.mp4"
   }
 };
