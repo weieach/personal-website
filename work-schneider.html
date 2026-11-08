@@ -38,7 +38,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu">
     <!-- stylesheet -->
-    <link rel="stylesheet" href="style.css?v=archive-nav-1">
+    <link rel="stylesheet" href="style.css?v=no-save-1">
 
     <link rel="stylesheet" href="style-project.css?v=schneider-outcome-1">
     <link rel="stylesheet" href="responsive.css?v=about-flower-2">
@@ -89,6 +89,16 @@
         }
         main.main-projectpg.case-study-project.cs-grid.schneider-project :is(.section-process--text-first, .section-product-walkthrough--text-first) .product-highlight-entry > div:not(.captioned-item) > h4 { margin: 0; }
         main.main-projectpg.case-study-project.cs-grid.schneider-project :is(.section-process--text-first, .section-product-walkthrough--text-first) .product-highlight-entry > div:not(.captioned-item) > p { margin: 6px 0 0; text-align: left; }
+        main.main-projectpg.case-study-project.cs-grid.schneider-project .section-problem > .cs-section-body > p {
+            font-family: "Geist", sans-serif;
+            font-size: calc(14px * var(--cs-text-scale));
+            font-weight: 400;
+            line-height: normal;
+            opacity: 0.6;
+        }
+        main.main-projectpg.case-study-project.cs-grid.schneider-project .section-problem > .cs-section-body > .list-case-study-problems {
+            margin-top: calc(var(--cs-block-gap) + 6px - var(--cs-body-gap));
+        }
     </style>
 </head>
 
@@ -126,7 +136,7 @@
             <div class="case-study-header">
                 <h1>Schneider Electric: AI+Power</h1>
                 <div class="cs-section-body">
-                    <h2>An agentic factory platform that pairs PowerGPT with busbar topology monitoring, risk insight, and
+                    <h2>AI+Power is an agentic factory platform that pairs PowerGPT with busbar topology monitoring, risk insight, and
                         embodied inspection workflows for industrial operations.</h2>
                     <ul class="list-case-study list-case-study-info">
                         <li>
@@ -184,59 +194,6 @@
                             </p>
                         </li>
                     </ul>
-                </div>
-            </section>
-            <section class="section-process section-process--text-first">
-                <h3>Process &amp; Iteration</h3>
-                <div class="cs-section-body">
-                    <p class="section-process-intro">With no UI design or product spec in place, I tried out a highly iterative, AI-native process in Cursor, testing different models against each other as their capabilities kept shifting. Building directly in code meant the prototypes were interactive and largely self-explanatory, which made cycling through feedback and revision fast.</p>
-                    <div class="product-highlight-entries">
-                        <div class="product-highlight-entry">
-                            <div>
-                                <h4>1. Mapping the factory as a node network</h4>
-                                <p>My first iteration took a dashboard mindset, mapping the factory as a network of nodes representing different types of equipment. The topology is legible at a glance, while clicking on a node to inspect it or talking to the agent below offers more information on the equipment's status.</p>
-                            </div>
-                            <div class="captioned-item">
-                                <img data-media-src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar"></noscript>
-                            </div>
-                        </div>
-                        <div class="product-highlight-entry">
-                            <div>
-                                <h4>2. Surfacing agent activity with a task queue</h4>
-                                <p>In a second iteration, I added a task queue, giving real-time visual confirmation and history for the tasks the agent carries out as it multitasks, and docked the chat as a persistent panel instead of click-to-open to keep the agent's updates always in view.</p>
-                            </div>
-                            <div class="captioned-item">
-                                <img data-media-src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log" width="1728" height="992" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log"></noscript>
-                            </div>
-                        </div>
-                        <div class="product-highlight-entry">
-                            <div>
-                                <h4>3. Visualizing root causes &amp; interactive checklists</h4>
-                                <p>I added a knowledge graph view over the node map, documenting the potential causes of equipment failure. I chose a top-down tree to illustrate cause-and-effect relationships. Agent messages now render as clickable components, such as a checklist that updates itself.</p>
-                            </div>
-                            <div class="captioned-item">
-                                <img data-media-src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log" width="1728" height="1117" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log"></noscript>
-                            </div>
-                        </div>
-                        <div class="product-highlight-entry">
-                            <div>
-                                <h4>4. Optimizing space &amp; exposing raw telemetry</h4>
-                                <p>I implemented the equipment node tree in a radial distribution to optimize space. Raw telemetry and the model's confidence score now print in the message dock, so a recommendation can be traced back to the readings behind it.</p>
-                            </div>
-                            <div class="captioned-item">
-                                <img data-media-src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score" width="1728" height="1117" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score"></noscript>
-                            </div>
-                        </div>
-                        <div class="product-highlight-entry">
-                            <div>
-                                <h4>5. Shifting from graph-first to a task-first workflow</h4>
-                                <p>A major pivot came when my lead and I decided that a task-first interface was the right structure (as opposed to graph-first or chat-first), since the agent should be able to schedule tasks rather than only run them one-off or execute them immediately. The user gets an at-a-glance view of completed and upcoming tasks, and can update them efficiently.</p>
-                            </div>
-                            <div class="captioned-item">
-                                <img data-media-src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat"></noscript>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
             <section class="section-product-highlights">
@@ -310,6 +267,59 @@
                     </div>
                 </div>
             </section>
+            <section class="section-process section-process--text-first">
+                <h3>Process &amp; Iteration</h3>
+                <div class="cs-section-body">
+                    <p class="section-process-intro">With no UI design or product spec in place, I tried out a highly iterative, AI-native process in Cursor, testing different models against each other as their capabilities kept shifting. Building directly in code meant the prototypes were interactive and largely self-explanatory, which made cycling through feedback and revision fast.</p>
+                    <div class="product-highlight-entries">
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>1. Mapping the factory as a node network</h4>
+                                <p>My first iteration took a dashboard mindset, mapping the factory as a network of nodes representing different types of equipment. The topology is legible at a glance, while clicking on a node to inspect it or talking to the agent below offers more information on the equipment's status.</p>
+                            </div>
+                            <div class="captioned-item">
+                                <img data-media-src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-01 at 13.44.23 1.png" alt="Busbar topology graph with factory health score and a docked risk insight bar"></noscript>
+                            </div>
+                        </div>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>2. Surfacing agent activity with a task queue</h4>
+                                <p>In a second iteration, I added a task queue, giving real-time visual confirmation and history for the tasks the agent carries out as it multitasks, and docked the chat as a persistent panel instead of click-to-open to keep the agent's updates always in view.</p>
+                            </div>
+                            <div class="captioned-item">
+                                <img data-media-src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log" width="1728" height="992" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-02 at 16.41.42 1.png" alt="PowerGPT panel with a risk recommendation, batch dispatch control, and task execution log"></noscript>
+                            </div>
+                        </div>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>3. Visualizing root causes &amp; interactive checklists</h4>
+                                <p>I added a knowledge graph view over the node map, documenting the potential causes of equipment failure. I chose a top-down tree to illustrate cause-and-effect relationships. Agent messages now render as clickable components, such as a checklist that updates itself.</p>
+                            </div>
+                            <div class="captioned-item">
+                                <img data-media-src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log" width="1728" height="1117" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-03 at 14.29.31 1.png" alt="Topology view with a toggle between device nodes and fault factors, alongside a paginated task log"></noscript>
+                            </div>
+                        </div>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>4. Optimizing space &amp; exposing raw telemetry</h4>
+                                <p>I implemented the equipment node tree in a radial distribution to optimize space. Raw telemetry and the model's confidence score now print in the message dock, so a recommendation can be traced back to the readings behind it.</p>
+                            </div>
+                            <div class="captioned-item">
+                                <img data-media-src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score" width="1728" height="1117" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-05 at 08.34.51 1.png" alt="Real-time telemetry gauges beside a root-cause analysis with a confidence score"></noscript>
+                            </div>
+                        </div>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>5. Shifting from graph-first to a task-first workflow</h4>
+                                <p>A major pivot came when my lead and I decided that a task-first interface was the right structure (as opposed to graph-first or chat-first), since the agent should be able to schedule tasks rather than only run them one-off or execute them immediately. The user gets an at-a-glance view of completed and upcoming tasks, and can update them efficiently.</p>
+                            </div>
+                            <div class="captioned-item">
+                                <img data-media-src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat" width="1728" height="993" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/Screenshot 2026-06-11 at 17.12.03 1.png" alt="Task panel home screen with task management cards, a weekly schedule, status counters, and the agent chat"></noscript>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section class="section-outcome">
                 <h3>Outcome &amp; impact</h3>
                 <div class="cs-section-body">
@@ -358,7 +368,7 @@
     <script src="media-config.js?v=1"></script>
     <script src="media-loader.js?v=1"></script>
     <script type="module" src="project-scroll.js?v=cover-first-1"></script>
-    <script src="script.js?v=optional-details-1"></script>
+    <script src="script.js?v=no-save-1"></script>
 </body>
 
 </html>

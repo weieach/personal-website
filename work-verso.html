@@ -23,6 +23,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Local typography and icon fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400&display=swap">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="fonts.css?v=roboto-2">
@@ -40,7 +41,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu">
     <!-- stylesheet -->
-    <link rel="stylesheet" href="style.css?v=archive-nav-1">
+    <link rel="stylesheet" href="style.css?v=no-save-1">
 
     <link rel="stylesheet" href="style-project.css?v=nijimu-awards-3">
     <link rel="stylesheet" href="responsive.css?v=about-flower-2">
@@ -72,13 +73,16 @@
         html:has(.verso-project) { --color-bg: #000000; }
         html:has(main.case-study-project.verso-project), body:has(main.case-study-project.verso-project) { background-color: var(--color-bg); }
         .case-study-project.verso-project { --cs-accent: #d8b7aa; }
-        .verso-project .img-casestudy-cover::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background: rgb(255 255 255 / 5%);
-            pointer-events: none;
+        main.main-projectpg.case-study-project.verso-project > .case-study-intro > .img-casestudy-cover {
+            aspect-ratio: 1280 / 804;
+        }
+        main.main-projectpg.case-study-project.verso-project > .case-study-intro > .img-casestudy-cover > :is(img, video) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            padding: 0;
+            scale: none;
+            transform: none;
         }
         .verso-project .verso-reflection-video {
             position: relative;
@@ -113,7 +117,27 @@
         }
         main.main-projectpg.case-study-project.cs-grid .project-caption .cs-section-body > .verso-reflection-list {
             margin-top: calc(14px - var(--cs-body-gap));
+            display: block;
+            list-style: disc outside;
+            padding-inline: 1.2em 0;
+            margin-inline: 0;
         }
+        main.main-projectpg.case-study-project.cs-grid .project-caption .verso-reflection-list > li {
+            display: list-item;
+            list-style: disc outside;
+            padding: 0;
+            margin: 0 0 14px;
+            border: 0;
+            grid-column: auto;
+        }
+        main.main-projectpg.case-study-project.cs-grid .project-caption .verso-reflection-list > li,
+        main.main-projectpg.case-study-project.cs-grid .project-caption .verso-reflection-list > li > span {
+            font-family: "Geist", sans-serif;
+            font-size: calc(14px * var(--cs-text-scale));
+            font-weight: 400;
+            line-height: normal;
+        }
+        .verso-project .verso-reflection-detail { opacity: 0.6; }
         .verso-project .verso-media-frame {
             display: flex;
             align-items: center;
@@ -152,6 +176,9 @@
             font-weight: 500;
             line-height: 1.35;
         }
+        main.main-projectpg.case-study-project.cs-grid .project-caption section .cs-section-body > .verso-research-quote > p:first-child {
+            font-family: "Nanum Myeongjo", serif;
+        }
         main.main-projectpg.case-study-project.cs-grid .project-caption .verso-research-quote > .verso-quote-attribution {
             margin-top: 10px;
             font-style: normal;
@@ -169,6 +196,26 @@
             border-radius: 999px;
             background: rgb(255 255 255 / 12%);
             color: #fff;
+        }
+        main.main-projectpg.case-study-project.cs-grid .project-caption .list-case-study-problems .verso-research-quote {
+            margin: 14px 0 0;
+        }
+        main.main-projectpg.case-study-project.cs-grid .project-caption .list-case-study-problems .verso-research-quote > p:first-child {
+            font-family: "Nanum Myeongjo", serif;
+            font-size: calc(14px * var(--cs-text-scale));
+            font-weight: 400;
+            line-height: normal;
+        }
+        main.main-projectpg.case-study-project.cs-grid .verso-problem-space .cs-section-body > p:not(.verso-opening-quote) {
+            opacity: 0.6;
+        }
+        main.main-projectpg.case-study-project.cs-grid .verso-opening-quote > span {
+            font: inherit;
+            line-height: inherit;
+        }
+        .verso-opening-quote > .verso-opening-attribution { opacity: 0.6; }
+        main.main-projectpg.case-study-project.cs-grid .verso-problem-space > .cs-section-body > .list-case-study-problems {
+            margin-top: calc(var(--cs-block-gap) + 6px - var(--cs-body-gap));
         }
     </style>
 </head>
@@ -201,13 +248,13 @@
 
         <div class="case-study-intro">
             <div class="img-casestudy-cover">
-                <video width="1600" height="900" aria-label="Verso’s gallery of design versions beside the conversation that produced them" data-media-src="assets/verso/case-study/reveal.mp4" data-media-poster="assets/verso/case-study/reveal.webp" poster="assets/verso/case-study/reveal.webp" data-media-autoplay muted loop playsinline preload="none"></video>
-                <noscript data-media-fallback><video width="1600" height="900" aria-label="Verso’s gallery of design versions beside the conversation that produced them" src="assets/verso/case-study/reveal.mp4" poster="assets/verso/case-study/reveal.webp" muted loop playsinline controls preload="none"></video></noscript>
+                <video width="1280" height="804" aria-label="Verso three views" data-media-src="assets/verso/case-study/thumbnail-three-views-v2.mp4" data-media-crossorigin="none" data-media-poster="assets/verso/case-study/thumbnail-three-views-v2.webp" poster="assets/verso/case-study/thumbnail-three-views-v2.webp" data-media-autoplay muted loop playsinline preload="none"></video>
+                <noscript data-media-fallback><video width="1280" height="804" src="assets/verso/case-study/thumbnail-three-views-v2.mp4" poster="assets/verso/case-study/thumbnail-three-views-v2.webp" muted loop playsinline controls preload="none"></video></noscript>
             </div>
             <div class="case-study-header">
                 <h1>Verso</h1>
                 <div class="cs-section-body">
-                    <h2>A visual history of the decisions behind an AI-assisted design.</h2>
+                    <h2><a class="case-study-site-icon" href="https://verso-prototype.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Visit project website"><img class="link-favicon" src="assets/verso/vero logo (no text).svg" alt="" aria-hidden="true"><span>Verso</span><i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></a> <span class="case-study-subtitle-copy">is a visualization tool for tracking key design decisions and milestones across AI-assisted creative workflows.</span></h2>
                     <ul class="list-case-study list-case-study-info">
                         <li>
                             <p class="entry-header">Role</p>
@@ -225,10 +272,6 @@
                             <p class="entry-header">Tools</p>
                             <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/openai.svg?v=white-1" width="16" height="16" alt="">Codex</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/claude.svg?v=color-1" width="16" height="16" alt="">Claude Code</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/cursor.svg?v=color-1" width="16" height="16" alt="">Cursor</span><span class="metadata-tool-separator">,</span><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/figma.svg?v=color-1" width="16" height="16" alt="">Figma</span></p>
                         </li>
-                        <li>
-                            <p class="entry-header">Website</p>
-                            <p class="entry-content"><a href="https://verso-prototype.vercel.app/" target="_blank" rel="noopener noreferrer"><img class="link-favicon" src="assets/verso/vero logo (no text).svg" alt="" aria-hidden="true"><span>verso-prototype.vercel.app</span></a><i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></p>
-                        </li>
                     </ul>
                     <p>I independently built a mid-fidelity prototype for this project, then led a four-people team to take it to high fidelity during a hackathon. Across both phases, I handled end-to-end product and UI design, the design system, UX research, prototype vibe coding, and AI branding animation. Our final deliverables included a view-only functional web prototype (plus a VR edition) populated with local demo data, along with a 7-minute presentation video.</p>
                 </div>
@@ -237,9 +280,10 @@
         </div>
 
         <div class="project-caption">
-            <section>
+            <section class="verso-problem-space">
                 <h3>Problem Space</h3>
                 <div class="cs-section-body">
+                    <p class="verso-opening-quote"><span>“Sometimes you may sit at your desk prompting all day, and by the end you don’t really remember what you did.”</span><br><span class="verso-opening-attribution">— Interviewee #2</span></p>
                     <p>In a traditional workflow, designers can easily trace how they arrived at a final result through sketches, iterations, and versioned Figma files. With vibe coding, most of that decision-making happens inside a conversation with AI. By the end of a project, designers are often left with only two things: a working product and a massive chat history—making it difficult to revisit the specific prompts and turning points that shaped the design.</p>
                     <p>To understand how this plays out in practice, we interviewed five creative vibe coders—including product designers, design engineers, and creative technologists. While all five reported higher productivity, they described the workflow as a cycle of constant patching and stitching with little structural oversight, surfacing three main pain points:</p>
                     <ul class="list-case-study list-case-study-problems">
@@ -256,10 +300,6 @@
                             <p>Keeping a visual record requires manually taking screenshots along the way, which breaks creative flow.</p>
                         </li>
                     </ul>
-                    <blockquote class="verso-research-quote">
-                        <p>“Sometimes you may sit at your desk prompting all day, and by the end you don’t really remember what you did.”</p>
-                        <p class="verso-quote-attribution">— Interviewee #2</p>
-                    </blockquote>
                     <div class="captioned-item">
                         <video width="1100" height="618" aria-label="A designer scrolling through an extended coding conversation" data-media-src="assets/verso/case-study/chat-history.mp4" data-media-poster="assets/verso/case-study/chat-history.webp" poster="assets/verso/case-study/chat-history.webp" data-media-autoplay muted loop playsinline preload="none"></video>
                         <noscript data-media-fallback><video width="1100" height="618" aria-label="A designer scrolling through an extended coding conversation" src="assets/verso/case-study/chat-history.mp4" poster="assets/verso/case-study/chat-history.webp" muted loop playsinline controls preload="none"></video></noscript>
@@ -435,30 +475,22 @@
                 <div class="cs-section-body">
                     <p>Our goal was to deliver a functional prototype that demonstrated Verso’s full feature set and visualization interactions as a standalone app. By wiring live version capture into my own workflow while building Verso, I was able to evaluate the tool in real time—using it to navigate my development timeline and pull visual artifacts directly into our hackathon presentation and this case study. While the prototype validated the core interaction model, scaling Verso into a full production app with an integrated AI chat panel would require dedicated backend engineering; our current build relies on Vercel’s free storage tier and is already reaching maximum capacity.</p>
                     <p>We ultimately submitted the project to the SVSD Virtual Hackathon alongside 300+ competing teams. While we were not selected as finalists, producing our 7-minute submission video—which blended screen-recorded product walkthroughs with live-action cinematography—pushed us to articulate our iterative process clearly and strengthened our visual storytelling skills.</p>
-                    <figure class="captioned-item">
+                    <hr class="verso-reflection-divider" style="width: 100%; border: 0; border-top: 1px solid rgb(255 255 255 / 14%); margin: calc(var(--cs-block-gap) - var(--cs-body-gap)) 0;">
+                    <figure class="captioned-item" hidden style="display: none;">
                         <img src="assets/verso/production%20plan.png" width="15092" height="7168" alt="Verso video production plan with storyboard, script, and shot planning for the SVSD hackathon submission" loading="lazy" decoding="async">
                         <figcaption class="floating-caption">
                             <p class="floating-caption-details">Production plan for video submission to SVSD hackathon</p>
                         </figcaption>
                     </figure>
                     <p>Meanwhile, building this prototype with AI reshaped my design process in three ways:</p>
-                    <ul class="list-case-study list-case-study-problems verso-reflection-list">
-                        <li>
-                            <h4>Designing rules and systems</h4>
-                            <p>Instead of manually tweaking individual screens, working with AI shifted my focus toward defining conditional logic, component rules, and system-level constraints.</p>
-                        </li>
-                        <li>
-                            <h4>Stress testing at scale</h4>
-                            <p>A functional prototype gave me the opportunity to test how the visualization system handled growing volumes of data, revealing where information density compromised legibility—something static Figma prototypes couldn't capture.</p>
-                        </li>
-                        <li>
-                            <h4>More room for experimentation</h4>
-                            <p>AI helped fill in implementation details and complete secondary interactions, allowing me to explore less-prescriptive design directions.</p>
-                        </li>
+                    <ul class="verso-reflection-list">
+                        <li><span>Designing rules and systems:</span> <span class="verso-reflection-detail">Instead of manually tweaking individual screens, working with AI shifted my focus toward defining conditional logic, component rules, and system-level constraints.</span></li>
+                        <li><span>Stress testing at scale:</span> <span class="verso-reflection-detail">A functional prototype gave me the opportunity to test how the visualization system handled growing volumes of data, revealing where information density compromised legibility—something static Figma prototypes couldn't capture.</span></li>
+                        <li><span>More room for experimentation:</span> <span class="verso-reflection-detail">AI helped fill in implementation details and complete secondary interactions, allowing me to explore less-prescriptive design directions.</span></li>
                     </ul>
                     <div class="verso-reflection-video">
-                        <video width="1920" height="1080" aria-label="Verso closing animation with logo" data-media-src="assets/verso/(copies)%20videos%20needed%20for%20case%20study/verso%20closing%20w%20logo.mp4" data-media-crossorigin="none" data-media-autoplay muted loop playsinline preload="none"></video>
-                        <noscript data-media-fallback><video width="1920" height="1080" aria-label="Verso closing animation with logo" src="assets/verso/(copies)%20videos%20needed%20for%20case%20study/verso%20closing%20w%20logo.mp4" muted loop playsinline controls preload="none"></video></noscript>
+                        <video width="1920" height="1080" aria-label="Verso closing animation with logo" data-media-src="assets/verso/(copies)%20videos%20needed%20for%20case%20study/(v2)%20verso%20closing%20w%20logo.mp4" data-media-crossorigin="none" data-media-autoplay muted loop playsinline preload="none"></video>
+                        <noscript data-media-fallback><video width="1920" height="1080" aria-label="Verso closing animation with logo" src="assets/verso/(copies)%20videos%20needed%20for%20case%20study/(v2)%20verso%20closing%20w%20logo.mp4" muted loop playsinline controls preload="none"></video></noscript>
                     </div>
                 </div>
             </section>
@@ -478,10 +510,10 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script src="media-config.js?v=20261108-new-videos"></script>
+    <script src="media-config.js?v=20261108-verso-closing-v2"></script>
     <script src="media-loader.js?v=20261108-new-videos"></script>
     <script type="module" src="project-scroll.js?v=cover-first-1"></script>
-    <script src="script.js?v=optional-details-1"></script>
+    <script src="script.js?v=no-save-1"></script>
 </body>
 
 </html>

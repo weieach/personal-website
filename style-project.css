@@ -1673,7 +1673,7 @@ main.main-projectpg.case-study-project{
   /* The global * rule would otherwise give the span its own font. */
   font: inherit;
   text-decoration: underline;
-  text-decoration-color: var(--cs-caption-color, #8c8c8c);
+  text-decoration-color: #555;
   color: inherit;
 }
 
@@ -2215,8 +2215,9 @@ main.main-projectpg.case-study-project.cs-grid :is(.case-study-header, .project-
   margin-bottom: 0;
 }
 
-/* The subtitle reads like a product-highlight paragraph: body text at 60%. */
-main.main-projectpg.case-study-project.cs-grid .case-study-header > .cs-section-body > h2{
+/* Subtitles and introductory body paragraphs share muted body styling. */
+main.main-projectpg.case-study-project.cs-grid .case-study-header > .cs-section-body > :is(h2, p),
+main.main-projectpg.case-study-project.cs-grid .case-study-header > p{
   font-family: "Geist", sans-serif;
   font-size: calc(14px * var(--cs-text-scale));
   font-weight: 400;
@@ -3183,4 +3184,63 @@ main.main-projectpg.case-study-toc-enabled{
   width: 1em;
   height: 1em;
   flex: 0 0 1em;
+}
+
+/* Embedded project links retain full contrast beside muted subtitle copy. */
+main.main-projectpg.case-study-project.cs-grid .case-study-header > .cs-section-body > h2:has(.case-study-site-icon) { opacity: 1; }
+main.main-projectpg.case-study-project.cs-grid .case-study-header .case-study-subtitle-copy { opacity: 0.6; }
+main.main-projectpg.case-study-project.cs-grid .case-study-header h2 > .case-study-site-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  vertical-align: middle;
+  margin-inline-end: 0;
+  color: #fff;
+  text-decoration: none;
+  opacity: 1;
+}
+main.main-projectpg.case-study-project.cs-grid .case-study-header .case-study-site-icon > span {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: #555;
+  text-underline-offset: 0.15em;
+}
+main.main-projectpg.case-study-project.cs-grid .case-study-header .case-study-site-icon > :is(img, .ph-globe) {
+  display: block;
+  width: 1.15em;
+  height: 1.15em;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+}
+main.main-projectpg.case-study-project.cs-grid .case-study-header .case-study-site-icon > .ph-arrow-up-right { font-size: 0.85em; }
+
+/* Keep linked names and description copy centered on the same inline axis. */
+main.main-projectpg.case-study-project.cs-grid .case-study-header .case-study-subtitle-copy {
+  vertical-align: middle;
+}
+main.main-projectpg.case-study-project.cs-grid .case-study-header h2 > .case-study-site-icon > :is(span, i, img) {
+  align-self: center;
+  line-height: 1;
+}
+
+/* Embedded URL labels use dark-gray underlines without dimming the link. */
+.project-caption ul:not(.list-case-study) a:has(.ph-globe, .link-favicon) span {
+  text-decoration-color: #555;
+}
+
+/* All embedded URL arrows share the muted body-text color. */
+.case-study-site-icon > .ph-arrow-up-right,
+a + .ph-arrow-up-right,
+a > .ph-arrow-up-right {
+  color: var(--cs-body-color, #f2f2f2);
+  opacity: 0.6;
+}
+main.main-projectpg.case-study-project.cs-grid .case-study-header .case-study-site-icon > .ph-arrow-up-right,
+.main-projectpg.case-study-project .list-case-study-info a + .ph-arrow-up-right,
+.project-caption ul:not(.list-case-study) a:has(.ph-globe, .link-favicon) + .ph-arrow-up-right {
+  color: var(--cs-body-color, #f2f2f2);
+  opacity: 0.6;
 }

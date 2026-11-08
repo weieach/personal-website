@@ -190,6 +190,7 @@ window.SiteMediaConfig = {
     "assets/nijimu/case-study/memory-selector.mp4": "media/e77bf38a2c7c956cf23f/memory-selector.mp4",
     "assets/nijimu/case-study/puddle-shader-v1.mp4": "media/921eaf116418b74a9389/puddle-shader-v1.mp4",
     "assets/verso/(copies) videos needed for case study/verso closing w logo.mp4": "media/1eb8e9b13a1a933ad328/verso closing w logo.mp4",
-    "assets/nijimu/nijimu 11.7 thumbnail cuts.mp4": "media/1b64ab3d28f352f76515/nijimu 11.7 thumbnail cuts.mp4"
+    "assets/nijimu/nijimu 11.7 thumbnail cuts.mp4": "media/1b64ab3d28f352f76515/nijimu 11.7 thumbnail cuts.mp4",
+    "assets/verso/(copies) videos needed for case study/(v2) verso closing w logo.mp4": "media/58d3aaf0515615af85f8/(v2) verso closing w logo.mp4"
   }
 };

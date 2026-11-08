@@ -829,3 +829,19 @@ document.addEventListener("click", (e) => {
   showFlower();
   tablet.addEventListener('change', showFlower);
 })();
+
+// --------------------------
+// Discourage casual saving of media: block drag-out and the right-click menu
+// on images, videos and canvases (CSS in style.css covers Safari/iOS).
+// Delegated on document so media added later is covered too.
+// --------------------------
+(() => {
+  const MEDIA = "img, video, canvas";
+  const isMedia = (target) => target instanceof Element && target.closest(MEDIA);
+  document.addEventListener("dragstart", (event) => {
+    if (isMedia(event.target)) event.preventDefault();
+  });
+  document.addEventListener("contextmenu", (event) => {
+    if (isMedia(event.target)) event.preventDefault();
+  });
+})();

@@ -38,7 +38,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu">
     <!-- stylesheet -->
-    <link rel="stylesheet" href="style.css?v=archive-nav-1">
+    <link rel="stylesheet" href="style.css?v=no-save-1">
 
     <link rel="stylesheet" href="style-project.css?v=nijimu-awards-3">
     <link rel="stylesheet" href="responsive.css?v=about-flower-2">
@@ -95,6 +95,26 @@
         }
         .dino-project .dino-media-frame > noscript { display: contents; }
     </style>
+    <style>
+        main.main-projectpg.case-study-project.cs-grid .project-caption .cs-section-body > p.dino-research-question {
+            font-family: "Geist", sans-serif;
+            font-size: calc(20px * var(--cs-text-scale));
+            font-weight: 500;
+            line-height: 1.35;
+            opacity: 1;
+        }
+    </style>
+    <style>
+        main.main-projectpg.case-study-project.cs-grid.dino-project .case-study-header > .cs-section-body > p.dino-intro-role {
+            color: var(--cs-body-color);
+            opacity: 0.6;
+        }
+    </style>
+    <style>
+        main.main-projectpg.case-study-project.cs-grid.dino-project .case-study-header .list-case-study-info > li:last-child {
+            padding-bottom: 0;
+        }
+    </style>
 </head>
 
 <body class="dark-mode">
@@ -131,8 +151,7 @@
             <div class="case-study-header">
                 <h1>Dino: Web UI Design</h1>
                 <div class="cs-section-body">
-                    <h2>A Web3-native event platform that help hosts create engaging, branded experiences and foster meaningful
-                        connections among attendees.</h2>
+                    <h2>Dino is an event discovery and coordination platform built for the Web3 ecosystem, replacing makeshift event tracking with a unified, community-driven web app.</h2>
                     <ul class="list-case-study list-case-study-info">
                         <li>
                             <p class="entry-header">Role</p>
@@ -147,24 +166,13 @@
                             <p class="entry-content metadata-tools"><span class="metadata-tool"><img class="metadata-tool-icon" src="assets/tool-icons/figma.svg?v=color-1" width="16" height="16" alt="">Figma</span></p>
                         </li>
                     </ul>
+                    <p class="dino-intro-role">I owned the branding, design system, and responsive UI across Dino’s landing page, web app, and conference campaigns. Throughout the build, I partnered closely with full-stack engineers and product managers to take each iteration from prototype to production.</p>
                 </div>
                 <a href="index.html" class="btn-back"><i class="ph-bold ph-arrow-left"></i> Back</a>
             </div>
         </div>
 
         <div class="project-caption">
-            <section>
-                <h3>Overview</h3>
-                <div class="cs-section-body">
-                    <p>Dino (dino.live) is an event discovery and coordination platform built for the Web3 ecosystem, replacing makeshift event tracking with a unified, community-driven web app.</p>
-                </div>
-            </section>
-            <section>
-                <h3>Role &amp; Execution</h3>
-                <div class="cs-section-body">
-                    <p class="dino-marked">I owned the <span>branding</span>, <span>design system</span>, and <span>responsive UI</span> across Dino’s landing page, web app, and conference campaigns. Throughout the build, I partnered closely with <span>full-stack engineers</span> and <span>product managers</span> to take each iteration from prototype to production.</p>
-                </div>
-            </section>
             <section class="section-problem">
                 <h3>Core Problems</h3>
                 <div class="cs-section-body">
@@ -187,7 +195,7 @@
             <section>
                 <h3>Research question</h3>
                 <div class="cs-section-body">
-                    <p>How might we centralize Web3 event discovery while building lasting ties between hosts and
+                    <p class="dino-research-question">How might we centralize Web3 event discovery while building lasting ties between hosts and
                         attendees?</p>
                 </div>
             </section>
@@ -399,7 +407,7 @@
     <script src="media-config.js?v=1"></script>
     <script src="media-loader.js?v=1"></script>
     <script type="module" src="project-scroll.js?v=cover-first-1"></script>
-    <script src="script.js?v=optional-details-1"></script>
+    <script src="script.js?v=no-save-1"></script>
 </body>
 
 </html>
