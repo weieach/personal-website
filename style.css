@@ -1551,7 +1551,7 @@ video.pictogram-source{
 .card-schneider .card-thumbnail{
     background-color: #53c66c;
     /* Floating desktop screen (see .card-superformula) */
-    aspect-ratio: 1 / calc(0.85 * 1922 / 3456 + 2 * var(--thumb-screen-margin-block));
+    aspect-ratio: 1 / calc(0.85 * 1990 / 3456 + 2 * var(--thumb-screen-margin-block));
     align-items: center;
     justify-content: center;
 }
