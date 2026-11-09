@@ -72,17 +72,28 @@
     <style>
         html:has(.verso-project) { --color-bg: #000000; }
         html:has(main.case-study-project.verso-project), body:has(main.case-study-project.verso-project) { background-color: var(--color-bg); }
-        .case-study-project.verso-project { --cs-accent: #d8b7aa; }
+        .case-study-project.verso-project { --cs-accent: #d8b7aa; --verso-inset-bg: #0c0c0c; }
         main.main-projectpg.case-study-project.verso-project > .case-study-intro > .img-casestudy-cover {
-            aspect-ratio: 1280 / 804;
+            width: calc(100vw - 2 * var(--page-inline-space));
+            max-width: none;
+            margin-inline: calc(50% - 50vw + var(--page-inline-space));
+            aspect-ratio: auto;
+            height: calc(min(0.85 * (100vw - 2 * var(--page-inline-space)) * 2160 / 3442, 80vh) * (1 + 2 * var(--thumb-screen-margin-block) * 3442 / 2160 / 0.85));
+            background-color: var(--verso-inset-bg);
+            container-type: inline-size;
         }
         main.main-projectpg.case-study-project.verso-project > .case-study-intro > .img-casestudy-cover > :is(img, video) {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            inset: auto;
+            top: 50%;
+            left: 50%;
+            width: min(85%, calc(80vh * 3442 / 2160));
+            height: auto;
+            object-fit: contain;
+            border-radius: calc(var(--radius-desktop-screen) * 0.85);
+            box-shadow: 0 0 16cqw rgb(0 0 0 / 95%), 0 0 6cqw rgb(0 0 0 / 85%);
             padding: 0;
             scale: none;
-            transform: none;
+            transform: translate(-50%, -50%);
         }
         .verso-project .verso-reflection-video {
             position: relative;
@@ -144,7 +155,7 @@
             justify-content: center;
             width: 100%;
             aspect-ratio: 1 / calc(0.85 * var(--verso-media-ratio) + 2 * var(--thumb-screen-margin-block));
-            background: #101010;
+            background: var(--verso-inset-bg);
             border-radius: 8px;
             overflow: hidden;
             container-type: inline-size;
@@ -248,8 +259,8 @@
 
         <div class="case-study-intro">
             <div class="img-casestudy-cover">
-                <video width="1280" height="804" aria-label="Verso three views" data-media-src="assets/verso/case-study/thumbnail-three-views-v2.mp4" data-media-crossorigin="none" data-media-poster="assets/verso/case-study/thumbnail-three-views-v2.webp" poster="assets/verso/case-study/thumbnail-three-views-v2.webp" data-media-autoplay muted loop playsinline preload="none"></video>
-                <noscript data-media-fallback><video width="1280" height="804" src="assets/verso/case-study/thumbnail-three-views-v2.mp4" poster="assets/verso/case-study/thumbnail-three-views-v2.webp" muted loop playsinline controls preload="none"></video></noscript>
+                <video width="3442" height="2160" aria-label="Verso three views" data-media-src="assets/verso/(copies)%20videos%20needed%20for%20case%20study/(v2)%204.4-4.5%20three%20views.mp4" data-media-crossorigin="none" data-media-poster="assets/verso/case-study/thumbnail-three-views-v2.webp" poster="assets/verso/case-study/thumbnail-three-views-v2.webp" data-media-autoplay muted loop playsinline preload="none"></video>
+                <noscript data-media-fallback><video width="3442" height="2160" src="assets/verso/(copies)%20videos%20needed%20for%20case%20study/(v2)%204.4-4.5%20three%20views.mp4" poster="assets/verso/case-study/thumbnail-three-views-v2.webp" muted loop playsinline controls preload="none"></video></noscript>
             </div>
             <div class="case-study-header">
                 <h1>Verso</h1>
@@ -510,7 +521,7 @@
                         class="ph-fill ph-linkedin-logo"></i></a>
             </div>
     </footer>
-    <script src="media-config.js?v=20261108-verso-closing-v2"></script>
+    <script src="media-config.js?v=20261108-verso-cover-hires"></script>
     <script src="media-loader.js?v=20261108-new-videos"></script>
     <script type="module" src="project-scroll.js?v=cover-first-1"></script>
     <script src="script.js?v=no-save-1"></script>
