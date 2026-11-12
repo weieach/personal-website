@@ -129,9 +129,6 @@ main.pg-with-thumbnail {
 }
 
 .page-thumbnail-tldr{
-  background-image: url(assets/tldr/tldr\ mockup.png);
-  background-size: cover;
-  background-position: 20% 25%;
   height: calc(85vh - 66px);
   max-height: calc(85vh - 66px);
   background-color: #000000;
@@ -959,11 +956,11 @@ body:has(main.schneider-project){
 
 /* Schneider's Process & iteration and Full Walkthrough media sit inset on a
    panel in Dino's proportions (the media fills 87.5% of the panel's width,
-   6.25% each side, with 6.765% of the width above and below), filled with
-   the a slightly darker #181818 than GVD's redesign-highlight insets. */
+   6.25% each side, with 6.765% of the width above and below), all filled
+   with the same deep #0f0f0f. */
 main.main-projectpg.case-study-project.schneider-project :is(.section-process, .section-product-walkthrough, .section-product-highlights) .captioned-item{
   padding: 6.765% 6.25%;
-  background-color: #181818;
+  background-color: #0f0f0f;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -1113,38 +1110,12 @@ h2{
   min-width: 0;
   gap: calc(var(--space) * 2);
   margin: 0;
-  cursor: pointer;
-  transition: opacity 0.3s ease, filter 0.3s ease;
-}
-
-.flexbox-tldr-demo.is-focusing .tldr-demo-item:not(.is-active){
-  opacity: 0.38;
-  filter: grayscale(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tldr-demo-item{
-    transition: none;
-  }
 }
 
 .tldr-demo-caption{
   display: none;
 }
 
-.tldr-demo-tap-tip{
-  display: none;
-}
-
-@media (pointer: coarse) {
-  .tldr-demo-hover-tip{
-    display: none;
-  }
-
-  .tldr-demo-tap-tip{
-    display: flex;
-  }
-}
 
 .tldr-project-pics > .captioned-item:first-child {
   margin-top: calc(var(--space) * 3);
@@ -1988,13 +1959,26 @@ main.main-projectpg.case-study-project.cs-grid .list-case-study-info :is(div.ent
   scale: none;
 }
 
-/* Dino, Adventurer and nijimu covers are already 16:9 artwork. */
-.main-projectpg.case-study-project > .case-study-intro > :is(.img-casestudy-cover-dino, .img-casestudy-cover-adventurer, .img-casestudy-cover-nijimu) > img{
+/* Dino's cover is already 16:9 artwork. */
+.main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-dino > img{
   object-fit: cover;
 }
 
+/* Adventurer's cover is its landing thumbnail video: the square phone clip on
+   its own gray, with the thumbnail's 1.18 crop so the phone matches. */
+.main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-adventurer{
+  background-color: #efefef;
+}
+
+.main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-adventurer > video{
+  scale: 1.18;
+  transform-origin: center;
+}
+
 .main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-nijimu{
-  background-color: #0b0a0c;
+  background-color: #000000;
+  /* The thumbnail video is 3746×2160, so the stage height follows the video. */
+  aspect-ratio: 3746 / 2160;
 }
 
 .main-projectpg.case-study-project > .case-study-intro > .img-casestudy-cover-schneider{

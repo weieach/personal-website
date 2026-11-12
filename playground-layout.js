@@ -146,6 +146,9 @@
       hero.append(picture);
     }
     makeTiles(hero);
+  } else if (hero?.matches('.page-thumbnail-tldr')) {
+    // The stage and floating phone screen are already in the markup.
+    hero.classList.add('playground-tile');
   } else if (hero) makeTiles(hero);
 
   const demoRow = main.querySelector('.flexbox-tldr-demo');

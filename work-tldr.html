@@ -39,7 +39,7 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=schneider-cover-2">
 
-    <link rel="stylesheet" href="style-project.css?v=tldr-cover-2">
+    <link rel="stylesheet" href="style-project.css?v=schneider-inset-2">
     <link rel="stylesheet" href="responsive.css">
     <title>Nicole Wei: Too Long, Didn't Read? (2025)</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
@@ -58,7 +58,7 @@
     <meta name="twitter:description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
     <meta name="twitter:image" content="https://www.ncwei.com/assets/og-image.jpg">
     <link rel="stylesheet" href="theme.css?v=8">
-    <link rel="stylesheet" href="playground-layout.css?v=17">
+    <link rel="stylesheet" href="playground-layout.css?v=tldr-hero-1">
     <link rel="stylesheet" href="site-motion.css?v=1">
     <script defer src="assets/vendor/gsap/gsap.min.js"></script>
     <script type="module" src="site-scroll.js?v=native-1"></script>
@@ -94,7 +94,12 @@
             </ul>
         </div>
         <div class="page-thumbnail page-thumbnail-tldr">
-            <img class="img-tldr-mockup" data-media-src="assets/tldr/tldr mockup.png" alt="Too Long, Didn't Read? app mockup" width="5760" height="3840" loading="lazy" decoding="async"><noscript data-media-fallback><img class="img-tldr-mockup" src="assets/tldr/tldr mockup.png" alt="Too Long, Didn't Read? app mockup"></noscript>
+            <!-- Mirrors the landing thumbnail: the home-screen recording as a floating phone screen over the blurred background -->
+            <div class="playground-media tldr-hero-stage">
+                <div class="tldr-hero-phone">
+                    <video data-media-src="assets/tldr/tldr-home.mp4" data-media-autoplay loop muted playsinline width="988" height="2160" preload="none" data-media-poster="assets/media-posters/492df25e4b00.webp" aria-label="Too Long, Didn't Read? home screen"></video><noscript data-media-fallback><video src="assets/tldr/tldr-home.mp4" loop muted playsinline controls preload="none"></video></noscript>
+                </div>
+            </div>
         </div>
         <div class="project-caption">
             <h1><i>Too Long, Didn't Read?</i> App Design</h1>
@@ -149,13 +154,11 @@
                     </figure>
                 </div>
             </div>
-            <div class="playground-media-pair tldr-mockup-pair">
-                <div class="captioned-item">
-                    <img class="img-tldr-mockup" data-media-src="assets/tldr/tldr mockup.png" alt="mockup" width="5760" height="3840" loading="lazy" decoding="async"><noscript data-media-fallback><img class="img-tldr-mockup" src="assets/tldr/tldr mockup.png" alt="mockup"></noscript>
-                </div>
-                <div class="captioned-item">
-                    <img class="img-tldr-mockup" data-media-src="assets/tldr/tldr-mockup-2phone.png" alt="mockup" width="2690" height="1813" loading="lazy" decoding="async"><noscript data-media-fallback><img class="img-tldr-mockup" src="assets/tldr/tldr-mockup-2phone.png" alt="mockup"></noscript>
-                </div>
+            <div class="captioned-item tldr-mockup-row">
+                <img class="img-tldr-mockup" data-media-src="assets/tldr/tldr mockup.png" alt="mockup" width="5760" height="3840" loading="lazy" decoding="async"><noscript data-media-fallback><img class="img-tldr-mockup" src="assets/tldr/tldr mockup.png" alt="mockup"></noscript>
+            </div>
+            <div class="captioned-item tldr-mockup-row">
+                <img class="img-tldr-mockup" data-media-src="assets/tldr/tldr-mockup-2phone.png" alt="mockup" width="2690" height="1813" loading="lazy" decoding="async"><noscript data-media-fallback><img class="img-tldr-mockup" src="assets/tldr/tldr-mockup-2phone.png" alt="mockup"></noscript>
             </div>
         </div>
     </main>
@@ -175,9 +178,9 @@
     </footer>
     <script src="media-config.js?v=1"></script>
     <script src="media-loader.js?v=1"></script>
-    <script type="module" src="project-scroll.js?v=media-1"></script>
+    <script type="module" src="project-scroll.js?v=no-tldr-focus-1"></script>
     <script src="script.js?v=no-save-1"></script>
-    <script src="playground-layout.js?v=media-1"></script>
+    <script src="playground-layout.js?v=tldr-hero-1"></script>
 </body>
 
 </html>

@@ -199,19 +199,69 @@ main.playground-project .playground-media > img.img-tldr-mockup {
   transform: translateY(-50%);
 }
 
-/* Two mockups share one row and cover the standard tile height. */
-main.playground-project.tldr-project .tldr-mockup-pair .playground-media > img.img-tldr-mockup {
-  inset: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  transform: none;
-  object-fit: cover;
-  object-position: center;
+/* The two final mockups each span a full row at their own ratio. */
+main.playground-project.tldr-project .playground-tile.tldr-mockup-row {
+  height: auto;
 }
 
-main.playground-project.tldr-project .tldr-mockup-pair > .captioned-item:first-child .playground-media > img.img-tldr-mockup {
-  object-position: left center;
+main.playground-project.tldr-project .tldr-mockup-row .playground-media {
+  flex: none;
+  height: auto;
+}
+
+main.playground-project.tldr-project .tldr-mockup-row .playground-media > img.img-tldr-mockup {
+  position: relative;
+  inset: auto;
+  top: auto;
+  width: 100%;
+  height: auto;
+  transform: none;
+}
+
+/* Hero mirrors the landing thumbnail: the blurred background with the
+   home-screen recording as a floating phone screen, the same share of the
+   height above and below it, and the same corner radius relative to its size. */
+main.playground-project .page-thumbnail-tldr .tldr-hero-stage {
+  --tldr-hero-phone-h: calc(56.25cqw * (1 - 2 * var(--thumb-screen-margin-block) * 2164 / 2160));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  background: #000;
+}
+
+main.playground-project .page-thumbnail-tldr .tldr-hero-stage::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  background: url("assets/tldr/thumbnail-bg.jpeg") center / cover no-repeat;
+  filter: blur(4.71cqw);
+  z-index: 0;
+  pointer-events: none;
+}
+
+main.playground-project .page-thumbnail-tldr .tldr-hero-phone {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  height: var(--tldr-hero-phone-h);
+  aspect-ratio: 988 / 2160;
+  /* Thumbnail: 4.643cqi radius on a screen 83.84% of the thumbnail's width tall. */
+  border-radius: calc(var(--tldr-hero-phone-h) * 0.05538);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(#000, #000);
+  mask-image: linear-gradient(#000, #000);
+}
+
+main.playground-project .page-thumbnail-tldr .tldr-hero-phone > video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  object-fit: cover;
+  border-radius: 0;
+  scale: none;
 }
 
 /* Hi-fi sheet spans the row at its own ratio, instead of letterboxing inside the 16:9 tile. */

@@ -40,7 +40,7 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css?v=schneider-cover-2">
 
-    <link rel="stylesheet" href="style-project.css?v=schneider-outcome-1">
+    <link rel="stylesheet" href="style-project.css?v=schneider-inset-2">
     <link rel="stylesheet" href="responsive.css?v=about-flower-2">
     <title>Nicole Wei: Schneider Electric AI+Power Platform (2026)</title>
     <meta name="description" content="Designer and creative technologist — communication design and HCI at WashU Sam Fox School.">
@@ -130,7 +130,7 @@
 
         <div class="case-study-intro">
             <div class="img-casestudy-cover img-casestudy-cover-schneider">
-                <img data-media-src="assets/schneider/agent-homepage.png" alt="Schneider Electric AI+Power agent homepage" width="3456" height="1922" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/agent-homepage.png" alt="Schneider Electric AI+Power agent homepage"></noscript>
+                <img data-media-src="assets/schneider/cover v2.png" alt="Schneider Electric Busbar O&amp;M agent task panel" width="3456" height="1990" loading="lazy" decoding="async"><noscript data-media-fallback><img src="assets/schneider/cover v2.png" alt="Schneider Electric Busbar O&amp;M agent task panel"></noscript>
             </div>
 
             <div class="case-study-header">
@@ -196,7 +196,59 @@
                     </ul>
                 </div>
             </section>
-            <section class="section-product-highlights">
+            <section class="section-product-walkthrough section-product-walkthrough--text-first">
+                <h3>Product walkthrough</h3>
+                <div class="cs-section-body">
+                    <div class="product-highlight-entries">
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>Flow 1: Creating an agent</h4>
+                                <p>The setup flow starts with a maintenance scenario, then narrows the agent’s scope to specific equipment. Users can link an existing knowledge graph or create a new one, connecting the agent to the structured knowledge it will use during inspections.</p>
+                            </div>
+                            <div class="captioned-item">
+                                <video class="video-app-highlights" data-media-src="assets/schneider/AIPower - 1.mp4" data-media-autoplay loop muted
+                                    playsinline width="3746" height="2160" preload="none" data-media-poster="assets/media-posters/d82fae6e9975.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/AIPower - 1.mp4" loop muted
+                                    playsinline controls></video></noscript>
+                            </div>
+                        </div>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>Flow 2: Scheduling and running an inspection task</h4>
+                                <p>A recurring inspection appears in the weekly schedule and runs as a tracked task. Its results bring equipment readings and analysis into the task details panel, where users can review an issue and request on-site verification when further checks are needed.</p>
+                            </div>
+                            <div class="captioned-item video-inset-border">
+                                <video class="video-app-highlights" data-media-src="assets/schneider/AIPower - 2.mp4" data-media-autoplay loop muted
+                                    playsinline width="3746" height="2160" preload="none" data-media-poster="assets/media-posters/b20bc712a1cc.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/AIPower - 2.mp4" loop muted
+                                    playsinline controls></video></noscript>
+                            </div>
+                        </div>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>Flow 3: Resolving manual checkpoints during a task (human-in-the-loop)</h4>
+                                <p>When an inspection flags something the agent can’t confirm on its own, the task pauses for a person. A work order with an on-site checklist goes to the field engineer’s phone; their recheck feeds back into the task details, where the user approves a handling plan that a robot carries out and re-measures until the temperature is back within range.</p>
+                            </div>
+                            <div class="captioned-item video-inset-border">
+                                <video class="video-app-highlights" data-media-src="assets/schneider/AIPower - 3.mp4" data-media-autoplay loop muted
+                                    playsinline width="3746" height="2160" preload="none" data-media-poster="assets/media-posters/4a2b0a17dbcf.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/AIPower - 3.mp4" loop muted
+                                    playsinline controls></video></noscript>
+                            </div>
+                        </div>
+                        <div class="product-highlight-entry">
+                            <div>
+                                <h4>Flow 4: Responding to high-priority alerts via robot dispatch</h4>
+                                <p>A real-time alert for a short-circuit precursor locates the fault in the 3D factory view. The agent works through it in phases: projecting rupture risk to recommend an immediate load cut, dispatching a robot for an infrared survey, tracing the root cause on the knowledge graph, then generating a tiered handling plan that the robot executes and validates after power is restored.</p>
+                            </div>
+                            <div class="captioned-item video-inset-border">
+                                <video class="video-app-highlights" data-media-src="assets/schneider/AIPower - 4 (cuts).mp4" data-media-autoplay loop muted
+                                    playsinline width="3746" height="2160" preload="none" data-media-poster="assets/media-posters/7e9aee46fdba.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/AIPower - 4 (cuts).mp4" loop muted
+                                    playsinline controls></video></noscript>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Final UI Design: hidden for now; remove style="display: none" to show it again -->
+            <section class="section-product-highlights" style="display: none">
                 <h3>Final UI Design</h3>
                 <div class="cs-section-body">
                     <div class="walkthrough-image-grid">
@@ -224,46 +276,6 @@
                             </div>
                             <div class="floating-caption"><p class="floating-caption-details">3D factory simulation and robot controls</p></div>
                         </figure>
-                    </div>
-                </div>
-            </section>
-            <section class="section-product-walkthrough section-product-walkthrough--text-first">
-                <h3>Product walkthrough</h3>
-                <div class="cs-section-body">
-                    <div class="product-highlight-entries">
-                        <div class="product-highlight-entry">
-                            <div>
-                                <h4>1. Creating an agent</h4>
-                                <p>The setup flow starts with a maintenance scenario, then narrows the agent’s scope to specific equipment. Users can link an existing knowledge graph or create a new one, connecting the agent to the structured knowledge it will use during inspections.</p>
-                            </div>
-                            <div class="captioned-item">
-                                <video class="video-app-highlights" data-media-src="assets/schneider/pgpt pt1 edit.mp4" data-media-autoplay loop muted
-                                    playsinline width="3172" height="1586" preload="none" data-media-poster="assets/media-posters/8d01c2f46370.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/pgpt pt1 edit.mp4" loop muted
-                                    playsinline controls></video></noscript>
-                            </div>
-                        </div>
-                        <div class="product-highlight-entry">
-                            <div>
-                                <h4>2. Scheduling and running an inspection task</h4>
-                                <p>A recurring inspection appears in the weekly schedule and runs as a tracked task. Its results bring equipment readings and analysis into the task details panel, where users can review an issue and request on-site verification when further checks are needed.</p>
-                            </div>
-                            <div class="captioned-item video-inset-border">
-                                <video class="video-app-highlights" data-media-src="assets/schneider/pgpt pt2 edit new.mp4" data-media-autoplay loop muted
-                                    playsinline width="3172" height="1586" preload="none" data-media-poster="assets/media-posters/9c75d94ae7a9.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/pgpt pt2 edit new.mp4" loop muted
-                                    playsinline controls></video></noscript>
-                            </div>
-                        </div>
-                        <div class="product-highlight-entry">
-                            <div>
-                                <h4>3. Responding to a triggered alert</h4>
-                                <p>A triggered alert opens a diagnostic conversation alongside the knowledge graph. The agent presents inspection findings, connects the issue to possible causes, and guides a graded response, with robot controls available in the 3D factory view.</p>
-                            </div>
-                            <div class="captioned-item video-inset-border">
-                                <video class="video-app-highlights" data-media-src="assets/schneider/pgpt pt3 edit.mp4" data-media-autoplay loop muted
-                                    playsinline width="3172" height="1586" preload="none" data-media-poster="assets/media-posters/d9d32af7cf62.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/pgpt pt3 edit.mp4" loop muted
-                                    playsinline controls></video></noscript>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -327,8 +339,8 @@
                     <p class="schneider-marked">The platform has since <span>entered formal development</span>; as a result, <span>my internship was extended from three months into a full year</span>, where I work alongside engineers and product designers to carry the prototype to production.</p>
                     <div class="product-highlight-entries">
                         <div class="captioned-item">
-                            <video class="video-app-highlights" data-media-src="assets/schneider/robot edit.mp4" data-media-autoplay loop muted
-                                playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/020fe8e69abf.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/robot edit.mp4" loop muted
+                            <video class="video-app-highlights" data-media-src="assets/schneider/schneider robot (edit v2).mp4" data-media-autoplay loop muted
+                                playsinline width="1920" height="1080" preload="none" data-media-poster="assets/media-posters/e536029d0dcd.webp"></video><noscript data-media-fallback><video class="video-app-highlights" src="assets/schneider/schneider robot (edit v2).mp4" loop muted
                                 playsinline controls></video></noscript>
                         </div>
                         <div class="outcome-media-row">
@@ -367,7 +379,7 @@
     </footer>
     <script src="media-config.js?v=1"></script>
     <script src="media-loader.js?v=1"></script>
-    <script type="module" src="project-scroll.js?v=cover-first-1"></script>
+    <script type="module" src="project-scroll.js?v=no-tldr-focus-1"></script>
     <script src="script.js?v=no-save-1"></script>
 </body>
 
